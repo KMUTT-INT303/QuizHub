@@ -12,7 +12,13 @@
     <%@ include file="Layouts/Headers.jsp" %> 
 
     <body>
-        
+        <h1>Login</h1>
+        <form action="Login" method="post">
+            Username :<input type="number" name="username"><br>
+            Password :<input type="text" name="password"><br>
+            <input type="submit"><br>
+            ${msg}
+        </form>
     </body>
     
 </html>
