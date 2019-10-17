@@ -12,6 +12,6 @@
         <title>Quiz Hub - Home Page</title>
     </head>
     <body>
-        <h1>Welcome to QuizHub !</h1>
+        <h1>Welcome to QuizHub !</h1><h1>Welcome to QuizHub !</h1>
     </body>
 </html>
