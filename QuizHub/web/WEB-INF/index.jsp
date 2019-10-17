@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Welcome to QuizHub !</h1><h1>Welcome to QuizHub !</h1>
+        <h1>That's right</h1>
     </body>
 </html>
