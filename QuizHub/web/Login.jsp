@@ -9,23 +9,41 @@
 
 <html>
 
-    <%@ include file="Layouts/Headers.jsp" %> 
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <body class="text-center" data-gr-c-s-loaded="true">
-        
-        
-        <form class="form-signin">
-            <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">QuizHub -</h1>
-            <label for="inputEmail" class="sr-only">ชื่อผู้ใช้งาน</label>
-            <input type="text" id="username" class="form-control" placeholder="ชื่อผู้ใช้งาน" required="" autofocus="">
-            <label for="password" class="sr-only">รหัสผ่าน</label>
-            <input type="password" id="password" class="form-control" placeholder="รหัสผ่าน" required="">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">เข้าสู่ระบบ</button>
-            <p class="mt-5 mb-3 text-muted">© 2019</p>
-        </form>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>QuizHub - Login</title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
-
+    <body>
+        <div class="login-section">
+            <div class="login-section-width">
+                <div id="container" class="container">
+                    <div class="row text-white">
+                        <div class="col-sm-6 offset-sm-3 text-center">
+                            <h3 class="display-4 mb-5">QuizHub</h3>
+                            <div class="info-form">
+                                <form action="" class="form-inlin justify-content-center">
+                                    <div class="form-group">
+                                        <label class="sr-only">Username</label>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only">Passoword</label>
+                                        <input type="password" class="form-control" placeholder="************">
+                                    </div>
+                                    <button type="submit" class="btn btn-success ">Login</button>
+                                    <a href="Register" class="btn btn-success">Register</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 
 </html>
