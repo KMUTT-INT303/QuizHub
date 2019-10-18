@@ -1,195 +1,216 @@
--- phpMyAdmin SQL Dump
--- version 4.9.0.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Oct 18, 2019 at 03:42 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+--------------------------------------------------------
+--  File created - Friday-October-18-2019   
+--------------------------------------------------------
+DROP TABLE "Quizhub"."CHOICES";
+--------------------------------------------------------
+--  DDL for Table CHOICES
+--------------------------------------------------------
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+  CREATE TABLE "Quizhub"."CHOICES" 
+   (	"CHOICE_ID" NUMBER(38,0), 
+	"CHOICE_NAME" VARCHAR2(255 BYTE), 
+	"CHOICE_CORRECT" NUMBER(1,0) DEFAULT ('1'), 
+	"QUESTION_ID" NUMBER(38,0)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into Quizhub.CHOICES
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index CHOICES_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "Quizhub"."CHOICES_PK" ON "Quizhub"."CHOICES" ("CHOICE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table CHOICES
+--------------------------------------------------------
+
+  ALTER TABLE "Quizhub"."CHOICES" ADD CONSTRAINT "CHOICES_PK" PRIMARY KEY ("CHOICE_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "Quizhub"."CHOICES" MODIFY ("CHOICE_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."CHOICES" MODIFY ("CHOICE_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."CHOICES" MODIFY ("CHOICE_CORRECT" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."CHOICES" MODIFY ("QUESTION_ID" NOT NULL ENABLE);
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+--------------------------------------------------------
+--  File created - Friday-October-18-2019   
+--------------------------------------------------------
+DROP TABLE "Quizhub"."QUESTIONS";
+--------------------------------------------------------
+--  DDL for Table QUESTIONS
+--------------------------------------------------------
 
---
--- Database: `quizhub`
---
+  CREATE TABLE "Quizhub"."QUESTIONS" 
+   (	"QUESTION_ID" NUMBER(38,0), 
+	"QUESTION_NAME" VARCHAR2(255 BYTE), 
+	"QUESTION_NUMBER" VARCHAR2(255 BYTE), 
+	"QUESTION_PICTURE" VARCHAR2(255 BYTE), 
+	"QUIZ_ID" NUMBER
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into Quizhub.QUESTIONS
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index QUESTIONS_PK
+--------------------------------------------------------
 
--- --------------------------------------------------------
+  CREATE UNIQUE INDEX "Quizhub"."QUESTIONS_PK" ON "Quizhub"."QUESTIONS" ("QUESTION_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table QUESTIONS
+--------------------------------------------------------
 
---
--- Table structure for table `choices`
---
+  ALTER TABLE "Quizhub"."QUESTIONS" ADD CONSTRAINT "QUESTIONS_PK" PRIMARY KEY ("QUESTION_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "Quizhub"."QUESTIONS" MODIFY ("QUESTION_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUESTIONS" MODIFY ("QUESTION_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUESTIONS" MODIFY ("QUESTION_NUMBER" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUESTIONS" MODIFY ("QUIZ_ID" NOT NULL ENABLE);
 
-CREATE TABLE `choices` (
-  `choice_id` int(255) NOT NULL,
-  `choice_name` varchar(255) NOT NULL,
-  `choice_correct` tinyint(1) NOT NULL,
-  `question_id` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--------------------------------------------------------
+--  File created - Friday-October-18-2019   
+--------------------------------------------------------
+DROP TABLE "Quizhub"."QUIZ";
+--------------------------------------------------------
+--  DDL for Table QUIZ
+--------------------------------------------------------
 
--- --------------------------------------------------------
+  CREATE TABLE "Quizhub"."QUIZ" 
+   (	"QUIZ_ID" NUMBER(20,0), 
+	"QUIZ_NAME" VARCHAR2(255 BYTE), 
+	"QUIZ_COMMENTS" VARCHAR2(255 BYTE), 
+	"QUIZ_STATUS" VARCHAR2(255 BYTE) DEFAULT ('Open'), 
+	"TEACHER_ID" NUMBER(20,0), 
+	"COURSE_NAME" VARCHAR2(255 BYTE), 
+	"COURSE_ID" VARCHAR2(255 BYTE), 
+	"JOIN_CODE" VARCHAR2(255 BYTE), 
+	"COVER_IMAGES" VARCHAR2(255 BYTE), 
+	"START_DATE" TIMESTAMP (6), 
+	"END_DATE" TIMESTAMP (6)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into Quizhub.QUIZ
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index QUIZ_PK
+--------------------------------------------------------
 
---
--- Table structure for table `questions`
---
+  CREATE UNIQUE INDEX "Quizhub"."QUIZ_PK" ON "Quizhub"."QUIZ" ("QUIZ_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table QUIZ
+--------------------------------------------------------
 
-CREATE TABLE `questions` (
-  `question_id` int(255) NOT NULL,
-  `question_name` varchar(255) NOT NULL,
-  `question_number` varchar(255) NOT NULL,
-  `question_picture` varchar(255) NOT NULL,
-  `quiz_id` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  ALTER TABLE "Quizhub"."QUIZ" ADD CONSTRAINT "QUIZ_PK" PRIMARY KEY ("QUIZ_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "Quizhub"."QUIZ" MODIFY ("QUIZ_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUIZ" MODIFY ("QUIZ_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUIZ" MODIFY ("QUIZ_STATUS" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUIZ" MODIFY ("TEACHER_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUIZ" MODIFY ("COURSE_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUIZ" MODIFY ("COURSE_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."QUIZ" MODIFY ("START_DATE" NOT NULL ENABLE);
 
--- --------------------------------------------------------
+--------------------------------------------------------
+--  File created - Friday-October-18-2019   
+--------------------------------------------------------
+DROP TABLE "Quizhub"."STUDENTS";
+--------------------------------------------------------
+--  DDL for Table STUDENTS
+--------------------------------------------------------
 
---
--- Table structure for table `quiz`
---
+  CREATE TABLE "Quizhub"."STUDENTS" 
+   (	"ID" NUMBER(20,0), 
+	"STUDENT_ID" VARCHAR2(255 BYTE), 
+	"FIRST_NAME" VARCHAR2(255 BYTE), 
+	"LAST_NAME" VARCHAR2(255 BYTE), 
+	"PASSWORD" VARCHAR2(255 BYTE), 
+	"FACULTY" VARCHAR2(255 BYTE), 
+	"BRANCH" VARCHAR2(255 BYTE), 
+	"ACCOUNT_STATUS" VARCHAR2(255 BYTE) DEFAULT ('Actived'), 
+	"LAST_TIME" TIMESTAMP (6)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into Quizhub.STUDENTS
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index STUDENTS_PK
+--------------------------------------------------------
 
-CREATE TABLE `quiz` (
-  `quiz_id` int(255) NOT NULL,
-  `quiz_name` varchar(255) NOT NULL,
-  `quiz_comments` varchar(255) NOT NULL,
-  `quiz_status` varchar(255) NOT NULL DEFAULT 'open',
-  `teacher_id` bigint(255) NOT NULL,
-  `course_name` varchar(255) NOT NULL,
-  `course_id` varchar(255) NOT NULL,
-  `join_code` varchar(255) NOT NULL,
-  `cover_images` varchar(255) NOT NULL,
-  `start_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `end_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CREATE UNIQUE INDEX "Quizhub"."STUDENTS_PK" ON "Quizhub"."STUDENTS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table STUDENTS
+--------------------------------------------------------
 
--- --------------------------------------------------------
+  ALTER TABLE "Quizhub"."STUDENTS" ADD CONSTRAINT "STUDENTS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("STUDENT_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("FIRST_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("LAST_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("PASSWORD" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("FACULTY" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("BRANCH" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."STUDENTS" MODIFY ("ACCOUNT_STATUS" NOT NULL ENABLE);
 
---
--- Table structure for table `students`
---
+--------------------------------------------------------
+--  File created - Friday-October-18-2019   
+--------------------------------------------------------
+DROP TABLE "Quizhub"."TEACHERS";
+--------------------------------------------------------
+--  DDL for Table TEACHERS
+--------------------------------------------------------
 
-CREATE TABLE `students` (
-  `id` int(255) NOT NULL,
-  `student_id` bigint(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `faculty` varchar(255) NOT NULL,
-  `branch` varchar(255) NOT NULL,
-  `account_status` varchar(255) NOT NULL DEFAULT 'active',
-  `last_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CREATE TABLE "Quizhub"."TEACHERS" 
+   (	"ID" NUMBER(38,0), 
+	"TEACHER_ID" NUMBER(38,0), 
+	"FIRST_NAME" VARCHAR2(255 BYTE), 
+	"LAST_NAME" VARCHAR2(255 BYTE), 
+	"PASSWORD" VARCHAR2(255 BYTE), 
+	"FACULTY" VARCHAR2(255 BYTE), 
+	"COURSE_NAME" VARCHAR2(255 BYTE), 
+	"COURSE_ID" VARCHAR2(255 BYTE), 
+	"ACCOUNT_STATUS" VARCHAR2(255 BYTE) DEFAULT ('Pending'), 
+	"LAST_TIME" TIMESTAMP (6)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into Quizhub.TEACHERS
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index TEACHERS_PK
+--------------------------------------------------------
 
---
--- Dumping data for table `students`
---
+  CREATE UNIQUE INDEX "Quizhub"."TEACHERS_PK" ON "Quizhub"."TEACHERS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table TEACHERS
+--------------------------------------------------------
 
-INSERT INTO `students` (`id`, `student_id`, `first_name`, `last_name`, `password`, `faculty`, `branch`, `account_status`, `last_time`) VALUES
-(1, 61130500038, 'demo', 'demo', 'demo', 'School of Information Technology', 'Information Technoloy', 'active', '2019-10-18 13:38:12'),
-(2, 61130500001, 'std01', 'std01', 'std01', 'School of Information Technology', 'Information Technoloy', 'active', '2019-10-18 13:39:38');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `teachers`
---
-
-CREATE TABLE `teachers` (
-  `id` int(255) NOT NULL,
-  `teacher_id` bigint(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `faculty` varchar(255) NOT NULL,
-  `course_name` varchar(255) NOT NULL,
-  `course_id` varchar(255) NOT NULL,
-  `account_status` varchar(255) NOT NULL DEFAULT 'pending',
-  `last_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `teachers`
---
-
-INSERT INTO `teachers` (`id`, `teacher_id`, `first_name`, `last_name`, `password`, `faculty`, `course_name`, `course_id`, `account_status`, `last_time`) VALUES
-(1, 100001, 'teacher', 'teacher', 'teacher', 'School of Information Technology', 'Web Programming', 'INT303', 'active', '2019-10-18 13:41:25');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `choices`
---
-ALTER TABLE `choices`
-  ADD PRIMARY KEY (`choice_id`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`question_id`);
-
---
--- Indexes for table `quiz`
---
-ALTER TABLE `quiz`
-  ADD PRIMARY KEY (`quiz_id`);
-
---
--- Indexes for table `students`
---
-ALTER TABLE `students`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `teachers`
---
-ALTER TABLE `teachers`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `choices`
---
-ALTER TABLE `choices`
-  MODIFY `choice_id` int(255) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `question_id` int(255) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `quiz`
---
-ALTER TABLE `quiz`
-  MODIFY `quiz_id` int(255) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `students`
---
-ALTER TABLE `students`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `teachers`
---
-ALTER TABLE `teachers`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("TEACHER_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("FIRST_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("LAST_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("PASSWORD" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("FACULTY" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("COURSE_NAME" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("COURSE_ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("ACCOUNT_STATUS" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "Quizhub"."TEACHERS" ADD CONSTRAINT "TEACHERS_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS"  ENABLE;
