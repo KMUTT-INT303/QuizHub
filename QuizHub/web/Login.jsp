@@ -26,7 +26,7 @@
                         <div class="col-sm-6 offset-sm-3 text-center">
                             <h3 class="display-4 mb-5">QuizHub</h3>
                             <div class="info-form">
-                                <form action="Login" class="form-inlin justify-content-center">
+                                <form action="Login" class="form-inlin justify-content-center" autocomplete="off">
                                     <div class="form-group">
                                         <label class="sr-only">Username</label>
                                         <input type="text" name="username" class="form-control" placeholder="Username">
