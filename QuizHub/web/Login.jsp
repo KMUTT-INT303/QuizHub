@@ -29,11 +29,11 @@
                                 <form action="Login" class="form-inlin justify-content-center">
                                     <div class="form-group">
                                         <label class="sr-only">Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                        <input type="text" name="username" class="form-control" placeholder="Username">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only">Passoword</label>
-                                        <input type="password" class="form-control" placeholder="************" name="password">
+                                        <input type="password" name="password" class="form-control" placeholder="Password">
                                     </div>
                                     <button type="submit" class="btn btn-success ">Login</button>
                                     <a href="Register" class="btn btn-success">Register</a>
