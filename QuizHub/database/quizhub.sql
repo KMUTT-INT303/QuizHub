@@ -4,6 +4,8 @@ DROP TABLE teachers;
 DROP TABLE choices;
 DROP TABLE quiz;
 DROP TABLE questions;
+DROP TABLE branch;
+DROP TABLE faculty;
 
 CREATE TABLE STUDENTS
 (
