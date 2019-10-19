@@ -35,6 +35,6 @@
         </select>
         <br>
         <input type="submit" value="REGISTER">
-        </form>${msg}
+        </form>${msg}<a href="/QuizHub/Login.jsp">BACK</a>
     </body>
 </html>
