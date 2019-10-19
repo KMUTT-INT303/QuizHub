@@ -1,3 +1,10 @@
+
+DROP TABLE students;
+DROP TABLE teachers;
+DROP TABLE choices;
+DROP TABLE quiz;
+DROP TABLE questions;
+
 CREATE TABLE STUDENTS
 (
     STUDENT_ID BIGINT NOT NULL,
