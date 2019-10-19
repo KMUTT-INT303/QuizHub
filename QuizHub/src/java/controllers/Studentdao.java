@@ -75,7 +75,7 @@ public class Studentdao {
         return null;
     }
     
-    public Student getStudentById(long sid){
+    public Student getStudentById(long sid){     
         conn = BuildConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(GET_STUDENT_BY_STUDENT_ID);
@@ -121,5 +121,11 @@ public class Studentdao {
         }return false;
     }
     
+    public static void main(String[] args) {
+        Studentdao sdao = new Studentdao();
+        Student s = new Student(611305, "firstName", "lastName", "password", 1, 2);
+        sdao.addStudent(s);
+        System.out.println(sdao.getStudentById(611305));
+    }
     
 }

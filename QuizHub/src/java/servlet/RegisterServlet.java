@@ -5,12 +5,19 @@
  */
 package servlet;
 
+import controllers.Branchdao;
+import controllers.Facultydao;
+import controllers.Studentdao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Branch;
+import model.Faculty;
+import model.Student;
 
 /**
  *
@@ -29,11 +36,74 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String msg = "";
+        
+        String student_id = request.getParameter("student_id");
+        String password = request.getParameter("password");
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+        String faculty_id = request.getParameter("faculty");
+        String brach_id = request.getParameter("branch");
+
+
+        if(student_id.trim().isEmpty() || password.trim().isEmpty() || fname.trim().isEmpty() || lname.trim().isEmpty() 
+                || faculty_id.trim().isEmpty() || brach_id.trim().isEmpty()){
+            msg = "You must to input all information";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            return;
+        }
+        
+        long sid = Long.valueOf(student_id);
+        int fid = Integer.valueOf(faculty_id);
+        int bid = Integer.valueOf(brach_id);
+        
+        Studentdao sdao = new Studentdao();
+        Student s = sdao.getStudentById(sid);
+        Student regStudent = new Student(sid, fname, lname, password, fid, bid);
+        
+        if(s != null){
+            if(s.getStudent_id() == sid){
+                msg = "You student id has Registered.";
+                request.setAttribute("msg", msg);
+                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+                return;
+            }else{
+                sdao.addStudent(regStudent);
+                msg = "Register successful.";
+                request.setAttribute("msg", msg);
+                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            }
+        }else{
+            sdao.addStudent(regStudent);
+            msg = "Register successful.";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+        }
+        
+        //request.getRequestDispatcher("/Register.jsp").forward(request, response);
         
         
+       //request.getRequestDispatcher("/Register.jsp").forward(request, response);
+         
+    }
+    
+    private void setFacultyAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        Facultydao fdao = new Facultydao();
+        ArrayList<Faculty> faculties = new ArrayList();
+        faculties = fdao.getAllFaculty();
+        request.setAttribute("faculties", faculties);
         
     }
-
+    
+    private void setBranchAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        Branchdao bdao = new Branchdao();
+        Facultydao fdao = new Facultydao();
+        ArrayList<Branch> branch = bdao.getAllBranch();
+        request.setAttribute("branch", branch);
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -47,6 +117,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**
