@@ -5,12 +5,14 @@
  */
 package servlet;
 
+import controllers.Studentdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Student;
 
 /**
  *
@@ -29,19 +31,39 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+       String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String path = "/Login.jsp";
+        String msg = "";
+        
+        if(username.trim().isEmpty() || password.trim().isEmpty()){
+            msg = "You must to input all info.";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher(path).forward(request, response);
+            return;
         }
+        
+        long usernameToLong = Long.valueOf(username);
+            
+        Studentdao sdao = new Studentdao();
+        Student s = sdao.getStudentById(usernameToLong);
+            
+        if(s != null){
+            if(s.getPassword().equals(password)){
+                    request.getSession().setAttribute("user", s);
+                    getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+                    return;
+            }else{
+                msg = "Wrong password.";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);  
+                return;
+            }
+        }
+        msg = "User not found.";
+        request.setAttribute("msg", msg);
+        getServletContext().getRequestDispatcher(path).forward(request, response);
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
