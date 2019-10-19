@@ -26,14 +26,14 @@
                         <div class="col-sm-6 offset-sm-3 text-center">
                             <h3 class="display-4 mb-5">QuizHub</h3>
                             <div class="info-form">
-                                <form action="" class="form-inlin justify-content-center">
+                                <form action="Login" class="form-inlin justify-content-center">
                                     <div class="form-group">
                                         <label class="sr-only">Username</label>
-                                        <input type="text" class="form-control" placeholder="Username">
+                                        <input type="text" class="form-control" placeholder="Username" name="username">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only">Passoword</label>
-                                        <input type="password" class="form-control" placeholder="************">
+                                        <input type="password" class="form-control" placeholder="************" name="password">
                                     </div>
                                     <button type="submit" class="btn btn-success ">Login</button>
                                     <a href="Register" class="btn btn-success">Register</a>
