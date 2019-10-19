@@ -30,7 +30,7 @@
                                 <form action="Login" method="post" class="form-inlin justify-content-center" autocomplete="off">
                                     <div class="form-group">
                                         <label class="sr-only">Username</label>
-                                        <input type="text" name="username" class="form-control" placeholder="Username">
+                                        <input type="number" name="username" class="form-control" placeholder="Username">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only">Passoword</label>

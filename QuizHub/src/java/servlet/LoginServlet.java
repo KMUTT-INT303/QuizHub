@@ -36,6 +36,15 @@ public class LoginServlet extends HttpServlet {
         String path = "/Login.jsp";
         String msg = "";
         
+        for (char c : username.toCharArray()) {
+            if (!Character.isDigit(c)) {
+            msg = "Username cannot be text.";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher(path).forward(request, response);
+            return;
+            }
+        } 
+        
         if(username.trim().isEmpty() || password.trim().isEmpty()){
             msg = "You must to input all info.";
             request.setAttribute("msg", msg);
@@ -43,8 +52,8 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         
-        long usernameToLong = Long.valueOf(username);
-            
+        long usernameToLong = Long.valueOf(username);  
+        
         Studentdao sdao = new Studentdao();
         Student s = sdao.getStudentById(usernameToLong);
             
