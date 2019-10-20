@@ -4,7 +4,3 @@
  * and open the template in the editor.
  */
 
-$("submit-form").submit(function(e) {
-    e.preventDefault();
-});
-

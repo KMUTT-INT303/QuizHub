@@ -24,10 +24,10 @@
                 <div id="container" class="container">
                     <div class="row text-white">
                         <div class="col-sm-6 offset-sm-3 text-center">
-                            <h3 class="display-4 mb-5">QuizHub</h3>
-                            <h2 class="display-4 mb-5">${msg}</h2>
+                            <h3 class="display-4 mb-3">QuizHub</h3>
+                            <h2 class="display-4 mb-2">${msg}</h2>
                             <div class="info-form">
-                                <form id="submit-form" action="Login" method="post" class="form-inlin justify-content-center" autocomplete="off">
+                                <form id="login-form" action="Login" method="post" class="form-inlin justify-content-center" autocomplete="off">
                                     <div class="form-group">
                                         <label class="sr-only">Username</label>
                                         <input type="number" name="username" class="form-control" placeholder="Username">

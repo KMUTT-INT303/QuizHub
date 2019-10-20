@@ -1,17 +1,32 @@
 html,
 body{
     height: 100%;
+    width: 100%;
 }
 
 .login-section {
     background: linear-gradient(to right, rgb(79, 72, 192), rgb(72, 0, 72));
     height: 100%;
+    width: 100%;
     text-align: center;
     display: flex;
     align-items: center;
 }
 
 .login-section-width {
+    width: 100%;
+}
+
+.register-section {
+    background: linear-gradient(to right, rgb(79, 72, 192), rgb(72, 0, 72));
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.register-section-width {
     width: 100%;
 }
 
