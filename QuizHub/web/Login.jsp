@@ -27,7 +27,7 @@
                             <h3 class="display-4 mb-5">QuizHub</h3>
                             <h2 class="display-4 mb-5">${msg}</h2>
                             <div class="info-form">
-                                <form id="login-form" action="Login" method="post" class="form-inlin justify-content-center" autocomplete="off">
+                                <form id="submit-form" action="Login" method="post" class="form-inlin justify-content-center" autocomplete="off">
                                     <div class="form-group">
                                         <label class="sr-only">Username</label>
                                         <input type="number" name="username" class="form-control" placeholder="Username">

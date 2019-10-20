@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
-$("login-form").submit(function(e) {
+$("submit-form").submit(function(e) {
     e.preventDefault();
 });
+
