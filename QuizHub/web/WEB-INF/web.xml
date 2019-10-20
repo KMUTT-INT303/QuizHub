@@ -24,6 +24,10 @@
         <servlet-name>ListFacultyServlet</servlet-name>
         <servlet-class>servlet.ListFacultyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentManagementServlet</servlet-name>
+        <servlet-class>servlet.StudentManagementServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ListFacultyServlet</servlet-name>
         <url-pattern>/ListFaculty</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentManagementServlet</servlet-name>
+        <url-pattern>/StudentManagement</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
