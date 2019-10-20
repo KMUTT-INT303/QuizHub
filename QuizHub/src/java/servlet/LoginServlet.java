@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         
         for (char c : username.toCharArray()) {
             if (!Character.isDigit(c)) {
-            msg = "Username cannot be text.";
+            msg = "Your username cannot be text.";
             request.setAttribute("msg", msg);
             request.getRequestDispatcher(path).forward(request, response);
             return;
@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         } 
         
         if(username.trim().isEmpty() || password.trim().isEmpty()){
-            msg = "You must to input all info.";
+            msg = "Your username or password are incorrect.";
             request.setAttribute("msg", msg);
             request.getRequestDispatcher(path).forward(request, response);
             return;
@@ -63,13 +63,13 @@ public class LoginServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
                     return;
             }else{
-                msg = "Wrong password.";
+                msg = "Your username or password are incorrect.";
                 request.setAttribute("msg", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);  
                 return;
             }
         }
-        msg = "User not found.";
+        msg = "Your username or password are incorrect.";
         request.setAttribute("msg", msg);
         getServletContext().getRequestDispatcher(path).forward(request, response);
        
