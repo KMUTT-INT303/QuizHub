@@ -38,6 +38,18 @@ public class ListFacultyServlet extends HttpServlet {
         this.setFacultyAttribute(request, response);
         this.setBranchAttribute(request, response);
         response.sendRedirect("/Register.jsp");
+        
+                
+        /*String faculty_id = request.getParameter("faculty");
+        if(faculty_id != null || !faculty_id.trim().isEmpty()){
+            Branchdao bdao = new Branchdao();
+            Facultydao fdao = new Facultydao();
+            ArrayList<Branch> branch = bdao.getAllBranch();
+            int fid = Integer.valueOf(faculty_id);
+            branch = bdao.getAllBranchInFacultyByFacultyId(fid);
+            request.setAttribute("branch", branch);
+            return;
+        }*/
 
     }
     private void setFacultyAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -49,6 +61,17 @@ public class ListFacultyServlet extends HttpServlet {
     }
     
     private void setBranchAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        
+      /* if(request.getParameter("faculty") != null || request.getParameter("faculty").trim().isEmpty()){
+           String faculty_id = request.getParameter("faculty");
+            int fid = Integer.valueOf(faculty_id);
+            Branchdao bdao = new Branchdao();
+            Facultydao fdao = new Facultydao();
+            ArrayList<Branch> branch = bdao.getAllBranchInFacultyByFacultyId(fid);
+            request.setAttribute("branch", branch);
+            response.sendRedirect("/Register.jsp");
+            return;
+        }*/
         Branchdao bdao = new Branchdao();
         Facultydao fdao = new Facultydao();
         ArrayList<Branch> branch = bdao.getAllBranch();

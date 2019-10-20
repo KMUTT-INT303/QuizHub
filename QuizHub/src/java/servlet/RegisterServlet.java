@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
         String lname = request.getParameter("lname");
         String faculty_id = request.getParameter("faculty");
         String brach_id = request.getParameter("branch");
-
+        
 
         if(student_id.trim().isEmpty() || password.trim().isEmpty() || fname.trim().isEmpty() || lname.trim().isEmpty() 
                 || faculty_id.trim().isEmpty() || brach_id.trim().isEmpty()){

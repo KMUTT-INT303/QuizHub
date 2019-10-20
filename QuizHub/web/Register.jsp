@@ -30,7 +30,7 @@
             Branch: 
             <select name="branch">
                 <c:forEach items="${branch}" var="b">
-                    <option value="${b.faculty_id}">${b.name}</option>
+                    <option value="${b.id}">${b.name}</option>
                 </c:forEach>
             </select>
             <br>
