@@ -16,25 +16,25 @@
     <body>
         <h1>Register</h1>
         <form action="Register" method="post">
-        Student ID: <input type="number" name="student_id"><br>
-        Password: <input type="text" name="password"><br>
-        First Name: <input type="text" name="fname"><br>
-        Last Name: <input type="text" name="lname"><br>
-        Faculty: 
-        <select name="faculty">
-            <c:forEach items="${faculties}" var="f">
-                <option value="${f.id}">${f.name}</option>
-            </c:forEach>
-        </select>
-        <br>
-        Branch: 
-        <select name="branch">
-            <c:forEach items="${branch}" var="b">
-                <option value="${b.id}">${b.name}</option>
-            </c:forEach>
-        </select>
-        <br>
-        <input type="submit" value="REGISTER">
+            Student ID: <input type="number" name="student_id"><br>
+            Password: <input type="text" name="password"><br>
+            First Name: <input type="text" name="fname"><br>
+            Last Name: <input type="text" name="lname"><br>
+            Faculty: 
+            <select name="faculty">
+                <c:forEach items="${faculties}" var="f">
+                    <option value="${f.id}">${f.name}</option>
+                </c:forEach>
+            </select>
+            <br>
+            Branch: 
+            <select name="branch">
+                <c:forEach items="${branch}" var="b">
+                    <option value="${b.faculty_id}">${b.name}</option>
+                </c:forEach>
+            </select>
+            <br>
+            <input type="submit" value="REGISTER">
         </form>${msg}<a href="/QuizHub/Login.jsp">BACK</a>
     </body>
 </html>
