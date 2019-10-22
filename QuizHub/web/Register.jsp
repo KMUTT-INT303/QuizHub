@@ -31,7 +31,7 @@
                             <h2 class="display-4 mb-2">${msg}</h2>
                             <div class="info-form">
 
-                                <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center" autocomplete="off">
+                                <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center" enctype="multipart/form-data" autocomplete="off">
 
                                     <div class="row">
                                         <div class="col">
@@ -68,6 +68,7 @@
                                             <div class="form-group">
                                                 <label class="sr-only">Faculty</label>
                                                 <select class="form-control" name="faculty">
+                                                    <option selected="selected">Select your faculty</option>
                                                     <c:forEach items="${faculties}" var="f">
                                                         <option value="${f.id}">${f.name}</option>
                                                     </c:forEach>
@@ -80,7 +81,8 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="sr-only">Branch</label>
-                                                <select class="form-control" name="branch">
+                                                <select class="form-control" id="branch" name="branch">
+                                                    <option selected="selected">Select your branch</option>
                                                     <c:forEach items="${branch}" var="b">
                                                         <option value="${b.id}">${b.name}</option>
                                                     </c:forEach>
