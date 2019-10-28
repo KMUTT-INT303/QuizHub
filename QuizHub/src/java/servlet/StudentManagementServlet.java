@@ -9,6 +9,7 @@ import controllers.Studentdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,29 @@ public class StudentManagementServlet extends HttpServlet {
             throws ServletException, IOException {
         String msg = "";
         if(request.getParameter("student_id") == null || request.getParameter("student_id").isEmpty()){
+            String findbydesc = request.getParameter("findbydescription");
+            Enumeration<String> description = request.getParameterNames();     
+            if(!findbydesc.trim().isEmpty()){
+                if(findbydesc == null){
+                    msg = "input values.";
+                    request.setAttribute("msg", msg);
+                    this.setStudentList(request);
+                    getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
+                }else{
+                    Studentdao sdao = new Studentdao();
+                    ArrayList<Student> students = sdao.getAllStudentLike(findbydesc);
+                    if(!students.isEmpty()){
+                        request.setAttribute("studentsbydes", students);
+                        this.setStudentList(request);
+                        getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
+                    }else{
+                        msg = "NO ONE MATCH.";
+                        request.setAttribute("msg", msg);
+                        this.setStudentList(request);
+                        getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
+                    }
+                }
+            }
             this.setStudentList(request);
             getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
         }else{

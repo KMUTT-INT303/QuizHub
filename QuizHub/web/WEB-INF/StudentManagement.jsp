@@ -16,6 +16,37 @@
         <h1>Hello ${user}!</h1>
         <h2>Student Management</h2><hr><br>
         ${msg}
+        <form action="StudentManagement" method="post">
+            Find Student : <input type="text" name="findbydescription" value="${param.findbydescription}"> <input  type="submit">
+            <c:if test="${studentsbydes!=null}">
+                <table border="3">
+                <tr>
+                    <th>Student_ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Faculty</th>
+                    <th>Branch</th>
+                    <th>REMOVE</th>
+                </tr>
+                <c:forEach items="${studentsbydes}" var="s">
+                    <tr>
+                        <td>${s.student_id}</td>
+                        <td>${s.firstName}</td>
+                        <td>${s.lastName}</td>
+                        <td>${s.faculty_id}</td>
+                        <td>${s.branch_id}</td>
+                        <td>
+                            <input type="checkbox" name="student_id" value="${s.student_id}">
+                        </td> 
+                    </tr>
+                </c:forEach>
+                    <te>
+                        <td colspan="5"></td>
+                        <td><input type="submit"></td>
+                    </tr>
+                </table>
+            <form>
+        </c:if>
         <table border="3">
             <tr>
                 <th>Student_ID</th>

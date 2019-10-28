@@ -22,6 +22,7 @@ import model.Student;
 public class Studentdao {
     Connection conn = null;
     private final String GET_ALL_STUDENT = "SELECT * FROM students ORDER BY student_id";
+    private final String GET_ALL_STUDENT_LIKE = "SELECT * FROM students WHERE CHAR(student_id) like ? OR LOWER(first_name) like ? OR LOWER(last_name) like ?";
     private final String REMOVE_STUDENT_BY_STUDENT_ID = "DELETE FROM students WHERE student_id = ?";
     private final String ADD_STUDENT = "INSERT INTO students(student_id, first_name, last_name, password, faculty_id, branch_id, account_status) VALUES(?,?,?,?,?,?,?)";
     private final String GET_STUDENT_BY_STUDENT_ID = "SELECT * FROM students WHERE student_id = ?";
@@ -33,6 +34,24 @@ public class Studentdao {
         conn = BuildConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(GET_ALL_STUDENT);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                students.add(new Student(rs.getLong("student_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("account_status")));
+            }return students;
+        } catch (SQLException ex) {
+            Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Student> getAllStudentLike(String description){
+        ArrayList<Student> students = new ArrayList();
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(GET_ALL_STUDENT_LIKE);
+            ps.setString(1, description + "%");
+            ps.setString(2, description.toLowerCase() + "%");
+            ps.setString(3, description.toLowerCase() + "%");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 students.add(new Student(rs.getLong("student_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("account_status")));
