@@ -1,7 +1,9 @@
 
 import controllers.Facultydao;
+import controllers.Studentdao;
 import java.util.ArrayList;
 import model.Faculty;
+import model.Student;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +20,11 @@ public class Test {
         Facultydao fdao = new Facultydao();
         ArrayList<Faculty> faculties = new ArrayList();
         faculties = fdao.getAllFaculty();
-        System.out.println(faculties);
+        //System.out.println(faculties);
+        
+        
+        Studentdao sdao = new Studentdao();
+        ArrayList<Student> students = sdao.getAllStudentLike("q");
+        System.out.println(students);
     }
 }
