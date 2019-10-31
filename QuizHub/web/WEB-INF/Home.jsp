@@ -22,7 +22,7 @@
                 <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Try an example »</a>
             </div>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 mb-4">
                     <div class="card">
                         <h6 class="card-header">User Information</h6>
                         <div class="card-body">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8 mb-4">
                     <div class="card">
                         <h6 class="card-header">Quizhub</h6>
                         <div class="card-body">
@@ -61,13 +61,7 @@
                                     <div class="col-sm-3"></div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col-sm-5">
-                                        <hr>
-                                    </div>
-                                    <div class="col-sm-2 text-center">
-                                        Or
-                                    </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-12">
                                         <hr>
                                     </div>
                                 </div>

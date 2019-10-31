@@ -11,6 +11,6 @@
 
 <footer class="footer">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted"> KMUTT, School of Information Technology | 2019 ©</span>
     </div>
 </footer>
