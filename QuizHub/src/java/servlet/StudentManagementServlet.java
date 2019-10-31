@@ -38,8 +38,8 @@ public class StudentManagementServlet extends HttpServlet {
         String msg = "";
         if(request.getParameter("student_id") == null || request.getParameter("student_id").isEmpty()){
             String findbydesc = request.getParameter("findbydescription"); 
-            if(!findbydesc.trim().isEmpty()){
-                if(findbydesc == null){
+            if(!(findbydesc == null || findbydesc.trim().isEmpty())){
+                if(findbydesc.length() <= 0){
                     msg = "input values.";
                     request.setAttribute("msg", msg);
                     this.setStudentList(request);
@@ -61,6 +61,7 @@ public class StudentManagementServlet extends HttpServlet {
             }
             this.setStudentList(request);
             getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
+            
         }else{
             long sid = Long.valueOf(request.getParameter("student_id"));
             Studentdao sdao = new Studentdao();
