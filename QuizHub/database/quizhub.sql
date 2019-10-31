@@ -8,6 +8,8 @@ DROP TABLE quiz;
 DROP TABLE questions;
 DROP TABLE branch;
 DROP TABLE faculty;
+DROP TABLE comments;
+drop TABLE REPLY_COMMENTS
 
 ----- CREATE STUDENT TABLE -----
 
