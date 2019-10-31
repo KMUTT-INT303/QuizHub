@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello ${user}!</h1>
+        <h1>Hello !</h1>
         <h2>Student Management</h2><hr><br>
         ${msg}
         <form action="StudentManagement" method="post">
@@ -45,8 +45,7 @@
                         <td><input type="submit"></td>
                     </tr>
                 </table>
-            <form>
-        </c:if>
+            </c:if>
         <table border="3">
             <tr>
                 <th>Student_ID</th>

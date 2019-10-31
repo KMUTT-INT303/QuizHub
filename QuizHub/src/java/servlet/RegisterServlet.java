@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
         String faculty_id = request.getParameter("faculty");
         String brach_id = request.getParameter("branch");
         
-
+        
         if(student_id.trim().isEmpty() || password.trim().isEmpty() || fname.trim().isEmpty() || lname.trim().isEmpty() 
                 || faculty_id.trim().isEmpty() || brach_id.trim().isEmpty()){
             msg = "You must to input all information";
@@ -55,9 +55,28 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
+        
+        
+        String bidFromPara = null;
+        if(brach_id.length() > 0){
+            for(int i =0; i < brach_id.length();i++){
+                char j = brach_id.charAt(i);
+                if(j == '-'){
+                    bidFromPara = brach_id.substring(i+1);
+                }
+            }
+        }
+        
         long sid = Long.valueOf(student_id);
         int fid = Integer.valueOf(faculty_id);
-        int bid = Integer.valueOf(brach_id);
+        int bid = Integer.valueOf(bidFromPara);
+        
+        if(fid <= 0){
+            msg = "Please select your faculty.";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            return;
+        }
         
         Studentdao sdao = new Studentdao();
         Student s = sdao.getStudentById(sid);
@@ -86,7 +105,7 @@ public class RegisterServlet extends HttpServlet {
         
         
        //request.getRequestDispatcher("/Register.jsp").forward(request, response);
-         
+     
     }
     
     private void setFacultyAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{

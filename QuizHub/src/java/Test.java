@@ -26,5 +26,16 @@ public class Test {
         Studentdao sdao = new Studentdao();
         ArrayList<Student> students = sdao.getAllStudentLike("q");
         System.out.println(students);
+        
+        
+        String fid_bid = "12-02";
+        String bid = null;
+        for(int i =0;i<fid_bid.length();i++){
+            char j = fid_bid.charAt(i);
+            if(j == '-'){
+                bid = fid_bid.substring(i+1);
+            }
+        }
+        System.out.println(bid);
     }
 }
