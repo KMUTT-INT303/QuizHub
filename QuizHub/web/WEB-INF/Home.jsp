@@ -15,14 +15,14 @@
 
         <header><%@ include file="../Layouts/Menu.jsp" %></header>
 
-        <main role="main" class="container mb-4">
+        <main role="main" class="container">
             <div class="jumbotron">
                 <h1>Welcome to QuizHub</h1>
                 <p class="lead">Make learning awesome! Quizhub! brings engagement and fun to more than 1 billion players every year at school, at work, and at home</p>
                 <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Try an example »</a>
             </div>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 mb-4">
                     <div class="card">
                         <h6 class="card-header">User Information</h6>
                         <div class="card-body">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8 mb-4">
                     <div class="card">
                         <h6 class="card-header">Quizhub</h6>
                         <div class="card-body">
