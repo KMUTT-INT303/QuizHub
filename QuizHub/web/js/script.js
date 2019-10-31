@@ -17,11 +17,16 @@ $(document).ready(function () {
         branchOptions.filter(function () {
             return this.value.indexOf(faculty.val() + "-") === 0;
         }).appendTo(branch);
-        
+
         branch.children("option:first").attr('selected', true);
 
         $("#faculty").val() == 0 ? $("#branch").attr("hidden", true) : $("#branch").attr("hidden", false)
 
+    });
+
+    $("#register-form, #login-form").submit(function (e) {
+        e.preventDefault();
+        this.submit();
     });
 
 });

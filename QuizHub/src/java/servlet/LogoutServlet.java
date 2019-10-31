@@ -5,20 +5,19 @@
  */
 package servlet;
 
-import controllers.Studentdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Student;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author tsch
  */
-public class LoginServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,48 +30,13 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String path = "/Login.jsp";
-        String msg = "";
-        
-        for (char c : username.toCharArray()) {
-            if (!Character.isDigit(c)) {
-            msg = "Your username cannot be text.";
-            request.setAttribute("msg", msg);
-            request.getRequestDispatcher(path).forward(request, response);
-            return;
-            }
-        } 
-        
-        if(username.trim().isEmpty() || password.trim().isEmpty()){
-            msg = "Your username or password are incorrect.";
-            request.setAttribute("msg", msg);
-            request.getRequestDispatcher(path).forward(request, response);
-            return;
+        HttpSession session = request.getSession(false);
+        if(session != null || session.getAttribute("user") != null) {
+            session.invalidate();
+            request.getRequestDispatcher("/Login.jsp").forward(request, response);
         }
         
-        long usernameToLong = Long.valueOf(username);  
-        
-        Studentdao sdao = new Studentdao();
-        Student s = sdao.getStudentById(usernameToLong);
-            
-        if(s != null){
-            if(s.getPassword().equals(password)){
-                    request.getSession().setAttribute("user", s);
-                    getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
-                    return;
-            }else{
-                msg = "Your username or password are incorrect.";
-                request.setAttribute("msg", msg);
-                getServletContext().getRequestDispatcher(path).forward(request, response);  
-                return;
-            }
-        }
-        msg = "Your username or password are incorrect.";
-        request.setAttribute("msg", msg);
-        getServletContext().getRequestDispatcher(path).forward(request, response);
-       
+        request.getRequestDispatcher("/Login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,7 +51,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/Login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
