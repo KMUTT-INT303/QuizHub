@@ -15,7 +15,7 @@
 
         <header><%@ include file="../Layouts/Menu.jsp" %></header>
 
-        <main role="main" class="container">
+        <main role="main" class="container mb-4">
             <div class="jumbotron">
                 <h1>Welcome to QuizHub</h1>
                 <p class="lead">Make learning awesome! Quizhub! brings engagement and fun to more than 1 billion players every year at school, at work, and at home</p>

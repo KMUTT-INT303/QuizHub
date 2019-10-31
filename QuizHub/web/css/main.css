@@ -3,6 +3,10 @@ body{
     background: linear-gradient(to right, rgb(79, 72, 192), rgb(72, 0, 72));
     height: 100%;
     width: 100%;
+    position: relative;
+    min-height: 100%;
+    /* Margin bottom by footer height */
+    margin-bottom: 10%;
 }
 
 .login-section {
@@ -30,7 +34,7 @@ body{
 }
 
 .footer {
-    position: relative;
+    position: inherit;
     bottom: 0;
     width: 100%;
     height: auto;
