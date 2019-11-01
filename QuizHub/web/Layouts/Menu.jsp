@@ -22,6 +22,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="#">Quiz</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="#">View Statistics</a>
                 </li>
 

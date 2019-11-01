@@ -1,36 +1,11 @@
-
-
 html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     background: linear-gradient(to right, rgb(79, 72, 192), rgb(72, 0, 72));
     margin-bottom: 60px;
-    height: 100%;
-}
-
-.login-section {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-section-width {
-    width: 100%;
-}
-
-.register-section {
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-}
-
-.register-section-width {
-    width: 100%;
 }
 
 .footer {

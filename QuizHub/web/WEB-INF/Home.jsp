@@ -23,7 +23,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-4 mb-4">
-                    <div class="card">
+
+                    <div class="card mb-2">
                         <h6 class="card-header">User Information</h6>
                         <div class="card-body">
                             <div class="card mb-2">
@@ -42,9 +43,18 @@
                             <span><a href="#" class="btn btn-outline-danger float-right">Sign out</a></span>
                         </div>
                     </div>
+
+                    <div class="card mb-2">
+                        <h6 class="card-header">Last Activities</h6>
+                        <div class="card-body">
+                            <p>Nothing</p>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="col-sm-8 mb-4">
-                    <div class="card">
+                    <div class="card mb-2">
                         <h6 class="card-header">Quizhub</h6>
                         <div class="card-body">
                             <form method="post" action="">
