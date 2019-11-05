@@ -22,9 +22,10 @@ import model.Student;
 public class Studentdao {
     Connection conn = null;
     private final String GET_ALL_STUDENT = "SELECT * FROM students ORDER BY student_id";
-    private final String GET_ALL_STUDENT_LIKE = "SELECT * FROM students WHERE CHAR(student_id) like ? OR LOWER(first_name) like ? OR LOWER(last_name) like ?";
+    private final String GET_ALL_STUDENT_LIKE = "SELECT * FROM students WHERE CHAR(student_id) like ? OR LOWER(first_name) like ? " + "OR LOWER(last_name) like ?";
     private final String REMOVE_STUDENT_BY_STUDENT_ID = "DELETE FROM students WHERE student_id = ?";
     private final String ADD_STUDENT = "INSERT INTO students(student_id, first_name, last_name, password, faculty_id, branch_id, account_status) VALUES(?,?,?,?,?,?,?)";
+    private final String EDIT_STUDENT_INFO = "UPDATE students SET first_name = ?, last_name = ?, password = ?, faculty_id = ?, branch_id = ?, account_status = ? WHERE student_id = ?";
     private final String GET_STUDENT_BY_STUDENT_ID = "SELECT * FROM students WHERE student_id = ?";
     private final String GET_ALL_STUDENT_BY_FACULTY_ID = "SELECT * FROM students s JOIN faculty f ON s.faculty_id = f.faculty_id WHERE f.faculty_id = ?";
     private final String GET_ALL_STUDENT_BY_BRANCH_ID = "SELECT * FROM students s JOIN branch b ON b.branch_id = s.branch_id WHERE b.branch_id = ?";
@@ -121,6 +122,24 @@ public class Studentdao {
             ps.setInt(5, s.getFaculty_id());
             ps.setInt(6, s.getBranch_id());
             ps.setString(7, "active");
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
+        }return false;
+    }
+    
+    public boolean editStudentInfo(Student s){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(EDIT_STUDENT_INFO);
+            ps.setString(1, s.getFirstName());
+            ps.setString(2, s.getLastName());
+            ps.setString(3, s.getPassword());
+            ps.setInt(4, s.getFaculty_id());
+            ps.setInt(5, s.getBranch_id());
+            ps.setString(6, s.getAccount_status());
+            ps.setLong(7, s.getStudent_id());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

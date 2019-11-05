@@ -37,5 +37,12 @@ public class Test {
             }
         }
         System.out.println(bid);
+        long sid = Long.valueOf("61130500001");
+        Student tests = sdao.getStudentById(sid);
+        System.out.println(tests);
+        tests.setAccount_status("pending");
+        tests.setPassword("123");
+        sdao.editStudentInfo(tests);
+        System.out.println(tests);
     }
 }

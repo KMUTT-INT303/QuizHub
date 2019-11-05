@@ -29,7 +29,7 @@ public class indexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
