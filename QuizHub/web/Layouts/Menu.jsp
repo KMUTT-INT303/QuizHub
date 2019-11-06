@@ -6,7 +6,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="#">QuizHub</a>
+        <a class="navbar-brand" href="/">QuizHub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,23 +14,23 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="Profile">Profile</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Quizzes</a>
+                    <a class="nav-link" href="Quizzes">Quizzes</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">View Statistics</a>
+                    <a class="nav-link" href="ViewStatistics">View Statistics</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Question?</a>
+                    <a class="nav-link" href="Question">Question?</a>
                 </li>
 
 
