@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <div class="card mb-2">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Welcome, <span class="username">${user.firstName}</span></li>
+                                    <li class="list-group-item">Name: <span class="username">${user.firstName} ${user.lastName}</span></li>
                                 </ul>
                             </div>
                             <div class="card mb-2">
