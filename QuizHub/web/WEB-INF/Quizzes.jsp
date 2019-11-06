@@ -9,11 +9,11 @@
 
 <html lang="en">
 
-    <%@ include file="Layouts/Headers.jsp" %> 
+    <%@ include file="../Layouts/Headers.jsp" %> 
 
     <body>
 
-        <header><%@ include file="Layouts/Menu.jsp" %></header>
+        <header><%@ include file="../Layouts/Menu.jsp" %></header>
 
         <main role="main" class="container">
 
@@ -107,7 +107,7 @@
         </main>
     </body>
 
-    <%@ include file="Layouts/Footers.jsp" %> 
+    <%@ include file="../Layouts/Footers.jsp" %> 
 
 
 </html>

@@ -49,8 +49,8 @@
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateQuizServlet</servlet-name>
-        <servlet-class>servlet.CreateQuizServlet</servlet-class>
+        <servlet-name>QuizzesServlet</servlet-name>
+        <servlet-class>servlet.QuizzesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageAccountForStudentServlet</servlet-name>
@@ -81,8 +81,8 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreateQuizServlet</servlet-name>
-        <url-pattern>/CreateQuiz</url-pattern>
+        <servlet-name>QuizzesServlet</servlet-name>
+        <url-pattern>/Quizzes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageAccountForStudentServlet</servlet-name>
