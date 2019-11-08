@@ -16,12 +16,12 @@
         <h1>Hello ${user.firstName}!</h1>
         ${user}
         <p>Change Password</p>
-        <%--form action="ManageAccountForStudent" method="post">
+        <form action="ChangePassword" method="post">
         Old Password:<input type="text" name="opass"><br>
         New Password:<input type="text" name="npass"><br>
         Confirm Password:<input type="text" name="cpass"><br>
         <input type="submit">
-        </form--%>
+        </form>
         
         <p>Edit Information</p>
         <form action="ManageAccountForStudent" method="post">
