@@ -67,7 +67,7 @@ public class StudentManagementServlet extends HttpServlet {
             Studentdao sdao = new Studentdao();
             Student s = sdao.getStudentById(sid);
             if(s != null){
-                sdao.removeStudentById(s.getStudent_id());
+                sdao.removeStudentById(s.getId());
                 msg = "Remove successful!";
                 request.setAttribute("msg", msg);
                 this.setStudentList(request);

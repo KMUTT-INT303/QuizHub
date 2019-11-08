@@ -7,14 +7,13 @@ package model;
 
 import java.sql.ResultSet;
 
-
 /**
  *
  * @author Top
  */
 public class Student {
-    
-    private long student_id;
+
+    private long id;
     private String firstName;
     private String lastName;
     private String password;
@@ -25,8 +24,8 @@ public class Student {
     public Student() {
     }
 
-    public Student(long student_id, String firstName, String lastName, String password, int faculty_id, int branch_id) {
-        this.student_id = student_id;
+    public Student(long id, String firstName, String lastName, String password, int faculty_id, int branch_id) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -34,8 +33,8 @@ public class Student {
         this.branch_id = branch_id;
     }
 
-    public Student(long student_id, String firstName, String lastName, String password, int faculty_id, int branch_id, String account_status) {
-        this.student_id = student_id;
+    public Student(long id, String firstName, String lastName, String password, int faculty_id, int branch_id, String account_status) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -44,12 +43,12 @@ public class Student {
         this.account_status = account_status;
     }
 
-    public long getStudent_id() {
-        return student_id;
+    public long getId() {
+        return id;
     }
 
-    public void setStudent_id(long student_id) {
-        this.student_id = student_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -102,9 +101,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "student_id=" + student_id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", branch_id=" + branch_id + ", account_status=" + account_status + '}';
+        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", branch_id=" + branch_id + ", account_status=" + account_status + '}';
     }
 
-
-    
 }

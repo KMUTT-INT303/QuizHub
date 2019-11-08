@@ -74,7 +74,7 @@ public class Teacherdao {
         conn = BuildConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement("UPDATE teachers SET account_status = 'active' WHERE teacher_id = ?");
-            ps.setLong(1, t.getTeacher_id());
+            ps.setLong(1, t.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -86,7 +86,7 @@ public class Teacherdao {
         conn = BuildConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement("UPDATE teachers SET account_status = 'pending' WHERE teacher_id = ?");
-            ps.setLong(1, t.getTeacher_id());
+            ps.setLong(1, t.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

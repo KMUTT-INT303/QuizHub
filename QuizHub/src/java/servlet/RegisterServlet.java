@@ -83,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
         Student regStudent = new Student(sid, fname, lname, password, fid, bid);
         
         if(s != null){
-            if(s.getStudent_id() == sid){
+            if(s.getId() == sid){
                 msg = "You student id has Registered.";
                 request.setAttribute("msg", msg);
                 request.getRequestDispatcher("/Register.jsp").forward(request, response);

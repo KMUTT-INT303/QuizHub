@@ -36,7 +36,7 @@
                             <div class="card mb-2">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Status: Student</li>
-                                    <li class="list-group-item">ID: ${user.student_id}</li>
+                                    <li class="list-group-item">ID: ${user.id}</li>
                                     <li class="list-group-item">Last time: 20/10/2562 - 06:39:59</li>
                                 </ul>
                             </div>

@@ -6,6 +6,7 @@
 package servlet;
 
 import controllers.Studentdao;
+import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -68,6 +70,22 @@ public class LoginServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher(path).forward(request, response);  
                 return;
             }
+        }else{
+            Teacherdao tdao = new Teacherdao();
+            Teacher t = tdao.getTeacherById(usernameToLong);
+            
+            if(t != null){
+                if(t.getPassword().equals(password)){
+                    request.getSession().setAttribute("user", t);
+                    getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+                    return;
+                }else{
+                    msg = "Your username or password are incorrect.";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                }
+            }
+            
         }
         msg = "Your username or password are incorrect.";
         request.setAttribute("msg", msg);

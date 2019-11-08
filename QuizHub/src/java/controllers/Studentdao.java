@@ -115,7 +115,7 @@ public class Studentdao {
         conn = BuildConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(ADD_STUDENT);
-            ps.setLong(1, s.getStudent_id());
+            ps.setLong(1, s.getId());
             ps.setString(2, s.getFirstName());
             ps.setString(3, s.getLastName());
             ps.setString(4, s.getPassword());
@@ -139,7 +139,7 @@ public class Studentdao {
             ps.setInt(4, s.getFaculty_id());
             ps.setInt(5, s.getBranch_id());
             ps.setString(6, s.getAccount_status());
-            ps.setLong(7, s.getStudent_id());
+            ps.setLong(7, s.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

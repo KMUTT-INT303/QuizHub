@@ -45,9 +45,9 @@ public class ManageAccountForStudentServlet extends HttpServlet {
         
         Student s = (Student) request.getSession().getAttribute("user");
         Studentdao sdao = new Studentdao();
-        Student sinDB = sdao.getStudentById(s.getStudent_id());
+        Student sinDB = sdao.getStudentById(s.getId());
         
-        if(s.getStudent_id() == sinDB.getStudent_id()){
+        if(s.getId() == sinDB.getId()){
             if(fname.length() > 0 && lname.length() > 0){
                 s.setFirstName(fname.trim());
                 s.setLastName(lname.trim());

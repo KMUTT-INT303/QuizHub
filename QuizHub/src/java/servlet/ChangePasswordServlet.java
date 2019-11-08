@@ -56,8 +56,8 @@ public class ChangePasswordServlet extends HttpServlet {
                         getServletContext().getRequestDispatcher(path).forward(request, response);
                     }else{
                         Studentdao sdao = new Studentdao();
-                        Student sinDB = sdao.getStudentById(s.getStudent_id());
-                        if(sinDB.getStudent_id() == s.getStudent_id()){
+                        Student sinDB = sdao.getStudentById(s.getId());
+                        if(sinDB.getId() == s.getId()){
                             s.setPassword(npass);
                             sdao.editStudentInfo(s);
                             msg = "change password successful.";

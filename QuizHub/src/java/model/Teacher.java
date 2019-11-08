@@ -10,7 +10,7 @@ package model;
  * @author Top
  */
 public class Teacher {
-    private long teacher_id;
+    private long id;
     private String firstName;
     private String lastName;
     private String password;
@@ -22,8 +22,8 @@ public class Teacher {
     public Teacher() {
     }
 
-    public Teacher(long teacher_id, String firstName, String lastName, String password, int faculty_id, String course_name, String course_id, String account_status) {
-        this.teacher_id = teacher_id;
+    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String course_name, String course_id, String account_status) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -33,18 +33,19 @@ public class Teacher {
         this.account_status = account_status;
     }
 
-    
     @Override
     public String toString() {
-        return "Teacher{" + "teacher_id=" + teacher_id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", course_id=" + course_id + ", course_name=" + course_name + ", account_status=" + account_status + '}';
+        return "Teacher{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", course_name=" + course_name + ", course_id=" + course_id + ", account_status=" + account_status + '}';
+    }
+    
+    
+
+    public long getId() {
+        return id;
     }
 
-    public long getTeacher_id() {
-        return teacher_id;
-    }
-
-    public void setTeacher_id(long teacher_id) {
-        this.teacher_id = teacher_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
