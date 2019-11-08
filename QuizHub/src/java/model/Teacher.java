@@ -22,6 +22,28 @@ public class Teacher {
     public Teacher() {
     }
 
+    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String course_name, String course_id) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.faculty_id = faculty_id;
+        this.course_name = course_name;
+        this.course_id = course_id;
+    }
+    
+
+    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String account_status) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.faculty_id = faculty_id;
+        this.account_status = account_status;
+    }
+
+    
+    
     public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String course_name, String course_id, String account_status) {
         this.id = id;
         this.firstName = firstName;

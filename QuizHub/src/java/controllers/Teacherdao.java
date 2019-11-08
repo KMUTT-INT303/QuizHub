@@ -121,6 +121,26 @@ public class Teacherdao {
         }return null;
     }
     
+    public boolean addTeacher(Teacher t){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO teachers(teacher_id, first_name, last_name, password, faculty_id, course_name, course_id, account_status) VALUES(?,?,?,?,?,?,?,?)");
+            ps.setLong(1, t.getId());
+            ps.setString(2, t.getFirstName());
+            ps.setString(3, t.getLastName());
+            ps.setString(4, t.getPassword());
+            ps.setInt(5, t.getFaculty_id());
+            ps.setString(6, t.getCourse_name());
+            ps.setString(7, t.getCourse_id());
+            ps.setString(8, "pending");
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
     
     public static void main(String[] args) {
         Teacherdao tdao = new Teacherdao();
@@ -129,6 +149,10 @@ public class Teacherdao {
        // tdao.setTeacherToActive(t);
         teachers = tdao.getAllTeacherPending();
         System.out.println(teachers);
+        long tid = Long.valueOf("1000000056");
+        Teacher addt = new Teacher(tid, "firstName", "lastName", "password", 2,"test","test");
+        tdao.addTeacher(addt);
+        System.out.println(tdao.getTeacherById(tid));
     }
     
 }
