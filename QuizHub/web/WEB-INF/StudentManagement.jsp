@@ -30,13 +30,13 @@
                 </tr>
                 <c:forEach items="${studentsbydes}" var="s">
                     <tr>
-                        <td>${s.student_id}</td>
+                        <td>${s.id}</td>
                         <td>${s.firstName}</td>
                         <td>${s.lastName}</td>
                         <td>${s.faculty_id}</td>
                         <td>${s.branch_id}</td>
                         <td>
-                            <input type="checkbox" name="student_id" value="${s.student_id}">
+                            <input type="checkbox" name="student_id" value="${s.id}">
                         </td> 
                     </tr>
                 </c:forEach>
@@ -57,12 +57,12 @@
             </tr>
             <c:forEach items="${students}" var="s">
                 <tr>
-                    <td>${s.student_id}</td>
+                    <td>${s.id}</td>
                     <td>${s.firstName}</td>
                     <td>${s.lastName}</td>
                     <td>${s.faculty_id}</td>
                     <td>${s.branch_id}</td>
-                    <td><a href="/QuizHub/StudentManagement?student_id=${s.student_id}">REMOVE</a></td>                 
+                    <td><a href="/QuizHub/StudentManagement?student_id=${s.id}">REMOVE</a></td>                 
                 </tr>
             </c:forEach>
         </table>
