@@ -40,7 +40,7 @@
                                     <li class="list-group-item">Last time: 20/10/2562 - 06:39:59</li>
                                 </ul>
                             </div>
-                            <div class="card text-center mb-2"><a href="ManageAccountForStudent" class="btn btn-outline-dark">Manage</a></div>
+                            <div class="card text-center mb-2"><a href="ManageAccount" class="btn btn-outline-dark">Manage</a></div>
                             <div class="card text-center mb-2"><a href="Logout" class="btn btn-outline-danger">Sign out</a></div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@
 package servlet;
 
 import controllers.Studentdao;
+import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,12 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Student;
+import model.Teacher;
 
 /**
  *
  * @author Top
  */
-public class ManageAccountForStudentServlet extends HttpServlet {
+public class ManageAccountServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +33,7 @@ public class ManageAccountForStudentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String msg = "";
+        String msg = null;
         String path = "/WEB-INF/ManageAccount.jsp";
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
@@ -42,22 +44,56 @@ public class ManageAccountForStudentServlet extends HttpServlet {
             getServletContext().getRequestDispatcher(path).forward(request, response);
             return;
         }
-        
-        Student s = (Student) request.getSession().getAttribute("user");
+        if(request.getSession().getAttribute("user") instanceof Student){
+            Student s = (Student) request.getSession().getAttribute("user");
         Studentdao sdao = new Studentdao();
         Student sinDB = sdao.getStudentById(s.getId());
         
-        if(s.getId() == sinDB.getId()){
-            if(fname.length() > 0 && lname.length() > 0){
-                s.setFirstName(fname.trim());
-                s.setLastName(lname.trim());
-                sdao.editStudentInfo(s);
-                msg = "successful.";
+            if(s.getId() == sinDB.getId()){
+                if(fname.length() >= 3 && lname.length() >= 3){
+                    s.setFirstName(fname.trim());
+                    s.setLastName(lname.trim());
+                    sdao.editStudentInfo(s);
+                    msg = "successful.";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                    //response.sendRedirect("/QuizHub/ManageAccountForStudent");
+                    return;
+                }else{
+                    msg = "First Name & Last Name must more than 3 character";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                }
+            }else{
+                msg = "cannot change";
                 request.setAttribute("msg", msg);
-                response.sendRedirect("/QuizHub/ManageAccountForStudent");
-                return;
+                getServletContext().getRequestDispatcher(path).forward(request, response);
             }
-            //getServletContext().getRequestDispatcher(path).forward(request, response);
+        }else if(request.getSession().getAttribute("user") instanceof Teacher){
+            Teacher t =(Teacher) request.getSession().getAttribute("user");
+            Teacherdao tdao = new Teacherdao();
+            Teacher tinDB = tdao.getTeacherById(t.getId());
+
+            if(t.getId() == tinDB.getId()){
+                if(fname.length() >= 3 && lname.length() >= 3){
+                    t.setFirstName(fname.trim());
+                    t.setLastName(lname.trim());
+                    tdao.editTeacher(t);
+                    msg = "successful.";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                    //response.sendRedirect("/QuizHub/ManageAccountForStudent");
+                    return;
+                }else{
+                    msg = "First Name & Last Name must more than 3 character";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                }
+            }else{
+                msg = "cannot change";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }
         }else{
             msg = "cannot change";
             request.setAttribute("msg", msg);

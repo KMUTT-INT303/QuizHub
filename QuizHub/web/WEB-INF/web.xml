@@ -37,16 +37,16 @@
         <servlet-class>servlet.QuizzesServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManageAccountForStudentServlet</servlet-name>
-        <servlet-class>servlet.ManageAccountForStudentServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CreateQuizServlet</servlet-name>
         <servlet-class>servlet.CreateQuizServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <servlet-class>servlet.ChangePasswordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAccountServlet</servlet-name>
+        <servlet-class>servlet.ManageAccountServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -77,16 +77,16 @@
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManageAccountForStudentServlet</servlet-name>
-        <url-pattern>/ManageAccountForStudent</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreateQuizServlet</servlet-name>
         <url-pattern>/CreateQuiz</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccountServlet</servlet-name>
+        <url-pattern>/ManageAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
