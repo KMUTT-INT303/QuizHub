@@ -6,6 +6,7 @@
 package servlet;
 
 import controllers.Studentdao;
+import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -36,28 +38,29 @@ public class ChangePasswordServlet extends HttpServlet {
         String opass = request.getParameter("opass");
         String npass = request.getParameter("npass");
         String cpass = request.getParameter("cpass");
-        
-        if(opass.trim().isEmpty() || npass.trim().isEmpty() || cpass.trim().isEmpty()){
+
+        if (opass.trim().isEmpty() || npass.trim().isEmpty() || cpass.trim().isEmpty()) {
             msg = "input all password values.";
             request.setAttribute("msg", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
-        
+
+        if (request.getSession().getAttribute("user") instanceof Student) {
             Student s = (Student) request.getSession().getAttribute("user");
-            if(s.getPassword().equals(opass)){
-                if(npass.equals(opass)){
+            if (s.getPassword().equals(opass)) {
+                if (npass.equals(opass)) {
                     msg = "New Password Shouldn't same as Old Password!";
                     request.setAttribute("msg", msg);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
-                }else{
-                    if(!npass.equals(cpass)){
+                } else {
+                    if (!npass.equals(cpass)) {
                         msg = "Wrong Confirm password!";
                         request.setAttribute("msg", msg);
                         getServletContext().getRequestDispatcher(path).forward(request, response);
-                    }else{
+                    } else {
                         Studentdao sdao = new Studentdao();
                         Student sinDB = sdao.getStudentById(s.getId());
-                        if(sinDB.getId() == s.getId()){
+                        if (sinDB.getId() == s.getId()) {
                             s.setPassword(npass);
                             sdao.editStudentInfo(s);
                             msg = "change password successful.";
@@ -65,21 +68,62 @@ public class ChangePasswordServlet extends HttpServlet {
                             //response.sendRedirect("/QuizHub/ChangePassword");
                             getServletContext().getRequestDispatcher(path).forward(request, response);
                             return;
-                            
-                        }else{
+
+                        } else {
                             msg = "Cannot change";
                             request.setAttribute("msg", msg);
                             getServletContext().getRequestDispatcher(path).forward(request, response);
                         }
                     }
                 }
-            }else{
+            } else {
                 msg = "Wrong Old Password!";
                 request.setAttribute("msg", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);
-                
             }
-            
+
+        } else if (request.getSession().getAttribute("user") instanceof Teacher) {
+            Teacher t = (Teacher) request.getSession().getAttribute("user");
+            if (t.getPassword().equals(opass)) {
+                if (npass.equals(opass)) {
+                    msg = "New Password Shouldn't same as Old Password!";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                } else {
+                    if (!npass.equals(cpass)) {
+                        msg = "Wrong Confirm password!";
+                        request.setAttribute("msg", msg);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    } else {
+                        Teacherdao tdao = new Teacherdao();
+                        Teacher tinDB = tdao.getTeacherById(t.getId());
+                        if (tinDB.getId() == t.getId()) {
+                            t.setPassword(npass);
+                            tdao.editTeacher(t);
+                            msg = "change password successful.";
+                            request.setAttribute("msg", msg);
+                            //response.sendRedirect("/QuizHub/ChangePassword");
+                            getServletContext().getRequestDispatcher(path).forward(request, response);
+                            return;
+                        } else {
+                            msg = "Cannot change";
+                            request.setAttribute("msg", msg);
+                            getServletContext().getRequestDispatcher(path).forward(request, response);
+                        }
+                    }
+                }
+            } else {
+                msg = "Wrong Old Password!";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }
+        } else {
+            msg = "Have a BUG!";
+            request.setAttribute("msg", msg);
+            getServletContext().getRequestDispatcher(path).forward(request, response);
+
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,7 +139,7 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-       //getServletContext().getRequestDispatcher("/WEB-INF/ManageAccount.jsp").forward(request, response);
+        //getServletContext().getRequestDispatcher("/WEB-INF/ManageAccount.jsp").forward(request, response);
     }
 
     /**
