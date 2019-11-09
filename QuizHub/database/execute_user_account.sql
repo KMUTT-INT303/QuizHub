@@ -11,12 +11,12 @@ VALUES
 --- INSERT TEACHERS DATA ---
 	
 INSERT INTO TEACHERS
-	(TEACHER_ID, FIRST_NAME, LAST_NAME, PASSWORD, FACULTY_ID, COURSE_NAME, COURSE_ID, LAST_TIME)
+	(TEACHER_ID, FIRST_NAME, LAST_NAME, PASSWORD, FACULTY_ID, LAST_TIME)
 VALUES 
-	(1000000001, 'Teacher', 'A', '1234', 2, 'Network I', 'INT201', CURRENT_TIMESTAMP),
-        (1000000002, 'Teacher', 'B', '1234', 2, 'Network I', 'INT201', CURRENT_TIMESTAMP),
-        (1000000003, 'Teacher', 'C', '1234', 2, 'Network I', 'INT201', CURRENT_TIMESTAMP),
-        (1000000004, 'Teacher', 'D', '1234', 2, 'Network I', 'INT201', CURRENT_TIMESTAMP);
+	(1000000001, 'Teacher', 'A', '1234', 2, CURRENT_TIMESTAMP),
+        (1000000002, 'Teacher', 'B', '1234', 2, CURRENT_TIMESTAMP),
+        (1000000003, 'Teacher', 'C', '1234', 2, CURRENT_TIMESTAMP),
+        (1000000004, 'Teacher', 'D', '1234', 2, CURRENT_TIMESTAMP);
 
 --- INSERT FACULTY DATA ---
 
@@ -98,3 +98,11 @@ VALUES
         --- College of Multidisciplinary Sciences -- 
 
         ('Science and Technology', 6); -- ID 45
+
+--- INSERT COURSES DATA ---
+	
+INSERT INTO COURSES
+	(COURSE_ID, COURSE_NAME, TEACHER)
+VALUES 
+	('INT201', 'Network I', 1000000001),
+        ('INT303', 'Web Programming', 1000000004);

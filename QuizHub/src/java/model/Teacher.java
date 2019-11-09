@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Top
@@ -15,23 +17,18 @@ public class Teacher {
     private String lastName;
     private String password;
     private int faculty_id;
-    private String course_name;
-    private String course_id;
     private String account_status;
 
     public Teacher() {
     }
 
-    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String course_name, String course_id) {
+    public Teacher(long id, String firstName, String lastName, String password, int faculty_id) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.faculty_id = faculty_id;
-        this.course_name = course_name;
-        this.course_id = course_id;
     }
-    
 
     public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String account_status) {
         this.id = id;
@@ -41,26 +38,6 @@ public class Teacher {
         this.faculty_id = faculty_id;
         this.account_status = account_status;
     }
-
-    
-    
-    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String course_name, String course_id, String account_status) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.faculty_id = faculty_id;
-        this.course_name = course_name;
-        this.course_id = course_id;
-        this.account_status = account_status;
-    }
-
-    @Override
-    public String toString() {
-        return "Teacher{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", course_name=" + course_name + ", course_id=" + course_id + ", account_status=" + account_status + '}';
-    }
-    
-    
 
     public long getId() {
         return id;
@@ -102,22 +79,6 @@ public class Teacher {
         this.faculty_id = faculty_id;
     }
 
-    public String getCourse_name() {
-        return course_name;
-    }
-
-    public void setCourse_name(String course_name) {
-        this.course_name = course_name;
-    }
-
-    public String getCourse_id() {
-        return course_id;
-    }
-
-    public void setCourse_id(String course_id) {
-        this.course_id = course_id;
-    }
-
     public String getAccount_status() {
         return account_status;
     }
@@ -126,7 +87,11 @@ public class Teacher {
         this.account_status = account_status;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Teacher{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", account_status=" + account_status + '}';
+    }
+
     
     
 }
