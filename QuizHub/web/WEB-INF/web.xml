@@ -57,10 +57,6 @@
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ListFacultyServlet</servlet-name>
         <url-pattern>/ListFaculty</url-pattern>
     </servlet-mapping>
@@ -75,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>QuizzesServlet</servlet-name>
         <url-pattern>/Quizzes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageAccountForStudentServlet</servlet-name>
