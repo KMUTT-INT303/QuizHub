@@ -39,6 +39,22 @@ public class Coursedao {
         return null;
     }
     
+    public boolean addCourse(Course c){
+        conn = BuildConnection.getConnection();
+        Teacherdao tdao = new Teacherdao();
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO courses(course_id, course_name, teacher) VALUES(?,?,?)");
+            ps.setString(1, c.getId());
+            ps.setString(2, c.getName());
+            ps.setLong(3, c.getTeacher().getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Coursedao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public ArrayList<Course> getAllCourse(){
         conn = BuildConnection.getConnection();
         ArrayList<Course> c = new ArrayList();
@@ -57,11 +73,54 @@ public class Coursedao {
         return null;
     }
     
+    public boolean removeCourse(Course c){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM courses WHERE course_id = ?");
+            ps.setString(1, c.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Coursedao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+     
+    public ArrayList<Course> getAllCourseByTeacher(Teacher t){
+        conn = BuildConnection.getConnection();
+        ArrayList<Course> c = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM courses WHERE teacher = ?");
+            ps.setLong(1, t.getId());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                c.add(new Course(rs.getString("course_id"), rs.getString("course_name"), t));
+            }return c;
+        } catch (SQLException ex) {
+            Logger.getLogger(Coursedao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
     public static void main(String[] args) {
         Coursedao cdao  = new Coursedao();
-        Course c = cdao.getCourseById("INT201");
+        Teacherdao tdao = new Teacherdao();
+        long tid = Long.valueOf("1000000004");
+        Teacher t = tdao.getTeacherById(tid);
+        Course c = cdao.getCourseById("testadd2");
         System.out.println(c);
         ArrayList<Course> cs = cdao.getAllCourse();
         System.out.println(cs);
+        Course cc = new Course("testadd3", "hahaha", t);
+        cdao.addCourse(cc);
+       // cdao.removeCourse(c);
+        System.out.println(cdao.getAllCourse());
+        cs = cdao.getAllCourseByTeacher(t);
+        System.out.println(cs);
+        cdao.removeCourse(cc);
+        System.out.println(cdao.getAllCourse());
+        
     }
 }
