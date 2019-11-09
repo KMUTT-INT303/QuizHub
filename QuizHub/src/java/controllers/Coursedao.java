@@ -31,7 +31,7 @@ public class Coursedao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Teacher t = tdao.getTeacherById(rs.getLong("teacher"));
-                return new Course(rs.getString("course_id"), rs.getString("course_name"), t);
+                return new Course(rs.getInt("course_no"), rs.getString("course_id"), rs.getString("course_name"), t);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Coursedao.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,12 +41,33 @@ public class Coursedao {
     
     public boolean addCourse(Course c){
         conn = BuildConnection.getConnection();
+        if(this.getCourseById(c.getId()) != null){
+            System.out.print("Cannot add.\n");
+            return false;
+        }else{
+            try {
+                PreparedStatement ps = conn.prepareStatement("INSERT INTO courses(course_id, course_name, teacher) VALUES(?,?,?)");
+                ps.setString(1, c.getId());
+                ps.setString(2, c.getName());
+                ps.setLong(3, c.getTeacher().getId());
+                ps.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(Coursedao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
+    }
+    
+    public boolean editCourse(Course c){
+        conn = BuildConnection.getConnection();
         Teacherdao tdao = new Teacherdao();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO courses(course_id, course_name, teacher) VALUES(?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("UPDATE courses SET course_id = ?, course_name = ?, teacher = ? WHERE course_no = ?");
             ps.setString(1, c.getId());
             ps.setString(2, c.getName());
             ps.setLong(3, c.getTeacher().getId());
+            ps.setInt(4, c.getCourse_no());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -64,7 +85,7 @@ public class Coursedao {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Teacher t = tdao.getTeacherById(rs.getLong("teacher"));
-                c.add(new Course(rs.getString("course_id"), rs.getString("course_name"), t));
+                c.add(new Course(rs.getInt("course_no"), rs.getString("course_id"), rs.getString("course_name"), t));
             }return c;
         } catch (SQLException ex) {
             Logger.getLogger(Coursedao.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,7 +116,7 @@ public class Coursedao {
             ps.setLong(1, t.getId());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                c.add(new Course(rs.getString("course_id"), rs.getString("course_name"), t));
+                c.add(new Course(rs.getInt("course_no"), rs.getString("course_id"), rs.getString("course_name"), t));
             }return c;
         } catch (SQLException ex) {
             Logger.getLogger(Coursedao.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,16 +130,26 @@ public class Coursedao {
         Teacherdao tdao = new Teacherdao();
         long tid = Long.valueOf("1000000004");
         Teacher t = tdao.getTeacherById(tid);
-        Course c = cdao.getCourseById("testadd2");
-        System.out.println(c);
+        Course c = new Course("INT123", "TEST", t);
+        //System.out.println(c);
         ArrayList<Course> cs = cdao.getAllCourse();
-        System.out.println(cs);
-        Course cc = new Course("testadd3", "hahaha", t);
-        cdao.addCourse(cc);
+        //System.out.println(cs);
+        //Course cc = new Course("testadd3", "hahaha", t);
+        //cdao.addCourse(c);
        // cdao.removeCourse(c);
-        System.out.println(cdao.getAllCourse());
+        /*System.out.println(cdao.getAllCourse());
         cs = cdao.getAllCourseByTeacher(t);
         System.out.println(cs);
+        cdao.removeCourse(cc);
+        System.out.println(cdao.getAllCourse());
+        cdao.addCourse(cc);*/
+        Course cc = cdao.getCourseById("INT123");
+        //cdao.addCourse(cc);
+        System.out.println(cdao.getCourseById(cc.getId()));
+        //cdao.addCourse(cc);
+        cc.setId("editaddt3");
+        cdao.editCourse(cc);
+        System.out.println(cdao.getCourseById("editaddt3"));
         cdao.removeCourse(cc);
         System.out.println(cdao.getAllCourse());
         

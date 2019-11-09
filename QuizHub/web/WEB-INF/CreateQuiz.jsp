@@ -32,7 +32,7 @@
         <div>
             <select name="course">
                 <c:forEach items="${course}" var="c">
-                    <option value="${c.id}">${c.id} ${c.name}</option>
+                    <option value="${c.course_no}">${c.id} ${c.name}</option>
                 </c:forEach>
             </select>
         </div>

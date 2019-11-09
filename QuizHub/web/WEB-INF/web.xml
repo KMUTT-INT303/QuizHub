@@ -52,6 +52,10 @@
         <servlet-name>ListCourseServlet</servlet-name>
         <servlet-class>servlet.ListCourseServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateCourseServlet</servlet-name>
+        <servlet-class>servlet.CreateCourseServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>ListCourseServlet</servlet-name>
         <url-pattern>/ListCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCourseServlet</servlet-name>
+        <url-pattern>/CreateCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
