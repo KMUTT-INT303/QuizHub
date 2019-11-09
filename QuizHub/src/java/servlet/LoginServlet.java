@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
         if(s != null){
             if(s.getPassword().equals(password)){
                     request.getSession().setAttribute("user", s);
-                    getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+                    response.sendRedirect("Home");
                     return;
             }else{
                 msg = "Your username or password are incorrect.";
@@ -77,7 +77,7 @@ public class LoginServlet extends HttpServlet {
             if(t != null){
                 if(t.getPassword().equals(password)){
                     request.getSession().setAttribute("user", t);
-                    getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+                    response.sendRedirect("Home");
                     return;
                 }else{
                     msg = "Your username or password are incorrect.";
