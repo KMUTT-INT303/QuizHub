@@ -29,6 +29,6 @@
         LAST NAME:<input type="text" name="lname"><br>
         <input type="submit">
         </form>
-        <a href="index" class="btn btn-outline-dark">BACK</a>
+        <a href="/QuizHub/Home" class="btn btn-outline-dark">BACK</a>
     </body>
 </html>

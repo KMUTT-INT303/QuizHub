@@ -62,6 +62,7 @@ public class LoginServlet extends HttpServlet {
         if(s != null){
             if(s.getPassword().equals(password)){
                     request.getSession().setAttribute("user", s);
+                    request.getSession().setAttribute("status", "Student");
                     response.sendRedirect("Home");
                     return;
             }else{
@@ -77,6 +78,7 @@ public class LoginServlet extends HttpServlet {
             if(t != null){
                 if(t.getPassword().equals(password)){
                     request.getSession().setAttribute("user", t);
+                    request.getSession().setAttribute("status", "Teacher");
                     response.sendRedirect("Home");
                     return;
                 }else{
