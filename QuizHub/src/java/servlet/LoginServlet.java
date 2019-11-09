@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Admin;
+import model.Admindao;
 import model.Student;
 import model.Teacher;
 
@@ -79,6 +81,19 @@ public class LoginServlet extends HttpServlet {
                 if(t.getPassword().equals(password)){
                     request.getSession().setAttribute("user", t);
                     request.getSession().setAttribute("status", "Teacher");
+                    response.sendRedirect("Home");
+                    return;
+                }else{
+                    msg = "Your username or password are incorrect.";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                }
+            }else{
+                Admindao adao = new Admindao();
+                Admin a = adao.getAdminById(usernameToLong);
+                if(a.getPassword().equals(password)){
+                    request.getSession().setAttribute("user", a);
+                    request.getSession().setAttribute("status", "Admin");
                     response.sendRedirect("Home");
                     return;
                 }else{

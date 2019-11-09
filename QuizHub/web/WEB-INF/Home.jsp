@@ -51,7 +51,7 @@
                             <p>Nothing</p>
                         </div>
                     </div>
-
+                    <c:if test='${status == "Admin"}'>
                     <div class="card mb-2">
                         <h6 class="card-header">Admin Panel</h6>
                         <div class="card-body">
@@ -59,7 +59,7 @@
                             <div class="card text-center mb-2"><a href="#" class="btn btn-outline-dark">Teacher Manage</a></div>
                         </div>
                     </div>
-
+                    </c:if>
                 </div>
                 <div class="col-sm-8">
                     <div class="card mb-2">

@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Admin;
 import model.Student;
 
 /**
@@ -36,6 +37,13 @@ public class StudentManagementServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String msg = "";
+        
+        if(!(request.getSession().getAttribute("user") instanceof Admin)){
+            response.sendRedirect("Home");
+            return;
+            //getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
+        }
+        
         if(request.getParameter("student_id") == null || request.getParameter("student_id").isEmpty()){
             String findbydesc = request.getParameter("findbydescription"); 
             if(!(findbydesc == null || findbydesc.trim().isEmpty())){
