@@ -13,9 +13,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        
         <jsp:include page="/ListFaculty"/>
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>QuizHub - Register</title>
     </head>
@@ -30,9 +29,8 @@
                             <h3 class="display-4 mb-3">QuizHub</h3>
                             <h2 class="display-4 mb-2">${msg}</h2>
                             <div class="info-form">
-
                                 <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
-
+                                    <div><input type="hidden" name="FROM_REGISTER" value="REGISTER"></div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">

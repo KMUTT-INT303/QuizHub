@@ -5,8 +5,7 @@
  */
 package servlet;
 
-import controllers.Branchdao;
-import controllers.Facultydao;
+import controllers.Coursedao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,14 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Branch;
-import model.Faculty;
+import model.Course;
 
 /**
  *
  * @author Top
  */
-public class ListFacultyServlet extends HttpServlet {
+public class ListCourseServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,54 +32,19 @@ public class ListFacultyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
-        this.setFacultyAttribute(request, response);
-        this.setBranchAttribute(request, response);
-        if("REGISTER".equalsIgnoreCase(request.getParameter("FROM_REGISTER"))){
-            response.sendRedirect("/Register.jsp");
-            return;
-        }
-        if("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))){
+        ListCourse(request);
+         if("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))){
             response.sendRedirect("/CreateQuiz.jsp");
             return;
         }
-                
-        /*String faculty_id = request.getParameter("faculty");
-        if(faculty_id != null || !faculty_id.trim().isEmpty()){
-            Branchdao bdao = new Branchdao();
-            Facultydao fdao = new Facultydao();
-            ArrayList<Branch> branch = bdao.getAllBranch();
-            int fid = Integer.valueOf(faculty_id);
-            branch = bdao.getAllBranchInFacultyByFacultyId(fid);
-            request.setAttribute("branch", branch);
-            return;
-        }*/
+        //response.sendRedirect("/CreateQuiz.jsp");
+    }
 
-    }
-    private void setFacultyAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        Facultydao fdao = new Facultydao();
-        ArrayList<Faculty> faculties = new ArrayList();
-        faculties = fdao.getAllFaculty();
-        request.setAttribute("faculties", faculties);
+    private void ListCourse(HttpServletRequest request){
         
-    }
-    
-    private void setBranchAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        
-      /* if(request.getParameter("faculty") != null || request.getParameter("faculty").trim().isEmpty()){
-           String faculty_id = request.getParameter("faculty");
-            int fid = Integer.valueOf(faculty_id);
-            Branchdao bdao = new Branchdao();
-            Facultydao fdao = new Facultydao();
-            ArrayList<Branch> branch = bdao.getAllBranchInFacultyByFacultyId(fid);
-            request.setAttribute("branch", branch);
-            response.sendRedirect("/Register.jsp");
-            return;
-        }*/
-        Branchdao bdao = new Branchdao();
-        Facultydao fdao = new Facultydao();
-        ArrayList<Branch> branch = bdao.getAllBranch();
-        request.setAttribute("branch", branch);
+        Coursedao cdao = new Coursedao();
+        ArrayList<Course> list = cdao.getAllCourse();
+        request.setAttribute("course", list);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

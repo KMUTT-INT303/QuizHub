@@ -48,6 +48,10 @@
         <servlet-name>ManageAccountServlet</servlet-name>
         <servlet-class>servlet.ManageAccountServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListCourseServlet</servlet-name>
+        <servlet-class>servlet.ListCourseServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>ManageAccountServlet</servlet-name>
         <url-pattern>/ManageAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCourseServlet</servlet-name>
+        <url-pattern>/ListCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
