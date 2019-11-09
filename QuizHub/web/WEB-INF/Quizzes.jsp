@@ -4,6 +4,7 @@
     Author     : tsch
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -54,7 +55,7 @@
                 <div class="col-sm-12">
 
                     <div class="card mb-2">
-                        <h6 class="card-header">Quizhub<div class="float-right"><a class="badge badge-success" href="CreateCourse">Create Course</a> <a class="badge badge-success" href="CreateQuiz">Create A Quiz</a></div></h6>
+                        <h6 class="card-header">Quizhub<div class="float-right"><c:if test="${status == 'Teacher'}"><a class="badge badge-success" href="CreateCourse">Create Course</a> </c:if><a class="badge badge-success" href="CreateQuiz">Create A Quiz</a></div></h6>
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col-sm-12">
