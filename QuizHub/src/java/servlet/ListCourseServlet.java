@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Course;
+import model.Teacher;
 
 /**
  *
@@ -32,20 +33,42 @@ public class ListCourseServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ListCourse(request);
-         if("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))){
+        //ListCourse(request);
+        /*if(request.getSession().getAttribute("user") instanceof Teacher){
+            ListCourseByTeacher(request);
+            if ("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))) {
+                response.sendRedirect("/CreateQuiz.jsp");
+                return;
+            }
+        }*/
+
+        ListCourseByTeacher(request);
+        if ("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))) {
             response.sendRedirect("/CreateQuiz.jsp");
             return;
         }
+
+        /*if ("QUIZZES".equalsIgnoreCase(request.getParameter("FROM_QUIZZES"))) {
+            response.sendRedirect("/Quizzes.jsp");
+            return;
+        }*/
         //response.sendRedirect("/CreateQuiz.jsp");
     }
 
-    private void ListCourse(HttpServletRequest request){
-        
+    private void ListCourse(HttpServletRequest request) {
+
         Coursedao cdao = new Coursedao();
         ArrayList<Course> list = cdao.getAllCourse();
         request.setAttribute("course", list);
     }
+
+    private void ListCourseByTeacher(HttpServletRequest request) {
+        Teacher t = (Teacher) request.getSession().getAttribute("user");
+        Coursedao cdao = new Coursedao();
+        ArrayList<Course> list = cdao.getAllCourseByTeacher(t);
+        request.setAttribute("course", list);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
