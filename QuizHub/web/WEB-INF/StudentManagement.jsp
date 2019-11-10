@@ -36,7 +36,7 @@
                         <td>${s.faculty_id}</td>
                         <td>${s.branch_id}</td>
                         <td>
-                            <input type="checkbox" name="student_id" value="${s.id}">
+                            <input type="checkbox" name="delete_id" value="${s.id}">
                         </td> 
                     </tr>
                 </c:forEach>

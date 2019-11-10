@@ -38,11 +38,64 @@ public class StudentManagementServlet extends HttpServlet {
             throws ServletException, IOException {
         String msg = "";
         
-        if(!(request.getSession().getAttribute("user") instanceof Admin)){
+        /*if(!(request.getSession().getAttribute("user") instanceof Admin)){
             response.sendRedirect("Home");
             return;
             //getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
-        }
+        }*/
+        
+            String[] id = request.getParameterValues("delete_id");
+            if(id != null){
+                ArrayList<String> ids = new ArrayList();
+                for(int i = 0; i < id.length; i++){
+                    String s = id[i];
+                    ids.add(s);
+                }
+                for(int i = 0; i < ids.size() ; i++){
+                    Studentdao sdao = new Studentdao();
+                    Student s = sdao.getStudentById(Long.valueOf(ids.get(i)));
+                    if(s != null){
+                        sdao.removeStudentById(Long.valueOf(ids.get(i)));
+                    }
+                }
+                
+                while(!ids.isEmpty()){
+                    ids.clear();
+                }
+                    msg = "REMOVE SUCCESSFUL!";
+                    request.setAttribute("msg", msg);
+                    this.setStudentList(request);
+                    //getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
+                    response.sendRedirect("StudentManagement");
+                    return;
+                /*Enumeration<String> e = request.getParameterNames();
+                if(request.getParameter("delete_id") != null){
+                    ArrayList<String> es = new ArrayList();
+                    while(e.hasMoreElements()){
+                        String varName = e.nextElement();
+                        es.add(request.getParameter(varName));
+                    }
+
+                    Studentdao sdao = new Studentdao();
+                    for(int i = 0; i < es.size(); i++){
+                        long sid = Long.valueOf(es.get(i));
+                        Student s = sdao.getStudentById(sid);
+                            if(s != null){
+                            sdao.removeStudentById(s.getId());
+                        }
+                        
+                    }
+                    while(!es.isEmpty()){
+                        es.clear();
+                    }
+                    msg = "REMOVE SUCCESSFUL!";
+                    request.setAttribute("msg", msg);
+                    this.setStudentList(request);
+                    getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
+                    return;
+                }*/
+            }
+            
         
         if(request.getParameter("student_id") == null || request.getParameter("student_id").isEmpty()){
             String findbydesc = request.getParameter("findbydescription"); 
@@ -52,7 +105,7 @@ public class StudentManagementServlet extends HttpServlet {
                     request.setAttribute("msg", msg);
                     this.setStudentList(request);
                     getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
-            }else{
+                }else{
                     Studentdao sdao = new Studentdao();
                     ArrayList<Student> students = sdao.getAllStudentLike(findbydesc);
                     if(!students.isEmpty()){
@@ -81,6 +134,8 @@ public class StudentManagementServlet extends HttpServlet {
                 this.setStudentList(request);
                 getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
             }
+            msg = "No Student!";
+            request.setAttribute("msg", msg);
             this.setStudentList(request);
             getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
         }
