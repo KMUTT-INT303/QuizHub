@@ -10,7 +10,7 @@ package model;
  * @author Top
  */
 public class Course {
-    private int course_no;
+
     private String id;
     private String name;
     private Teacher teacher;
@@ -18,8 +18,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(int course_no, String id, String name) {
-        this.course_no = course_no;
+    public Course(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -30,13 +29,6 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public Course(int course_no, String id, String name, Teacher teacher) {
-        this.course_no = course_no;
-        this.id = id;
-        this.name = name;
-        this.teacher = teacher;
-    }
-    
     public String getId() {
         return id;
     }
@@ -61,18 +53,9 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public int getCourse_no() {
-        return course_no;
-    }
-
-    public void setCourse_no(int course_no) {
-        this.course_no = course_no;
-    }
-
     @Override
     public String toString() {
-        return "Course{" + "course_no=" + course_no + ", id=" + id + ", name=" + name + ", teacher=" + teacher + '}';
+        return "Course{" + "id=" + id + ", name=" + name + ", teacher=" + teacher + '}';
     }
-    
-    
+
 }
