@@ -24,7 +24,7 @@
         </form>
         
         <p>Edit Information</p>
-        <form action="ManageAccountForStudent" method="post">
+        <form action="ManageAccount" method="post">
         FIRST NAME:<input type="text" name="fname"><br>
         LAST NAME:<input type="text" name="lname"><br>
         <input type="submit">
