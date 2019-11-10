@@ -66,5 +66,6 @@
                 </tr>
             </c:forEach>
         </table>
+            <a href="/QuizHub/Home">Back</a>
     </body>
 </html>
