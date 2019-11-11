@@ -20,7 +20,7 @@ import model.Teacher;
  *
  * @author Top
  */
-public class ManageAccountServlet extends HttpServlet {
+public class ProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +34,7 @@ public class ManageAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String msg = null;
-        String path = "/WEB-INF/ManageAccount.jsp";
+        String path = "/WEB-INF/Profile.jsp";
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
         
@@ -114,7 +114,7 @@ public class ManageAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       getServletContext().getRequestDispatcher("/WEB-INF/ManageAccount.jsp").forward(request, response);
+       getServletContext().getRequestDispatcher("/WEB-INF/Profile.jsp").forward(request, response);
     }
 
     /**
