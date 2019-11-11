@@ -55,8 +55,8 @@
                     <div class="card mb-2">
                         <h6 class="card-header">Admin Panel</h6>
                         <div class="card-body">
-                            <div class="card text-center mb-2"><a href="/QuizHub/StudentManagement" class="btn btn-outline-dark">Student Manage</a></div>
-                            <div class="card text-center mb-2"><a href="#" class="btn btn-outline-dark">Teacher Manage</a></div>
+                            <div class="card text-center mb-2"><a href="StudentManagement" class="btn btn-outline-dark">Student Manage</a></div>
+                            <div class="card text-center mb-2"><a href="TeacherManagement" class="btn btn-outline-dark">Teacher Manage</a></div>
                         </div>
                     </div>
                     </c:if>

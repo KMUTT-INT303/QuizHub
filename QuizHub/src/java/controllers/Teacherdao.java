@@ -39,6 +39,25 @@ public class Teacherdao {
         return null;
     }
     
+    public ArrayList<Teacher> getAllTeacherLike(String desciption){
+        ArrayList<Teacher> teachers = new ArrayList();
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM teachers WHERE CHAR(teacher_id) like ? OR LOWER(first_name) like ? " + "OR LOWER(last_name) like ?");
+            ps.setString(1, "%" + desciption + "%");
+            ps.setString(2, desciption.toLowerCase() + "%");
+            ps.setString(3, desciption.toLowerCase() + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
+                        rs.getInt("faculty_id"), rs.getString("account_status")));
+            }return teachers;
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public ArrayList<Teacher> getAllTeacherActive(){
         ArrayList<Teacher> teachers = new ArrayList();
         conn = BuildConnection.getConnection();
@@ -182,7 +201,7 @@ public class Teacherdao {
     }*/
     
     public static void main(String[] args) {
-        Teacherdao tdao = new Teacherdao();
+     /*   Teacherdao tdao = new Teacherdao();
         ArrayList<Teacher> teachers = new ArrayList();
         Teacher t = tdao.getTeacherById(Long.valueOf("1000000001"));
        // tdao.setTeacherToActive(t);
@@ -195,7 +214,11 @@ public class Teacherdao {
         System.out.println(addt);
         addt.setFirstName("testname");
         tdao.editTeacher(addt);
-        System.out.println(tdao.getTeacherById(tid));
+        System.out.println(tdao.getTeacherById(tid));*/
+     Teacherdao tdao = new Teacherdao();
+        ArrayList<Teacher> teachers = new ArrayList();
+        teachers = tdao.getAllTeacherLike("b");
+        System.out.println(teachers);
     }
     
 }

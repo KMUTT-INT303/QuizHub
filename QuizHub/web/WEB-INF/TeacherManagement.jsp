@@ -1,6 +1,6 @@
 <%-- 
-    Document   : StudentMangement
-    Created on : Oct 20, 2019, 1:26:31 PM
+    Document   : TeacherManagement
+    Created on : Nov 11, 2019, 11:46:14 PM
     Author     : Top
 --%>
 
@@ -14,29 +14,29 @@
     </head>
     <body>
         <h1>Hello ${user.firstName} ${user.lastName}!</h1>
-        <h2>Student Management</h2><hr><br>
+        <h2>Teacher Management</h2><hr><br>
         ${msg}
-        <form action="StudentManagement" method="post">
+        <form action="TeacherManagement" method="post">
             Find Student : <input type="text" name="findbydescription" value="${param.findbydescription}"> <input  type="submit">
-            <c:if test="${studentsbydes!=null}">
+            <c:if test="${teachersbydes!=null}">
                 <table border="3">
                 <tr>
                     <th>Student_ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Faculty</th>
-                    <th>Branch</th>
+                    <th>Status</th>
                     <th>REMOVE</th>
                 </tr>
-                <c:forEach items="${studentsbydes}" var="s">
+                <c:forEach items="${teachersbydes}" var="t">
                     <tr>
-                        <td>${s.id}</td>
-                        <td>${s.firstName}</td>
-                        <td>${s.lastName}</td>
-                        <td>${s.faculty_id}</td>
-                        <td>${s.branch_id}</td>
+                        <td>${t.id}</td>
+                        <td>${t.firstName}</td>
+                        <td>${t.lastName}</td>
+                        <td>${t.faculty_id}</td>
+                        <td>${t.account_status}</td>
                         <td>
-                            <input type="checkbox" name="delete_id" value="${s.id}">
+                            <input type="checkbox" name="delete_id" value="${t.id}">
                         </td> 
                     </tr>
                 </c:forEach>
@@ -52,17 +52,17 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Faculty</th>
-                <th>Branch</th>
+                <th>Status</th>
                 <th>REMOVE</th>
             </tr>
-            <c:forEach items="${students}" var="s">
+            <c:forEach items="${teachers}" var="t">
                 <tr>
-                    <td>${s.id}</td>
-                    <td>${s.firstName}</td>
-                    <td>${s.lastName}</td>
-                    <td>${s.faculty_id}</td>
-                    <td>${s.branch_id}</td>
-                    <td><a href="StudentManagement?student_id=${s.id}">REMOVE</a></td>                 
+                    <td>${t.id}</td>
+                    <td>${t.firstName}</td>
+                    <td>${t.lastName}</td>
+                    <td>${t.faculty_id}</td>
+                    <td>${t.account_status}</td>
+                    <td><a href="TeacherManagement?teacher_id=${t.id}">REMOVE</a></td>                 
                 </tr>
             </c:forEach>
         </table>
