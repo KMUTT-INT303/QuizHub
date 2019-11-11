@@ -13,7 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Quizzes;
+import model.Teacher;
 
 /**
  *
@@ -36,7 +38,7 @@ public class CreateQuizServlet extends HttpServlet {
         String quizName = request.getParameter("quiz_name");
         String quizComment = request.getParameter("quiz_advice");
         String quizStatus = request.getParameter("quiz_status");
-        String quizTeacherId = request.getParameter("teacher_id");
+        String quizTeacherId = "1000000001"; //request.getParameter("teacher_id");
         String course = request.getParameter("course");
         String quizFacultyId = request.getParameter("faculty_id");
         String quizBranchId = request.getParameter("branch_id");
@@ -60,6 +62,9 @@ public class CreateQuizServlet extends HttpServlet {
         String removeTS = quizStartDate.replace("T", " ");
         String removeED = quizEndDate.replace("T", " ");
         
+        HttpSession session = request.getSession();
+        Teacher t = (Teacher) session.getAttribute("user"); // Session User to Type Teacher!
+        
         Quizdao qdao = new Quizdao();
         Quizzes q;
         q = new Quizzes(
@@ -67,6 +72,7 @@ public class CreateQuizServlet extends HttpServlet {
                 quizComment,
                 quizStatus,
                 Long.valueOf(quizTeacherId),
+                //t.getId(),
                 courseName,
                 courseId,
                 Integer.valueOf(quizFacultyId),
@@ -74,8 +80,8 @@ public class CreateQuizServlet extends HttpServlet {
                 quizCode,
                 quizCoverImages,
                 quizSkillText,
-                Timestamp.valueOf(removeTS),
-                Timestamp.valueOf(removeED)
+                Timestamp.valueOf(removeTS + ":00"),
+                Timestamp.valueOf(removeED + ":00")
         );
 
         qdao.createQuiz(q);
