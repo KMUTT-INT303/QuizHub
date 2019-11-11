@@ -1,7 +1,11 @@
 
 import controllers.Facultydao;
 import controllers.Studentdao;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import model.Faculty;
 import model.Student;
 
@@ -16,24 +20,22 @@ import model.Student;
  */
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Facultydao fdao = new Facultydao();
         ArrayList<Faculty> faculties = new ArrayList();
         faculties = fdao.getAllFaculty();
         //System.out.println(faculties);
-        
-        
+
         Studentdao sdao = new Studentdao();
         ArrayList<Student> students = sdao.getAllStudentLike("q");
         System.out.println(students);
-        
-        
+
         String fid_bid = "12-02";
         String bid = null;
-        for(int i =0;i<fid_bid.length();i++){
+        for (int i = 0; i < fid_bid.length(); i++) {
             char j = fid_bid.charAt(i);
-            if(j == '-'){
-                bid = fid_bid.substring(i+1);
+            if (j == '-') {
+                bid = fid_bid.substring(i + 1);
             }
         }
         System.out.println(bid);
@@ -44,5 +46,12 @@ public class Test {
         tests.setPassword("123");
         sdao.editStudentInfo(tests);
         System.out.println(tests);
+
+        String rsd = "2019-11-11T20:22:56";
+        
+        String x = rsd.replace("T", " ");
+        
+        System.out.println(Timestamp.valueOf(x));
+
     }
 }

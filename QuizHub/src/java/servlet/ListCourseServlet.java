@@ -33,20 +33,20 @@ public class ListCourseServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //ListCourse(request);
-        /*if(request.getSession().getAttribute("user") instanceof Teacher){
+        ListCourse(request);
+        if(request.getSession().getAttribute("user") instanceof Teacher){
             ListCourseByTeacher(request);
             if ("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))) {
                 response.sendRedirect("/CreateQuiz.jsp");
                 return;
             }
-        }*/
+        }/*
 
         ListCourseByTeacher(request);
         if ("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))) {
             response.sendRedirect("/CreateQuiz.jsp");
             return;
-        }
+        }*/
 
         /*if ("QUIZZES".equalsIgnoreCase(request.getParameter("FROM_QUIZZES"))) {
             response.sendRedirect("/Quizzes.jsp");
