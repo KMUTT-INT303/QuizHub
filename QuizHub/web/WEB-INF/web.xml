@@ -60,6 +60,10 @@
         <servlet-name>TeacherManagementServlet</servlet-name>
         <servlet-class>servlet.TeacherManagementServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActiveUserSystemServlet</servlet-name>
+        <servlet-class>servlet.ActiveUserSystemServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>TeacherManagementServlet</servlet-name>
         <url-pattern>/TeacherManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActiveUserSystemServlet</servlet-name>
+        <url-pattern>/ActiveUserSystem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

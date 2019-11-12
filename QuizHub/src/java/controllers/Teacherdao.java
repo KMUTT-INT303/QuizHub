@@ -219,6 +219,8 @@ public class Teacherdao {
         ArrayList<Teacher> teachers = new ArrayList();
         teachers = tdao.getAllTeacherLike("b");
         System.out.println(teachers);
+        Teacher t = tdao.getTeacherById(Long.valueOf("1000000001"));
+        tdao.setTeacherToActive(t);
     }
     
 }
