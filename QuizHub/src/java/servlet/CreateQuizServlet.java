@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Quizzes;
 import model.Teacher;
+import java.util.*;
+import java.nio.charset.*;
 
 /**
  *
@@ -98,12 +100,29 @@ public class CreateQuizServlet extends HttpServlet {
         q.setQuizSkillText(quizSkillText);
         q.setQuizStartDate(Timestamp.valueOf(removeTS + ":00"));
         q.setQuizEndDate(Timestamp.valueOf(removeED + ":00"));
+        q.setPage(RequiredString(10).toUpperCase());
 
         qdao.createQuiz(q);
 
         request.setAttribute("msg", "You have created a quiz.");
         getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
 
+    }
+
+    public String RequiredString(int n) {
+        byte[] array = new byte[256];
+        new Random().nextBytes(array);
+        String randomString
+                = new String(array, Charset.forName("UTF-8"));
+        StringBuffer ra = new StringBuffer();
+        for (int i = 0; i < randomString.length(); i++) {
+            char ch = randomString.charAt(i);
+            if (((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) && (n > 0)) {
+                ra.append(ch);
+                n--;
+            }
+        }
+        return ra.toString();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

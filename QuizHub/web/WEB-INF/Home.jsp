@@ -79,6 +79,7 @@
                                 </div>
                                 <div class="col-sm-3"></div>
                             </div>
+                            <center><span>${jerror}</span></center>
                             <div class="row mb-2">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">

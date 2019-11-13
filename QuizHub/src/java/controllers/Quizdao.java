@@ -26,7 +26,7 @@ public class Quizdao {
     public boolean createQuiz(Quizzes q) {
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO quiz(quiz_name, quiz_comments, quiz_status, teacher_id, course_name, course_id, faculty_id, branch_id, join_code, cover_images, skill_text, start_date, end_date) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO quiz(quiz_name, quiz_comments, quiz_status, teacher_id, course_name, course_id, faculty_id, branch_id, join_code, cover_images, skill_text, start_date, end_date, page) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, q.getQuizName());
             ps.setString(2, q.getQuizComment());
             ps.setString(3, q.getQuizStatus());
@@ -40,6 +40,7 @@ public class Quizdao {
             ps.setString(11, q.getQuizSkillText());
             ps.setTimestamp(12, q.getQuizStartDate());
             ps.setTimestamp(13, q.getQuizEndDate());
+            ps.setString(14, q.getPage());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -58,7 +59,7 @@ public class Quizdao {
             while (rs.next()) {
                 quizzez.add(new Quizzes(rs.getString("quizname"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
                         rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"))
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"))
                 );
             }
             return quizzez;
@@ -68,7 +69,7 @@ public class Quizdao {
 
         return null;
     }
-    
+
     public ArrayList<Quizzes> ListAllQuizByBranch(int bid) {
         conn = BuildConnection.getConnection();
         ArrayList<Quizzes> quizzez = new ArrayList();
@@ -79,7 +80,7 @@ public class Quizdao {
             while (rs.next()) {
                 quizzez.add(new Quizzes(rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
                         rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"))
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"))
                 );
             }
             return quizzez;
@@ -89,7 +90,7 @@ public class Quizdao {
 
         return null;
     }
-    
+
     public ArrayList<Quizzes> ListAllQuizByFaculty(int faculty_id) {
         conn = BuildConnection.getConnection();
         ArrayList<Quizzes> quizzez = new ArrayList();
@@ -100,7 +101,7 @@ public class Quizdao {
             while (rs.next()) {
                 quizzez.add(new Quizzes(rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
                         rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"))
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"))
                 );
             }
             return quizzez;
@@ -109,12 +110,29 @@ public class Quizdao {
         }
 
         return null;
-    }   
+    }
+
+    public Quizzes findQuizzesByCode(String code) {
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz WHERE join_code = ?");
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Quizzes(rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
+                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Quizdao qdao = new Quizdao();
         ArrayList<Quizzes> qs = qdao.ListAllQuizByFaculty(2);
         System.out.println(qs);
     }
 
-    
 }

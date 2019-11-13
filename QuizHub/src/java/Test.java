@@ -1,11 +1,14 @@
 
 import controllers.Facultydao;
+import controllers.Quizdao;
 import controllers.Studentdao;
+import java.nio.charset.Charset;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import model.Faculty;
 import model.Student;
 
@@ -52,13 +55,32 @@ public class Test {
         String x = rsd.replace("T", " ");
         
         System.out.println(Timestamp.valueOf(x));
-*/
+         */
         int count = 0;
-        for(int i = 0; i < 10; i++) {
-            count++;
-            if(count %5 == 0) {
-                System.out.println("1 round");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(RequiredString(10).toUpperCase());
+        }
+
+        Quizdao dq = new Quizdao();
+        System.out.println(dq.findQuizzesByCode("HHQ123"));
+        
+        
+
+    }
+    
+    public static String RequiredString(int n) {
+        byte[] array = new byte[256];
+        new Random().nextBytes(array);
+        String randomString
+                = new String(array, Charset.forName("UTF-8"));
+        StringBuffer ra = new StringBuffer();
+        for (int i = 0; i < randomString.length(); i++) {
+            char ch = randomString.charAt(i);
+            if (((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) && (n > 0)) {
+                ra.append(ch);
+                n--;
             }
         }
+        return ra.toString();
     }
 }

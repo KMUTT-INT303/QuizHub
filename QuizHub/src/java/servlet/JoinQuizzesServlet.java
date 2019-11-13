@@ -8,22 +8,17 @@ package servlet;
 import controllers.Quizdao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Admin;
 import model.Quizzes;
-import model.Student;
-import model.Teacher;
 
 /**
  *
  * @author tsch
  */
-public class QuizzesServlet extends HttpServlet {
+public class JoinQuizzesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,49 +32,23 @@ public class QuizzesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String page = request.getParameter("p");
-        if (page.trim().isEmpty()) {
-            this.ListQuizByBranch(request);
-            String path = "/WEB-INF/Quizzes.jsp";
-            getServletContext().getRequestDispatcher(path).forward(request, response);
-        }
-        else {
-            getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
-        }
+        String code = request.getParameter("code");
 
-    }
-
-    private void ListQuiz(HttpServletRequest request) {
-        Quizdao qdao = new Quizdao();
-        ArrayList<Quizzes> quizzes = qdao.ListAllQuiz();
-        request.setAttribute("quizzes", quizzes);
-    }
-
-    private void ListQuizByBranch(HttpServletRequest request) {
-        Quizdao qdao = new Quizdao();
-        HttpSession session = request.getSession();
-        Object user = session.getAttribute("user");
-
-        if (user instanceof Student) {
-            Student s = (Student) user;
-            ArrayList<Quizzes> quizzes = qdao.ListAllQuizByBranch(s.getBranch_id());
-            request.setAttribute("quizzes", quizzes);
+        if (code.trim().isEmpty() || code == null) {
+            request.setAttribute("jerror", "Please enter a quizzes code.");
+            getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/Quizzes.jsp").forward(request, response);
+        } else {
+            Quizdao dq = new Quizdao();
+            Quizzes q = dq.findQuizzesByCode(code);
+            if (code == null) {
+                request.setAttribute("jerror", "Invalid quizzes code.");
+                getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/Quizzes.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("Quizzes?p=" + q.getPage());
+            }
         }
-        if (user instanceof Teacher) {
-            Teacher t = (Teacher) user;
-            ArrayList<Quizzes> quizzes = qdao.ListAllQuizByFaculty(t.getFaculty_id());
-            request.setAttribute("quizzes", quizzes);
-        }
-        if (user instanceof Admin) {
-            ArrayList<Quizzes> quizzes = qdao.ListAllQuiz();
-            request.setAttribute("quizzes", quizzes);
-        }
-
-        if (user == null) {
-            ArrayList<Quizzes> quizzes = qdao.ListAllQuiz();
-            request.setAttribute("quizzes", quizzes);
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
