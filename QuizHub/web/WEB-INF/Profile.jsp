@@ -93,6 +93,18 @@
                         </div>
                     </div>
 
+
+                    <div class="card mb-4">
+                        <h6 class="card-header">User Information</h6>
+                        <div class="card-body">
+                            <div class="card mb-2">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">First Name: <span class="username">${user.firstName}</span></li>
+                                    <li class="list-group-item">Last Name: <span class="username">${user.lastName}</span></li>
+                                    <li class="list-group-item">Student ID: <span class="id">${user.id}</span></li>
+                        </div>
+                    </div>
+
                 </div>
 
 
