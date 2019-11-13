@@ -4,6 +4,7 @@
     Author     : tsch
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container">
         <a class="navbar-brand" href="/QuizHub/Home">QuizHub</a>
@@ -33,6 +34,11 @@
                     <a class="nav-link" href="Question">Question?</a>
                 </li>
 
+                <c:if test="${status == 'Admin'}">
+                <li class="nav-item">
+                    <a class="nav-link" href="ManageSystem">Manage System</a>
+                </li>
+                </c:if>
 
             </ul>
             <form class="form-inline mt-2 mt-md-0">

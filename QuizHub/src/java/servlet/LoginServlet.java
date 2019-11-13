@@ -79,6 +79,11 @@ public class LoginServlet extends HttpServlet {
             
             if(t != null){
                 if(t.getPassword().equals(password)){
+                    if(!t.getAccount_status().equals("active")){
+                        msg = "This ID is waiting to active.";
+                        request.setAttribute("msg", msg);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    }
                     request.getSession().setAttribute("user", t);
                     request.getSession().setAttribute("status", "Teacher");
                     response.sendRedirect("Home");

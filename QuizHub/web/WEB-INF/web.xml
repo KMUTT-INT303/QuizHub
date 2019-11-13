@@ -64,6 +64,10 @@
         <servlet-name>ActiveUserSystemServlet</servlet-name>
         <servlet-class>servlet.ActiveUserSystemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageSystemServlet</servlet-name>
+        <servlet-class>servlet.ManageSystemServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>ActiveUserSystemServlet</servlet-name>
         <url-pattern>/ActiveUserSystem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageSystemServlet</servlet-name>
+        <url-pattern>/ManageSystem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
