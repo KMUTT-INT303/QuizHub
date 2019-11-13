@@ -63,6 +63,7 @@
                                             <div class="card-group">
 
                                             <c:forEach items="${quizzes}" var="q">
+
                                                 <div class="card m-2">
                                                     <img class="card-img-top" src="images/template.svg" alt="Card image cap">
                                                     <div class="card-body">
