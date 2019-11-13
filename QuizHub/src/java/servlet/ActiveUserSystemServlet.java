@@ -36,7 +36,24 @@ public class ActiveUserSystemServlet extends HttpServlet {
         String path = "/WEB-INF/ActiveUserSystem.jsp";
         String teacher_id = request.getParameter("teacher_id");
         String forwhat = request.getParameter("for");
+        String descriptionPendingUser = request.getParameter("descriptionPendingUser");
+        
         if(teacher_id == null || teacher_id.isEmpty() || forwhat == null || forwhat.trim().isEmpty()){
+            
+            if(!(descriptionPendingUser == null || descriptionPendingUser.trim().isEmpty())){
+                Teacherdao tdao = new Teacherdao();
+                ArrayList<Teacher> teachers = tdao.getAllTeacherPendingLike(descriptionPendingUser);
+                if(!teachers.isEmpty()){
+                    request.setAttribute("teacherByDes", teachers);
+                    this.ListTeacher(request);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                }else{
+                    msg = "No User.";
+                    request.setAttribute("msg", msg);
+                    this.ListTeacher(request);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                }
+            }
             this.ListTeacher(request);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
@@ -44,6 +61,8 @@ public class ActiveUserSystemServlet extends HttpServlet {
         Long tid = Long.valueOf(teacher_id);
         Teacherdao tdao = new Teacherdao();
         Teacher t = tdao.getTeacherById(tid);
+
+        
         if(forwhat.equals("active")){
             if(t != null){
                 if(t.getAccount_status().equals("active")){

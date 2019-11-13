@@ -15,6 +15,40 @@
     <body>
         <h1>Hello ${user}!</h1>
         ${msg}
+        <form action="ActiveUserSystem" method="post">
+        FIND PENDING USER:<input type="text" name="descriptionPendingUser"><input type="submit">
+        </form>
+        <c:if test="${teacherByDes != null}">
+            <table border="3">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+                <c:forEach items="${teacherByDes}" var="t">
+                    <tr>
+                        <td>
+                            ${t.id}
+                        </td>
+                        <td>
+                            ${t.firstName}
+                        </td>
+                        <td>
+                            ${t.lastName}
+                        </td>
+                        <td>
+                            ${t.account_status}
+                        </td>
+                        <td>
+                            <input type="checkbox" name="toactive" value="${t.id}">
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+        
         <table border="3">
             <tr>
                 <th>ID</th>

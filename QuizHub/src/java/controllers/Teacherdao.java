@@ -58,6 +58,46 @@ public class Teacherdao {
         return null;
     }
     
+    public ArrayList<Teacher> getAllTeacherActiveLike(String desciption){
+        ArrayList<Teacher> teachers = new ArrayList();
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM teachers WHERE ( CHAR(teacher_id) like ? OR LOWER(first_name) like ? OR LOWER(last_name) like ? )AND account_status = ?");
+            ps.setString(1, "%" + desciption + "%");
+            ps.setString(2, desciption.toLowerCase() + "%");
+            ps.setString(3, desciption.toLowerCase() + "%");
+            ps.setString(4, "active");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
+                        rs.getInt("faculty_id"), rs.getString("account_status")));
+            }return teachers;
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Teacher> getAllTeacherPendingLike(String desciption){
+        ArrayList<Teacher> teachers = new ArrayList();
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM teachers WHERE ( CHAR(teacher_id) like ? OR LOWER(first_name) like ? OR LOWER(last_name) like ? )AND account_status = ?");
+            ps.setString(1, "%" + desciption + "%");
+            ps.setString(2, desciption.toLowerCase() + "%");
+            ps.setString(3, desciption.toLowerCase() + "%");
+            ps.setString(4, "pending");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
+                        rs.getInt("faculty_id"), rs.getString("account_status")));
+            }return teachers;
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public ArrayList<Teacher> getAllTeacherActive(){
         ArrayList<Teacher> teachers = new ArrayList();
         conn = BuildConnection.getConnection();
@@ -215,9 +255,9 @@ public class Teacherdao {
         addt.setFirstName("testname");
         tdao.editTeacher(addt);
         System.out.println(tdao.getTeacherById(tid));*/
-     Teacherdao tdao = new Teacherdao();
+        Teacherdao tdao = new Teacherdao();
         ArrayList<Teacher> teachers = new ArrayList();
-        teachers = tdao.getAllTeacherLike("b");
+        teachers = tdao.getAllTeacherActiveLike("te");
         System.out.println(teachers);
         Teacher t = tdao.getTeacherById(Long.valueOf("1000000001"));
         tdao.setTeacherToActive(t);
