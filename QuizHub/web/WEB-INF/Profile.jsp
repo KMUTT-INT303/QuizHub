@@ -57,8 +57,8 @@
                     <div class="card mb-4">
                         <h6 class="card-header">User Information</h6>
                         <div class="card-body text-secondary">
-                            ${msg}
-                            <form action="ChangePassword" method="post">
+                            ${ProfileException}
+                            <form action="Profile" method="post">
                                 <div class="form-group row">
                                     <label for="newpassword" class="col-sm-4 col-form-label">First Name</label>
                                     <div class="col-sm-8">

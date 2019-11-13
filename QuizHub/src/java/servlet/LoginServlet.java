@@ -35,51 +35,51 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String username = request.getParameter("username");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         String path = "/Login.jsp";
-        String msg = "";
-        
+        String msg = null;
+
         for (char c : username.toCharArray()) {
             if (!Character.isDigit(c)) {
-            msg = "Your username cannot be text.";
-            request.setAttribute("msg", msg);
-            request.getRequestDispatcher(path).forward(request, response);
-            return;
+                msg = "Your username cannot be text.";
+                request.setAttribute("msg", msg);
+                request.getRequestDispatcher(path).forward(request, response);
+                return;
             }
-        } 
-        
-        if(username.trim().isEmpty() || password.trim().isEmpty()){
+        }
+
+        if (username.trim().isEmpty() || password.trim().isEmpty()) {
             msg = "Your username or password are incorrect.";
             request.setAttribute("msg", msg);
             request.getRequestDispatcher(path).forward(request, response);
             return;
         }
-        
-        long usernameToLong = Long.valueOf(username);  
-        
+
+        long usernameToLong = Long.valueOf(username);
+
         Studentdao sdao = new Studentdao();
         Student s = sdao.getStudentById(usernameToLong);
-            
-        if(s != null){
-            if(s.getPassword().equals(password)){
-                    request.getSession().setAttribute("user", s);
-                    request.getSession().setAttribute("status", "Student");
-                    response.sendRedirect("Home");
-                    return;
-            }else{
+
+        if (s != null) {
+            if (s.getPassword().equals(password)) {
+                request.getSession().setAttribute("user", s);
+                request.getSession().setAttribute("status", "Student");
+                response.sendRedirect("Home");
+                return;
+            } else {
                 msg = "Your username or password are incorrect.";
                 request.setAttribute("msg", msg);
-                getServletContext().getRequestDispatcher(path).forward(request, response);  
+                getServletContext().getRequestDispatcher(path).forward(request, response);
                 return;
             }
-        }else{
+        } else {
             Teacherdao tdao = new Teacherdao();
             Teacher t = tdao.getTeacherById(usernameToLong);
-            
-            if(t != null){
-                if(t.getPassword().equals(password)){
-                    if(!t.getAccount_status().equals("active")){
+
+            if (t != null) {
+                if (t.getPassword().equals(password)) {
+                    if (!t.getAccount_status().equals("active")) {
                         msg = "This ID is waiting to active.";
                         request.setAttribute("msg", msg);
                         getServletContext().getRequestDispatcher(path).forward(request, response);
@@ -88,31 +88,38 @@ public class LoginServlet extends HttpServlet {
                     request.getSession().setAttribute("status", "Teacher");
                     response.sendRedirect("Home");
                     return;
-                }else{
+                } else {
                     msg = "Your username or password are incorrect.";
                     request.setAttribute("msg", msg);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                 }
-            }else{
+            } else {
                 Admindao adao = new Admindao();
                 Admin a = adao.getAdminById(usernameToLong);
-                if(a.getPassword().equals(password)){
-                    request.getSession().setAttribute("user", a);
-                    request.getSession().setAttribute("status", "Admin");
-                    response.sendRedirect("Home");
-                    return;
-                }else{
-                    msg = "Your username or password are incorrect.";
+                if (a != null) {
+                    if (a.getPassword().equals(password)) {
+                        request.getSession().setAttribute("user", a);
+                        request.getSession().setAttribute("status", "Admin");
+                        response.sendRedirect("Home");
+                        return;
+                    } else {
+                        msg = "Your username or password are incorrect.";
+                        request.setAttribute("msg", msg);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    }
+                } else {
+                    msg = "NO USER!!";
                     request.setAttribute("msg", msg);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
+                    return;
                 }
             }
-            
+
         }
         msg = "Your username or password are incorrect.";
         request.setAttribute("msg", msg);
         getServletContext().getRequestDispatcher(path).forward(request, response);
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

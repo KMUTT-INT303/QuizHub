@@ -40,7 +40,7 @@ public class ProfileServlet extends HttpServlet {
         
         if(fname.trim().isEmpty() || lname.trim().isEmpty()){
             msg = "input all values.";
-            request.setAttribute("msg", msg);
+            request.setAttribute("ProfileException", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
             return;
         }
@@ -55,18 +55,18 @@ public class ProfileServlet extends HttpServlet {
                     s.setLastName(lname.trim());
                     sdao.editStudentInfo(s);
                     msg = "successful.";
-                    request.setAttribute("msg", msg);
+                    request.setAttribute("ProfileException", msg);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                     //response.sendRedirect("/QuizHub/ManageAccountForStudent");
                     return;
                 }else{
                     msg = "First Name & Last Name must more than 3 character";
-                    request.setAttribute("msg", msg);
+                    request.setAttribute("ProfileException", msg);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                 }
             }else{
                 msg = "cannot change";
-                request.setAttribute("msg", msg);
+                request.setAttribute("ProfileException", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }
         }else if(request.getSession().getAttribute("user") instanceof Teacher){
@@ -80,7 +80,7 @@ public class ProfileServlet extends HttpServlet {
                     t.setLastName(lname.trim());
                     tdao.editTeacher(t);
                     msg = "successful.";
-                    request.setAttribute("msg", msg);
+                    request.setAttribute("ProfileException", msg);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                     //response.sendRedirect("/QuizHub/ManageAccountForStudent");
                     return;
@@ -91,12 +91,12 @@ public class ProfileServlet extends HttpServlet {
                 }
             }else{
                 msg = "cannot change";
-                request.setAttribute("msg", msg);
+                request.setAttribute("ProfileException", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }
         }else{
             msg = "cannot change";
-            request.setAttribute("msg", msg);
+            request.setAttribute("ProfileException", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
     }
