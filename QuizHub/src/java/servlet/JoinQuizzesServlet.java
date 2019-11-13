@@ -39,9 +39,11 @@ public class JoinQuizzesServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
             getServletContext().getRequestDispatcher("/WEB-INF/Quizzes.jsp").forward(request, response);
         } else {
+            
             Quizdao dq = new Quizdao();
             Quizzes q = dq.findQuizzesByCode(code);
-            if (code == null) {
+            
+            if (q == null) {
                 request.setAttribute("jerror", "Invalid quizzes code.");
                 getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
                 getServletContext().getRequestDispatcher("/WEB-INF/Quizzes.jsp").forward(request, response);
