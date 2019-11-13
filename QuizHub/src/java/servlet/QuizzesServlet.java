@@ -37,16 +37,17 @@ public class QuizzesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String page = request.getParameter("p");
-        if (page.trim().isEmpty()) {
-            this.ListQuizByBranch(request);
-            String path = "/WEB-INF/Quizzes.jsp";
-            getServletContext().getRequestDispatcher(path).forward(request, response);
-        }
-        else {
-            getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
-        }
+        if (request.getParameterMap().containsKey("page")) {
+            String page = request.getParameter("page");
+            if (page.trim().isEmpty()) {
+                this.ListQuizByBranch(request);
+                String path = "/WEB-INF/Quizzes.jsp";
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }
 
+            getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
+
+        }
     }
 
     private void ListQuiz(HttpServletRequest request) {
