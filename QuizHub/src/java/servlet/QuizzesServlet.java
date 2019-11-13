@@ -40,6 +40,12 @@ public class QuizzesServlet extends HttpServlet {
 
         String page = request.getParameter("p");
         String path = "/WEB-INF/Quizzes.jsp";
+
+        if (!request.getParameterMap().containsKey("p")) {
+            this.ListQuizByBranch(request);
+            getServletContext().getRequestDispatcher(path).forward(request, response);
+        }
+        
         if (page.trim().isEmpty() || page == null) {
             this.ListQuizByBranch(request);
             getServletContext().getRequestDispatcher(path).forward(request, response);
