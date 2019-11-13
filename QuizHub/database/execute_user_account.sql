@@ -113,3 +113,11 @@ INSERT INTO ADMINS
 	(ADMIN_ID, FIRST_NAME, LAST_NAME, PASSWORD)
 VALUES 
 	(000, 'ADMIN', 'IS GOD', '000');
+
+INSERT INTO QUIZ 
+        (QUIZ_NAME, QUIZ_COMMENTS, QUIZ_STATUS, TEACHER_ID, COURSE_NAME, COURSE_ID, FACULTY_ID, BRANCH_ID, JOIN_CODE, COVER_IMAGES, SKILL_TEXT, START_DATE, END_DATE) 
+VALUES ('Network Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
+        ('Gen Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
+        ('Program Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
+        ('Eng Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
+        ('GG Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654');

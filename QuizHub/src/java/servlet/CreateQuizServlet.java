@@ -47,8 +47,8 @@ public class CreateQuizServlet extends HttpServlet {
         String quizSkillText = request.getParameter("skill");
         String quizStartDate = request.getParameter("start_date");
         String quizEndDate = request.getParameter("end_date");
-        
-        if(quizName == null) {
+
+        if (quizName == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
         }
 
@@ -61,13 +61,14 @@ public class CreateQuizServlet extends HttpServlet {
 
         String removeTS = quizStartDate.replace("T", " ");
         String removeED = quizEndDate.replace("T", " ");
-        
+
         HttpSession session = request.getSession();
         Teacher t = (Teacher) session.getAttribute("user"); // Session User to Type Teacher!
-        
+
         Quizdao qdao = new Quizdao();
         Quizzes q = new Quizzes();
-       /* q = new Quizzes(
+
+        /* q = new Quizzes(
                 quizName,
                 quizComment,
                 quizStatus,
@@ -83,20 +84,20 @@ public class CreateQuizServlet extends HttpServlet {
                 Timestamp.valueOf(removeTS + ":00"),
                 Timestamp.valueOf(removeED + ":00")
         );*/
-       q.setQuizName(quizName);
-       q.setQuizComment(quizComment);
-       q.setQuizStatus(quizStatus);
-       q.setQuizTeacherId(Long.valueOf(quizTeacherId));
-                //t.getId(),
-       q.setQuizCourseName(courseName);
-       q.setQuizCourseId(courseId);
-       q.setQuizBranchId(Integer.valueOf(quizFacultyId));
-       q.setQuizBranchId(Integer.valueOf(branch_id));
-       q.setQuizCode(quizCode);
-       q.setQuizCoverImages(quizCoverImages);
-       q.setQuizSkillText(quizSkillText);
-       q.setQuizStartDate(Timestamp.valueOf(removeTS + ":00"));
-       q.setQuizEndDate(Timestamp.valueOf(removeED + ":00"));
+        q.setQuizName(quizName);
+        q.setQuizComment(quizComment);
+        q.setQuizStatus(quizStatus);
+        q.setQuizTeacherId(Long.valueOf(quizTeacherId));
+        //t.getId(),
+        q.setQuizCourseName(courseName);
+        q.setQuizCourseId(courseId);
+        q.setQuizFacultyId(Integer.valueOf(quizFacultyId));
+        q.setQuizBranchId(Integer.valueOf(branch_id));
+        q.setQuizCode(quizCode);
+        q.setQuizCoverImages(quizCoverImages);
+        q.setQuizSkillText(quizSkillText);
+        q.setQuizStartDate(Timestamp.valueOf(removeTS + ":00"));
+        q.setQuizEndDate(Timestamp.valueOf(removeED + ":00"));
 
         qdao.createQuiz(q);
 

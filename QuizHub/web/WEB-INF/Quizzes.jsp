@@ -63,21 +63,17 @@
                                             <div class="card-group">
 
                                             <c:forEach items="${quizzes}" var="q">
-                                                <div class="row">
-                                                    <div class="card-group">
-                                                        <div class="card m-2">
-                                                            <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">${q.quizCourseName}</h5>
-                                                                <p class="card-text">
-                                                                    ${q.quizComment}
-                                                                </p>
-                                                                <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                                            </div>
-                                                            <div class="card-footer">
-                                                                <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                                            </div>
-                                                        </div>
+                                                <div class="card m-2">
+                                                    <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${q.quizCourseName}</h5>
+                                                        <p class="card-text">
+                                                            ${q.quizComment}
+                                                        </p>
+                                                        <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <span class="text-muted float-left">Last updated 3 mins ago</span>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -117,9 +113,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                            
-                                            <div class="row">
-                                            <div class="card-group">
+
+                                    <div class="row">
+                                        <div class="card-group">
 
                                             <div class="card m-2">
                                                 <img class="card-img-top" src="images/template.svg" alt="Card image cap">
@@ -154,8 +150,8 @@
                                                     <span class="text-muted float-left">Last updated 3 mins ago</span>
                                                 </div>
                                             </div>
-                                                </div>
-                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
