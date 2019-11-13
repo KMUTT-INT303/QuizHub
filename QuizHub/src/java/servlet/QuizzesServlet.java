@@ -5,12 +5,20 @@
  */
 package servlet;
 
+import controllers.Quizdao;
+import controllers.Studentdao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Admin;
+import model.Quizzes;
+import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -30,9 +38,43 @@ public class QuizzesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        this.ListQuizByBranch(request);
         String path = "/WEB-INF/Quizzes.jsp";
         getServletContext().getRequestDispatcher(path).forward(request, response);
 
+    }
+    
+    private void ListQuiz(HttpServletRequest request){
+        Quizdao qdao = new Quizdao();
+        ArrayList<Quizzes> quizzes = qdao.ListAllQuiz();
+        request.setAttribute("quizzes", quizzes);
+    }
+    
+    private void ListQuizByBranch(HttpServletRequest request){
+        Quizdao qdao = new Quizdao();
+        HttpSession session = request.getSession();
+        Object user = session.getAttribute("user");
+        
+        if(user instanceof Student){
+            Student s = (Student) user;
+            ArrayList<Quizzes> quizzes = qdao.ListAllQuizByBranch(s.getBranch_id());
+            request.setAttribute("quizzes", quizzes);
+        }
+        if(user instanceof Teacher){
+            Teacher t = (Teacher) user;
+            ArrayList<Quizzes> quizzes = qdao.ListAllQuizByFaculty(t.getFaculty_id());
+            request.setAttribute("quizzes", quizzes);
+        }
+        if(user instanceof Admin){
+            ArrayList<Quizzes> quizzes = qdao.ListAllQuiz();
+            request.setAttribute("quizzes", quizzes);
+        }
+        
+        if(user == null){
+            ArrayList<Quizzes> quizzes = qdao.ListAllQuiz();
+            request.setAttribute("quizzes", quizzes);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

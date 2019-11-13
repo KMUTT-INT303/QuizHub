@@ -27,11 +27,11 @@
                 <option value="private">private</option>
             </select>
         </div>
-        <div><input type="text" name="teacher_id" value="" /></div>
+        <%--div><input type="text" name="teacher_id" value="" /></div--%>
         <div>
             <select name="course">
                 <c:forEach items="${course}" var="c">
-                    <option value="${c.id}-${c.name}">${c.name}</option>
+                    <option value="${c.id}-${c.name}">${c.id} ${c.name}</option>
                 </c:forEach>
             </select>
         </div>

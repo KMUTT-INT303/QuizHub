@@ -56,11 +56,32 @@
 
                     <div class="card mb-2">
                         <h6 class="card-header">Quizhub<div class="float-right"><c:if test="${status == 'Teacher'}"><a class="badge badge-success" href="CreateCourse">Create Course</a> <a class="badge badge-success" href="CreateQuiz">Create A Quiz</a></c:if></div></h6>
-                        <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col-sm-12">
-                                    <div class="row">
-                                        <div class="card-group">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="card-group">
+
+                                            <c:forEach items="${quizzes}" var="q">
+                                                <div class="row">
+                                                    <div class="card-group">
+                                                        <div class="card m-2">
+                                                            <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">${q.quizCourseName}</h5>
+                                                                <p class="card-text">
+                                                                    ${q.quizComment}
+                                                                </p>
+                                                                <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <span class="text-muted float-left">Last updated 3 mins ago</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+
                                             <div class="card m-2">
                                                 <img class="card-img-top" src="images/template.svg" alt="Card image cap">
                                                 <div class="card-body">
@@ -96,6 +117,45 @@
                                             </div>
                                         </div>
                                     </div>
+                                            
+                                            <div class="row">
+                                            <div class="card-group">
+
+                                            <div class="card m-2">
+                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Java Programing</h5>
+                                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
+                                                </div>
+                                            </div>
+                                            <div class="card m-2">
+                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Network Quiz</h5>
+                                                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
+                                                </div>
+                                            </div>
+                                            <div class="card m-2">
+                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Web Programing</h5>
+                                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
+                                                </div>
+                                            </div>
+                                                </div>
+                                                </div>
                                 </div>
                             </div>
                         </div>

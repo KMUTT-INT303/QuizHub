@@ -8,7 +8,9 @@ package controllers;
 import db.BuildConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Quizzes;
@@ -36,8 +38,8 @@ public class Quizdao {
             ps.setString(9, q.getQuizCode());
             ps.setString(10, q.getQuizCoverImages());
             ps.setString(11, q.getQuizSkillText());
-            ps.setTimestamp(12, q.getQuizStartDate());      
-            ps.setTimestamp(13, q.getQuizEndDate());   
+            ps.setTimestamp(12, q.getQuizStartDate());
+            ps.setTimestamp(13, q.getQuizEndDate());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -46,8 +48,73 @@ public class Quizdao {
 
         return false;
     }
-    
-    public static void main(String[] args) {
-        
+
+    public ArrayList<Quizzes> ListAllQuiz() {
+        conn = BuildConnection.getConnection();
+        ArrayList<Quizzes> quizzez = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                quizzez.add(new Quizzes(rs.getString("quizname"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
+                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"))
+                );
+            }
+            return quizzez;
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
+    
+    public ArrayList<Quizzes> ListAllQuizByBranch(int bid) {
+        conn = BuildConnection.getConnection();
+        ArrayList<Quizzes> quizzez = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz WHERE branch_id = ?");
+            ps.setInt(1, bid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                quizzez.add(new Quizzes(rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
+                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"))
+                );
+            }
+            return quizzez;
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
+    public ArrayList<Quizzes> ListAllQuizByFaculty(int faculty_id) {
+        conn = BuildConnection.getConnection();
+        ArrayList<Quizzes> quizzez = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz WHERE faculty_id = ?");
+            ps.setInt(1, faculty_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                quizzez.add(new Quizzes(rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
+                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"))
+                );
+            }
+            return quizzez;
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }   
+    public static void main(String[] args) {
+        Quizdao qdao = new Quizdao();
+        ArrayList<Quizzes> qs = qdao.ListAllQuizByFaculty(2);
+        System.out.println(qs);
+    }
+
+    
 }

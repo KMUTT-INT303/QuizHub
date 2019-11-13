@@ -37,17 +37,17 @@ public class ActiveUserSystemServlet extends HttpServlet {
         String teacher_id = request.getParameter("teacher_id");
         String forwhat = request.getParameter("for");
         String descriptionPendingUser = request.getParameter("descriptionPendingUser");
-        
-        if(teacher_id == null || teacher_id.isEmpty() || forwhat == null || forwhat.trim().isEmpty()){
-            
-            if(!(descriptionPendingUser == null || descriptionPendingUser.trim().isEmpty())){
+
+        if (teacher_id == null || teacher_id.isEmpty() || forwhat == null || forwhat.trim().isEmpty()) {
+
+            if (!(descriptionPendingUser == null || descriptionPendingUser.trim().isEmpty())) {
                 Teacherdao tdao = new Teacherdao();
                 ArrayList<Teacher> teachers = tdao.getAllTeacherPendingLike(descriptionPendingUser);
-                if(!teachers.isEmpty()){
+                if (!teachers.isEmpty()) {
                     request.setAttribute("teacherByDes", teachers);
                     this.ListTeacher(request);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
-                }else{
+                } else {
                     msg = "No User.";
                     request.setAttribute("msg", msg);
                     this.ListTeacher(request);
@@ -57,57 +57,63 @@ public class ActiveUserSystemServlet extends HttpServlet {
             this.ListTeacher(request);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
-        
+
         Long tid = Long.valueOf(teacher_id);
         Teacherdao tdao = new Teacherdao();
         Teacher t = tdao.getTeacherById(tid);
 
-        
-        if(forwhat.equals("active")){
-            if(t != null){
-                if(t.getAccount_status().equals("active")){
-                    msg = "This Account is Actived.";
-                    request.setAttribute("msg", msg);
-                    this.ListTeacher(request);
-                    getServletContext().getRequestDispatcher(path).forward(request, response);
-                }
+        if (forwhat != null) {
+            if (forwhat.equals("active")) {
+                if (t != null) {
+                    if (t.getAccount_status().equals("active")) {
+                        msg = "This Account is Actived.";
+                        request.setAttribute("msg", msg);
+                        this.ListTeacher(request);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    }
 
-                if(t.getAccount_status().equals("pending")){
-                    tdao.setTeacherToActive(t);
-                    msg = "Active Successful!";
+                    if (t.getAccount_status().equals("pending")) {
+                        tdao.setTeacherToActive(t);
+                        msg = "Active Successful!";
+                        request.setAttribute("msg", msg);
+                        this.ListTeacher(request);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    }
+                } else {
+                    msg = "No this User!";
                     request.setAttribute("msg", msg);
                     this.ListTeacher(request);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                 }
-            }else{
-                msg = "No this User!";
-                request.setAttribute("msg", msg);
-                this.ListTeacher(request);
-                getServletContext().getRequestDispatcher(path).forward(request, response);
             }
-        }
-        if(forwhat.equals("pending")){
-            if(t != null){
-                if(t.getAccount_status().equals("pending")){
-                    msg = "This Account is waiting for Active.";
-                    request.setAttribute("msg", msg);
-                    this.ListTeacher(request);
-                    getServletContext().getRequestDispatcher(path).forward(request, response);
-                }
+            if (forwhat.equals("pending")) {
+                if (t != null) {
+                    if (t.getAccount_status().equals("pending")) {
+                        msg = "This Account is waiting for Active.";
+                        request.setAttribute("msg", msg);
+                        this.ListTeacher(request);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    }
 
-                if(t.getAccount_status().equals("active")){
-                    tdao.setTeacherToPending(t);
-                    msg = "Set to Pending Successful!";
+                    if (t.getAccount_status().equals("active")) {
+                        tdao.setTeacherToPending(t);
+                        msg = "Set to Pending Successful!";
+                        request.setAttribute("msg", msg);
+                        this.ListTeacher(request);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    }
+                } else {
+                    msg = "No this User!";
                     request.setAttribute("msg", msg);
                     this.ListTeacher(request);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                 }
-            }else{
-                msg = "No this User!";
-                request.setAttribute("msg", msg);
-                this.ListTeacher(request);
-                getServletContext().getRequestDispatcher(path).forward(request, response);
             }
+
+            msg = "forwhat exception";
+            request.setAttribute("msg", msg);
+            this.ListTeacher(request);
+            getServletContext().getRequestDispatcher(path).forward(request, response);
         }
         /*if(t != null){
             if(t.getAccount_status().equals("active")){
@@ -131,21 +137,22 @@ public class ActiveUserSystemServlet extends HttpServlet {
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }*/
     }
-    
-        private void ListTeacher(HttpServletRequest request){
+
+    private void ListTeacher(HttpServletRequest request) {
         Teacherdao tdao = new Teacherdao();
         ArrayList<Teacher> teachersActive = tdao.getAllTeacherActive();
         request.setAttribute("teachers_active", teachersActive);
         ArrayList<Teacher> teachersPending = tdao.getAllTeacherPending();
         request.setAttribute("teachers_pending", teachersPending);
     }
-        private void ListTeacherActive(HttpServletRequest request){
+
+    private void ListTeacherActive(HttpServletRequest request) {
         Teacherdao tdao = new Teacherdao();
         ArrayList<Teacher> teachersActive = tdao.getAllTeacherActive();
         request.setAttribute("teachers_active", teachersActive);
-        }
-    
-    private void ListTeacherPending(HttpServletRequest request){
+    }
+
+    private void ListTeacherPending(HttpServletRequest request) {
         Teacherdao tdao = new Teacherdao();
         ArrayList<Teacher> teachersPending = tdao.getAllTeacherPending();
         request.setAttribute("teachers_pending", teachersPending);
