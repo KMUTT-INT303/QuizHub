@@ -34,7 +34,7 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String msg = null;
-        String path = "/WEB-INF/ManageAccount.jsp";
+        String path = "/WEB-INF/Profile.jsp";
         String opass = request.getParameter("opass");
         String npass = request.getParameter("npass");
         String cpass = request.getParameter("cpass");
