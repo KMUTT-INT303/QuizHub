@@ -4,9 +4,9 @@
 INSERT INTO STUDENTS
 	(STUDENT_ID, FIRST_NAME, LAST_NAME, PASSWORD, FACULTY_ID, BRANCH_ID, LAST_TIME)
 VALUES 
-	(61130500001, 'Student', 'A', '1234', 2, 1, CURRENT_TIMESTAMP),
-        (61130500002, 'Student', 'B', '1234', 2, 2, CURRENT_TIMESTAMP),
-        (61130500003, 'Student', 'C', '1234', 2, 3, CURRENT_TIMESTAMP);
+	(61130500001, 'Student', 'A', '1234', 2, 18, CURRENT_TIMESTAMP),
+        (61130500002, 'Student', 'B', '1234', 2, 18, CURRENT_TIMESTAMP),
+        (61130500003, 'Student', 'C', '1234', 2, 18, CURRENT_TIMESTAMP);
 
 --- INSERT TEACHERS DATA ---
 	
@@ -17,6 +17,7 @@ VALUES
         (1000000002, 'Teacher', 'B', '1234', 2, CURRENT_TIMESTAMP),
         (1000000003, 'Teacher', 'C', '1234', 2, CURRENT_TIMESTAMP),
         (1000000004, 'Teacher', 'D', '1234', 2, CURRENT_TIMESTAMP);
+UPDATE TEACHERS SET account_status = 'active' WHERE teacher_id = 1000000001;
 
 --- INSERT FACULTY DATA ---
 
@@ -117,7 +118,7 @@ VALUES
 INSERT INTO QUIZ 
         (QUIZ_NAME, QUIZ_COMMENTS, QUIZ_STATUS, TEACHER_ID, COURSE_NAME, COURSE_ID, FACULTY_ID, BRANCH_ID, JOIN_CODE, COVER_IMAGES, SKILL_TEXT, START_DATE, END_DATE) 
 VALUES ('Network Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
-        ('Gen Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
+        ('Gen Programing', 'Please attention', 'public', 1000000001, 'Web Programing', 'INT303', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
         ('Program Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
         ('Eng Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654'),
         ('GG Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654');

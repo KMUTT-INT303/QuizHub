@@ -21,7 +21,7 @@ import model.Student;
 public class Test {
 
     public static void main(String[] args) throws ParseException {
-        Facultydao fdao = new Facultydao();
+        /*Facultydao fdao = new Facultydao();
         ArrayList<Faculty> faculties = new ArrayList();
         faculties = fdao.getAllFaculty();
         //System.out.println(faculties);
@@ -52,6 +52,13 @@ public class Test {
         String x = rsd.replace("T", " ");
         
         System.out.println(Timestamp.valueOf(x));
-
+*/
+        int count = 0;
+        for(int i = 0; i < 10; i++) {
+            count++;
+            if(count %5 == 0) {
+                System.out.println("1 round");
+            }
+        }
     }
 }
