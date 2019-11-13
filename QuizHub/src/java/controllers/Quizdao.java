@@ -129,6 +129,23 @@ public class Quizdao {
         return null;
     }
 
+    public Quizzes findQuizzesByPage(String code) {
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz WHERE page = ?");
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Quizzes(rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
+                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Quizdao qdao = new Quizdao();
         ArrayList<Quizzes> qs = qdao.ListAllQuizByFaculty(2);

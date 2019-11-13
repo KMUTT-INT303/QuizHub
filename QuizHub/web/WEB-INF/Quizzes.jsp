@@ -24,7 +24,7 @@
 
                     <div class="card mb-2">
                         <div class="card-body">
-                            <form method="post" action="">
+                            <form method="post" action="JoinQuizzes">
 
                                 <div class="row mb-2">
                                     <div class="col-sm-12 text-center"><h3>Quizhub Code</h3></div>

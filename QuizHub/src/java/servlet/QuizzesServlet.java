@@ -6,6 +6,7 @@
 package servlet;
 
 import controllers.Quizdao;
+import controllers.Studentdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,16 +38,32 @@ public class QuizzesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (request.getParameterMap().containsKey("page")) {
-            String page = request.getParameter("page");
-            if (page.trim().isEmpty()) {
-                this.ListQuizByBranch(request);
-                String path = "/WEB-INF/Quizzes.jsp";
-                getServletContext().getRequestDispatcher(path).forward(request, response);
+        String page = request.getParameter("p");
+        String path = "/WEB-INF/Quizzes.jsp";
+        if (page.trim().isEmpty() || page == null) {
+            this.ListQuizByBranch(request);
+            getServletContext().getRequestDispatcher(path).forward(request, response);
+        } else {
+
+            Quizdao q = new Quizdao();
+            Quizzes qzs = q.findQuizzesByPage(page);
+
+            if (qzs == null) {
+                request.setAttribute("msg", "Quizzes not found or page invalid.");
+                getServletContext().getRequestDispatcher("/WEB-INF/PageBlock.jsp").forward(request, response);
             }
 
-            getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            Studentdao sdao = new Studentdao();
+            Student s = (Student) session.getAttribute("user");
 
+            if (sdao.getStudentById(s.getId()).getBranch_id() == qzs.getQuizBranchId()) {
+                session.setAttribute("takequiz", qzs);
+                getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
+            } else {
+                request.setAttribute("msg", "Quizzes not found or page invalid.");
+                getServletContext().getRequestDispatcher("/WEB-INF/PageBlock.jsp").forward(request, response);
+            }
         }
     }
 

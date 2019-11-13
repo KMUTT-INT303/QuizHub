@@ -50,7 +50,6 @@ public class JoinQuizzesServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/Quizzes.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("takequiz", q);
                 response.sendRedirect("Quizzes?p=" + q.getPage());
             }
         }
