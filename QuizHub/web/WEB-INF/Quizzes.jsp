@@ -66,10 +66,10 @@
                                                 <div class="card">
                                                     <img class="card-img-top" src="images/template.svg" alt="Card image cap">
                                                     <div class="card-body">
-                                                        <h5 class="card-title">${q.quizCourseName}</h5>
-                                                        <p class="card-text">${q.quizComment}</p>
+                                                        <h5 class="card-title">${q.quizName}</h5>
+                                                        <p class="card-text" style="color: gray;">${q.quizComment}</p>
+                                                        <span class="badge badge-info">${q.quizCourseName}</span>
                                                     </div>
-                                                        <a href="Quizzes?p=${q.page}">Start</a>
                                                     <div class="card-footer">
                                                         <small class="text-muted">Due date: ${q.quizEndDate}</small>
                                                     </div>
@@ -79,6 +79,7 @@
                                                 <c:if test="${round.count % 3 == 0}">
                                                 </div>
                                             </div>
+                                                <hr style="width: 50em;">
                                             <div class="row m-3 mb-2">
                                                 <div class="card-deck col-12">
                                                 </c:if>

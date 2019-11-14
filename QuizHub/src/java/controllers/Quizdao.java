@@ -57,9 +57,24 @@ public class Quizdao {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                quizzez.add(new Quizzes(rs.getInt("quiz_id"), rs.getString("quizname"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
-                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"))
+                quizzez.add(
+                    new Quizzes(
+                        rs.getInt("quiz_id"), 
+                        rs.getString("quizname"), 
+                        rs.getString("quiz_comments"), 
+                        rs.getString("quiz_status"), 
+                        rs.getLong("teacher_id"),
+                        rs.getString("course_name"), 
+                        rs.getString("course_id"), 
+                        rs.getInt("faculty_id"), 
+                        rs.getInt("branch_id"), 
+                        rs.getString("join_code"), 
+                        rs.getString("cover_images"), 
+                        rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), 
+                        rs.getTimestamp("end_date"), 
+                        rs.getString("page")
+                    )
                 );
             }
             return quizzez;
@@ -78,9 +93,22 @@ public class Quizdao {
             ps.setInt(1, bid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                quizzez.add(new Quizzes(rs.getInt("quiz_id"), rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
-                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"))
+                quizzez.add(new Quizzes(
+                        rs.getInt("quiz_id"), 
+                        rs.getString("quiz_name"), 
+                        rs.getString("quiz_comments"), 
+                        rs.getString("quiz_status"), 
+                        rs.getLong("teacher_id"),
+                        rs.getString("course_name"), 
+                        rs.getString("course_id"), 
+                        rs.getInt("faculty_id"), 
+                        rs.getInt("branch_id"), 
+                        rs.getString("join_code"), 
+                        rs.getString("cover_images"), 
+                        rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), 
+                        rs.getTimestamp("end_date"), 
+                        rs.getString("page"))
                 );
             }
             return quizzez;
@@ -99,9 +127,23 @@ public class Quizdao {
             ps.setInt(1, faculty_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                quizzez.add(new Quizzes(rs.getInt("quiz_id"), rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
-                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"))
+                quizzez.add(
+                    new Quizzes(
+                        rs.getInt("quiz_id"), 
+                        rs.getString("quiz_name"), 
+                        rs.getString("quiz_comments"), 
+                        rs.getString("quiz_status"), 
+                        rs.getLong("teacher_id"),
+                        rs.getString("course_name"), 
+                        rs.getString("course_id"), 
+                        rs.getInt("faculty_id"), 
+                        rs.getInt("branch_id"), 
+                        rs.getString("join_code"), 
+                        rs.getString("cover_images"), 
+                        rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), 
+                        rs.getTimestamp("end_date"), rs.getString("page")
+                    )
                 );
             }
             return quizzez;
@@ -119,9 +161,21 @@ public class Quizdao {
             ps.setString(1, code);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new Quizzes(rs.getInt("quiz_id"), rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
-                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"));
+                return new Quizzes(rs.getInt("quiz_id"), 
+                        rs.getString("quiz_name"), 
+                        rs.getString("quiz_comments"), 
+                        rs.getString("quiz_status"), 
+                        rs.getLong("teacher_id"),
+                        rs.getString("course_name"), 
+                        rs.getString("course_id"), 
+                        rs.getInt("faculty_id"), 
+                        rs.getInt("branch_id"), 
+                        rs.getString("join_code"), 
+                        rs.getString("cover_images"), 
+                        rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"), 
+                        rs.getTimestamp("end_date"), 
+                        rs.getString("page"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,9 +190,22 @@ public class Quizdao {
             ps.setString(1, code);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new Quizzes(rs.getInt("quiz_id"), rs.getString("quiz_name"), rs.getString("quiz_comments"), rs.getString("quiz_status"), rs.getLong("teacher_id"),
-                        rs.getString("course_name"), rs.getString("course_id"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("join_code"), rs.getString("cover_images"), rs.getString("skill_text"),
-                        rs.getTimestamp("start_date"), rs.getTimestamp("end_date"), rs.getString("page"));
+                return new Quizzes(
+                        rs.getInt("quiz_id"),
+                        rs.getString("quiz_name"),
+                        rs.getString("quiz_comments"),
+                        rs.getString("quiz_status"),
+                        rs.getLong("teacher_id"),
+                        rs.getString("course_name"),
+                        rs.getString("course_id"),
+                        rs.getInt("faculty_id"),
+                        rs.getInt("branch_id"),
+                        rs.getString("join_code"),
+                        rs.getString("cover_images"),
+                        rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"),
+                        rs.getTimestamp("end_date"),
+                        rs.getString("page"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
