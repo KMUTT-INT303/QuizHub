@@ -59,100 +59,34 @@
                             <div class="card-body">
                                 <div class="row mb-2">
                                     <div class="col-sm-12">
-                                        <div class="row">
-                                            <div class="card-group">
+                                        <div class="row m-3">
+                                            <div class="card-deck col-12">
 
-                                            <c:forEach items="${quizzes}" var="q">
-
-                                                <div class="card m-2">
+                                            <c:forEach items="${quizzes}" var="q" varStatus="round">
+                                                <div class="card">
                                                     <img class="card-img-top" src="images/template.svg" alt="Card image cap">
                                                     <div class="card-body">
                                                         <h5 class="card-title">${q.quizCourseName}</h5>
-                                                        <p class="card-text">
-                                                            ${q.quizComment}
-                                                        </p>
-                                                        <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
+                                                        <p class="card-text">${q.quizComment}</p>
                                                     </div>
+                                                        <a href="Quizzes?p=${q.page}">Start</a>
                                                     <div class="card-footer">
-                                                        <span class="text-muted float-left">Last updated 3 mins ago</span>
+                                                        <small class="text-muted">Due date: ${q.quizEndDate}</small>
                                                     </div>
                                                 </div>
+
+
+                                                <c:if test="${round.count % 3 == 0}">
+                                                </div>
+                                            </div>
+                                            <div class="row m-3 mb-2">
+                                                <div class="card-deck col-12">
+                                                </c:if>
                                             </c:forEach>
-
-                                            <div class="card m-2">
-                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Java Programing</h5>
-                                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="card m-2">
-                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Network Quiz</h5>
-                                                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="card m-2">
-                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Web Programing</h5>
-                                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="card-group">
 
-                                            <div class="card m-2">
-                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Java Programing</h5>
-                                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="card m-2">
-                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Network Quiz</h5>
-                                                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="card m-2">
-                                                <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Web Programing</h5>
-                                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                                    <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

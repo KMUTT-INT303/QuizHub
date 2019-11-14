@@ -58,11 +58,14 @@ public class Test {
          */
         int count = 0;
         for (int i = 0; i < 10; i++) {
-            System.out.println(RequiredString(10).toUpperCase());
+            count++;
+            if(count % 3 == 0) {
+                System.out.println("rounded");
+            }
         }
 
         Quizdao dq = new Quizdao();
-        System.out.println(dq.findQuizzesByCode("HHQ123"));
+        //System.out.println(dq.findQuizzesByCode("HHQ123"));
         
         
 
