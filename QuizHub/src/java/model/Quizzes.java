@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  */
 public class Quizzes {
 
+    private int quizId;
     private String quizName;
     private String quizComment;
     private String quizStatus;
@@ -43,6 +44,29 @@ public class Quizzes {
         this.quizStartDate = quizStartDate;
         this.quizEndDate = quizEndDate;
         this.page = page;
+    }
+
+    public Quizzes(int quizId, String quizName, String quizComment, String quizStatus, long quizTeacherId, String quizCourseName, String quizCourseId, int quizFacultyId, int quizBranchId, String quizCode, String quizCoverImages, String quizSkillText, Timestamp quizStartDate, Timestamp quizEndDate, String page) {
+
+        this.quizId = quizId;
+        this.quizName = quizName;
+        this.quizComment = quizComment;
+        this.quizStatus = quizStatus;
+        this.quizTeacherId = quizTeacherId;
+        this.quizCourseName = quizCourseName;
+        this.quizCourseId = quizCourseId;
+        this.quizFacultyId = quizFacultyId;
+        this.quizBranchId = quizBranchId;
+        this.quizCode = quizCode;
+        this.quizCoverImages = quizCoverImages;
+        this.quizSkillText = quizSkillText;
+        this.quizStartDate = quizStartDate;
+        this.quizEndDate = quizEndDate;
+        this.page = page;
+    }
+
+    public int getQuizId() {
+        return quizId;
     }
 
     public String getQuizName() {
@@ -162,7 +186,7 @@ public class Quizzes {
 
     @Override
     public String toString() {
-        return "Quizzes{" + "quizName=" + quizName + ", quizComment=" + quizComment + ", quizStatus=" + quizStatus + ", quizTeacherId=" + quizTeacherId + ", quizCourseName=" + quizCourseName + ", quizCourseId=" + quizCourseId + ", quizFacultyId=" + quizFacultyId + ", quizBranchId=" + quizBranchId + ", quizCode=" + quizCode + ", quizCoverImages=" + quizCoverImages + ", quizSkillText=" + quizSkillText + ", quizStartDate=" + quizStartDate + ", quizEndDate=" + quizEndDate + ", page=" + page + '}';
+        return "Quizzes{" + "quizId=" + quizId + ", quizName=" + quizName + ", quizComment=" + quizComment + ", quizStatus=" + quizStatus + ", quizTeacherId=" + quizTeacherId + ", quizCourseName=" + quizCourseName + ", quizCourseId=" + quizCourseId + ", quizFacultyId=" + quizFacultyId + ", quizBranchId=" + quizBranchId + ", quizCode=" + quizCode + ", quizCoverImages=" + quizCoverImages + ", quizSkillText=" + quizSkillText + ", quizStartDate=" + quizStartDate + ", quizEndDate=" + quizEndDate + ", page=" + page + '}';
     }
 
 }
