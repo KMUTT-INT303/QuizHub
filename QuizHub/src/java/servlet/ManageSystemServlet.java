@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Admin;
 
 /**
@@ -30,8 +31,8 @@ public class ManageSystemServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        if(!request.getSession().getAttribute("status").equals("Admin")){
+        HttpSession session = request.getSession();
+        if((!session.getAttribute("status").equals("Admin"))){
             //getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
             response.sendRedirect("Home");
             return;

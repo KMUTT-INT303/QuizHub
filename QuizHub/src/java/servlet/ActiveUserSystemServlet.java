@@ -33,11 +33,46 @@ public class ActiveUserSystemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String msg = null;
+        ArrayList<String> errormsg = null;
         String path = "/WEB-INF/ActiveUserSystem.jsp";
         String teacher_id = request.getParameter("teacher_id");
         String forwhat = request.getParameter("for");
         String descriptionPendingUser = request.getParameter("descriptionPendingUser");
-
+        String[] teachersToActive = request.getParameterValues("toactive");
+        
+        if("TEACHERSTOACTIVE".equals(request.getParameter("tsta"))){
+            if(teachersToActive != null){
+                ArrayList<String> idt = new ArrayList();
+                ArrayList<String> error = new ArrayList();
+                    for(int i = 0; i < teachersToActive.length; i++){
+                        String tid = teachersToActive[i];
+                        idt.add(tid);
+                    }
+                    for(int i = 0; i < idt.size() ; i++){
+                        Teacherdao tdao = new Teacherdao();
+                        Teacher t = tdao.getTeacherById(Long.valueOf(idt.get(i)));
+                        if(t != null){
+                            if(t.getAccount_status().equals("pending")){
+                                tdao.setTeacherToActive(t);
+                            }/*else{
+                                error.add("TEST" + String.valueOf(t.getId()));
+                            } */
+                        }
+                    }
+                    
+                    while(!idt.isEmpty()){
+                        idt.clear();
+                    }
+                        msg = "Active SUCCESSFUL!";
+                        errormsg = error;
+                        request.setAttribute("msg", msg);
+                        request.setAttribute("errormsg", error);
+                        this.ListTeacher(request);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                        return;
+            }
+        }
+        
         if (teacher_id == null || teacher_id.isEmpty() || forwhat == null || forwhat.trim().isEmpty()) {
 
             if (!(descriptionPendingUser == null || descriptionPendingUser.trim().isEmpty())) {

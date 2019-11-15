@@ -14,10 +14,10 @@
     </head>
     <body>
         <h1>Hello ${user}!</h1>
-        ${msg}
+        ${msg}${errormsg}
         <form action="ActiveUserSystem" method="post">
-        FIND PENDING USER:<input type="text" name="descriptionPendingUser"><input type="submit">
-        </form>
+            FIND PENDING USER:<input type="text" name="descriptionPendingUser" value="${param.descriptionPendingUser}"><input type="submit">
+            <input type="hidden" name="tsta" value="TEACHERSTOACTIVE">
         <c:if test="${teacherByDes != null}">
             <table border="3">
                 <tr>
@@ -46,9 +46,16 @@
                         </td>
                     </tr>
                 </c:forEach>
+                <tr>
+                    <td colspan="4"></td>
+                    <td>
+                        <input type="submit">
+                    </td>
+                </tr>
             </table>
         </c:if>
-        
+        </form>
+            <p>User wait to active</p>
         <table border="3">
             <tr>
                 <th>ID</th>
@@ -77,7 +84,7 @@
                 </tr>
             </c:forEach>
         </table>
-        
+        <p>Users have actived</p>
         <table border="3">
             <tr>
                 <th>ID</th>
