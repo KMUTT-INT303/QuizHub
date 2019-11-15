@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
             if (t != null) {
                 if (t.getPassword().equals(password)) {
                     if (!t.getAccount_status().equals("active")) {
-                        msg = "This ID is waiting to active.";
+                        msg = "Please wait, Your account on pending";
                         request.setAttribute("msg", msg);
                         getServletContext().getRequestDispatcher(path).forward(request, response);
                     }
@@ -108,7 +108,7 @@ public class LoginServlet extends HttpServlet {
                         getServletContext().getRequestDispatcher(path).forward(request, response);
                     }
                 } else {
-                    msg = "NO USER!!";
+                    msg = "Your username or password are incorrect.";
                     request.setAttribute("msg", msg);
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                     return;

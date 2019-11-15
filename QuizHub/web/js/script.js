@@ -29,4 +29,39 @@ $(document).ready(function () {
         this.submit();
     });
 
+    var status = $('#status');
+    status.on('change', function () {
+
+        if ($("#status").val() == 'public') {
+            $("#code").attr("hidden", true)
+        }
+        if ($("#status").val() == 'private') {
+            $("#code").attr("hidden", false)
+            var code = makeid(6);
+            document.getElementById("code-value").placeholder = code;
+            document.getElementById("code-value").value = code;
+        }
+
+    });
+
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+
+    var generate = $('#generate');
+    generate.on('click', function () {
+
+        var code = makeid(6);
+
+        document.getElementById("code-value").placeholder = code;
+        document.getElementById("code-value").value = code;
+    });
+
 });
