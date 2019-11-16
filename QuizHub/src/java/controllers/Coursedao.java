@@ -127,14 +127,15 @@ public class Coursedao {
     public static void main(String[] args) {
         Coursedao cdao  = new Coursedao();
         Teacherdao tdao = new Teacherdao();
-        long tid = Long.valueOf("1000000004");
+        long tid = Long.valueOf("1000000001");
         Teacher t = tdao.getTeacherById(tid);
-        Course c = new Course("INT123", "TEST", t);
+        //Course c = new Course("INT123", "TEST", t);
         //System.out.println(c);
-        ArrayList<Course> cs = cdao.getAllCourse();
+        ArrayList<Course> cs = cdao.getAllCourseByTeacher(t);
+        System.out.println(cs);
         //System.out.println(cs);
         //Course cc = new Course("testadd3", "hahaha", t);
-        cdao.addCourse(c);
+       // cdao.addCourse(c);
        // cdao.removeCourse(c);
         /*System.out.println(cdao.getAllCourse());
         cs = cdao.getAllCourseByTeacher(t);
@@ -142,13 +143,13 @@ public class Coursedao {
         cdao.removeCourse(cc);
         System.out.println(cdao.getAllCourse());
         cdao.addCourse(cc);*/
-        Course cc = cdao.getCourseById("INT123");
+      //  Course cc = cdao.getCourseById("INT123");
         //cdao.addCourse(cc);
-        System.out.println(cdao.getCourseById(cc.getId()));
+     //   System.out.println(cdao.getCourseById(cc.getId()));
         //cdao.addCourse(cc);
-        cc.setName("editaddt3");
-        cdao.editCourseName(cc);
-        System.out.println(cdao.getCourseById("INT123"));
+     //   cc.setName("editaddt3");
+    //    cdao.editCourseName(cc);
+    //    System.out.println(cdao.getCourseById("INT123"));
         //cdao.removeCourse(cc);
         //System.out.println(cdao.getAllCourse());
         

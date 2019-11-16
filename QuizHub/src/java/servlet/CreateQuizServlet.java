@@ -59,91 +59,89 @@ public class CreateQuizServlet extends HttpServlet {
             Coursedao cdao = new Coursedao();
             Teacher t = (Teacher) request.getSession().getAttribute("user");
             ArrayList<Course> courses = cdao.getAllCourseByTeacher(t);
-            if(courses.size() <= 0 || course == null){
+            if(courses.size() <= 0 || courses == null){
                 String msg = "You must to create a course first!";
                 request.setAttribute("msg", msg);
                 getServletContext().getRequestDispatcher("/WEB-INF/CreateCourse.jsp").forward(request, response);
             }
+        }
             
-        }
-        
-        String hours = null;
-        String minutes = null;
+            String hours = null;
+            String minutes = null;
 
-        if (t_h == null || t_h.trim().isEmpty()) {
-            hours = "00";
-            minutes = t_m;
-        }
+            if (t_h == null || t_h.trim().isEmpty()) {
+                hours = "00";
+                minutes = t_m;
+            }
 
-        if (t_m == null || t_m.trim().isEmpty()) {
-            hours = t_h;
-            minutes = "00";
-        }
+            if (t_m == null || t_m.trim().isEmpty()) {
+                hours = t_h;
+                minutes = "00";
+            }
 
-        if (t_h == null || t_h.trim().isEmpty() && t_m == null || t_m.trim().isEmpty()) {
-            hours = "unlimited";
-            minutes = "unlimited";
-        }
+            if (t_h == null || t_h.trim().isEmpty() && t_m == null || t_m.trim().isEmpty()) {
+                hours = "unlimited";
+                minutes = "unlimited";
+            }
 
-        if (quizName == null) {
+            if (quizName == null) {
+                getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
+            }
+
+            String[] list = course.split("-");
+            String courseId = list[0];
+            String courseName = list[1];
+
+            String[] branch_list = quizBranchId.split("-");
+            String branch_id = branch_list[1];
+
+            String removeTS = quizStartDate.replace("T", " ");
+            String removeED = quizEndDate.replace("T", " ");
+
+            HttpSession session = request.getSession();
+            Teacher t = (Teacher) session.getAttribute("user"); // Session User to Type Teacher!
+
+            Quizdao qdao = new Quizdao();
+            Quizzes q = new Quizzes();
+
+            /* q = new Quizzes(
+                    quizName,
+                    quizComment,
+                    quizStatus,
+                    Long.valueOf(quizTeacherId),
+                    //t.getId(),
+                    courseName,
+                    courseId,
+                    Integer.valueOf(quizFacultyId),
+                    Integer.valueOf(branch_id),
+                    quizCode,
+                    quizCoverImages,
+                    quizSkillText,
+                    Timestamp.valueOf(removeTS + ":00"),
+                    Timestamp.valueOf(removeED + ":00")
+            );*/
+            q.setQuizName(quizName);
+            q.setQuizComment(quizComment);
+            q.setQuizStatus(quizStatus);
+            q.setQuizTeacherId(Long.valueOf(quizTeacherId));
+            //t.getId(),
+            q.setQuizCourseName(courseName);
+            q.setQuizCourseId(courseId);
+            q.setQuizFacultyId(Integer.valueOf(quizFacultyId));
+            q.setQuizBranchId(Integer.valueOf(branch_id));
+            q.setQuizCode(quizCode);
+            q.setQuizCoverImages(quizCoverImages);
+            q.setQuizSkillText(quizSkillText);
+            q.setQuizStartDate(Timestamp.valueOf(removeTS + ":00"));
+            q.setQuizEndDate(Timestamp.valueOf(removeED + ":00"));
+            q.setPage(RequiredString(10).toUpperCase());
+            q.setHours(hours);
+            q.setMinutes(minutes);
+
+            qdao.createQuiz(q);
+
+            request.setAttribute("msg", "You have created a quiz.");
             getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
-        }
-
-        String[] list = course.split("-");
-        String courseId = list[0];
-        String courseName = list[1];
-
-        String[] branch_list = quizBranchId.split("-");
-        String branch_id = branch_list[1];
-
-        String removeTS = quizStartDate.replace("T", " ");
-        String removeED = quizEndDate.replace("T", " ");
-
-        HttpSession session = request.getSession();
-        Teacher t = (Teacher) session.getAttribute("user"); // Session User to Type Teacher!
-
-        Quizdao qdao = new Quizdao();
-        Quizzes q = new Quizzes();
-
-        /* q = new Quizzes(
-                quizName,
-                quizComment,
-                quizStatus,
-                Long.valueOf(quizTeacherId),
-                //t.getId(),
-                courseName,
-                courseId,
-                Integer.valueOf(quizFacultyId),
-                Integer.valueOf(branch_id),
-                quizCode,
-                quizCoverImages,
-                quizSkillText,
-                Timestamp.valueOf(removeTS + ":00"),
-                Timestamp.valueOf(removeED + ":00")
-        );*/
-        q.setQuizName(quizName);
-        q.setQuizComment(quizComment);
-        q.setQuizStatus(quizStatus);
-        q.setQuizTeacherId(Long.valueOf(quizTeacherId));
-        //t.getId(),
-        q.setQuizCourseName(courseName);
-        q.setQuizCourseId(courseId);
-        q.setQuizFacultyId(Integer.valueOf(quizFacultyId));
-        q.setQuizBranchId(Integer.valueOf(branch_id));
-        q.setQuizCode(quizCode);
-        q.setQuizCoverImages(quizCoverImages);
-        q.setQuizSkillText(quizSkillText);
-        q.setQuizStartDate(Timestamp.valueOf(removeTS + ":00"));
-        q.setQuizEndDate(Timestamp.valueOf(removeED + ":00"));
-        q.setPage(RequiredString(10).toUpperCase());
-        q.setHours(hours);
-        q.setMinutes(minutes);
-
-        qdao.createQuiz(q);
-
-        request.setAttribute("msg", "You have created a quiz.");
-        getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
-
     }
 
     public String RequiredString(int n) {
