@@ -72,6 +72,10 @@
         <servlet-name>JoinQuizzesServlet</servlet-name>
         <servlet-class>servlet.JoinQuizzesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeacherRegisterServlet</servlet-name>
+        <servlet-class>servlet.TeacherRegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>JoinQuizzesServlet</servlet-name>
         <url-pattern>/JoinQuizzes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherRegisterServlet</servlet-name>
+        <url-pattern>/TeacherRegister</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

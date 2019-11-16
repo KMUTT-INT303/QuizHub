@@ -45,8 +45,8 @@ public class RegisterServlet extends HttpServlet {
         String lname = request.getParameter("lname");
         String faculty_id = request.getParameter("faculty");
         String brach_id = request.getParameter("branch");
-        
-        
+        String checkForm = request.getParameter("FROM_REGISTER");
+
         if(student_id.trim().isEmpty() || password.trim().isEmpty() || fname.trim().isEmpty() || lname.trim().isEmpty() 
                 || faculty_id.trim().isEmpty() || brach_id.trim().isEmpty()){
             msg = "You must to input all information";
@@ -55,6 +55,12 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
+        if(checkForm == null || !checkForm.equals("REGISTER_STUDENT")){
+            msg = "Something wrong. Plase try again later!";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            return;
+        }
         
         
         String bidFromPara = null;

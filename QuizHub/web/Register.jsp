@@ -30,7 +30,7 @@
                             <h2 class="display-4 mb-2">${msg}</h2>
                             <div class="info-form">
                                 <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
-                                    <div><input type="hidden" name="FROM_REGISTER" value="REGISTER"></div>
+                                    <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_STUDENT"></div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
@@ -93,6 +93,58 @@
                                     <a href="Login" class="btn btn-success">Back</a>
                                 </form>
 
+                                    
+                                <form id="register-form" action="TeacherRegister" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
+                                    <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_TEACHER"></div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="sr-only">Teacher ID</label>
+                                                <input type="number" name="teacher_id" class="form-control" placeholder="Teacher ID">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="sr-only">Passoword</label>
+                                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="sr-only">First Name</label>
+                                                <input type="text" name="fname" class="form-control" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="sr-only">Last Name</label>
+                                                <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="sr-only">Faculty</label>
+                                                <select class="form-control" id="faculty" name="faculty">
+                                                    <option value="0" selected="selected">Select your faculty</option>
+                                                    <c:forEach items="${faculties}" var="f">
+                                                        <option value="${f.id}">${f.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success ">Register</button>
+                                    <a href="Login" class="btn btn-success">Back</a>
+                                </form>
+                                    
+                                    
                             </div>
                         </div>
                     </div>
