@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import controllers.Coursedao;
 import controllers.Quizdao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import model.Quizzes;
 import model.Teacher;
 import java.util.*;
 import java.nio.charset.*;
+import model.Course;
 
 /**
  *
@@ -52,6 +54,19 @@ public class CreateQuizServlet extends HttpServlet {
         String t_h = request.getParameter("hours");
         String t_m = request.getParameter("minutes");
 
+        //Check Course
+        if(request.getSession().getAttribute("user") instanceof Teacher){
+            Coursedao cdao = new Coursedao();
+            Teacher t = (Teacher) request.getSession().getAttribute("user");
+            ArrayList<Course> courses = cdao.getAllCourseByTeacher(t);
+            if(courses.size() <= 0 || course == null){
+                String msg = "You must to create a course first!";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher("/WEB-INF/CreateCourse.jsp").forward(request, response);
+            }
+            
+        }
+        
         String hours = null;
         String minutes = null;
 
