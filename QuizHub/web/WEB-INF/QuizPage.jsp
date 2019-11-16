@@ -20,12 +20,37 @@
 
             <div class="row">
 
-                ${takequiz}
-                <div id="time">
-                    <div class="timer"></div>
+                <div class="col-sm-8">
+
+                    <div class="card mb-4">
+                        <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
+                        <div class="card-body text-secondary">
+                            ${msg}
+                        </div>
+                    </div>
+
                 </div>
 
+
+                <div class="col-sm-4">
+
+
+                    <div class="card mb-4">
+                        <h6 class="card-header"><center>Time</center></h6>
+                        <div class="card-body text-secondary">
+                            <center>   
+                                <div id="time">
+                                    <div class="timer"></div>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
+
 
 
         </main>

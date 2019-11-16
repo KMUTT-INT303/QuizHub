@@ -7,6 +7,7 @@ package servlet;
 
 import controllers.Quizdao;
 import controllers.Studentdao;
+import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class QuizzesServlet extends HttpServlet {
             this.ListQuizByBranch(request);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
-        
+
         if (page.trim().isEmpty() || page == null) {
             this.ListQuizByBranch(request);
             getServletContext().getRequestDispatcher(path).forward(request, response);
@@ -61,15 +62,38 @@ public class QuizzesServlet extends HttpServlet {
 
             HttpSession session = request.getSession();
             Studentdao sdao = new Studentdao();
-            Student s = (Student) session.getAttribute("user");
+            Teacherdao tdao = new Teacherdao();
 
-            if (sdao.getStudentById(s.getId()).getBranch_id() == qzs.getQuizBranchId()) {
-                session.setAttribute("takequiz", qzs);
-                getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
-            } else {
-                request.setAttribute("msg", "Quizzes not found or page invalid.");
-                getServletContext().getRequestDispatcher("/WEB-INF/PageBlock.jsp").forward(request, response);
+            Object user = session.getAttribute("user");
+
+            if (user instanceof Student) {
+
+                Student s = (Student) session.getAttribute("user");
+
+                if (sdao.getStudentById(s.getId()).getBranch_id() == qzs.getQuizBranchId()) {
+                    session.setAttribute("takequiz", qzs);
+                    getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("msg", "Quizzes not found or page invalid.");
+                    getServletContext().getRequestDispatcher("/WEB-INF/PageBlock.jsp").forward(request, response);
+                }
+
             }
+
+            if (user instanceof Teacher) {
+                
+                Teacher t = (Teacher) session.getAttribute("user");
+
+                if (tdao.getTeacherById(t.getId()).getId() == qzs.getQuizTeacherId()) {
+                    session.setAttribute("takequiz", qzs);
+                    getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("msg", "Quizzes not found or page invalid.");
+                    getServletContext().getRequestDispatcher("/WEB-INF/PageBlock.jsp").forward(request, response);
+                }
+
+            }
+
         }
     }
 
