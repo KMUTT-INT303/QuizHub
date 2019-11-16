@@ -67,6 +67,12 @@ public class Test {
         Quizdao dq = new Quizdao();
         //System.out.println(dq.findQuizzesByCode("HHQ123"));
         
+        String hours = "2";
+        String minutes = "00";
+        
+        String time = hours + ":" + minutes;
+        
+        System.out.println(time);
         
 
     }

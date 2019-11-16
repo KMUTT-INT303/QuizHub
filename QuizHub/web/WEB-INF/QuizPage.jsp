@@ -20,6 +20,7 @@
 
             <div class="row">
 
+                ${takequiz}
                 <div id="time">
                     <div class="timer"></div>
                 </div>
@@ -35,27 +36,29 @@
 
     <script>
 
+        <c:if test="${takequiz.hours != 'unlimited' && takequiz.minutes != 'unlimited'}">
         var timer = new Timer();
         timer.start({
-            countdown: true, 
+            countdown: true,
             startValues: {
-                hours: 0,
-                minutes: 1,
-                seconds: 30
+                hours: ${takequiz.hours},
+                minutes: ${takequiz.minutes},
+                seconds: 0
             }
         });
-        
+
         $('#time .timer').html(timer.getTimeValues().toString());
-        
-        timer.addEventListener('secondsUpdated', function (e) 
+
+        timer.addEventListener('secondsUpdated', function (e)
         {
             $('#time .timer').html(timer.getTimeValues().toString());
         });
-        
-        timer.addEventListener('targetAchieved', function (e) 
+
+        timer.addEventListener('targetAchieved', function (e)
         {
             $('#time .timer').html('Time over');
         });
+        </c:if>
 
     </script>
 

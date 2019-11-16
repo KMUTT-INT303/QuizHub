@@ -49,6 +49,26 @@ public class CreateQuizServlet extends HttpServlet {
         String quizSkillText = request.getParameter("skill");
         String quizStartDate = request.getParameter("start_date");
         String quizEndDate = request.getParameter("end_date");
+        String t_h = request.getParameter("hours");
+        String t_m = request.getParameter("minutes");
+
+        String hours = null;
+        String minutes = null;
+
+        if (t_h == null || t_h.trim().isEmpty()) {
+            hours = "00";
+            minutes = t_m;
+        }
+
+        if (t_m == null || t_m.trim().isEmpty()) {
+            hours = t_h;
+            minutes = "00";
+        }
+
+        if (t_h == null || t_h.trim().isEmpty() && t_m == null || t_m.trim().isEmpty()) {
+            hours = "unlimited";
+            minutes = "unlimited";
+        }
 
         if (quizName == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
@@ -101,6 +121,8 @@ public class CreateQuizServlet extends HttpServlet {
         q.setQuizStartDate(Timestamp.valueOf(removeTS + ":00"));
         q.setQuizEndDate(Timestamp.valueOf(removeED + ":00"));
         q.setPage(RequiredString(10).toUpperCase());
+        q.setHours(hours);
+        q.setMinutes(minutes);
 
         qdao.createQuiz(q);
 

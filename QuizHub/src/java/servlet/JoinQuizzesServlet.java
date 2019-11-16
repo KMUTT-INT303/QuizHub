@@ -49,7 +49,6 @@ public class JoinQuizzesServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
                 getServletContext().getRequestDispatcher("/WEB-INF/Quizzes.jsp").forward(request, response);
             } else {
-                HttpSession session = request.getSession();
                 response.sendRedirect("Quizzes?p=" + q.getPage());
             }
         }

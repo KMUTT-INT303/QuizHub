@@ -32,7 +32,7 @@
                         <center><h3 class="p-2">Create a Quizzes</h3></center>
                         <p>${msg}</p>
 
-                        <form action="CreateQuiz" method="post" autocomplete="off">
+                        <form action="CreateQuiz" method="get" autocomplete="off">
                             <div><input type="hidden" name="FROM_CREATE_QUIZ" value="CREATEQUIZ"></div>
 
 
@@ -162,13 +162,13 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Hours</div>
                                                 </div>
-                                                <input type="text" class="form-control" placeholder="00">
+                                                <input type="text" class="form-control" name="hours" placeholder="00">
                                             </div>
                                         </div>
                                         :
                                         <div class="col-4">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="00">
+                                                <input type="text" class="form-control" name="minutes" placeholder="00">
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">Minutes</div>
                                                 </div>

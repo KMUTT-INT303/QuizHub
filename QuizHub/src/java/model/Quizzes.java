@@ -28,8 +28,10 @@ public class Quizzes {
     private Timestamp quizStartDate;
     private Timestamp quizEndDate;
     private String page;
+    private String hours;
+    private String minutes;
 
-    public Quizzes(String quizName, String quizComment, String quizStatus, long quizTeacherId, String quizCourseName, String quizCourseId, int quizFacultyId, int quizBranchId, String quizCode, String quizCoverImages, String quizSkillText, Timestamp quizStartDate, Timestamp quizEndDate, String page) {
+    public Quizzes(String quizName, String quizComment, String quizStatus, long quizTeacherId, String quizCourseName, String quizCourseId, int quizFacultyId, int quizBranchId, String quizCode, String quizCoverImages, String quizSkillText, Timestamp quizStartDate, Timestamp quizEndDate, String page, String hours, String minutes) {
         this.quizName = quizName;
         this.quizComment = quizComment;
         this.quizStatus = quizStatus;
@@ -44,9 +46,11 @@ public class Quizzes {
         this.quizStartDate = quizStartDate;
         this.quizEndDate = quizEndDate;
         this.page = page;
+        this.hours = hours;
+        this.minutes = minutes;
     }
 
-    public Quizzes(int quizId, String quizName, String quizComment, String quizStatus, long quizTeacherId, String quizCourseName, String quizCourseId, int quizFacultyId, int quizBranchId, String quizCode, String quizCoverImages, String quizSkillText, Timestamp quizStartDate, Timestamp quizEndDate, String page) {
+    public Quizzes(int quizId, String quizName, String quizComment, String quizStatus, long quizTeacherId, String quizCourseName, String quizCourseId, int quizFacultyId, int quizBranchId, String quizCode, String quizCoverImages, String quizSkillText, Timestamp quizStartDate, Timestamp quizEndDate, String page, String hours, String minutes) {
 
         this.quizId = quizId;
         this.quizName = quizName;
@@ -63,6 +67,8 @@ public class Quizzes {
         this.quizStartDate = quizStartDate;
         this.quizEndDate = quizEndDate;
         this.page = page;
+        this.hours = hours;
+        this.minutes = minutes;
     }
 
     public int getQuizId() {
@@ -184,9 +190,25 @@ public class Quizzes {
     public Quizzes() {
     }
 
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(String minutes) {
+        this.minutes = minutes;
+    }
+
     @Override
     public String toString() {
-        return "Quizzes{" + "quizId=" + quizId + ", quizName=" + quizName + ", quizComment=" + quizComment + ", quizStatus=" + quizStatus + ", quizTeacherId=" + quizTeacherId + ", quizCourseName=" + quizCourseName + ", quizCourseId=" + quizCourseId + ", quizFacultyId=" + quizFacultyId + ", quizBranchId=" + quizBranchId + ", quizCode=" + quizCode + ", quizCoverImages=" + quizCoverImages + ", quizSkillText=" + quizSkillText + ", quizStartDate=" + quizStartDate + ", quizEndDate=" + quizEndDate + ", page=" + page + '}';
+        return "Quizzes{" + "quizId=" + quizId + ", quizName=" + quizName + ", quizComment=" + quizComment + ", quizStatus=" + quizStatus + ", quizTeacherId=" + quizTeacherId + ", quizCourseName=" + quizCourseName + ", quizCourseId=" + quizCourseId + ", quizFacultyId=" + quizFacultyId + ", quizBranchId=" + quizBranchId + ", quizCode=" + quizCode + ", quizCoverImages=" + quizCoverImages + ", quizSkillText=" + quizSkillText + ", quizStartDate=" + quizStartDate + ", quizEndDate=" + quizEndDate + ", page=" + page + ", hours=" + hours + ", minutes=" + minutes + '}';
     }
 
 }
