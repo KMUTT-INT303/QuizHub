@@ -89,25 +89,27 @@
                             </div>
                         </div>
 
-                        <c:forEach items="${question}" var="q" varStatus="qround">
-                            <div class="card-body text-secondary">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${q.questionName}</h5>
-                                        <c:forEach items="${choice}" var="c" varStatus="cround">
-                                            <c:if test="${q.questionId == c.questionId}">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                    <label class="form-check-label" for="exampleRadios2">
-                                                        ${c.choiceName}
-                                                    </label>
-                                                </div>
-                                            </c:if>
-                                        </c:forEach>
+                        <form method="post" action="Done" id="send">
+                            <c:forEach items="${question}" var="q" varStatus="qround">
+                                <div class="card-body text-secondary">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${q.questionName}</h5>
+                                            <c:forEach items="${choice}" var="c" varStatus="cround">
+                                                <c:if test="${q.questionId == c.questionId}">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="${q.questionId}" value="${c.choiceId}">
+                                                        <label class="form-check-label" for="${q.questionId}">
+                                                            ${c.choiceName}
+                                                        </label>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                        </form>
 
                         <%--<div class="card-footer">
 <span class="float-left"><span class="btn btn-secondary" id="prev">Previous</span></span>
@@ -139,7 +141,7 @@
                         <div class="card-body text-secondary">
                             <center>   
 
-                                <button type="button" class="btn btn-success">Done</button>
+                                <button type="submit" form="send" class="btn btn-success">Done</button>
 
                             </center>
                         </div>
