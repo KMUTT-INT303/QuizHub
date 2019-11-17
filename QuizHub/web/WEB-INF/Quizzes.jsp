@@ -61,9 +61,10 @@
                                     <div class="col-sm-12">
                                         <div class="row m-3">
                                             <div class="card-deck col-12">
-
+                                            
                                             <c:forEach items="${quizzes}" var="q" varStatus="round">
                                                 <div class="card">
+                                                    <a href="Quizzes?p=${q.page}"><div id="child-link"></div></a>
                                                     <img class="card-img-top" src="images/template.svg" alt="Card image cap">
                                                     <div class="card-body">
                                                         <h5 class="card-title">${q.quizName}</h5>
