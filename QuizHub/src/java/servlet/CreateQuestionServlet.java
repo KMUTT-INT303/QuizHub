@@ -40,7 +40,7 @@ public class CreateQuestionServlet extends HttpServlet {
             out.println("<head>");
             out.println(question);
             for (int i = 0; i < c.length ; i++) {
-                out.println(c[i]);
+                out.println(c[i].toString());
             }
             out.println("</head>");
             out.println("<body>");
