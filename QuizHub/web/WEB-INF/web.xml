@@ -76,6 +76,10 @@
         <servlet-name>TeacherRegisterServlet</servlet-name>
         <servlet-class>servlet.TeacherRegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateQuestionServlet</servlet-name>
+        <servlet-class>servlet.CreateQuestionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>TeacherRegisterServlet</servlet-name>
         <url-pattern>/TeacherRegister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateQuestionServlet</servlet-name>
+        <url-pattern>/CreateQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -65,7 +65,7 @@ public class QuizzesServlet extends HttpServlet {
             Teacherdao tdao = new Teacherdao();
 
             Object user = session.getAttribute("user");
-
+            
             if (user instanceof Student) {
 
                 Student s = (Student) session.getAttribute("user");

@@ -28,6 +28,66 @@
                         <div class="card-body text-secondary">
                             <div class="card">
                                 <div class="card-body">
+                                    <nav class="nav">
+                                        <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target="#question" aria-expanded="false" aria-controls="question">
+                                            Add Question
+                                        </button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="question">
+                            <div class="card-body text-secondary">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="container mb-1">
+                                            <div class="row">
+                                                <div class="control-group col">
+
+                                                    <div class="controls-q"> 
+                                                        <form role="form" autocomplete="off" id="qform" method="post" action="CreateQuestion">
+                                                            <div class="entry-q input-group col-xs-3">
+                                                                <input name="quiz_id" value="${takequiz.quizId}" hidden />
+                                                                <input class="form-control" name="question" type="text" placeholder="Insert your question" />
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="control-group col">
+
+                                                    <div class="controls-c"> 
+                                                        <fieldset role="form" autocomplete="off" id="qform">
+                                                            <div class="entry-c input-group col-xs-3">
+                                                                <input class="form-control m-1" name="choice" type="text" placeholder="Insert your choice" />
+                                                                <select name="correct" class="form-control col-2 m-1">
+                                                                    <option value="false">false</option>
+                                                                    <option value="true">true</option>
+                                                                </select>
+                                                                <span class="input-group-btn m-1">
+                                                                    <button class="btn btn-success btn-add-c" type="button">
+                                                                        +
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <center><button type="submit" form="qform" class="btn btn-success">Confirm</button></center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                                
+                        <div class="card-body text-secondary">
+                            <div class="card">
+                                <div class="card-body">
                                     <h5 class="card-title">Question 1</h5>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">

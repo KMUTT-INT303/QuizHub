@@ -64,4 +64,39 @@ $(document).ready(function () {
         document.getElementById("code-value").value = code;
     });
 
+    var countChoice = 5;
+    var x = 1;
+
+    $(function ()
+    {
+        $(document).on('click', '.btn-add-c', function (e)
+        {
+            e.preventDefault();
+
+            if (x < countChoice) {
+
+                x++;
+
+                var controlForm = $('.controls-c fieldset:first'),
+                        currentEntry = $(this).parents('.entry-c:first'),
+                        newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+                newEntry.find('input').val('');
+                controlForm.find('.entry-c:not(:last) .btn-add-c')
+                        .removeClass('btn-add-c').addClass('btn-remove-c')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('-');
+            }
+
+        }).on('click', '.btn-remove-c', function (e)
+        {
+            x--;
+            $(this).parents('.entry-c:first').remove();
+
+            e.preventDefault();
+            return false;
+
+        });
+    });
+
 });
