@@ -14,6 +14,9 @@ public class Question {
     private String questionName;
     private int quizId;
 
+    public Question() {
+    }
+
     public Question(int questionId, String questionName, int quizId) {
         this.questionId = questionId;
         this.questionName = questionName;

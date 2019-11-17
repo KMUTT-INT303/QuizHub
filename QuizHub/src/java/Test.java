@@ -1,5 +1,6 @@
 
 import controllers.Facultydao;
+import controllers.Questiondao;
 import controllers.Quizdao;
 import controllers.Studentdao;
 import java.nio.charset.Charset;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import model.Faculty;
+import model.Question;
 import model.Student;
 
 /*
@@ -59,24 +61,31 @@ public class Test {
         int count = 0;
         for (int i = 0; i < 10; i++) {
             count++;
-            if(count % 3 == 0) {
+            if (count % 3 == 0) {
                 System.out.println("rounded");
             }
         }
 
         Quizdao dq = new Quizdao();
         //System.out.println(dq.findQuizzesByCode("HHQ123"));
-        
+
         String hours = "2";
         String minutes = "00";
-        
+
         String time = hours + ":" + minutes;
-        
+
         System.out.println(time);
-        
+
+        Questiondao qdao = new Questiondao();
+        Question q = new Question();
+
+        q.setQuestionName("Hello world");
+        q.setQuizId(6);
+
+        qdao.createQuestion(q);
 
     }
-    
+
     public static String RequiredString(int n) {
         byte[] array = new byte[256];
         new Random().nextBytes(array);
@@ -92,4 +101,5 @@ public class Test {
         }
         return ra.toString();
     }
+
 }

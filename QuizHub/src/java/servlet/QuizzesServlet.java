@@ -5,6 +5,8 @@
  */
 package servlet;
 
+import controllers.Choicedao;
+import controllers.Questiondao;
 import controllers.Quizdao;
 import controllers.Studentdao;
 import controllers.Teacherdao;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Admin;
+import model.Choice;
+import model.Question;
 import model.Quizzes;
 import model.Student;
 import model.Teacher;
@@ -55,6 +59,9 @@ public class QuizzesServlet extends HttpServlet {
             Quizdao q = new Quizdao();
             Quizzes qzs = q.findQuizzesByPage(page);
 
+            Questiondao quesdao = new Questiondao();
+            Choicedao cdao = new Choicedao();
+
             if (qzs == null) {
                 request.setAttribute("msg", "Quizzes not found or page invalid.");
                 getServletContext().getRequestDispatcher("/WEB-INF/PageBlock.jsp").forward(request, response);
@@ -65,13 +72,20 @@ public class QuizzesServlet extends HttpServlet {
             Teacherdao tdao = new Teacherdao();
 
             Object user = session.getAttribute("user");
-            
+
             if (user instanceof Student) {
 
                 Student s = (Student) session.getAttribute("user");
 
                 if (sdao.getStudentById(s.getId()).getBranch_id() == qzs.getQuizBranchId()) {
+
+                    ArrayList<Question> ques = quesdao.getAllQuestionByQuizId(qzs.getQuizId());
+                    Question qid = quesdao.getQuestionByQuizId(qzs.getQuizId());
+                    ArrayList<Choice> cresult = cdao.getAllChoiceByQuestionId(qid.getQuestionId());
+
                     session.setAttribute("takequiz", qzs);
+                    session.setAttribute("question", ques);
+                    session.setAttribute("choice", cresult);
                     getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
                 } else {
                     request.setAttribute("msg", "Quizzes not found or page invalid.");
@@ -81,11 +95,18 @@ public class QuizzesServlet extends HttpServlet {
             }
 
             if (user instanceof Teacher) {
-                
+
                 Teacher t = (Teacher) session.getAttribute("user");
 
                 if (tdao.getTeacherById(t.getId()).getId() == qzs.getQuizTeacherId()) {
+                    
+                    ArrayList<Question> ques = quesdao.getAllQuestionByQuizId(qzs.getQuizId());
+                    Question qid = quesdao.getQuestionByQuizId(qzs.getQuizId());
+                    ArrayList<Choice> cresult = cdao.getAllChoiceByQuestionId(qid.getQuestionId());
+
                     session.setAttribute("takequiz", qzs);
+                    session.setAttribute("question", ques);
+                    session.setAttribute("choice", cresult);
                     getServletContext().getRequestDispatcher("/WEB-INF/QuizPage.jsp").forward(request, response);
                 } else {
                     request.setAttribute("msg", "Quizzes not found or page invalid.");

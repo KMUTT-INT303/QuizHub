@@ -5,12 +5,16 @@
  */
 package servlet;
 
+import controllers.Choicedao;
+import controllers.Questiondao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Choice;
+import model.Question;
 
 /**
  *
@@ -31,23 +35,47 @@ public class CreateQuestionServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String question = request.getParameter("question");
+        String quiz_id = request.getParameter("quiz_id");
         String[] c = request.getParameterValues("choice");
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println(question);
-            for (int i = 0; i < c.length ; i++) {
-                out.println(c[i].toString());
-            }
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CreateQuestionServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String page = request.getParameter("page");
+
+        String[] correct = request.getParameterValues("correct");
+
+        Questiondao qdao = new Questiondao();
+        Question q = new Question();
+
+        q.setQuestionName(question);
+        q.setQuizId(Integer.valueOf(quiz_id));
+
+        qdao.createQuestion(q);
+
+        Question qindb = qdao.getQuestionByQuizId(Integer.valueOf(quiz_id));
+
+        Choicedao cdao = new Choicedao();
+        Choice choice = new Choice();
+
+        for (int i = 0; i < c.length; i++) {
+            choice.setQuestionId(Integer.valueOf(qindb.getQuestionId()));
+            choice.setChoiceName(c[i]);
+            choice.setChoiceCorrect(correct[i].toString());
+            cdao.createChoice(choice);
         }
+        
+        response.sendRedirect("Quizzes?p=" + page);
+        
+        /*response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+
+            for (int i = 0; i < c.length; i++) {
+                out.print(c[i].toLowerCase().toString());
+            }
+
+            for (int i = 0; i < c.length; i++) {
+                out.print(correct[i].toLowerCase().toString());
+            }
+            out.print(question);
+            out.print(quiz_id);
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

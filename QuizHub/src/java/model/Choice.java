@@ -12,17 +12,20 @@ package model;
 public class Choice {
     private int choiceId;
     private String choiceName;
-    private boolean choiceCorrect;
+    private String choiceCorrect;
     private int questionId;
 
-    public Choice(int choiceId, String choiceName, boolean choiceCorrect, int questionId) {
+    public Choice() {
+    }
+
+    public Choice(int choiceId, String choiceName, String choiceCorrect, int questionId) {
         this.choiceId = choiceId;
         this.choiceName = choiceName;
         this.choiceCorrect = choiceCorrect;
         this.questionId = questionId;
     }
 
-    public Choice(String choiceName, boolean choiceCorrect, int questionId) {
+    public Choice(String choiceName, String choiceCorrect, int questionId) {
         this.choiceName = choiceName;
         this.choiceCorrect = choiceCorrect;
         this.questionId = questionId;
@@ -44,11 +47,11 @@ public class Choice {
         this.choiceName = choiceName;
     }
 
-    public boolean isChoiceCorrect() {
+    public String isChoiceCorrect() {
         return choiceCorrect;
     }
 
-    public void setChoiceCorrect(boolean choiceCorrect) {
+    public void setChoiceCorrect(String choiceCorrect) {
         this.choiceCorrect = choiceCorrect;
     }
 

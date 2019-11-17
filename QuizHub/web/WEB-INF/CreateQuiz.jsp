@@ -32,7 +32,7 @@
                         <center><h3 class="p-2">Create a Quizzes</h3></center>
                         <p>${msg}</p>
 
-                        <form action="CreateQuiz" method="get" autocomplete="off">
+                        <form action="CreateQuiz" method="post" autocomplete="off">
                             <div><input type="hidden" name="FROM_CREATE_QUIZ" value="CREATEQUIZ"></div>
 
 
