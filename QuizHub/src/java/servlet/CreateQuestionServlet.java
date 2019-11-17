@@ -9,6 +9,7 @@ import controllers.Choicedao;
 import controllers.Questiondao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,36 +34,39 @@ public class CreateQuestionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         String question = request.getParameter("question");
         String quiz_id = request.getParameter("quiz_id");
         String[] c = request.getParameterValues("choice");
         String page = request.getParameter("page");
-
+        
         String[] correct = request.getParameterValues("correct");
-
+        
         Questiondao qdao = new Questiondao();
         Question q = new Question();
-
+        
         q.setQuestionName(question);
         q.setQuizId(Integer.valueOf(quiz_id));
-
+        
         qdao.createQuestion(q);
-
-        Question qindb = qdao.getQuestionByQuizId(Integer.valueOf(quiz_id));
-
+        
+        ArrayList<Question> qindb = qdao.getAllQuestionByQuizId(Integer.valueOf(quiz_id));
+        
         Choicedao cdao = new Choicedao();
         Choice choice = new Choice();
-
+        
         for (int i = 0; i < c.length; i++) {
-            choice.setQuestionId(Integer.valueOf(qindb.getQuestionId()));
+            choice.setQuizId(Integer.valueOf(quiz_id));
             choice.setChoiceName(c[i]);
             choice.setChoiceCorrect(correct[i].toString());
+            for (Question num : qindb) {
+                choice.setQuestionId(Integer.valueOf(num.getQuestionId()));
+            }
             cdao.createChoice(choice);
         }
         
         response.sendRedirect("Quizzes?p=" + page);
-        
+
         /*response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 

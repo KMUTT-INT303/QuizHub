@@ -26,10 +26,11 @@ public class Choicedao {
     public boolean createChoice(Choice c) {
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO choices(choice_name, choice_correct, question_id) VALUES(?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO choices(choice_name, choice_correct, question_id, quiz_id) VALUES(?,?,?,?)");
             ps.setString(1, c.getChoiceName());
             ps.setString(2, c.isChoiceCorrect());
             ps.setInt(3, c.getQuestionId());
+            ps.setInt(4, c.getQuizId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -39,16 +40,21 @@ public class Choicedao {
         return false;
     }
 
-    public ArrayList<Choice> getAllChoiceByQuestionId(int quest_id) {
+    public ArrayList<Choice> getAllChoiceByQuizId(int quiz_id) {
         conn = BuildConnection.getConnection();
         ArrayList<Choice> q = new ArrayList();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM choices WHERE question_id = ?");
-            ps.setInt(1, quest_id);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM choices WHERE quiz_id = ?");
+            ps.setInt(1, quiz_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 q.add(
-                        new Choice(rs.getInt("choice_id"), rs.getString("choice_name"), rs.getString("choice_correct"), rs.getInt("question_id")
+                        new Choice(
+                                rs.getInt("choice_id"), 
+                                rs.getString("choice_name"), 
+                                rs.getString("choice_correct"), 
+                                rs.getInt("question_id"), 
+                                rs.getInt("quiz_id")
                         )
                 );
             }

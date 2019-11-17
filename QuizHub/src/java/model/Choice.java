@@ -14,21 +14,24 @@ public class Choice {
     private String choiceName;
     private String choiceCorrect;
     private int questionId;
+    private int quizId;
 
     public Choice() {
     }
 
-    public Choice(int choiceId, String choiceName, String choiceCorrect, int questionId) {
+    public Choice(int choiceId, String choiceName, String choiceCorrect, int questionId, int quizId) {
         this.choiceId = choiceId;
         this.choiceName = choiceName;
         this.choiceCorrect = choiceCorrect;
         this.questionId = questionId;
+        this.quizId = quizId;
     }
 
-    public Choice(String choiceName, String choiceCorrect, int questionId) {
+    public Choice(String choiceName, String choiceCorrect, int questionId, int quizId) {
         this.choiceName = choiceName;
         this.choiceCorrect = choiceCorrect;
         this.questionId = questionId;
+        this.quizId = quizId;
     }
 
     public int getChoiceId() {
@@ -63,9 +66,17 @@ public class Choice {
         this.questionId = questionId;
     }
 
+    public int getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
+    }
+
     @Override
     public String toString() {
-        return "Choice{" + "choiceId=" + choiceId + ", choiceName=" + choiceName + ", choiceCorrect=" + choiceCorrect + ", questionId=" + questionId + '}';
-    }
+        return "Choice{" + "choiceId=" + choiceId + ", choiceName=" + choiceName + ", choiceCorrect=" + choiceCorrect + ", questionId=" + questionId + ", quizId=" + quizId + '}';
+    }    
     
 }

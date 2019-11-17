@@ -80,8 +80,7 @@ public class QuizzesServlet extends HttpServlet {
                 if (sdao.getStudentById(s.getId()).getBranch_id() == qzs.getQuizBranchId()) {
 
                     ArrayList<Question> ques = quesdao.getAllQuestionByQuizId(qzs.getQuizId());
-                    Question qid = quesdao.getQuestionByQuizId(qzs.getQuizId());
-                    ArrayList<Choice> cresult = cdao.getAllChoiceByQuestionId(qid.getQuestionId());
+                    ArrayList<Choice> cresult = cdao.getAllChoiceByQuizId(qzs.getQuizId());
 
                     session.setAttribute("takequiz", qzs);
                     session.setAttribute("question", ques);
@@ -101,8 +100,7 @@ public class QuizzesServlet extends HttpServlet {
                 if (tdao.getTeacherById(t.getId()).getId() == qzs.getQuizTeacherId()) {
                     
                     ArrayList<Question> ques = quesdao.getAllQuestionByQuizId(qzs.getQuizId());
-                    Question qid = quesdao.getQuestionByQuizId(qzs.getQuizId());
-                    ArrayList<Choice> cresult = cdao.getAllChoiceByQuestionId(qid.getQuestionId());
+                    ArrayList<Choice> cresult = cdao.getAllChoiceByQuizId(qzs.getQuizId());
 
                     session.setAttribute("takequiz", qzs);
                     session.setAttribute("question", ques);

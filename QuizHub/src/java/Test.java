@@ -79,10 +79,11 @@ public class Test {
         Questiondao qdao = new Questiondao();
         Question q = new Question();
 
-        q.setQuestionName("Hello world");
-        q.setQuizId(6);
+        ArrayList<Question> qindb = qdao.getAllQuestionByQuizId(Integer.valueOf(6));
 
-        qdao.createQuestion(q);
+        for (Question num : qindb) {
+            System.out.println(num.getQuestionId());
+        }
 
     }
 

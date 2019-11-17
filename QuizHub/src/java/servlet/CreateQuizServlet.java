@@ -69,19 +69,19 @@ public class CreateQuizServlet extends HttpServlet {
         String hours = null;
         String minutes = null;
 
-        if (t_h == null || t_h.trim().isEmpty()) {
+        if (t_h == null || t_h.trim().isEmpty() || t_h == "0" || t_h == "00") {
             hours = "00";
             minutes = t_m;
             t_h = "00";
         }
 
-        if (t_m == null || t_m.trim().isEmpty()) {
+        if (t_m == null || t_m.trim().isEmpty() || t_m == "0" || t_m == "00") {
             hours = t_h;
             minutes = "00";
             t_m = "00";
         }
 
-        if (t_h == null || t_h.trim().isEmpty() && t_m == null || t_m.trim().isEmpty()) {
+        if (t_h == null || t_h.trim().isEmpty() || t_h == "0" || t_h == "00" && t_m == null || t_m.trim().isEmpty() || t_m == "0" || t_m == "00") {
             hours = "unlimited";
             minutes = "unlimited";
         }

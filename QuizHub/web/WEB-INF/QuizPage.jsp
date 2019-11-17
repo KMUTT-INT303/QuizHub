@@ -95,12 +95,14 @@
                                     <div class="card-body">
                                         <h5 class="card-title">${q.questionName}</h5>
                                         <c:forEach items="${choice}" var="c" varStatus="cround">
+                                            <c:if test="${q.questionId == c.questionId}">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
                                                     <label class="form-check-label" for="exampleRadios2">
                                                         ${c.choiceName}
                                                     </label>
                                                 </div>
+                                            </c:if>
                                         </c:forEach>
                                     </div>
                                 </div>
