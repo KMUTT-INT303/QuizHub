@@ -1,0 +1,124 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import model.Comment;
+import model.CommentReplyDao;
+import model.Quizzes;
+import model.Reply;
+import model.Student;
+
+/**
+ *
+ * @author MaxPong
+ */
+public class CommentReplyServlet extends HttpServlet {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+//        Student ex = new Student(61130500068l, "max", "pong", "1234", 1313, 7777);
+//        request.getSession().setAttribute("user",ex);
+        
+        Student s = ((Student) (request.getSession().getAttribute("user")));
+        int currentQuizId = Integer.valueOf((String)request.getSession().getAttribute("currentQuizId"));
+        
+//int currentQuizId=-1;
+        if (((Quizzes) (request.getSession().getAttribute("takequiz"))) != null) {
+            currentQuizId = ((Quizzes) (request.getSession().getAttribute("takequiz"))).getQuizId();
+        }
+        
+        String deleteComment = request.getParameter("deleteComment");
+        String deleteReply = request.getParameter("deleteReply");
+        String commentText = request.getParameter("comment");
+        String replyText = request.getParameter("reply");
+
+        //Insert comment or reply part
+        if (commentText != null) {
+            CommentReplyDao crd = new CommentReplyDao();
+            Comment c = new Comment(commentText,s.getId(), currentQuizId);
+            
+
+            crd.addComment(c);
+        }
+
+        if (replyText != null) {
+            CommentReplyDao crd = new CommentReplyDao();
+            Reply r = new Reply(replyText, s.getId(), Integer.valueOf(request.getParameter("commentTarget")));
+            //Reply r = new Reply(replyText, ((Student) (request.getSession().getAttribute("user"))).getStudent_id(),1);
+            
+            crd.addReply(r);
+        }
+        
+        //delete comment or reply 
+        if(deleteReply!=null||deleteComment!=null){
+        if(deleteComment!=null){
+        CommentReplyDao crd = new CommentReplyDao();
+        crd.deleteComment(Integer.valueOf(deleteComment));
+        }else{
+        CommentReplyDao crd = new CommentReplyDao();
+        crd.deleteReply(Integer.valueOf(deleteReply));
+        }
+        
+        }
+
+//get list of comment and reply part and set Attribute
+        CommentReplyDao comments = new CommentReplyDao();
+
+        if (comments.getAllCommentByQuizId(currentQuizId) != null) {
+            request.setAttribute("CommentList", comments.getAllCommentByQuizId(currentQuizId));
+        }
+
+        request.getServletContext().getRequestDispatcher("/Comment.jsp").forward(request, response);
+
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+  
+    
+    
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+}

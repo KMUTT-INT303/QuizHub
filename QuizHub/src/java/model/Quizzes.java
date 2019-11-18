@@ -30,6 +30,19 @@ public class Quizzes {
     private String page;
     private String hours;
     private String minutes;
+    
+        public Quizzes(String quizName, String quizCourseName) {
+        this.quizName = quizName;
+        this.quizCourseName = quizCourseName;
+    }
+    
+
+    
+    public Quizzes(String quizName, String quizCourseName,int quizId) {
+        this.quizId = quizId;
+        this.quizName = quizName;
+        this.quizCourseName = quizCourseName;
+    }
 
     public Quizzes(String quizName, String quizComment, String quizStatus, long quizTeacherId, String quizCourseName, String quizCourseId, int quizFacultyId, int quizBranchId, String quizCode, String quizCoverImages, String quizSkillText, Timestamp quizStartDate, Timestamp quizEndDate, String page, String hours, String minutes) {
         this.quizName = quizName;
