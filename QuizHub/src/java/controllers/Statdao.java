@@ -47,7 +47,7 @@ public class Statdao {
         ArrayList<Quizzes> q = new ArrayList();
         try {
             //PreparedStatement ps = conn.prepareStatement("SELECT * FROM QUIZ WHERE upper(QUIZ_NAME) like upper(?)");
-            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name,q.page as page FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.page order by q.quiz_name");
+            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name,q.page as page FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.page order by q.quiz_name");
             ps.setLong(1, studentId);
             ps.setString(2, "%" + searchText + "%");
             ResultSet rs = ps.executeQuery();
@@ -68,7 +68,7 @@ public class Statdao {
         ArrayList<Quizzes> q = new ArrayList();
         try {
             //PreparedStatement ps = conn.prepareStatement("SELECT * FROM QUIZ WHERE upper(COURSE_ID) = upper(?)");
-            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name,q.page as page FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.course_id) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.page");
+            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name,q.page as page FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND UPPER(Q.course_id) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.page");
             ps.setLong(1, studentId);
             ps.setString(2, courseId);
             ResultSet rs = ps.executeQuery();
@@ -90,9 +90,9 @@ public class Statdao {
         ArrayList<QuizScore> q = new ArrayList();
         try {
 
-            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND CH.CHOICE_CORRECT = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
+            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
             //PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME order by q.quiz_name");
-            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.quiz_name)like upper(?) and cr.ANSWER=true group by q.quiz_id");
+            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.quiz_name)like upper(?) and CR.CHOICE_RESULT_ID IS NOT NULL group by q.quiz_id");
 
             
             
@@ -125,9 +125,9 @@ public class Statdao {
         ArrayList<QuizScore> q = new ArrayList();
         try {
 
-            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND CH.CHOICE_CORRECT = true AND UPPER(Q.COURSE_ID) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
+            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.COURSE_ID) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
             //PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.COURSE_ID) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME order by q.quiz_name");
-            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.course_id)=upper(?) and cr.ANSWER=true group by q.quiz_id");
+            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.course_id)=upper(?) and CR.CHOICE_RESULT_ID IS NOT NULL group by q.quiz_id");
 
             
             ps.setLong(1, studentId);
@@ -161,7 +161,7 @@ public class Statdao {
         ArrayList<QuizScore> q = new ArrayList();
         try {
 
-            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND CH.CHOICE_CORRECT = true AND UPPER(Q.QUIZ_NAME) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text");
+            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.QUIZ_NAME) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text");
             PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,quiz_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND UPPER(Q.QUIZ_NAME) = UPPER(?) group by quiz_name");
 
             ps.setString(2, quizName);
