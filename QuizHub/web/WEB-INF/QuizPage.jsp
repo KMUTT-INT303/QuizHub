@@ -90,6 +90,8 @@
                         </div>
 
                         <form method="post" action="Done" id="send">
+                            <input name="quiz_id" value="${takequiz.quizId}" hidden />
+                            <input name="student_id" value="${user.id}" hidden />
                             <c:forEach items="${question}" var="q" varStatus="qround">
                                 <div class="card-body text-secondary">
                                     <div class="card">
