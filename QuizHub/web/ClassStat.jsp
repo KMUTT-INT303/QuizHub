@@ -35,7 +35,7 @@
         
     
     <c:forEach items="${quizList}" var="q" varStatus="qs"> Quiz Name : 
-    <a href="StatSearch?quizSelect=${q.quizId}">${q.quizName}</a>
+    <a href="Quizzes?p=${q.page}">${q.quizName}</a>
     
     
     Course : ${q.quizCourseName}

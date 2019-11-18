@@ -47,12 +47,12 @@ public class Statdao {
         ArrayList<Quizzes> q = new ArrayList();
         try {
             //PreparedStatement ps = conn.prepareStatement("SELECT * FROM QUIZ WHERE upper(QUIZ_NAME) like upper(?)");
-            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME order by q.quiz_name");
+            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name,q.page as page FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.page order by q.quiz_name");
             ps.setLong(1, studentId);
             ps.setString(2, "%" + searchText + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id")));
+                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id"),rs.getString("page")));
             }
             return q;
         } catch (SQLException ex) {
@@ -68,12 +68,12 @@ public class Statdao {
         ArrayList<Quizzes> q = new ArrayList();
         try {
             //PreparedStatement ps = conn.prepareStatement("SELECT * FROM QUIZ WHERE upper(COURSE_ID) = upper(?)");
-            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.course_id) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME");
+            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name,q.page as page FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.course_id) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.page");
             ps.setLong(1, studentId);
             ps.setString(2, courseId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id")));
+                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id"),rs.getString("page")));
             }
             return q;
         } catch (SQLException ex) {
