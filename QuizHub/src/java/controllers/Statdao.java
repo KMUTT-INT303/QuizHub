@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package controllers;
 
+import model.SkillStat;
 import db.BuildConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +14,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Course;
+import model.QuizScore;
+import model.Quizzes;
 
-public class StatDao {
+public class Statdao {
 
     //getListOfClass
     Connection conn = null;
@@ -31,7 +35,7 @@ public class StatDao {
             }
             return c;
         } catch (SQLException ex) {
-            Logger.getLogger(StatDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Statdao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
@@ -52,7 +56,7 @@ public class StatDao {
             }
             return q;
         } catch (SQLException ex) {
-            Logger.getLogger(StatDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Statdao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
@@ -73,7 +77,7 @@ public class StatDao {
             }
             return q;
         } catch (SQLException ex) {
-            Logger.getLogger(StatDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Statdao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;

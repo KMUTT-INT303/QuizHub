@@ -88,6 +88,10 @@
         <servlet-name>StatSearchServlet</servlet-name>
         <servlet-class>servlet.StatSearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageQuizServlet</servlet-name>
+        <servlet-class>servlet.ManageQuizServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>StatSearchServlet</servlet-name>
         <url-pattern>/StatSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageQuizServlet</servlet-name>
+        <url-pattern>/ManageQuiz</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
