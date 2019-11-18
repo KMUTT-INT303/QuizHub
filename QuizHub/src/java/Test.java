@@ -1,8 +1,10 @@
 
+import controllers.ChoiceResultDao;
 import controllers.Choicedao;
 import controllers.Facultydao;
 import controllers.Questiondao;
 import controllers.Quizdao;
+import controllers.Resultdao;
 import controllers.Studentdao;
 import java.nio.charset.Charset;
 import java.sql.Timestamp;
@@ -12,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import model.Choice;
+import model.ChoiceResult;
 import model.Faculty;
 import model.Question;
+import model.Result;
 import model.Student;
 
 /*
@@ -87,14 +91,24 @@ public class Test {
             System.out.println(num.getQuestionId());
         }
 
-        Choice c = new Choice();
+        /*Choice c = new Choice();
         Choicedao cdao = new Choicedao();
 
         if (cdao.findCorrectChoiceById(Integer.valueOf(1)).isChoiceCorrect().equals("true")) {
             System.out.println("True");
         } else {
             System.out.println("False");
-        }
+        }*/
+        
+        ChoiceResultDao crdao = new ChoiceResultDao();
+        ChoiceResult cr = new ChoiceResult();
+            
+            cr.setQuiz_id(8);
+            cr.setQuestion_id(1);
+            cr.setChoice_id(1);
+            cr.setStudent_id(6113050001L);
+            
+            crdao.createChoiceResult(cr);
 
     }
 

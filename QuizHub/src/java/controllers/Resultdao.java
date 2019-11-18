@@ -26,13 +26,12 @@ public class Resultdao {
     public boolean createResult(Result r) {
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO results (total_time, total_correct, total_incorrect, quiz_id, student_id, result_date) VALUES(?,?,?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO results (total_time, total_correct, total_incorrect, quiz_id, student_id) VALUES(?,?,?,?,?)");
             ps.setString(1, r.getTotal_time());
             ps.setInt(2, r.getTotalCorrect());
             ps.setInt(3, r.getTotalIncorrect());
             ps.setInt(4, r.getQuizId());
             ps.setLong(5, r.getStudentId());
-            ps.setTimestamp(6, r.getResult_date());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -45,7 +44,7 @@ public class Resultdao {
     public boolean updateResult(Result r) {
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE results SET total_time = ?, total_correct = ?, total_incorrect = ?, quiz_id = ?, student_id = ? WHERE student_id = ?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE results SET total_time = ?, total_correct = ?, total_incorrect = ?, quiz_id = ?, student_id = ?, result_date = CURRENT_TIMESTAMP WHERE student_id = ?");
             ps.setString(1, r.getTotal_time());
             ps.setInt(2, r.getTotalCorrect());
             ps.setInt(3, r.getTotalIncorrect());

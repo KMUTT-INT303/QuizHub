@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import controllers.ChoiceResultDao;
 import controllers.Choicedao;
 import controllers.Resultdao;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Choice;
+import model.ChoiceResult;
 import model.Result;
 
 /**
@@ -54,9 +56,16 @@ public class DoneServlet extends HttpServlet {
         int totalIncorrect = 0;
         
         Choicedao cdao = new Choicedao();
+        Choice c = new Choice();
+        
+        ChoiceResultDao crdao = new ChoiceResultDao();
+        ChoiceResult cr = new ChoiceResult();
+        
         
         for(int i = 0; i < results.size(); i++) {
-            if(cdao.findCorrectChoiceById(Integer.valueOf(results.get(i))).isChoiceCorrect().equals("true")) {
+            
+            c = cdao.findChoiceById(Integer.valueOf(results.get(i)));
+            if(c.isChoiceCorrect().equals("true")) {
                 score ++;
                 totalCorrect++;
             }
@@ -64,6 +73,14 @@ public class DoneServlet extends HttpServlet {
             {
                 totalIncorrect++;
             }
+            
+            cr.setQuiz_id(quiz_id);
+            cr.setQuestion_id(c.getQuestionId());
+            cr.setChoice_id(c.getChoiceId());
+            cr.setStudent_id(student_id);
+            
+            crdao.createChoiceResult(cr);
+            
         }
         
         Resultdao rdao = new Resultdao();
