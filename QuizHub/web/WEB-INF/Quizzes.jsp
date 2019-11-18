@@ -69,7 +69,8 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title">${q.quizName}</h5>
                                                         <p class="card-text" style="color: gray;">${q.quizComment}</p>
-                                                        <span class="badge badge-info">${q.quizCourseName}</span>
+                                                        <p><b>Course: </b><span class="badge badge-primary">${q.quizCourseName}</span></p>
+                                                        <p><b>Skill: </b><span class="badge badge-info">${q.quizSkillText}</span></p>
                                                     </div>
                                                     <div class="card-footer">
                                                         <small class="text-muted">Due date: ${q.quizEndDate}</small>
