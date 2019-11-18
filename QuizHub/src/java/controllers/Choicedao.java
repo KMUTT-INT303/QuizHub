@@ -50,10 +50,10 @@ public class Choicedao {
             while (rs.next()) {
                 q.add(
                         new Choice(
-                                rs.getInt("choice_id"), 
-                                rs.getString("choice_name"), 
-                                rs.getString("choice_correct"), 
-                                rs.getInt("question_id"), 
+                                rs.getInt("choice_id"),
+                                rs.getString("choice_name"),
+                                rs.getString("choice_correct"),
+                                rs.getInt("question_id"),
                                 rs.getInt("quiz_id")
                         )
                 );
@@ -63,6 +63,44 @@ public class Choicedao {
             Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return null;
+    }
+
+    public Choice findCorrectChoiceById(int choice) {
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM choices WHERE choice_id = ?");
+            ps.setInt(1, choice);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Choice(
+                        rs.getString("choice_correct")
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Choice findChoiceById(int choice) {
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM choices WHERE choice_id = ?");
+            ps.setInt(1, choice);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Choice(
+                        rs.getInt("choice_id"),
+                        rs.getString("choice_name"),
+                        rs.getString("choice_correct"),
+                        rs.getInt("question_id"),
+                        rs.getInt("quiz_id")
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 }

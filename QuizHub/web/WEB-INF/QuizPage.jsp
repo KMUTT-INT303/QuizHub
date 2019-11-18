@@ -92,6 +92,7 @@
                         <form method="post" action="Done" id="send">
                             <input name="quiz_id" value="${takequiz.quizId}" hidden />
                             <input name="student_id" value="${user.id}" hidden />
+                            <input type="hidden" name="count" value="${countc}">
                             <c:forEach items="${question}" var="q" varStatus="qround">
                                 <div class="card-body text-secondary">
                                     <div class="card">
@@ -100,7 +101,7 @@
                                             <c:forEach items="${choice}" var="c" varStatus="cround">
                                                 <c:if test="${q.questionId == c.questionId}">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="${q.questionId}" value="${c.choiceId}">
+                                                        <input class="form-check-input" type="radio" name="result${q.questionId}" value="${c.choiceId}">
                                                         <label class="form-check-label" for="${q.questionId}">
                                                             ${c.choiceName}
                                                         </label>
@@ -134,7 +135,10 @@
                                 <div id="time">
                                     <div class="timer"></div>
                                 </div>
-
+                                <button id="start" class="btn btn-warning" >Start</button>
+                                
+                                ${countc} : ${countq}
+                                
                             </center>
                         </div>
                     </div>
@@ -178,16 +182,22 @@
 
         <c:if test="${takequiz.hours != 'unlimited' && takequiz.minutes != 'unlimited'}">
         var timer = new Timer();
-        timer.start({
-            countdown: true,
-            startValues: {
-                hours: ${takequiz.hours},
-                minutes: ${takequiz.minutes},
-                seconds: 0
-            }
-        });
 
-        $('#time .timer').html(timer.getTimeValues().toString());
+        $(document).on('click', '#start', function (e)
+        {
+            e.preventDefault();
+            timer.start({
+                countdown: true,
+                startValues: {
+                    hours: ${takequiz.hours},
+                    minutes: ${takequiz.minutes},
+                    seconds: 0
+                }
+            });
+
+        })
+
+        $('#time .timer').html('${takequiz.hours}:${takequiz.minutes}:00');
 
         timer.addEventListener('secondsUpdated', function (e)
         {

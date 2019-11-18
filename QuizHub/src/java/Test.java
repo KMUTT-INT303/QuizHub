@@ -1,4 +1,5 @@
 
+import controllers.Choicedao;
 import controllers.Facultydao;
 import controllers.Questiondao;
 import controllers.Quizdao;
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import model.Choice;
 import model.Faculty;
 import model.Question;
 import model.Student;
@@ -83,6 +85,15 @@ public class Test {
 
         for (Question num : qindb) {
             System.out.println(num.getQuestionId());
+        }
+
+        Choice c = new Choice();
+        Choicedao cdao = new Choicedao();
+
+        if (cdao.findCorrectChoiceById(Integer.valueOf(1)).isChoiceCorrect().equals("true")) {
+            System.out.println("True");
+        } else {
+            System.out.println("False");
         }
 
     }

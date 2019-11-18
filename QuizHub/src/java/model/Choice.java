@@ -19,6 +19,10 @@ public class Choice {
     public Choice() {
     }
 
+    public Choice(String choiceCorrect) {
+        this.choiceCorrect = choiceCorrect;
+    }
+
     public Choice(int choiceId, String choiceName, String choiceCorrect, int questionId, int quizId) {
         this.choiceId = choiceId;
         this.choiceName = choiceName;
