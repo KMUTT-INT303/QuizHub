@@ -25,7 +25,7 @@ import model.Student;
  *
  * @author MaxPong
  */
-
+//fix this servlet
 public class StatSearchServlet extends HttpServlet {
 
     /**
