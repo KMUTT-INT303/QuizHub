@@ -6,6 +6,7 @@
 package servlet;
 
 import controllers.Choicedao;
+import controllers.Resultdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Choice;
+import model.Result;
 
 /**
  *
@@ -33,7 +35,9 @@ public class DoneServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        long student_id = Long.valueOf(request.getParameter("student_id"));
         int totalChoice = Integer.valueOf(request.getParameter("count"));
+        int quiz_id = Integer.valueOf(request.getParameter("quiz_id"));
         
         ArrayList<String> results = new ArrayList();
         for(int i = 0; i < totalChoice; i++){
@@ -49,20 +53,29 @@ public class DoneServlet extends HttpServlet {
         int totalCorrect = 0;
         int totalIncorrect = 0;
         
-        Choice c = new Choice();
         Choicedao cdao = new Choicedao();
         
         for(int i = 0; i < results.size(); i++) {
             if(cdao.findCorrectChoiceById(Integer.valueOf(results.get(i))).isChoiceCorrect().equals("true")) {
                 score ++;
                 totalCorrect++;
-                
             }
             else
             {
                 totalIncorrect++;
             }
         }
+        
+        Resultdao rdao = new Resultdao();
+        Result r = new Result();
+        
+        r.setTotal_time("");
+        r.setTotalCorrect(totalCorrect);
+        r.setTotalIncorrect(totalIncorrect);
+        r.setQuizId(quiz_id);
+        r.setStudentId(student_id);
+        
+        rdao.updateResult(r);
         
         request.setAttribute("score", score);
         request.setAttribute("totalcorrect", totalCorrect);
