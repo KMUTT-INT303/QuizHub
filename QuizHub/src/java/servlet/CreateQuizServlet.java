@@ -65,7 +65,7 @@ public class CreateQuizServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/CreateCourse.jsp").forward(request, response);
             }
         }
-
+         
         String hours = null;
         String minutes = null;
 

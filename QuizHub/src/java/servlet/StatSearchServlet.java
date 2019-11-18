@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Course;
 import model.QuizScore;
 import model.Quizzes;
-import model.StatDao;
+import controllers.Statdao;
 import model.Student;
 
 /**
@@ -49,7 +49,7 @@ public class StatSearchServlet extends HttpServlet {
                     if (searchType.equals("quizName")) {
 
                         //getCollection Of Quiz from searchtext
-                        StatDao sd = new StatDao();
+                        Statdao sd = new Statdao();
                         ArrayList<Quizzes> ql = sd.getAllQuizByName(searchText, s.getId());
 
                         ArrayList<QuizScore> quizTestScore = null;
@@ -64,7 +64,7 @@ public class StatSearchServlet extends HttpServlet {
 
                             //show stat of class from searchtext
                             //getCollection Of Class from searchtext 
-                            StatDao sd = new StatDao();
+                            Statdao sd = new Statdao();
                             ArrayList<Course> c = sd.getAllCourseByName(searchText);
 
                             request.setAttribute("classList", c);
@@ -85,7 +85,7 @@ public class StatSearchServlet extends HttpServlet {
             }
 
             if (classSelect != null) {
-                StatDao sd = new StatDao();
+                Statdao sd = new Statdao();
                 ArrayList<Quizzes> ql = sd.getQuizByCourseId(classSelect, s.getId());
 
                 ArrayList<QuizScore> quizTestScore = quizTestScore = sd.getTestScoreForQuizByCourseId(classSelect,s.getId());
@@ -144,7 +144,7 @@ public class StatSearchServlet extends HttpServlet {
 
         request.getServletContext().getRequestDispatcher("/StatSearch.jsp").forward(request, response);
     }
-
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

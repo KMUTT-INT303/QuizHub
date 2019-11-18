@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package controllers;
 
 import db.BuildConnection;
 import java.sql.Connection;
@@ -13,12 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Comment;
+import model.Reply;
 
 /**
  *
  * @author MaxPong
  */
-public class CommentReplyDao {
+public class CommentReplydao {
 
     private final String ADD_COMMENT = "INSERT INTO COMMENTS(COMMENT,STUDENT_ID,QUIZ_ID) VALUES(?,?,?)";
     private final String ADD_REPLY = "INSERT INTO REPLY_COMMENTS(REPLY_COMMENT,STUDENT_ID,COMMENT_ID) VALUES(?,?,?)";
@@ -89,7 +91,7 @@ public class CommentReplyDao {
                 return null;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CommentReplyDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommentReplydao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -122,7 +124,7 @@ public class CommentReplyDao {
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(CommentReplyDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommentReplydao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
 
@@ -140,7 +142,7 @@ public class CommentReplyDao {
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(CommentReplyDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommentReplydao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
 
@@ -158,7 +160,7 @@ public class CommentReplyDao {
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(CommentReplyDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommentReplydao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -177,7 +179,7 @@ public class CommentReplyDao {
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(CommentReplyDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommentReplydao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         

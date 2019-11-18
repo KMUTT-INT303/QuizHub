@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Comment;
-import model.CommentReplyDao;
+import controllers.CommentReplydao;
 import model.Quizzes;
 import model.Reply;
 import model.Student;
@@ -45,7 +45,7 @@ public class CommentReplyServlet extends HttpServlet {
 
         //Insert comment or reply part
         if (commentText != null) {
-            CommentReplyDao crd = new CommentReplyDao();
+            CommentReplydao crd = new CommentReplydao();
             Comment c = new Comment(commentText,s.getId(), currentQuizId);
             
 
@@ -53,7 +53,7 @@ public class CommentReplyServlet extends HttpServlet {
         }
 
         if (replyText != null) {
-            CommentReplyDao crd = new CommentReplyDao();
+            CommentReplydao crd = new CommentReplydao();
             Reply r = new Reply(replyText, s.getId(), Integer.valueOf(request.getParameter("commentTarget")));
             //Reply r = new Reply(replyText, ((Student) (request.getSession().getAttribute("user"))).getStudent_id(),1);
             
@@ -63,17 +63,17 @@ public class CommentReplyServlet extends HttpServlet {
         //delete comment or reply 
         if(deleteReply!=null||deleteComment!=null){
         if(deleteComment!=null){
-        CommentReplyDao crd = new CommentReplyDao();
+        CommentReplydao crd = new CommentReplydao();
         crd.deleteComment(Integer.valueOf(deleteComment));
         }else{
-        CommentReplyDao crd = new CommentReplyDao();
+        CommentReplydao crd = new CommentReplydao();
         crd.deleteReply(Integer.valueOf(deleteReply));
         }
         
         }
 
 //get list of comment and reply part and set Attribute
-        CommentReplyDao comments = new CommentReplyDao();
+        CommentReplydao comments = new CommentReplydao();
 
         if (comments.getAllCommentByQuizId(currentQuizId) != null) {
             request.setAttribute("CommentList", comments.getAllCommentByQuizId(currentQuizId));

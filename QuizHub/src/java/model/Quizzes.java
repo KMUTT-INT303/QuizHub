@@ -38,10 +38,11 @@ public class Quizzes {
     
 
     
-    public Quizzes(String quizName, String quizCourseName,int quizId) {
+    public Quizzes(String quizName, String quizCourseName,int quizId,String page) {
         this.quizId = quizId;
         this.quizName = quizName;
         this.quizCourseName = quizCourseName;
+        this.page = page;
     }
 
     public Quizzes(String quizName, String quizComment, String quizStatus, long quizTeacherId, String quizCourseName, String quizCourseId, int quizFacultyId, int quizBranchId, String quizCode, String quizCoverImages, String quizSkillText, Timestamp quizStartDate, Timestamp quizEndDate, String page, String hours, String minutes) {
