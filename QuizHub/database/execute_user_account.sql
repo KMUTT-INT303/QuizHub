@@ -58,7 +58,7 @@ VALUES
 
         --- School of Information Technology ---
 
-        ('Computer Science ( English Proram )', 2), -- ID 17
+        ('Computer Science ( English Program )', 2), -- ID 17
         ('Information Technology', 2), -- ID 18
         ('Digital Service Innovation', 2), -- ID 19
         

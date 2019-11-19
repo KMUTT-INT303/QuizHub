@@ -20,7 +20,7 @@
     </head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <body>
+    <body>        
         <div class="register-section">
             <div class="register-section-width">
                 <div id="container" class="container">
@@ -29,8 +29,8 @@
                             <h3 class="display-4 mb-3">QuizHub</h3>
                             <h2 class="display-4 mb-2">${msg}</h2>
                             <div class="info-form">
-
-
+                                
+                                
 
 
 
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
 
-
+                                
 
 
                             </div>

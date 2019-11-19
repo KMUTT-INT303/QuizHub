@@ -24,7 +24,7 @@
 
                     <div class="card mb-4">
                         <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
-
+                        <c:if test="${(status=='Teacher') || (status=='Admin')}">
                         <div class="card-body text-secondary">
                             <div class="card">
                                 <div class="card-body">
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        </c:if>
                         <form method="post" action="Done" id="send">
                             <input name="quiz_id" value="${takequiz.quizId}" hidden />
                             <input name="student_id" value="${user.id}" hidden />
