@@ -5,12 +5,18 @@
  */
 package servlet;
 
+import controllers.Choicedao;
+import controllers.Questiondao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Choice;
+import model.Question;
 
 /**
  *
@@ -29,11 +35,20 @@ public class StartQuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String value = request.getParameter("json");
+        String id = request.getParameter("quiz_id");
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println(value);
-        }
+
+        HttpSession session = request.getSession();
+
+        Questiondao quesdao = new Questiondao();
+        Choicedao cdao = new Choicedao();
+
+        ArrayList<Question> ques = quesdao.getAllQuestionByQuizId(Integer.valueOf(id));
+        ArrayList<Choice> cresult = cdao.getAllChoiceByQuizId(Integer.valueOf(id));
+        session.setAttribute("countc", cresult.size());
+        session.setAttribute("countq", ques.size());
+        session.setAttribute("question", ques);
+        session.setAttribute("choice", cresult);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

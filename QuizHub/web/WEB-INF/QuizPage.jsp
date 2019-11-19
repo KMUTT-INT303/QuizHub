@@ -209,7 +209,7 @@
                     type: "POST",
                     url: "StartQuiz",
                     data: {
-                        json: "Test"
+                        quiz_id: ${takequiz.quizId}
                     },
                     success: function (e) {
                         console.log(e);

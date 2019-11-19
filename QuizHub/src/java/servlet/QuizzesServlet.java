@@ -99,10 +99,12 @@ public class QuizzesServlet extends HttpServlet {
                 Teacher t = (Teacher) session.getAttribute("user");
 
                 if (tdao.getTeacherById(t.getId()).getId() == qzs.getQuizTeacherId()) {
-                    
+
                     ArrayList<Question> ques = quesdao.getAllQuestionByQuizId(qzs.getQuizId());
                     ArrayList<Choice> cresult = cdao.getAllChoiceByQuizId(qzs.getQuizId());
 
+                    request.setAttribute("countc", cresult.size());
+                    request.setAttribute("countq", ques.size());
                     session.setAttribute("takequiz", qzs);
                     session.setAttribute("question", ques);
                     session.setAttribute("choice", cresult);
