@@ -18,7 +18,7 @@
 
         <main role="main" class="container">
 
-            <div class="row">
+            <div class="row justify-content-center">
 
                 <div class="col-sm-8">
 
@@ -35,7 +35,7 @@
                                     </nav>
                                 </div>
                             </div>
-                        </div>
+                        
 
                         <div class="collapse" id="question">
                             <div class="card-body text-secondary">
@@ -71,7 +71,7 @@
                                                                     </select>
                                                                     <span class="input-group-btn m-1">
                                                                         <button class="btn btn-success btn-add-c" type="button">
-                                                                            +
+                                                                            <i class="fas fa-plus"></i>
                                                                         </button>
                                                                     </span>
                                                                 </div>
@@ -80,7 +80,7 @@
                                                     </div>
                                                 </div>
 
-                                                <center><button type="submit" class="btn btn-success">Confirm</button></center>
+                                                <center><button type="submit" class="btn btn-success"><i class="fas fa-check-square"></i> Confirm</button></center>
                                             </div>
                                         </form>                        
 
@@ -89,6 +89,7 @@
                             </div>
                         </div>
                         </c:if>
+                        
                         <form method="post" action="Done" id="send">
                             <input name="quiz_id" value="${takequiz.quizId}" hidden />
                             <input name="student_id" value="${user.id}" hidden />
@@ -97,7 +98,7 @@
                                 <div class="card-body text-secondary">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title">${q.questionName}</h5>
+                                            <h5 class="card-title">${qround.count}. ${q.questionName}</h5>
                                             <c:forEach items="${choice}" var="c" varStatus="cround">
                                                 <c:if test="${q.questionId == c.questionId}">
                                                     <div class="form-check">
@@ -126,28 +127,20 @@
 
 
                     <div class="card mb-4">
-                        <h6 class="card-header"><center>Time</center></h6>
+                        <h6 class="card-header"><center><i class="fas fa-hourglass-half"></i> Time</center></h6>
                         <div class="card-body text-secondary">
                             <center>   
                                 <c:if test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
                                     <p>Pratice</p>
                                 </c:if>
-                                <div id="time">
-                                    <div class="timer"></div>
+                                <div class="m-3">
+                                    <div id="time">
+                                        <div class="timer"></div>
+                                    </div>
                                 </div>
-                                <button id="start" class="btn btn-warning" >Start</button>
-                                
-                                ${countc} : ${countq}
-                                
-                            </center>
-                        </div>
-                    </div>
+                                <button id="start" class="btn btn-warning" ><i class="fas fa-play"></i> Start</button>
 
-                    <div class="card mb-4">
-                        <div class="card-body text-secondary">
-                            <center>   
-
-                                <button type="submit" form="send" class="btn btn-success">Done</button>
+                                <%--${countc} : ${countq} --%>
 
                             </center>
                         </div>
@@ -157,7 +150,17 @@
                         <div class="card-body text-secondary">
                             <center>   
 
-                                <button type="button" class="btn btn-success">Mange Quizzes</button>
+                                <button type="submit" form="send" class="btn btn-success"><i class="fas fa-arrow-alt-circle-right"></i> Done</button>
+
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body text-secondary">
+                            <center>   
+
+                                <button type="button" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
 
                             </center>
                         </div>
@@ -186,14 +189,16 @@
         $(document).on('click', '#start', function (e)
         {
             e.preventDefault();
-            timer.start({
-                countdown: true,
-                startValues: {
-                    hours: ${takequiz.hours},
-                    minutes: ${takequiz.minutes},
-                    seconds: 0
-                }
-            });
+            if (!timer.isRunning()) {
+                timer.start({
+                    countdown: true,
+                    startValues: {
+                        hours: ${takequiz.hours},
+                        minutes: ${takequiz.minutes},
+                        seconds: 0
+                    }
+                });
+            }
 
         })
 

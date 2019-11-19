@@ -69,6 +69,7 @@ $(document).ready(function () {
 
     $(function ()
     {
+
         $(document).on('click', '.btn-add-c', function (e)
         {
             e.preventDefault();
@@ -85,7 +86,7 @@ $(document).ready(function () {
                 controlForm.find('.entry-c:not(:last) .btn-add-c')
                         .removeClass('btn-add-c').addClass('btn-remove-c')
                         .removeClass('btn-success').addClass('btn-danger')
-                        .html('-');
+                        .html('<i class="fas fa-minus"></i>');
             }
 
         }).on('click', '.btn-remove-c', function (e)
