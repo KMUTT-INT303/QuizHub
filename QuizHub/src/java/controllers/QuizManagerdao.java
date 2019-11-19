@@ -51,4 +51,34 @@ public class QuizManagerdao {
             
         
         }
+            
+            public void deleteQuiz(int quizId){
+           
+        try {
+            ps = conn.prepareStatement("DELETE FROM quiz WHERE Quiz_id=?");
+            ps.setInt(1,quizId);
+            ps.executeUpdate();
+            ps = conn.prepareStatement("DELETE FROM questions WHERE Quiz_id=?");
+            ps.setInt(1,quizId);
+            ps.executeUpdate();
+            ps = conn.prepareStatement("DELETE FROM choices WHERE Quiz_id=?");
+            ps.setInt(1,quizId);
+            ps.executeUpdate();
+            ps = conn.prepareStatement("DELETE FROM choice_results WHERE Quiz_id=?");
+            ps.setInt(1,quizId);
+            ps.executeUpdate();
+        
+        
+        
+        
+        
+        
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizManagerdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            }
+            
+            
 }
