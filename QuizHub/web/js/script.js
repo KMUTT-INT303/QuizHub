@@ -69,6 +69,7 @@ $(document).ready(function () {
 
     $(function ()
     {
+
         $(document).on('click', '.btn-add-c', function (e)
         {
             e.preventDefault();

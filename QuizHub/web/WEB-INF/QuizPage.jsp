@@ -18,24 +18,26 @@
 
         <main role="main" class="container">
 
-            <div class="row">
+            <div class="row justify-content-center">
 
                 <div class="col-sm-8">
 
                     <div class="card mb-4">
                         <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
 
-                        <div class="card-body text-secondary">
-                            <div class="card">
-                                <div class="card-body">
-                                    <nav class="nav">
-                                        <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target="#question" aria-expanded="false" aria-controls="question">
-                                            <i class="fas fa-plus"></i> Add Question
-                                        </button>
-                                    </nav>
+                        <c:if test='${status == "Teacher"}'>
+                            <div class="card-body text-secondary">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <nav class="nav">
+                                            <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target="#question" aria-expanded="false" aria-controls="question">
+                                                <i class="fas fa-plus"></i> Add Question
+                                            </button>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:if>
 
                         <div class="collapse" id="question">
                             <div class="card-body text-secondary">
@@ -188,14 +190,16 @@
         $(document).on('click', '#start', function (e)
         {
             e.preventDefault();
-            timer.start({
-                countdown: true,
-                startValues: {
-                    hours: ${takequiz.hours},
-                    minutes: ${takequiz.minutes},
-                    seconds: 0
-                }
-            });
+            if (!timer.isRunning()) {
+                timer.start({
+                    countdown: true,
+                    startValues: {
+                        hours: ${takequiz.hours},
+                        minutes: ${takequiz.minutes},
+                        seconds: 0
+                    }
+                });
+            }
 
         })
 
