@@ -116,7 +116,7 @@
                                     </div>
                                 </c:forEach>
                             </c:if>
-                            <c:if test="${question.size() > 0}">
+                            <c:if test="${question.size() <= 0}">
                                 <div class="card-body text-secondary">
                                     <div class="card">
                                         <div class="card-body">
