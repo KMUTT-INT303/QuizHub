@@ -52,7 +52,7 @@ public class Statdao {
             ps.setString(2, "%" + searchText + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id"),rs.getString("page")));
+                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id"), rs.getString("page")));
             }
             return q;
         } catch (SQLException ex) {
@@ -73,7 +73,7 @@ public class Statdao {
             ps.setString(2, courseId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id"),rs.getString("page")));
+                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id"), rs.getString("page")));
             }
             return q;
         } catch (SQLException ex) {
@@ -90,25 +90,41 @@ public class Statdao {
         ArrayList<QuizScore> q = new ArrayList();
         try {
 
-            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
-            //PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME order by q.quiz_name");
-            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.quiz_name)like upper(?) and CR.CHOICE_RESULT_ID IS NOT NULL group by q.quiz_id");
-
-            
-            
+//            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
+//            //PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.QUIZ_NAME) like UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME order by q.quiz_name");
+//            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.quiz_name)like upper(?) and CR.CHOICE_RESULT_ID IS NOT NULL group by q.quiz_id");
+//
+//            ps.setLong(1, studentId);
+//            ps.setString(2, "%" + quizName + "%");
+//
+//            ps2.setLong(1, studentId);
+//            ps2.setString(2, "%" + quizName + "%");
+//
+//            ResultSet rs = ps.executeQuery();
+//            ResultSet rs2 = ps2.executeQuery();
+//
+//
+//            while (rs.next() && rs2.next()) {
+//                
+//                q.add(new QuizScore(rs.getLong("score"), rs2.getLong("fullScore"), rs.getString("skill_text")));
+//                
+//            }
+            PreparedStatement ps = conn.prepareStatement("select  quiz_name from quiz where quiz_id  IN(select quiz_id from choice_results where student_id=? group by quiz_id) and upper(quiz_name) like upper(?)");
             ps.setLong(1, studentId);
             ps.setString(2, "%" + quizName + "%");
-           
-            
-            ps2.setLong(1, studentId);
-            ps2.setString(2, "%" + quizName + "%");
-            
             ResultSet rs = ps.executeQuery();
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs.next() & rs2.next()) {
-
-                q.add(new QuizScore(rs.getLong("score"), rs2.getLong("fullScore"), rs.getString("skill_text")));
+            ArrayList<String> quizNameList = new ArrayList();
+            while (rs.next()) {
+                quizNameList.add(rs.getString("quiz_name"));
             }
+
+            //searchScoreForEachQuiz
+            for (int i = 0; i < quizNameList.size(); i++) {
+                QuizScore ex = this.getTestScoreForEachQuizByName(quizNameList.get(i), studentId);
+                q.add(ex);
+
+            }
+
             return q;
 
         } catch (Exception e) {
@@ -124,26 +140,42 @@ public class Statdao {
         conn = BuildConnection.getConnection();
         ArrayList<QuizScore> q = new ArrayList();
         try {
-
-            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.COURSE_ID) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
-            //PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.COURSE_ID) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME order by q.quiz_name");
-            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.course_id)=upper(?) and CR.CHOICE_RESULT_ID IS NOT NULL group by q.quiz_id");
-
-            
+//
+//            PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.COURSE_ID) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text order by q.quiz_name");
+//            //PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.ANSWER = true AND UPPER(Q.COURSE_ID) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME order by q.quiz_name");
+//            PreparedStatement ps2 = conn.prepareStatement("select count(qt.QUESTION_ID) as fullScore from quiz q join questions qt on q.QUIZ_ID = qt.QUIZ_ID join choice_results cr on cr.QUESTION_ID = qt.QUESTION_ID where cr.STUDENT_ID=? and upper(q.course_id)=upper(?) and CR.CHOICE_RESULT_ID IS NOT NULL group by q.quiz_id");
+//
+//            ps.setLong(1, studentId);
+//            ps.setString(2, courseId);
+//
+//            ps2.setLong(1, studentId);
+//            ps2.setString(2, courseId);
+//
+//            ResultSet rs = ps.executeQuery();
+//            ResultSet rs2 = ps2.executeQuery();
+//            while (rs.next() & rs2.next()) {
+//
+//                q.add(new QuizScore(rs.getLong("score"), rs2.getLong("fullScore"), rs.getString("skill_text")));
+//            }
+            PreparedStatement ps = conn.prepareStatement("select  quiz_name from quiz where quiz_id  IN(select quiz_id from choice_results where student_id=? group by quiz_id) and upper(course_id) = upper(?)");
             ps.setLong(1, studentId);
-            ps.setString(2, courseId);
-            
-
-            ps2.setLong(1, studentId);
-            ps2.setString(2, courseId);
-            
-
+            ps.setString(2,courseId);
             ResultSet rs = ps.executeQuery();
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs.next() & rs2.next()) {
-
-                q.add(new QuizScore(rs.getLong("score"), rs2.getLong("fullScore"), rs.getString("skill_text")));
+            ArrayList<String> quizNameList = new ArrayList();
+            while (rs.next()) {
+                quizNameList.add(rs.getString("quiz_name"));
             }
+
+            //searchScoreForEachQuiz
+            for (int i = 0; i < quizNameList.size(); i++) {
+                QuizScore ex = this.getTestScoreForEachQuizByName(quizNameList.get(i), studentId);
+                q.add(ex);
+
+            }
+
+
+
+
             return q;
 
         } catch (Exception e) {
@@ -154,15 +186,15 @@ public class Statdao {
     }
 
     //getTestScoreForEachQuiz
-    public ArrayList<QuizScore> getTestScoreForEachQuizByName(String quizName, long studentId) {
+    public QuizScore getTestScoreForEachQuizByName(String quizName, long studentId) {
         //return test score and practice score
 
         conn = BuildConnection.getConnection();
-        ArrayList<QuizScore> q = new ArrayList();
+        QuizScore q = null;
         try {
 
             PreparedStatement ps = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND CR.CHOICE_RESULT_ID IS NOT NULL AND CH.CHOICE_CORRECT = true AND UPPER(Q.QUIZ_NAME) = UPPER(?) group by q.quiz_id,q.quiz_name,Q.COURSE_NAME,q.skill_text");
-            PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,quiz_name FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND UPPER(Q.QUIZ_NAME) = UPPER(?) group by quiz_name");
+            PreparedStatement ps2 = conn.prepareStatement("select count(choice_result_id) as score,quiz_name,skill_text FROM QUIZ Q JOIN QUESTIONS QT ON Q.QUIZ_ID = QT.QUIZ_ID JOIN CHOICES CH ON CH.QUESTION_ID = QT.QUESTION_ID JOIN CHOICE_RESULTS CR ON CH.CHOICE_ID = CR.CHOICE_ID WHERE CR.STUDENT_ID = ? AND UPPER(Q.QUIZ_NAME) = UPPER(?) group by quiz_name,skill_text");
 
             ps.setString(2, quizName);
             ps.setLong(1, studentId);
@@ -171,9 +203,17 @@ public class Statdao {
             ps2.setLong(1, studentId);
             ResultSet rs = ps.executeQuery();
             ResultSet rs2 = ps2.executeQuery();
-            while (rs.next() & rs2.next()) {
+            if (rs.next()) {
 
-                q.add(new QuizScore(rs.getLong("score"), rs2.getLong("score"), rs.getString("skill_text")));
+                if (rs2.next()) {
+                    q = new QuizScore(rs2.getString("quiz_name"), rs.getLong("score"), rs2.getLong("score"), rs2.getString("skill_text"));
+                }
+            } else {
+
+                if (rs2.next()) {
+                    q = new QuizScore(rs2.getString("quiz_name"), 0l, rs2.getLong("score"), rs2.getString("skill_text"));
+                }
+
             }
             return q;
 
@@ -186,7 +226,7 @@ public class Statdao {
 
     public ArrayList<SkillStat> getSkillStatByCourseId(String courseId, long studentId) {
 
-        ArrayList<QuizScore> quizTestScore = quizTestScore = this.getTestScoreForQuizByCourseId(courseId, studentId);
+        ArrayList<QuizScore> quizTestScore = this.getTestScoreForQuizByCourseId(courseId, studentId);
 
         if (quizTestScore.isEmpty()) {
             return null;
@@ -206,9 +246,9 @@ public class Statdao {
                     System.out.println(sl);
                     for (int v = 0; v < sl.size(); v++) {
                         if (sl.get(v).getName().equals(skillName)) {
-                            SkillStat skillStatOld = new SkillStat(sl.get(v).getName(),sl.get(v).getAllPercent(),sl.get(v).getQuantityOfSameSkillQuiz());
+                            SkillStat skillStatOld = new SkillStat(sl.get(v).getName(), sl.get(v).getAllPercent(), sl.get(v).getQuantityOfSameSkillQuiz());
                             SkillStat skillStatPrepare = skillStatOld;
-                            
+
                             skillStatPrepare.setAllPercent(skillStatOld.getAllPercent() + percent);
                             skillStatPrepare.setName(skillStatOld.getName());
                             skillStatPrepare.setQuantityOfSameSkillQuiz(skillStatOld.getQuantityOfSameSkillQuiz() + 1);
@@ -217,7 +257,7 @@ public class Statdao {
                         }
 
                     }
-                }else{
+                } else {
                     System.out.println("it's empty");
                 }
 

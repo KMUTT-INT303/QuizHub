@@ -2,10 +2,19 @@
 package model;
 
 public class QuizScore {
+    String name;
     double score;
     double fullScore;
     double percent;
     String skill;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getSkill() {
         return skill;
@@ -22,6 +31,14 @@ public class QuizScore {
     }
 
     public QuizScore(double score, double fullScore,String skill) {
+        this.score = score;
+        this.fullScore = fullScore;
+        this.percent = (score/fullScore)*100;
+        this.skill = skill;
+    }
+    
+       public QuizScore(String name,double score, double fullScore,String skill) {
+        this.name = name;
         this.score = score;
         this.fullScore = fullScore;
         this.percent = (score/fullScore)*100;
@@ -56,9 +73,10 @@ public class QuizScore {
 
     @Override
     public String toString() {
-        return "QuizScore{" + "score=" + score + ", fullScore=" + fullScore + ", percent=" + percent + ", skill=" + skill + '}';
+        return "QuizScore{" + "name=" + name + ", score=" + score + ", fullScore=" + fullScore + ", percent=" + percent + ", skill=" + skill + '}';
     }
 
+ 
    
 
 

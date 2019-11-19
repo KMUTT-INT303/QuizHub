@@ -146,8 +146,9 @@ public class StatSearchServlet extends HttpServlet {
     }
     public static void main(String[] args) {
         Statdao sd = new Statdao();
-        System.out.println(sd.getSkillStatByCourseId("int105",61130500001l
-        ));
+        System.out.println(sd.getTestScoreForQuizByName("net",61130500001l));
+        
+        //System.out.println(sd.getSkillStatByCourseId("INT105",61130500001l));
     }
    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

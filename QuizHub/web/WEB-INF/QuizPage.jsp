@@ -103,7 +103,7 @@
                                             <c:forEach items="${choice}" var="c" varStatus="cround">
                                                 <c:if test="${q.questionId == c.questionId}">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="result${q.questionId}" value="${c.choiceId}">
+                                                        <input class="form-check-input" type="radio" name="result${qround.count}" value="${c.choiceId}">
                                                         <label class="form-check-label" for="${q.questionId}">
                                                             ${c.choiceName}
                                                         </label>
