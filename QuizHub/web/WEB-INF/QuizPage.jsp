@@ -37,83 +37,94 @@
                                     </div>
                                 </div>
                             </div>
-                        
 
-                        <div class="collapse" id="question">
-                            <div class="card-body text-secondary">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form role="form" autocomplete="off" method="post" action="CreateQuestion">
-                                            <div class="container mb-1">
-                                                <div class="row">
-                                                    <div class="control-group col">
 
-                                                        <div class="controls-q"> 
+                            <div class="collapse" id="question">
+                                <div class="card-body text-secondary">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form role="form" autocomplete="off" method="post" action="CreateQuestion">
+                                                <div class="container mb-1">
+                                                    <div class="row">
+                                                        <div class="control-group col">
 
-                                                            <div class="entry-q input-group col-xs-3">
-                                                                <input name="page" value="${takequiz.page}" hidden />
-                                                                <input name="quiz_id" value="${takequiz.quizId}" hidden />
-                                                                <input class="form-control" name="question" type="text" placeholder="Insert your question" />
-                                                            </div>
+                                                            <div class="controls-q"> 
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="control-group col">
-
-                                                        <div class="controls-c"> 
-                                                            <fieldset role="form" autocomplete="off">
-                                                                <div class="entry-c input-group col-xs-3">
-                                                                    <input class="form-control m-1" name="choice" type="text" placeholder="Insert your choice" />
-                                                                    <select name="correct" class="form-control col-2 m-1">
-                                                                        <option value="false">false</option>
-                                                                        <option value="true">true</option>
-                                                                    </select>
-                                                                    <span class="input-group-btn m-1">
-                                                                        <button class="btn btn-success btn-add-c" type="button">
-                                                                            <i class="fas fa-plus"></i>
-                                                                        </button>
-                                                                    </span>
+                                                                <div class="entry-q input-group col-xs-3">
+                                                                    <input name="page" value="${takequiz.page}" hidden />
+                                                                    <input name="quiz_id" value="${takequiz.quizId}" hidden />
+                                                                    <input class="form-control" name="question" type="text" placeholder="Insert your question" />
                                                                 </div>
-                                                            </fieldset>
+
+                                                            </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="row">
+                                                        <div class="control-group col">
+
+                                                            <div class="controls-c"> 
+                                                                <fieldset role="form" autocomplete="off">
+                                                                    <div class="entry-c input-group col-xs-3">
+                                                                        <input class="form-control m-1" name="choice" type="text" placeholder="Insert your choice" />
+                                                                        <select name="correct" class="form-control col-2 m-1">
+                                                                            <option value="false">false</option>
+                                                                            <option value="true">true</option>
+                                                                        </select>
+                                                                        <span class="input-group-btn m-1">
+                                                                            <button class="btn btn-success btn-add-c" type="button">
+                                                                                <i class="fas fa-plus"></i>
+                                                                            </button>
+                                                                        </span>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <center><button type="submit" class="btn btn-success"><i class="fas fa-check-square"></i> Confirm</button></center>
                                                 </div>
+                                            </form>                        
 
-                                                <center><button type="submit" class="btn btn-success"><i class="fas fa-check-square"></i> Confirm</button></center>
-                                            </div>
-                                        </form>                        
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </c:if>
                         <form method="post" action="Done" id="send">
                             <input name="quiz_id" value="${takequiz.quizId}" hidden />
                             <input name="student_id" value="${user.id}" hidden />
                             <input type="hidden" name="count" value="${countc}">
-                            <c:forEach items="${question}" var="q" varStatus="qround">
+                            <c:if test="${question.size() > 0}">
+                                <c:forEach items="${question}" var="q" varStatus="qround">
+                                    <div class="card-body text-secondary">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${qround.count}. ${q.questionName}</h5>
+                                                <c:forEach items="${choice}" var="c" varStatus="cround">
+                                                    <c:if test="${q.questionId == c.questionId}">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="result${qround.count}" value="${c.choiceId}">
+                                                            <label class="form-check-label" for="${q.questionId}">
+                                                                ${c.choiceName}
+                                                            </label>
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${question.size() > 0}">
                                 <div class="card-body text-secondary">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title">${qround.count}. ${q.questionName}</h5>
-                                            <c:forEach items="${choice}" var="c" varStatus="cround">
-                                                <c:if test="${q.questionId == c.questionId}">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="result${qround.count}" value="${c.choiceId}">
-                                                        <label class="form-check-label" for="${q.questionId}">
-                                                            ${c.choiceName}
-                                                        </label>
-                                                    </div>
-                                                </c:if>
-                                            </c:forEach>
+                                            This quiz doesn't have any question yet.
                                         </div>
                                     </div>
                                 </div>
-                            </c:forEach>
+                            </c:if>
                         </form>
 
                         <%--<div class="card-footer">
@@ -160,8 +171,8 @@
                     <div class="card mb-4">
                         <div class="card-body text-secondary">
                             <center>   
-                                <form action="ManageQuiz" method="get">
-                                <button type="submit" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
+                                <form action="ManageQuiz" method="post">
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
                                 </form>
                             </center>
                         </div>
@@ -178,7 +189,7 @@
         </main>
     </body>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <%@ include file="../Layouts/Footers.jsp" %> 
     <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>
     <script src="js/script.js"></script>
 
@@ -191,6 +202,18 @@
         {
             e.preventDefault();
             if (!timer.isRunning()) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "StartQuiz",
+                    data: {
+                        json: "Test"
+                    },
+                    success: function (e) {
+                        console.log(e);
+                    }
+                });
+
                 timer.start({
                     countdown: true,
                     startValues: {
@@ -217,8 +240,6 @@
         </c:if>
 
     </script>
-
-    <%@ include file="../Layouts/Footers.jsp" %> 
 
 
 </html>
