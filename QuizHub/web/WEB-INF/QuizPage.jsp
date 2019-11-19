@@ -24,6 +24,17 @@
 
                     <div class="card mb-4">
                         <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
+
+                        <c:if test='${status == "Teacher"}'>
+                            <div class="card-body text-secondary">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <nav class="nav">
+                                            <button class="btn btn-primary m-2" type="button" data-toggle="collapse" data-target="#question" aria-expanded="false" aria-controls="question">
+                                                <i class="fas fa-plus"></i> Add Question
+                                            </button>
+                                        </nav>
+                                    </div>
                         <c:if test="${(status=='Teacher') || (status=='Admin')}">
                         <div class="card-body text-secondary">
                             <div class="card">
@@ -35,7 +46,11 @@
                                     </nav>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         
+=======
+                        </c:if>
+>>>>>>> origin/master
 
                         <div class="collapse" id="question">
                             <div class="card-body text-secondary">
