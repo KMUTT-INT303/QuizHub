@@ -20,13 +20,13 @@
             <div class="jumbotron">
                 <h1>Welcome to QuizHub</h1>
                 <p class="lead">Make learning awesome! Quizhub! brings engagement and fun to more than 1 billion players every year at school, at work, and at home</p>
-                <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Try an example »</a>
+                <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Try an example <i class="fas fa-hand-point-left"></i></a>
             </div>
             <div class="row">
                 <div class="col-sm-4">
 
                     <div class="card mb-2">
-                        <h6 class="card-header">User Information</h6>
+                        <h6 class="card-header"><i class="fas fa-user-tag"></i> User Information</h6>
                         <div class="card-body">
                             <div class="card mb-2">
                                 <ul class="list-group list-group-flush">
@@ -40,20 +40,20 @@
                                     <li class="list-group-item">Last time: 20/10/2562 - 06:39:59</li>
                                 </ul>
                             </div>
-                            <div class="card text-center mb-2"><a href="Profile" class="btn btn-outline-dark">Manage</a></div>
-                            <div class="card text-center mb-2"><a href="Logout" class="btn btn-outline-danger">Sign out</a></div>
+                            <div class="card text-center mb-2"><a href="Profile" class="btn btn-outline-dark"><i class="fas fa-cogs"></i> Manage</a></div>
+                            <div class="card text-center mb-2"><a href="Logout" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i> Sign out</a></div>
                         </div>
                     </div>
 
                     <div class="card mb-2">
-                        <h6 class="card-header">Last Activities</h6>
+                        <h6 class="card-header"><i class="fas fa-list"></i> Last Activities</h6>
                         <div class="card-body">
                             <p>Nothing</p>
                         </div>
                     </div>
                     <c:if test='${status == "Admin"}'>
                     <div class="card mb-2">
-                        <h6 class="card-header">Admin Panel</h6>
+                        <h6 class="card-header"><i class="fas fa-user-shield"></i> Admin Panel</h6>
                         <div class="card-body">
                             <div class="card text-center mb-2"><a href="StudentManagement" class="btn btn-outline-dark">Student Manage</a></div>
                             <div class="card text-center mb-2"><a href="TeacherManagement" class="btn btn-outline-dark">Teacher Manage</a></div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="card mb-2">
-                        <h6 class="card-header">Featured Quizzes</h6>
+                        <h6 class="card-header"><i class="fas fa-star"></i> Featured Quizzes</h6>
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col-sm-3"></div>
@@ -72,7 +72,7 @@
                                         <div class="input-group">
                                             <input class="form-control mr-sm-2" type="text" name="code" placeholder="Have a code? Join with your code "/> 
                                             <span class="input-group-btn">
-                                                <button type="submit" class="btn btn-outline-primary">Join</button>
+                                                <button type="submit" class="btn btn-outline-primary"><i class="fas fa-paper-plane"></i> Join</button>
                                             </span>
                                         </div>
                                     </form>
@@ -83,7 +83,7 @@
                             <div class="row mb-2">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">
-                                    <div class="card text-center mb-2"><a href="Quizzes" class="btn btn-outline-dark">Quizzes</a></div>
+                                    <div class="card text-center mb-2"><a href="Quizzes" class="btn btn-outline-dark"><i class="fas fa-th"></i> Quizzes</a></div>
                                 </div>
                                 <div class="col-sm-3"></div>
                             </div>

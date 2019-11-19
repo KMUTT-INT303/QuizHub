@@ -36,7 +36,7 @@
                                         <div class="input-group">
                                             <input class="form-control mr-sm-2" type="text" name="code" placeholder="Have a code? Join with your code"> 
                                             <span class="input-group-btn">
-                                                <button class="btn btn-outline-primary">Join</button>
+                                                <button class="btn btn-outline-primary"><i class="fas fa-paper-plane"></i> Join</button>
                                             </span>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                 <div class="col-sm-12">
 
                     <div class="card mb-2">
-                        <h6 class="card-header">Quizhub<div class="float-right"><c:if test="${status == 'Teacher'}"><a class="badge badge-success" href="CreateCourse">Create Course</a> <a class="badge badge-success" href="CreateQuiz">Create A Quiz</a></c:if></div></h6>
+                        <h6 class="card-header"><i class="fas fa-star"></i> Quizhub<div class="float-right"><c:if test="${status == 'Teacher'}"><a class="badge badge-success" href="CreateCourse">Create Course</a> <a class="badge badge-success" href="CreateQuiz">Create A Quiz</a></c:if></div></h6>
                             <div class="card-body">
                                 <div class="row mb-2">
                                     <div class="col-sm-12">

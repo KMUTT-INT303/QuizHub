@@ -22,7 +22,7 @@
                 <div class="col-sm-8">
 
                     <div class="card mb-4">
-                        <h6 class="card-header">Change Password</h6>
+                        <h6 class="card-header"><i class="fas fa-edit"></i>  Change Password</h6>
                         <div class="card-body text-secondary">
                             ${msg}
                             <form action="ChangePassword" method="post">
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+                                        <button type="submit" class="btn btn-primary mb-2"><i class="far fa-check-circle"></i> Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -55,7 +55,7 @@
 
 
                     <div class="card mb-4">
-                        <h6 class="card-header">User Information</h6>
+                        <h6 class="card-header"><i class="fas fa-edit"></i>  Change Name</h6>
                         <div class="card-body text-secondary">
                             ${ProfileException}
                             <form action="Profile" method="post">
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="form-group row"> 
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+                                        <button type="submit" class="btn btn-primary mb-2"><i class="far fa-check-circle"></i> Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -87,7 +87,7 @@
 
 
                     <div class="card mb-4">
-                        <h6 class="card-header">Account Status</h6>
+                        <h6 class="card-header"><i class="fas fa-bookmark"></i> Account Status</h6>
                         <div class="card-body text-secondary">
                             <center><p class="btn btn-success col-sm-8">Active</p></center>
                         </div>
@@ -95,7 +95,7 @@
 
 
                     <div class="card mb-4">
-                        <h6 class="card-header">User Information</h6>
+                        <h6 class="card-header"><i class="fas fa-user-tag"></i> User Information</h6>
                         <div class="card-body">
                             <div class="card mb-2">
                                 <ul class="list-group list-group-flush">

@@ -39,13 +39,12 @@
 
                                 <div class="container">
                                     <ul class="nav nav-tabs justify-content-center align-items-center" style="border-bottom: 0px;">
-                                        <li><a data-toggle="tab" href="#s" class="btn btn-primary m-2">Student Register</a></li>
-                                        <li><a data-toggle="tab" href="#t" class="btn btn-primary m-2">Teacher Register</a></li>
+                                        <li><a data-toggle="tab" href="#s" class="btn btn-primary m-2"><i class="fas fa-user-graduate"></i> Student Register</a></li>
+                                        <li><a data-toggle="tab" href="#t" class="btn btn-primary m-2"><i class="fas fa-chalkboard-teacher"></i> Teacher Register</a></li>
                                     </ul>
 
                                     <div class="tab-content">
                                         <div id="s" class="tab-pane fade in active">
-                                            <h3>Register Student</h3>
                                             <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
                                                 <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_STUDENT"></div>
                                                 <div class="row">
@@ -106,13 +105,12 @@
                                                 </div>
 
 
-                                                <button type="submit" class="btn btn-success ">Register</button>
-                                                <a href="Login" class="btn btn-success">Back</a>
+                                                <button type="submit" class="btn btn-success "><i class="fas fa-check-square"></i> Register</button>
+                                                <a href="Login" class="btn btn-success"><i class="fas fa-undo"></i> Back</a>
                                             </form>
 
                                         </div>
                                         <div id="t" class="tab-pane fade">
-                                            <h3>Register Teacher</h3>
                                             <form id="register-form" action="TeacherRegister" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
                                                 <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_TEACHER"></div>
                                                 <div class="row">
@@ -159,17 +157,9 @@
                                                     </div>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-success ">Register</button>
-                                                <a href="Login" class="btn btn-success">Back</a>
+                                                <button type="submit" class="btn btn-success "><i class="fas fa-check-square"></i> Register</button>
+                                                <a href="Login" class="btn btn-success"><i class="fas fa-undo"></i> Back</a>
                                             </form>
-                                        </div>
-                                        <div id="menu2" class="tab-pane fade">
-                                            <h3>Menu 2</h3>
-                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                                        </div>
-                                        <div id="menu3" class="tab-pane fade">
-                                            <h3>Menu 3</h3>
-                                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -188,6 +178,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1085264464.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
 </html>
