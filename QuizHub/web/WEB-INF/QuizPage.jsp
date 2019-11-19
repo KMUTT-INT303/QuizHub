@@ -160,9 +160,9 @@
                     <div class="card mb-4">
                         <div class="card-body text-secondary">
                             <center>   
-
-                                <button type="button" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
-
+                                <form action="ManageQuiz" method="get">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
+                                </form>
                             </center>
                         </div>
                     </div>

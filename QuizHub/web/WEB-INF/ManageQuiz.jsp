@@ -38,18 +38,18 @@
             </select> 
             <input type="text" name="newSkill" >
 
-            <input class="form-control" type="datetime-local" name="newStartDate">
+            <input type="datetime-local" name="newStartDate">
 
-            <input class="form-control" type="datetime-local" name="newEndDate">
+            <input type="datetime-local" name="newEndDate">
 
-            <input type="text" class="form-control" name="newHours" >
+            <input type="text" name="newHours" >
 
-            <input type="text" class="form-control" name="newMinutes" >
+            <input type="text" name="newMinutes" >
 
             <input type="file" name="newCoverImage">
             <label for="customFile">Choose Images</label>
 
-            <button type="submit" class="btn btn-primary mb-2">Create Now</button>
+            <button type="submit" class="btn btn-primary mb-2">Apply</button>
 
 
         </form>  

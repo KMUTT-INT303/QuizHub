@@ -38,7 +38,7 @@ public class ManageQuizServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String quizId = request.getParameter("quizId");
-        int id = Integer.valueOf(quizId);
+        
         String newName = request.getParameter("newName");
         String newCode = request.getParameter("newCode");
         String newFaculty = request.getParameter("newFaculty");
@@ -50,14 +50,19 @@ public class ManageQuizServlet extends HttpServlet {
         String newMinutes = request.getParameter("newMinutes");
         String newCourse = request.getParameter("newCourse");
         
+        request.setAttribute("currentQuizId",quizId);
         QuizManagerdao qm = new QuizManagerdao();
+        int id = -1;
         
-        
+        if(request.getParameter("currentQuiz")!=null){
+        id = Integer.valueOf(request.getParameter("currentQuiz"));
+        }
 
         if ((newName == null || newName.equals("")) && (newCode == null || newCode.equals("")) && (newFaculty == null || newFaculty.equals("")) && (newBranch == null || newBranch.equals(""))
                 && (newSkill == null || newSkill.equals("")) && (newStartDate == null || newStartDate.equals("")) && (newEndDate == null || newEndDate.equals("")) && (newHours == null || newHours.equals("")) && (newMinutes == null || newMinutes.equals(""))) {
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/ManageQuiz.jsp").forward(request, response);
+        
         } else {
                     String hours = null;
         String minutes = null;
