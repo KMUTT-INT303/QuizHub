@@ -143,10 +143,9 @@ public class ManageQuizServlet extends HttpServlet {
 
     }
     public static void main(String[] args) {
-        QuizManagerdao qm = new QuizManagerdao();
-        qm.setQuizAttributeValue("quiz_name","GoodGuy Programming",5);
+        QuizManagerdao qd = new QuizManagerdao();
+        qd.deleteQuiz(9);
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
