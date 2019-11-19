@@ -31,7 +31,7 @@ public class Quizdao {
             ps.setString(2, q.getQuizComment());
             ps.setString(3, q.getQuizStatus());
             ps.setLong(4, q.getQuizTeacherId());
-            ps.setString(5, q.getQuizName());
+            ps.setString(5, q.getQuizCourseName());
             ps.setString(6, q.getQuizCourseId());
             ps.setInt(7, q.getQuizFacultyId());
             ps.setInt(8, q.getQuizBranchId());

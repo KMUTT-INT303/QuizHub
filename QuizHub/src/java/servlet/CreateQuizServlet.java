@@ -42,7 +42,7 @@ public class CreateQuizServlet extends HttpServlet {
         String quizName = request.getParameter("quiz_name");
         String quizComment = request.getParameter("quiz_advice");
         String quizStatus = request.getParameter("quiz_status");
-        String quizTeacherId = "1000000001"; //request.getParameter("teacher_id");
+        String quizTeacherId = request.getParameter("teacher_id");
         String course = request.getParameter("course");
         String quizFacultyId = request.getParameter("faculty_id");
         String quizBranchId = request.getParameter("branch_id");
