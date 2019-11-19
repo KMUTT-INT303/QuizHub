@@ -38,22 +38,130 @@
 
 
                                 <div class="container">
-                                    <h2>Dynamic Tabs</h2>
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                                        <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-                                        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-                                        <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+                                    <ul class="nav nav-tabs justify-content-center align-items-center" style="border-bottom: 0px;">
+                                        <li><a data-toggle="tab" href="#s" class="btn btn-primary m-2">Student Register</a></li>
+                                        <li><a data-toggle="tab" href="#t" class="btn btn-primary m-2">Teacher Register</a></li>
                                     </ul>
 
                                     <div class="tab-content">
-                                        <div id="home" class="tab-pane fade in active">
-                                            <h3>HOME</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <div id="s" class="tab-pane fade in active">
+                                            <h3>Register Student</h3>
+                                            <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
+                                                <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_STUDENT"></div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Student ID</label>
+                                                            <input type="number" name="student_id" class="form-control" placeholder="Student ID">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Passoword</label>
+                                                            <input type="password" name="password" class="form-control" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">First Name</label>
+                                                            <input type="text" name="fname" class="form-control" placeholder="First Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Last Name</label>
+                                                            <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Faculty</label>
+                                                            <select class="form-control" id="faculty" name="faculty">
+                                                                <option value="0" selected="selected">Select your faculty</option>
+                                                                <c:forEach items="${faculties}" var="f">
+                                                                    <option value="${f.id}">${f.name}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Branch</label>
+                                                            <select class="form-control" id="branch" name="branch" hidden="true"> 
+                                                                <c:forEach items="${branch}" var="b">
+                                                                    <option value="${b.faculty_id}-${b.id}">${b.name}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <button type="submit" class="btn btn-success ">Register</button>
+                                                <a href="Login" class="btn btn-success">Back</a>
+                                            </form>
+
                                         </div>
-                                        <div id="menu1" class="tab-pane fade">
-                                            <h3>Menu 1</h3>
-                                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        <div id="t" class="tab-pane fade">
+                                            <h3>Register Teacher</h3>
+                                            <form id="register-form" action="TeacherRegister" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
+                                                <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_TEACHER"></div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Teacher ID</label>
+                                                            <input type="number" name="teacher_id" class="form-control" placeholder="Teacher ID">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Passoword</label>
+                                                            <input type="password" name="password" class="form-control" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">First Name</label>
+                                                            <input type="text" name="fname" class="form-control" placeholder="First Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Last Name</label>
+                                                            <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Faculty</label>
+                                                            <select class="form-control" id="faculty" name="faculty">
+                                                                <option value="0" selected="selected">Select your faculty</option>
+                                                                <c:forEach items="${faculties}" var="f">
+                                                                    <option value="${f.id}">${f.name}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-success ">Register</button>
+                                                <a href="Login" class="btn btn-success">Back</a>
+                                            </form>
                                         </div>
                                         <div id="menu2" class="tab-pane fade">
                                             <h3>Menu 2</h3>
@@ -67,127 +175,6 @@
                                 </div>
 
 
-
-
-
-
-
-
-
-                                <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
-                                    <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_STUDENT"></div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Student ID</label>
-                                                <input type="number" name="student_id" class="form-control" placeholder="Student ID">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Passoword</label>
-                                                <input type="password" name="password" class="form-control" placeholder="Password">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">First Name</label>
-                                                <input type="text" name="fname" class="form-control" placeholder="First Name">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Last Name</label>
-                                                <input type="text" name="lname" class="form-control" placeholder="Last Name">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Faculty</label>
-                                                <select class="form-control" id="faculty" name="faculty">
-                                                    <option value="0" selected="selected">Select your faculty</option>
-                                                    <c:forEach items="${faculties}" var="f">
-                                                        <option value="${f.id}">${f.name}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Branch</label>
-                                                <select class="form-control" id="branch" name="branch" hidden="true"> 
-                                                    <c:forEach items="${branch}" var="b">
-                                                        <option value="${b.faculty_id}-${b.id}">${b.name}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <button type="submit" class="btn btn-success ">Register</button>
-                                    <a href="Login" class="btn btn-success">Back</a>
-                                </form>
-
-
-                                <form id="register-form" action="TeacherRegister" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
-                                    <div><input type="hidden" name="FROM_REGISTER" value="REGISTER_TEACHER"></div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Teacher ID</label>
-                                                <input type="number" name="teacher_id" class="form-control" placeholder="Teacher ID">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Passoword</label>
-                                                <input type="password" name="password" class="form-control" placeholder="Password">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">First Name</label>
-                                                <input type="text" name="fname" class="form-control" placeholder="First Name">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Last Name</label>
-                                                <input type="text" name="lname" class="form-control" placeholder="Last Name">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label class="sr-only">Faculty</label>
-                                                <select class="form-control" id="faculty" name="faculty">
-                                                    <option value="0" selected="selected">Select your faculty</option>
-                                                    <c:forEach items="${faculties}" var="f">
-                                                        <option value="${f.id}">${f.name}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-success ">Register</button>
-                                    <a href="Login" class="btn btn-success">Back</a>
-                                </form>
 
 
                             </div>

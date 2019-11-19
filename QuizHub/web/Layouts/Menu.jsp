@@ -15,35 +15,35 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="/QuizHub/Home">Home</a>
+                    <a class="nav-link" href="/QuizHub/Home"><i class="fas fa-home"></i> Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="Profile">Profile</a>
+                    <a class="nav-link" href="Profile"><i class="fas fa-user"></i> Profile</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="Quizzes">Quizzes</a>
+                    <a class="nav-link" href="Quizzes"><i class="fas fa-stream"></i> Quizzes</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/QuizHub/StatSearch.jsp">View Statistics</a>
+                    <a class="nav-link" href="/QuizHub/StatSearch.jsp"><i class="fas fa-chart-bar"></i> View Statistics</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="Question">Question?</a>
+                    <a class="nav-link" href="Question"><i class="fas fa-comment-dots"></i> Question?</a>
                 </li>
 
                 <c:if test="${status == 'Admin'}">
                 <li class="nav-item">
-                    <a class="nav-link" href="ManageSystem">Manage System</a>
+                    <a class="nav-link" href="ManageSystem"><i class="fas fa-cogs"></i> Manage System</a>
                 </li>
                 </c:if>
 
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
             </form>
         </div>
     </div>

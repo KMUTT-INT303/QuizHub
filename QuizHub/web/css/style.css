@@ -11,6 +11,7 @@ and open the template in the editor.
 html, body {
     background: linear-gradient(to right, rgb(79, 72, 192), rgb(72, 0, 72));
     height: 100%;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .login-section {

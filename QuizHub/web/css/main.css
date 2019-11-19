@@ -8,6 +8,10 @@ body {
     margin-bottom: 60px;
 }
 
+html, body {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
