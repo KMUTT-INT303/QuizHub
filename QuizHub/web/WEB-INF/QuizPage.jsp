@@ -168,15 +168,17 @@
                         </div>
                     </div>
 
-                    <div class="card mb-4">
-                        <div class="card-body text-secondary">
-                            <center>   
-                                <form action="ManageQuiz" method="post">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
-                                </form>
-                            </center>
+                    <c:if test="${status == 'Teacher' || status == 'Admin'}">
+                        <div class="card mb-4">
+                            <div class="card-body text-secondary">
+                                <center>   
+                                    <form action="ManageQuiz" method="post">
+                                        <button type="submit" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
+                                    </form>
+                                </center>
+                            </div>
                         </div>
-                    </div>
+                    </c:if>
 
 
                 </div>
