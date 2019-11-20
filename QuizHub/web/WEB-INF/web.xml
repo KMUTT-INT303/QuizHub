@@ -104,6 +104,10 @@
         <servlet-name>LoadDoneButtonServlet</servlet-name>
         <servlet-class>servlet.LoadDoneButtonServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgetPasswordServlet</servlet-name>
+        <servlet-class>servlet.ForgetPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>LoadDoneButtonServlet</servlet-name>
         <url-pattern>/LoadDoneButton</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgetPasswordServlet</servlet-name>
+        <url-pattern>/ForgetPassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
