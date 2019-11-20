@@ -39,7 +39,7 @@ public class TeacherRegisterServlet extends HttpServlet {
         String faculty_id = request.getParameter("faculty");
         String email = request.getParameter("email");
         String checkForm = request.getParameter("FROM_REGISTER");
-        String path = "/Register.jsp";
+        String path = "/WEB-INF/Register.jsp";
         
         if(id.trim().isEmpty() || firstName.trim().isEmpty() || lastName.trim().isEmpty() || password.trim().isEmpty() || faculty_id.trim().isEmpty() || email.trim().isEmpty()){
             msg = "input all information";
@@ -102,7 +102,7 @@ public class TeacherRegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        request.getRequestDispatcher("/Register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
     }
 
     /**

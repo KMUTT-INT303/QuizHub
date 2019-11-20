@@ -47,19 +47,20 @@ public class RegisterServlet extends HttpServlet {
         String brach_id = request.getParameter("branch");
         String email = request.getParameter("email");
         String checkForm = request.getParameter("FROM_REGISTER");
+        String path = "/WEB-INF/Register.jsp";
 
         if (student_id.trim().isEmpty() || password.trim().isEmpty() || fname.trim().isEmpty() || lname.trim().isEmpty()
                 || faculty_id.trim().isEmpty() || brach_id.trim().isEmpty() || email.trim().isEmpty()) {
             msg = "You must to input all information";
             request.setAttribute("msg", msg);
-            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            request.getRequestDispatcher(path).forward(request, response);
             return;
         }
 
         if (checkForm == null || !checkForm.equals("REGISTER_STUDENT")) {
             msg = "Something wrong. Plase try again later!";
             request.setAttribute("msg", msg);
-            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            request.getRequestDispatcher(path).forward(request, response);
             return;
         }
 
@@ -76,7 +77,7 @@ public class RegisterServlet extends HttpServlet {
         if (student_id.length() < 10) {
             msg = "Wrong format of Student ID.";
             request.setAttribute("msg", msg);
-            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            request.getRequestDispatcher(path).forward(request, response);
             return;
         }
 
@@ -84,7 +85,7 @@ public class RegisterServlet extends HttpServlet {
             if (!Character.isDigit(c)) {
                 msg = "Student ID cannot be text.";
                 request.setAttribute("msg", msg);
-                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+                request.getRequestDispatcher(path).forward(request, response);
                 return;
             }
         }
@@ -96,7 +97,7 @@ public class RegisterServlet extends HttpServlet {
         if (fid <= 0) {
             msg = "Please select your faculty.";
             request.setAttribute("msg", msg);
-            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            request.getRequestDispatcher(path).forward(request, response);
             return;
         }
 
@@ -107,7 +108,7 @@ public class RegisterServlet extends HttpServlet {
         if (s != null) {
             msg = "You student id has Registered.";
             request.setAttribute("msg", msg);
-            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            request.getRequestDispatcher(path).forward(request, response);
             return;
 
         } else {
@@ -115,13 +116,13 @@ public class RegisterServlet extends HttpServlet {
             if(smail!= null){
                 msg = "this email has Registered.";
                 request.setAttribute("msg", msg);
-                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+                request.getRequestDispatcher(path).forward(request, response);
                 return;
             }else{
                 sdao.addStudent(regStudent);
                 msg = "Register successful.";
                 request.setAttribute("msg", msg);
-                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+                request.getRequestDispatcher(path).forward(request, response);
             }
         }
 
@@ -156,7 +157,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/Register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
         //processRequest(request, response);
 
     }

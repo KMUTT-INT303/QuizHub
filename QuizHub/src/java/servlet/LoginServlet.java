@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String path = "/Login.jsp";
+        String path = "/WEB-INF/Login.jsp";
         String msg = null;
 
         for (char c : username.toCharArray()) {
@@ -135,7 +135,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().removeAttribute("codemsg");
-        request.getRequestDispatcher("/Login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
     }
 
     /**
