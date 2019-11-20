@@ -33,6 +33,10 @@ public class Result {
         this.result_date = result_date;
     }
 
+    public Result(int quizId) {
+        this.quizId = quizId;
+    }
+
     public int getResult_id() {
         return result_id;
     }

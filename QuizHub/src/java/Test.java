@@ -99,16 +99,11 @@ public class Test {
         } else {
             System.out.println("False");
         }*/
-        
-        ChoiceResultDao crdao = new ChoiceResultDao();
-        ChoiceResult cr = new ChoiceResult();
-            
-            cr.setQuiz_id(8);
-            cr.setQuestion_id(1);
-            cr.setChoice_id(1);
-            cr.setStudent_id(6113050001L);
-            
-            crdao.createChoiceResult(cr);
+        Choicedao cdao = new Choicedao();
+        ArrayList<Choice> cresult = cdao.getAllChoiceByQuizId(10);
+        System.out.println(cresult);
+        ArrayList<Choice> cresult1 = cdao.getAllChoiceByQuizId(1);
+        System.out.println(cresult1);
 
     }
 

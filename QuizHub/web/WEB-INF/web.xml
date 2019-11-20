@@ -96,6 +96,14 @@
         <servlet-name>StartQuizServlet</servlet-name>
         <servlet-class>servlet.StartQuizServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadQuizServlet</servlet-name>
+        <servlet-class>servlet.LoadQuizServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadDoneButtonServlet</servlet-name>
+        <servlet-class>servlet.LoadDoneButtonServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -183,6 +191,14 @@
     <servlet-mapping>
         <servlet-name>StartQuizServlet</servlet-name>
         <url-pattern>/StartQuiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadQuizServlet</servlet-name>
+        <url-pattern>/LoadQuiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadDoneButtonServlet</servlet-name>
+        <url-pattern>/LoadDoneButton</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

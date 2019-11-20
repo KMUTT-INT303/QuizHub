@@ -96,25 +96,19 @@
                             <input name="student_id" value="${user.id}" hidden />
                             <input type="hidden" name="count" value="${countc}">
                             <c:if test="${question.size() > 0}">
-                                <c:forEach items="${question}" var="q" varStatus="qround">
-                                    <div class="card-body text-secondary">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${qround.count}. ${q.questionName}</h5>
-                                                <c:forEach items="${choice}" var="c" varStatus="cround">
-                                                    <c:if test="${q.questionId == c.questionId}">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="result${qround.count}" value="${c.choiceId}">
-                                                            <label class="form-check-label" for="${q.questionId}">
-                                                                ${c.choiceName}
-                                                            </label>
-                                                        </div>
-                                                    </c:if>
-                                                </c:forEach>
+                                <c:if test="${takequiz.page != page}">
+                                    <div id="nready">
+                                        <div class="card-body text-secondary">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    Please press start.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
+                                </c:if>
+                                <div id="ready">
+                                </div>
                             </c:if>
                             <c:if test="${question.size() <= 0}">
                                 <div class="card-body text-secondary">
@@ -150,22 +144,16 @@
                                         <div class="timer"></div>
                                     </div>
                                 </div>
-                                <button id="start" class="btn btn-warning" ><i class="fas fa-play"></i> Start</button>
-
+                                <button id="load" class="btn btn-warning" ><i class="fas fa-play"></i> Ready</button>
+                                <div id="start_btn"></div>
                                 <%--${countc} : ${countq} --%>
 
                             </center>
                         </div>
                     </div>
 
-                    <div class="card mb-4">
-                        <div class="card-body text-secondary">
-                            <center>   
+                    <div id="done_button">
 
-                                <button type="submit" form="send" class="btn btn-success"><i class="fas fa-arrow-alt-circle-right"></i> Done</button>
-
-                            </center>
-                        </div>
                     </div>
 
                     <c:if test="${status == 'Teacher' || status == 'Admin'}">
@@ -200,21 +188,38 @@
         <c:if test="${takequiz.hours != 'unlimited' && takequiz.minutes != 'unlimited'}">
         var timer = new Timer();
 
+        $(document).on('click', '#load', function (e)
+        {
+            e.preventDefault();
+
+            $('#nready').hide();
+            $('#load').hide();
+            $('#start_btn').html('<button id="start" class="btn btn-warning" ><i class="fas fa-play"></i> Start</button>');
+
+            $.ajax({
+                type: "POST",
+                url: "StartQuiz",
+                data: {
+                    quiz_id: ${takequiz.quizId},
+                    page: '${takequiz.page}'
+                },
+                success: function (e) {
+                    console.log(e);
+                }
+            });
+
+        })
+
         $(document).on('click', '#start', function (e)
         {
             e.preventDefault();
             if (!timer.isRunning()) {
 
-                $.ajax({
-                    type: "POST",
-                    url: "StartQuiz",
-                    data: {
-                        quiz_id: ${takequiz.quizId}
-                    },
-                    success: function (e) {
-                        console.log(e);
-                    }
-                });
+                $('#ready').load("LoadQuiz");
+                $('#done_button').load("LoadDoneButton",
+                        {
+                            user_agent: 'ajax',
+                        })
 
                 timer.start({
                     countdown: true,

@@ -86,11 +86,14 @@ public class DoneServlet extends HttpServlet {
         Resultdao rdao = new Resultdao();
         Result r = new Result();
         
+        r = rdao.findResultByQuizId(quiz_id);
+        
         r.setTotal_time("");
         r.setTotalCorrect(totalCorrect);
         r.setTotalIncorrect(totalIncorrect);
         r.setQuizId(quiz_id);
         r.setStudentId(student_id);
+        r.setResult_id(r.getResult_id());
         
         rdao.updateResult(r);
         

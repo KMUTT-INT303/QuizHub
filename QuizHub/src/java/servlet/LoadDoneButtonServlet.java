@@ -5,27 +5,20 @@
  */
 package servlet;
 
-import controllers.Choicedao;
-import controllers.Questiondao;
-import controllers.Resultdao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Choice;
-import model.Question;
-import model.Result;
-import model.Student;
+import model.Quizzes;
 
 /**
  *
  * @author tsch
  */
-public class StartQuizServlet extends HttpServlet {
+public class LoadDoneButtonServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,26 +31,17 @@ public class StartQuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("quiz_id");
-        String page = request.getParameter("page");
-        /*try (PrintWriter out = response.getWriter()) {
-            out.println(id);
-        }*/
         HttpSession session = request.getSession();
-        session.setAttribute("doquiz", "true");
-        session.setAttribute("page", page);
-        Student s = (Student)session.getAttribute("user");
+        Quizzes q = (Quizzes) session.getAttribute("takequiz");
+        String page = (String) session.getAttribute("page");
 
-        Resultdao rdao = new Resultdao();
-        Result r = new Result();
-
-        r.setTotal_time("0");
-        r.setTotalCorrect(0);
-        r.setTotalIncorrect(0);
-        r.setQuizId(Integer.valueOf(id));
-        r.setStudentId(s.getId());
-
-        rdao.createResult(r);
+        if (q != null && page != null) {
+            if (q.getPage().equals(page)) {
+                getServletContext().getRequestDispatcher("/WEB-INF/core/DoneButton.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("Quizzes");
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +56,13 @@ public class StartQuizServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("Quizzes");
+        String headerName = request.getHeader("x-requested-with");
+
+        if (null == headerName) {
+            response.sendRedirect("Quizzes");
+        } else {
+            processRequest(request, response);
+        }
     }
 
     /**
