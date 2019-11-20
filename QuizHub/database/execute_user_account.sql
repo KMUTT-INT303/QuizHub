@@ -117,8 +117,8 @@ VALUES
 
 INSERT INTO QUIZ 
         (QUIZ_NAME, QUIZ_COMMENTS, QUIZ_STATUS, TEACHER_ID, COURSE_NAME, COURSE_ID, FACULTY_ID, BRANCH_ID, JOIN_CODE, COVER_IMAGES, SKILL_TEXT, START_DATE, END_DATE, PAGE, HOURS, MINUTES) 
-VALUES ('Network Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', 'HRVIDPZG6G', '5', '00'),
-        ('Gen Programing', 'Please attention', 'public', 1000000001, 'Web Programing', 'INT303', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', 'R3V9RAOUPJ', '10', '00'),
-        ('Program Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', 'EMWO7GGBSM', '10', '00'),
-        ('Eng Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', '6TA8MMBDDG', '30', '00'),
-        ('GG Programing', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', '8E4QKLU4JA', '15', '00');
+VALUES ('Network Programming', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', 'HRVIDPZG6G', '5', '00'),
+        ('Gen Programming', 'Please attention', 'public', 1000000001, 'Web Programing', 'INT303', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', 'R3V9RAOUPJ', '10', '00'),
+        ('Program Programming', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', 'EMWO7GGBSM', '10', '00'),
+        ('Eng Programming', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', '6TA8MMBDDG', '30', '00'),
+        ('GG Programming', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', '8E4QKLU4JA', '15', '00');
