@@ -73,7 +73,24 @@ public class RegisterServlet extends HttpServlet {
             }
         }
         
-        long sid = Long.valueOf(student_id);
+        if(student_id.length() < 10){
+            msg = "Wrong format of Student ID.";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            return;
+        }
+        
+       for (char c : student_id.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                msg = "Student ID cannot be text.";
+                request.setAttribute("msg", msg);
+                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+                return;
+            }
+        }
+        
+        
+        long sid = Long.valueOf(student_id);      
         int fid = Integer.valueOf(faculty_id);
         int bid = Integer.valueOf(bidFromPara);
         
