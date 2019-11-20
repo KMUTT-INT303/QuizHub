@@ -17,28 +17,41 @@ public class Teacher {
     private String lastName;
     private String password;
     private int faculty_id;
+    private String email;
     private String account_status;
 
     public Teacher() {
     }
 
-    public Teacher(long id, String firstName, String lastName, String password, int faculty_id) {
+    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.faculty_id = faculty_id;
+        this.email = email;
     }
 
-    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String account_status) {
+    public Teacher(long id, String firstName, String lastName, String password, int faculty_id, String email, String account_status) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.faculty_id = faculty_id;
+        this.email = email;
         this.account_status = account_status;
     }
 
+    @Override
+    public String toString() {
+        return "Teacher{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", email=" + email + ", account_status=" + account_status + '}';
+    }
+
+    public String getFullname(){
+        String fullname = getFirstName() + " " + getLastName();
+        return fullname;
+    }
+    
     public long getId() {
         return id;
     }
@@ -79,6 +92,14 @@ public class Teacher {
         this.faculty_id = faculty_id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getAccount_status() {
         return account_status;
     }
@@ -87,10 +108,6 @@ public class Teacher {
         this.account_status = account_status;
     }
 
-    @Override
-    public String toString() {
-        return "Teacher{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", account_status=" + account_status + '}';
-    }
 
     
     

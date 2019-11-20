@@ -30,7 +30,7 @@ public class Teacherdao {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
-                        rs.getInt("faculty_id"), rs.getString("account_status")));
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status")));
             }return teachers;
         } catch (SQLException ex) {
             Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,7 +49,7 @@ public class Teacherdao {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
-                        rs.getInt("faculty_id"), rs.getString("account_status")));
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status")));
             }return teachers;
         } catch (SQLException ex) {
             Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +69,7 @@ public class Teacherdao {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
-                        rs.getInt("faculty_id"), rs.getString("account_status")));
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status")));
             }return teachers;
         } catch (SQLException ex) {
             Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +89,7 @@ public class Teacherdao {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
-                        rs.getInt("faculty_id"), rs.getString("account_status")));
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status")));
             }return teachers;
         } catch (SQLException ex) {
             Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,7 +105,7 @@ public class Teacherdao {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
-                        rs.getInt("faculty_id"), rs.getString("account_status")));
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status")));
             }return teachers;
         } catch (SQLException ex) {
             Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +121,7 @@ public class Teacherdao {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 teachers.add(new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
-                        rs.getInt("faculty_id"), rs.getString("account_status")));
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status")));
             }return teachers;
         } catch (SQLException ex) {
             Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,7 +173,22 @@ public class Teacherdao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 return new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
-                        rs.getInt("faculty_id"), rs.getString("account_status"));
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
+        }return null;
+    }
+    
+    public Teacher getTeacherByMail(String mail){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM teachers WHERE email = ?");
+            ps.setString(1, mail);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return new Teacher(rs.getLong("teacher_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"),
+                        rs.getInt("faculty_id"), rs.getString("email"), rs.getString("account_status"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Teacherdao.class.getName()).log(Level.SEVERE, null, ex);
@@ -183,13 +198,14 @@ public class Teacherdao {
     public boolean addTeacher(Teacher t){
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO teachers(teacher_id, first_name, last_name, password, faculty_id, account_status) VALUES(?,?,?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO teachers(teacher_id, first_name, last_name, password, faculty_id, email, account_status) VALUES(?,?,?,?,?,?,?)");
             ps.setLong(1, t.getId());
             ps.setString(2, t.getFirstName());
             ps.setString(3, t.getLastName());
             ps.setString(4, t.getPassword());
             ps.setInt(5, t.getFaculty_id());
-            ps.setString(6, "pending");
+            ps.setString(6, t.getEmail());
+            ps.setString(7, "pending");
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -202,13 +218,14 @@ public class Teacherdao {
     public boolean editTeacher(Teacher t){
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ?, password = ?, faculty_id = ?, account_status= ? WHERE teacher_id = ?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ?, password = ?, faculty_id = ?, email = ?, account_status= ? WHERE teacher_id = ?");
             ps.setString(1, t.getFirstName());
             ps.setString(2, t.getLastName());
             ps.setString(3, t.getPassword());
             ps.setInt(4, t.getFaculty_id());
-            ps.setString(5, t.getAccount_status());
-            ps.setLong(6, t.getId());
+            ps.setString(5, t.getEmail());
+            ps.setString(6, t.getAccount_status());
+            ps.setLong(7, t.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -255,11 +272,12 @@ public class Teacherdao {
         tdao.editTeacher(addt);
         System.out.println(tdao.getTeacherById(tid));*/
         Teacherdao tdao = new Teacherdao();
-        ArrayList<Teacher> teachers = new ArrayList();
-        teachers = tdao.getAllTeacherActiveLike("te");
-        System.out.println(teachers);
-        Teacher t = tdao.getTeacherById(Long.valueOf("1000000001"));
-        tdao.setTeacherToActive(t);
+        //ArrayList<Teacher> teachers = new ArrayList();
+        //teachers = tdao.getAllTeacherActiveLike("te");
+        //ystem.out.println(teachers);
+        //Teacher t = tdao.getTeacherById(Long.valueOf("1000000001"));
+        //tdao.setTeacherToActive(t);
+        System.out.println(tdao.getTeacherByMail("ta@gmail.com"));
     }
     
 }

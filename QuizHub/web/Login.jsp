@@ -25,7 +25,7 @@
                     <div class="row text-white">
                         <div class="col-sm-6 offset-sm-3 text-center">
                             <h3 class="display-4 mb-3">QuizHub</h3>
-                            <h2 class="display-4 mb-2">${msg}</h2>
+                            <h4 class="mb-2">${msg}</h4>
                             <div class="info-form">
                                 <form id="login-form" action="Login" method="post" class="form-inlin justify-content-center" autocomplete="off">
                                     <div class="form-group">
@@ -37,7 +37,8 @@
                                         <input type="password" name="password" class="form-control" placeholder="Password">
                                     </div>
                                     <button type="submit" class="btn btn-success "><i class="fas fa-sign-in-alt"></i> Login</button>
-                                    <a href="/QuizHub/Register.jsp" class="btn btn-success"><i class="fas fa-user-plus"></i> Register</a>
+                                    <a href="Register" class="btn btn-success"><i class="fas fa-user-plus"></i> Register</a>
+                                    <a href="ForgetPassword" class="btn btn-success">Forget Password ?</a>
                                 </form>
                             </div>
                         </div>

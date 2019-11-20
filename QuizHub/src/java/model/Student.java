@@ -20,29 +20,42 @@ public class Student {
     private int faculty_id;
     private int branch_id;
     private String account_status;
-
+    private String email;
+    
     public Student() {
     }
 
-    public Student(long id, String firstName, String lastName, String password, int faculty_id, int branch_id) {
+    public Student(long id, String firstName, String lastName, String password, int faculty_id, int branch_id, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.faculty_id = faculty_id;
         this.branch_id = branch_id;
+        this.email = email;
     }
 
-    public Student(long id, String firstName, String lastName, String password, int faculty_id, int branch_id, String account_status) {
+    public Student(long id, String firstName, String lastName, String password, int faculty_id, int branch_id, String email, String account_status) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.faculty_id = faculty_id;
         this.branch_id = branch_id;
+        this.email = email;
         this.account_status = account_status;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", branch_id=" + branch_id + ", account_status=" + account_status + ", email=" + email + '}';
+    }
+
+    public String getFullname(){
+        String fullname = getFirstName() + " " + getLastName();
+        return fullname;
+    }
+    
     public long getId() {
         return id;
     }
@@ -99,9 +112,16 @@ public class Student {
         this.account_status = account_status;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", branch_id=" + branch_id + ", account_status=" + account_status + '}';
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    
+
 
 }

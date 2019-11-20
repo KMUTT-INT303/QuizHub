@@ -27,7 +27,7 @@
                     <div class="row text-white">
                         <div class="col-sm-6 offset-sm-3 text-center">
                             <h3 class="display-4 mb-3">QuizHub</h3>
-                            <h2 class="display-4 mb-2">${msg}</h2>
+                            <h4 class="mb-2">${msg}</h4>
                             <div class="info-form">
                                 
                                 
@@ -73,6 +73,15 @@
                                                         <div class="form-group">
                                                             <label class="sr-only">Last Name</label>
                                                             <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">E-mail</label>
+                                                            <input type="text" name="email" class="form-control" placeholder="Email Address">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -139,6 +148,15 @@
                                                         <div class="form-group">
                                                             <label class="sr-only">Last Name</label>
                                                             <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">E-mail</label>
+                                                            <input type="text" name="email" class="form-control" placeholder="Email Address">
                                                         </div>
                                                     </div>
                                                 </div>

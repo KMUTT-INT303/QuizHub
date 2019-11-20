@@ -37,10 +37,11 @@ public class TeacherRegisterServlet extends HttpServlet {
         String lastName = request.getParameter("lname");
         String password = request.getParameter("password");
         String faculty_id = request.getParameter("faculty");
+        String email = request.getParameter("email");
         String checkForm = request.getParameter("FROM_REGISTER");
         String path = "/Register.jsp";
         
-        if(id.trim().isEmpty() || firstName.trim().isEmpty() || lastName.trim().isEmpty() || password.trim().isEmpty() || faculty_id.trim().isEmpty()){
+        if(id.trim().isEmpty() || firstName.trim().isEmpty() || lastName.trim().isEmpty() || password.trim().isEmpty() || faculty_id.trim().isEmpty() || email.trim().isEmpty()){
             msg = "input all information";
             request.setAttribute("msg", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
@@ -64,16 +65,23 @@ public class TeacherRegisterServlet extends HttpServlet {
         Long tid = Long.valueOf(id);
         Teacherdao tdao = new Teacherdao();
         Teacher t = tdao.getTeacherById(tid);
-        Teacher registerTeacher = new Teacher(tid, firstName, lastName, password, fid);
+        Teacher registerTeacher = new Teacher(tid, firstName, lastName, password, fid, email);
         if(t != null){
             msg = "This account have registed!";
             request.setAttribute("msg", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }else{
-            tdao.addTeacher(registerTeacher);
-            msg = "Register successful.";
-            request.setAttribute("msg", msg);
-            getServletContext().getRequestDispatcher(path).forward(request, response);
+            Teacher tmail = tdao.getTeacherByMail(email);
+            if(tmail != null){
+                msg = "This email has registed!";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }else{
+                tdao.addTeacher(registerTeacher);
+                msg = "Register successful.";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }
         }
         
         
@@ -93,7 +101,8 @@ public class TeacherRegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        request.getRequestDispatcher("/Register.jsp").forward(request, response);
     }
 
     /**
