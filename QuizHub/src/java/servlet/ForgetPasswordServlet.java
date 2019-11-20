@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.MailSet;
 import model.Student;
 import model.Teacher;
@@ -41,8 +42,8 @@ public class ForgetPasswordServlet extends HttpServlet {
         String msg = null;
         
         request.getSession().removeAttribute("codemsg");
-        request.getSession().removeAttribute("code");
-        this.genCode(request);
+        /*request.getSession().removeAttribute("code");
+        this.genCode(request);*/
         
         if(who.trim().isEmpty()){
             request.setAttribute("msg", "Input your E-Mail or ID.");
@@ -127,7 +128,8 @@ public class ForgetPasswordServlet extends HttpServlet {
             salt.append(SALTCHARS.charAt(index));
         }
         String code = salt.toString();
-        request.getSession(false).setAttribute("code", code);
+        HttpSession session = request.getSession();
+        session.setAttribute("code", code);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
