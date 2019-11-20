@@ -21,7 +21,7 @@ import model.Faculty;
  *
  * @author Top
  */
-public class ListFacultyServlet extends HttpServlet {
+public class FacultyManagementServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,55 +34,48 @@ public class ListFacultyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
-        this.setFacultyAttribute(request, response);
-        this.setBranchAttribute(request, response);
-        if("REGISTER".equalsIgnoreCase(request.getParameter("FROM_REGISTER"))){
-            response.sendRedirect("/WEB-INF/Register.jsp");
-            return;
+        
+        String path = "/WEB-INF/FacultyManagement.jsp";
+        
+        String fid = request.getParameter("id");
+        String bid = request.getParameter("bid");
+        String edit_faculty = request.getParameter("edit_faculty_name");
+        String edit_branch = request.getParameter("edit_branch_name");
+        
+        if(fid == null || fid.isEmpty()){
+            //request.setAttribute("faculty", "SELECT SOME FACULTY");
+            //request.setAttribute("branch", "SELECT SOME BRANCH");
+            //this.setFacultyAttribute(request, response);
+            getServletContext().getRequestDispatcher("/ListFaculty").include(request, response);
+            getServletContext().getRequestDispatcher(path).forward(request, response);
         }
-        if("CREATEQUIZ".equalsIgnoreCase(request.getParameter("FROM_CREATE_QUIZ"))){
-            response.sendRedirect("/WEB-INF/CreateQuiz.jsp");
-            return;
-        }
-                
-        /*String faculty_id = request.getParameter("faculty");
-        if(faculty_id != null || !faculty_id.trim().isEmpty()){
-            Branchdao bdao = new Branchdao();
-            Facultydao fdao = new Facultydao();
-            ArrayList<Branch> branch = bdao.getAllBranch();
-            int fid = Integer.valueOf(faculty_id);
-            branch = bdao.getAllBranchInFacultyByFacultyId(fid);
-            request.setAttribute("branch", branch);
-            return;
-        }*/
-
-    }
-    private void setFacultyAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        
         Facultydao fdao = new Facultydao();
-        ArrayList<Faculty> faculties = new ArrayList();
-        faculties = fdao.getAllFaculty();
-        request.setAttribute("faculties", faculties);
+        Faculty f = fdao.getFacultyById(Integer.valueOf(fid));
+        if(f != null){
+            Branchdao bdao = new Branchdao();
+            ArrayList<Branch> bs = bdao.getAllBranchInFacultyByFacultyId(f.getId());
+            if(bid == null || bid.isEmpty()){
+                request.setAttribute("branch", null);
+            }else{
+                Branch b = bdao.getBranchById(Integer.valueOf(bid));
+                request.setAttribute("branch", b);
+            }
+            request.setAttribute("branchesInfaculty", bs);
+            request.setAttribute("faculty", f);
+            getServletContext().getRequestDispatcher(path).forward(request, response);
+        }
+        
+        if(bid == null || bid.isEmpty()){
+            request.setAttribute("branch", "SELECT SOME BRANCH");
+            getServletContext().getRequestDispatcher("/ListFaculty").include(request, response);
+            getServletContext().getRequestDispatcher(path).forward(request, response);
+        }
+        
+        
         
     }
-    
-    private void setBranchAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        
-      /* if(request.getParameter("faculty") != null || request.getParameter("faculty").trim().isEmpty()){
-           String faculty_id = request.getParameter("faculty");
-            int fid = Integer.valueOf(faculty_id);
-            Branchdao bdao = new Branchdao();
-            Facultydao fdao = new Facultydao();
-            ArrayList<Branch> branch = bdao.getAllBranchInFacultyByFacultyId(fid);
-            request.setAttribute("branch", branch);
-            response.sendRedirect("/Register.jsp");
-            return;
-        }*/
-        Branchdao bdao = new Branchdao();
-        Facultydao fdao = new Facultydao();
-        ArrayList<Branch> branches = bdao.getAllBranch();
-        request.setAttribute("branches", branches);
-    }
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -96,6 +89,7 @@ public class ListFacultyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        //getServletContext().getRequestDispatcher("/WEB-INF/FacultyManagement.jsp").forward(request, response);
     }
 
     /**

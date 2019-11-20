@@ -84,6 +84,14 @@
                                                             <input type="text" name="email" class="form-control" placeholder="Email Address">
                                                         </div>
                                                     </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Address</label>
+                                                            <select name="submail" class="form-control">
+                                                                <option value="@mail.kmutt.ac.th">@mail.kmutt.ac.th</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row">
@@ -105,7 +113,7 @@
                                                         <div class="form-group">
                                                             <label class="sr-only">Branch</label>
                                                             <select class="form-control" id="branch" name="branch" hidden="true"> 
-                                                                <c:forEach items="${branch}" var="b">
+                                                                <c:forEach items="${branches}" var="b">
                                                                     <option value="${b.faculty_id}-${b.id}">${b.name}</option>
                                                                 </c:forEach>
                                                             </select>
@@ -159,7 +167,16 @@
                                                             <input type="text" name="email" class="form-control" placeholder="Email Address">
                                                         </div>
                                                     </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">Address</label>
+                                                            <select name="submail" class="form-control">
+                                                                <option value="@kmutt.ac.th">@kmutt.ac.th</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                
 
                                                 <div class="row">
                                                     <div class="col">

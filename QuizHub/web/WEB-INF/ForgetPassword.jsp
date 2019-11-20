@@ -13,8 +13,8 @@
     <body>
         ${msg}${codemsg}
         <form action="ForgetPassword" method="post">
-        Your E-mail / ID :<input type="text" name="who"><br>
-        <input type="text" name="code" placeholder="code"> ${code}<br>
+            Your E-mail / ID :<input type="text" name="who" autocomplete="off"><br>
+            <input type="text" name="code" placeholder="code" autocomplete="off"> ${code}<br>
         <input type="submit"><br>
         </form>
         <a href="Login">Back</a>

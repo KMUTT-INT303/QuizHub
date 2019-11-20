@@ -23,6 +23,21 @@ public class Branchdao {
     
     Connection conn = null;
     
+    
+    public boolean setBranchName(Branch b){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE branch SET name = ? WHERE id = ?");
+            ps.setString(1, b.getName());
+            ps.setInt(2, b.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Branchdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public ArrayList<Branch> getAllBranch(){
         ArrayList<Branch> branch = new ArrayList();
         try {

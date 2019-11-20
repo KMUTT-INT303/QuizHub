@@ -32,7 +32,7 @@
                 </c:forEach>
             </select>
             Quizzes Branch :  <select  name="newBranch">
-                <c:forEach items="${branch}" var="b">
+                <c:forEach items="${branches}" var="b">
                     <option value="${b.faculty_id}-${b.id}">${b.name}</option>
                 </c:forEach>
             </select> 

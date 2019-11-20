@@ -37,11 +37,12 @@ public class TeacherRegisterServlet extends HttpServlet {
         String lastName = request.getParameter("lname");
         String password = request.getParameter("password");
         String faculty_id = request.getParameter("faculty");
-        String email = request.getParameter("email");
+        String mail = request.getParameter("email");
+        String submail = request.getParameter("submail");
         String checkForm = request.getParameter("FROM_REGISTER");
         String path = "/WEB-INF/Register.jsp";
         
-        if(id.trim().isEmpty() || firstName.trim().isEmpty() || lastName.trim().isEmpty() || password.trim().isEmpty() || faculty_id.trim().isEmpty() || email.trim().isEmpty()){
+        if(id.trim().isEmpty() || firstName.trim().isEmpty() || lastName.trim().isEmpty() || password.trim().isEmpty() || faculty_id.trim().isEmpty() || mail.trim().isEmpty() || submail.trim().isEmpty()){
             msg = "input all information";
             request.setAttribute("msg", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
@@ -54,6 +55,12 @@ public class TeacherRegisterServlet extends HttpServlet {
             return;
         }
         
+        if(!submail.equals("@kmutt.ac.th")){
+            msg = "Plz , select mail address.";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher(path).forward(request, response);
+        } 
+        
         int fid = Integer.valueOf(faculty_id);
         if(fid <= 0){
             msg = "Please select your faculty.";
@@ -62,6 +69,7 @@ public class TeacherRegisterServlet extends HttpServlet {
             return;
         }
         
+        String email = mail.trim() + submail;
         Long tid = Long.valueOf(id);
         Teacherdao tdao = new Teacherdao();
         Teacher t = tdao.getTeacherById(tid);

@@ -21,6 +21,21 @@ import model.Faculty;
  */
 public class Facultydao {
     Connection conn = null;
+    
+    public boolean setFacultyName(Faculty f){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE faculty SET name = ? WHERE id = ?");
+            ps.setString(1, f.getName());
+            ps.setInt(2, f.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Facultydao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public ArrayList<Faculty> getAllFaculty(){
         ArrayList<Faculty> faculties = new ArrayList();
         try {

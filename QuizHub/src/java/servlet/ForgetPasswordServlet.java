@@ -40,6 +40,7 @@ public class ForgetPasswordServlet extends HttpServlet {
         String icode = request.getParameter("code");
         String path = "/WEB-INF/ForgetPassword.jsp";
         String msg = null;
+
         
         request.getSession().removeAttribute("codemsg");
         /*request.getSession().removeAttribute("code");
@@ -158,6 +159,10 @@ public class ForgetPasswordServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         //request.getSession().removeAttribute("codemsg");
+                
+        if(request.getSession().getAttribute("user") != null){
+            getServletContext().getRequestDispatcher("/WEB-INF/Profile.jsp").forward(request, response);
+        }
         request.getSession().removeAttribute("code");
         this.genCode(request);
         getServletContext().getRequestDispatcher("/WEB-INF/ForgetPassword.jsp").forward(request, response);
