@@ -76,6 +76,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">E-mail</label>
+                                                            <input type="text" name="email" class="form-control" placeholder="Email Address">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div class="row">
                                                     <div class="col">
@@ -139,6 +148,15 @@
                                                         <div class="form-group">
                                                             <label class="sr-only">Last Name</label>
                                                             <input type="text" name="lname" class="form-control" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label class="sr-only">E-mail</label>
+                                                            <input type="text" name="email" class="form-control" placeholder="Email Address">
                                                         </div>
                                                     </div>
                                                 </div>

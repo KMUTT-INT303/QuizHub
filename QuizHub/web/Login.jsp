@@ -37,7 +37,8 @@
                                         <input type="password" name="password" class="form-control" placeholder="Password">
                                     </div>
                                     <button type="submit" class="btn btn-success "><i class="fas fa-sign-in-alt"></i> Login</button>
-                                    <a href="/QuizHub/Register.jsp" class="btn btn-success"><i class="fas fa-user-plus"></i> Register</a>
+                                    <a href="Register" class="btn btn-success"><i class="fas fa-user-plus"></i> Register</a>
+                                    <a href="ForgetPassword" class="btn btn-success">Forget Password ?</a>
                                 </form>
                             </div>
                         </div>
