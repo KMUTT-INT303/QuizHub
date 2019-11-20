@@ -79,6 +79,8 @@ public class ForgetPasswordServlet extends HttpServlet {
             if(s != null){
                 ms.setMail(s.getFullname(), "Your password is " + s.getPassword(), s.getEmail());
                 ms.sendMail();
+                request.getSession().removeAttribute("code");
+                this.genCode(request);
                 request.setAttribute("msg", "Check you mail, we send your password to you mail.");
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }else{
@@ -87,9 +89,13 @@ public class ForgetPasswordServlet extends HttpServlet {
                 if(t != null){
                     ms.setMail(t.getFullname(), "Your password is " + t.getPassword(), t.getEmail());
                     ms.sendMail();
+                    request.getSession().removeAttribute("code");
+                    this.genCode(request);
                     request.setAttribute("msg", "Check you mail, we send your password to you mail.");
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                 }else{
+                    request.getSession().removeAttribute("code");
+                    this.genCode(request);
                     request.setAttribute("msg", "Wrong Email!");
                     getServletContext().getRequestDispatcher(path).forward(request, response);
                 }
@@ -102,6 +108,8 @@ public class ForgetPasswordServlet extends HttpServlet {
         if(s != null){
             ms.setMail(s.getFullname(), "Your password is " + s.getPassword(), s.getEmail());
             ms.sendMail();
+            request.getSession().removeAttribute("code");
+            this.genCode(request);
             request.setAttribute("msg", "Check you mail, we send your password to you mail.");
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }else{
@@ -110,9 +118,13 @@ public class ForgetPasswordServlet extends HttpServlet {
             if(t != null){
                 ms.setMail(t.getFullname(), "Your password is " + t.getPassword(), t.getEmail());
                 ms.sendMail();
+                request.getSession().removeAttribute("code");
+                this.genCode(request);
                 request.setAttribute("msg", "Check you mail, we send your password to you mail.");
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }else{
+                request.getSession().removeAttribute("code");
+                this.genCode(request);
                 request.setAttribute("msg", "Maybe you still have not register.");
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }
