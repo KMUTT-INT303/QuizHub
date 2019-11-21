@@ -61,8 +61,8 @@
                         </div>
                     </c:if>
                 </div>
-                <div class="col-sm-8 d-flex">
-                    <div class="card mb-2 flex-fill">
+                <div class="col-sm-8">
+                    <div class="card mb-2">
                         <h6 class="card-header"><i class="fas fa-star"></i> Featured Quizzes</h6>
                         <div class="card-body pb-1">
                             <div class="row mb-2">
@@ -95,7 +95,7 @@
                             <div class="row">
                                 <div class="card-deck p-2">
                                     <div class="card mb-1">
-                                        <img src="..." class="card-img-top" alt="...">
+                                        <img src="images/template.svg" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">Card title</h5>
                                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -105,7 +105,7 @@
                                         </div>
                                     </div>
                                     <div class="card mb-1">
-                                        <img src="..." class="card-img-top" alt="...">
+                                        <img src="images/template.svg" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">Card title</h5>
                                             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>

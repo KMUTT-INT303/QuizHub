@@ -25,7 +25,9 @@
                 <div id="container" class="container">
                     <div class="row justify-content-center">
                         <div class="col-6">
-                            <h3 class="display-4 mb-3">QuizHub</h3>
+                            <div class="row justify-content-center">
+                                <h3 class="display-4 mb-3 quizhub">QuizHub</h3>
+                            </div>
                             <c:if test="${msg != null}">
                                 <div class="row justify-content-center">
                                     <div class="mb-3 badge badge-danger">
