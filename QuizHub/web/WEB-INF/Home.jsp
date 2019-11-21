@@ -17,7 +17,7 @@
         <header><%@ include file="../Layouts/Menu.jsp" %></header>
 
         <main role="main" class="container">
-            <div class="jumbotron">
+            <div class="jumbotron mb-2">
                 <h1>Welcome to QuizHub</h1>
                 <p class="lead">Make learning awesome! Quizhub! brings engagement and fun to more than 1 billion players every year at school, at work, and at home</p>
                 <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Try an example <i class="fas fa-hand-point-left"></i></a>
@@ -52,25 +52,25 @@
                         </div>
                     </div>
                     <c:if test='${status == "Admin"}'>
-                    <div class="card mb-2">
-                        <h6 class="card-header"><i class="fas fa-user-shield"></i> Admin Panel</h6>
-                        <div class="card-body">
-                            <div class="card text-center mb-2"><a href="StudentManagement" class="btn btn-outline-dark">Student Manage</a></div>
-                            <div class="card text-center mb-2"><a href="TeacherManagement" class="btn btn-outline-dark">Teacher Manage</a></div>
+                        <div class="card mb-2">
+                            <h6 class="card-header"><i class="fas fa-user-shield"></i> Admin Panel</h6>
+                            <div class="card-body">
+                                <div class="card text-center mb-2"><a href="StudentManagement" class="btn btn-outline-dark">Student Manage</a></div>
+                                <div class="card text-center mb-2"><a href="TeacherManagement" class="btn btn-outline-dark">Teacher Manage</a></div>
+                            </div>
                         </div>
-                    </div>
                     </c:if>
                 </div>
-                <div class="col-sm-8">
-                    <div class="card mb-2">
+                <div class="col-sm-8 d-flex">
+                    <div class="card mb-2 flex-fill">
                         <h6 class="card-header"><i class="fas fa-star"></i> Featured Quizzes</h6>
-                        <div class="card-body">
+                        <div class="card-body pb-1">
                             <div class="row mb-2">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">
                                     <form method="post" action="JoinQuizzes">
                                         <div class="input-group">
-                                            <input class="form-control mr-sm-2" type="text" name="code" placeholder="Have a code? Join with your code "/> 
+                                            <input class="form-control mr-sm-2" type="text" name="code" placeholder="Join quizzes with your code!"/> 
                                             <span class="input-group-btn">
                                                 <button type="submit" class="btn btn-outline-primary"><i class="fas fa-paper-plane"></i> Join</button>
                                             </span>
@@ -93,38 +93,25 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="card-group">
-                                    <div class="card m-2">
-                                        <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                <div class="card-deck p-2">
+                                    <div class="card mb-1">
+                                        <img src="..." class="card-img-top" alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title">Java Programing</h5>
+                                            <h5 class="card-title">Card title</h5>
                                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
                                         </div>
                                         <div class="card-footer">
-                                            <span class="text-muted float-left">Last updated 3 mins ago</span>
+                                            <small class="text-muted">Last updated 3 mins ago</small>
                                         </div>
                                     </div>
-                                    <div class="card m-2">
-                                        <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                    <div class="card mb-1">
+                                        <img src="..." class="card-img-top" alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title">Network Quiz</h5>
+                                            <h5 class="card-title">Card title</h5>
                                             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                            <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
                                         </div>
                                         <div class="card-footer">
-                                            <span class="text-muted float-left">Last updated 3 mins ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="card m-2">
-                                        <img class="card-img-top" src="images/template.svg" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Web Programing</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                            <p class="card-text text-center"><a href="#" class="btn btn-primary">Go somewhere</a></p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <span class="text-muted float-left">Last updated 3 mins ago</span>
+                                            <small class="text-muted">Last updated 3 mins ago</small>
                                         </div>
                                     </div>
                                 </div>

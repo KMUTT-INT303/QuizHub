@@ -34,7 +34,7 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-6">
                                         <div class="input-group">
-                                            <input class="form-control mr-sm-2" type="text" name="code" placeholder="Have a code? Join with your code"> 
+                                            <input class="form-control mr-sm-2" type="text" name="code" placeholder="Join quizzes with your code!"> 
                                             <span class="input-group-btn">
                                                 <button class="btn btn-outline-primary"><i class="fas fa-paper-plane"></i> Join</button>
                                             </span>
