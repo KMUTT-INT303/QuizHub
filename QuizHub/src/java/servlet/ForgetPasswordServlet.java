@@ -65,7 +65,7 @@ public class ForgetPasswordServlet extends HttpServlet {
         
         
         String mailAddress = null;
-        MailSet ms = new MailSet();
+        MailSet ms = new MailSet("Forget Password");
 
         for (char c : who.toCharArray()) {
             if (!Character.isDigit(c)) {

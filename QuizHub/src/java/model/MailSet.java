@@ -18,12 +18,15 @@ public class MailSet {
 
     private final String username = "int303.quizhub@gmail.com";
     private final String password = "atmquiz303";
+    private String subjectline = null;
     private String toName = null;
     private String messageTosend = null;
     private String toMailAddress = null;
 
-    public MailSet() {
+    public MailSet(String subjectline) {
+        this.subjectline = subjectline;
     }
+    
     
     public void setMail(String dear, String message, String emailAddress){   
         this.toName = dear;
@@ -57,7 +60,7 @@ public class MailSet {
                         Message.RecipientType.TO,
                         InternetAddress.parse(getToMailAddress())
                 );
-                message.setSubject("QuizHub - Mail Contact");
+                message.setSubject("QuizHub - " + subjectline);
                 message.setText(
                         "Dear " + getToName() + ","
                         + "\n\n "
