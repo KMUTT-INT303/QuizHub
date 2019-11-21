@@ -53,6 +53,14 @@ public class FacultyManagementServlet extends HttpServlet {
         Facultydao fdao = new Facultydao();
         Faculty f = fdao.getFacultyById(Integer.valueOf(fid));
         if(f != null){
+            
+            if(edit_faculty != null){
+                f.setName(edit_faculty);
+                fdao.setFacultyName(f);
+                request.setAttribute("msg", "change faculty name successful!");
+            }
+        
+            
             Branchdao bdao = new Branchdao();
             ArrayList<Branch> bs = bdao.getAllBranchInFacultyByFacultyId(f.getId());
             if(bid == null || bid.isEmpty()){
@@ -66,11 +74,13 @@ public class FacultyManagementServlet extends HttpServlet {
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
         
-        if(bid == null || bid.isEmpty()){
+        /*if(bid == null || bid.isEmpty()){
             request.setAttribute("branch", "SELECT SOME BRANCH");
             getServletContext().getRequestDispatcher("/ListFaculty").include(request, response);
             getServletContext().getRequestDispatcher(path).forward(request, response);
-        }
+        }*/
+        
+        
         
         
         
