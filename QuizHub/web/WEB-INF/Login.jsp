@@ -25,27 +25,28 @@
             <div class="login-section-width">
                 <div id="container" class="container">
                     <div class="row justify-content-center">
-                        <div class="col-6">
+                        <div id="load-screen"></div>  
+                        <div class="col-6" id="login-section">
                             <div class="row justify-content-center">
                                 <h3 class="display-4 mb-3 quizhub animated bounceInUp faster">QuizHub</h3>
                             </div>
                             <div id="result">
                             </div>
                             <div class="info-form justify-content-center">
-                                <form id="login-form" method="post" class="form-inlin justify-content-center" autocomplete="off">
-                                    <div class="form-group">
-                                        <label class="sr-only">Username</label>
-                                        <input type="number" id="username" name="username" class="form-control animated bounceInUp fast" placeholder="Username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only">Passoword</label>
-                                        <input type="password" id="password" name="password" class="form-control animated bounceInUp" placeholder="Password">        
-                                    </div>
-                                    <div class="row mt-1 justify-content-center animated bounceInUp">
-                                        <button id="login" class="btn btn-success ml-2 mr-2"><i class="fas fa-sign-in-alt"></i> Login</button>
-                                        <a href="Register" class="btn btn-success ml-2 mr-2"><i class="fas fa-user-plus"></i> Register</a>
-                                    </div>
-                                </form>
+                                <%--<form id="login-form" class="form-inlin justify-content-center" autocomplete="off">--%>
+                                <div class="form-group">
+                                    <label class="sr-only">Username</label>
+                                    <input type="number" id="username" name="username" class="form-control animated bounceInUp fast" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only">Passoword</label>
+                                    <input type="password" id="password" name="password" class="form-control animated bounceInUp" placeholder="Password">        
+                                </div>
+                                <div class="row mt-1 justify-content-center animated bounceInUp">
+                                    <button id="login" class="btn btn-success ml-2 mr-2"><i class="fas fa-sign-in-alt"></i> Login</button>
+                                    <a href="Register" class="btn btn-success ml-2 mr-2"><i class="fas fa-user-plus"></i> Register</a>
+                                </div>
+                                <%--</form>--%>
                             </div>
                             <div class="row mt-1 justify-content-center animated bounceInUp">
                                 <a href="ForgetPassword">Forget Password?</a>
@@ -68,6 +69,10 @@
         $(document).on('click', '#login', function (e)
         {
             e.preventDefault();
+
+            $('#login-section').fadeOut(1000);
+            $('#load-screen').fadeIn(1500).html("<div id='loader'></div>  ");
+
             $.ajax({
                 type: "POST",
                 url: "Login",
@@ -76,10 +81,14 @@
                     password: $('#password').val()
                 },
                 success: function (e) {
+                    $('#load-screen').fadeOut().html("<div id='loader'></div>  ");
+
                     if (e == 1) {
                         window.location.href = "Home";
                     } else {
-                        $('#result').html("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" + e + " <button type='button' class='close'' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+                        $('#login-section').fadeIn(1000, function () {
+                            $('#result').html("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" + e + " <button type='button' class='close'' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+                        });
                     }
                 }
             });
