@@ -36,3 +36,9 @@ html, body {
 .register-section-width {
     width: 100%;
 }
+
+.quizhub {
+    font-weight: bold;
+    color: #d4cfff;
+    text-shadow: 2px 2px 2px #CE5937;
+}
