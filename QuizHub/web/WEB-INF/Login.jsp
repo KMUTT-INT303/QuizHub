@@ -50,6 +50,12 @@
                                     <input type="password" id="password" name="password" class="form-control animated bounceInUp" placeholder="Password">        
                                 </div>
                                 <div class="row mt-1 justify-content-center animated bounceInUp">
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="rememberme">
+                                        <label class="form-check-label" for="rememberme" style="color: darkgray;">Remember Me</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-1 justify-content-center animated bounceInUp">
                                     <button id="login" class="btn btn-success ml-2 mr-2"><i class="fas fa-sign-in-alt"></i> Login</button>
                                     <a href="Register" class="btn btn-success ml-2 mr-2"><i class="fas fa-user-plus"></i> Register</a>
                                 </div>
