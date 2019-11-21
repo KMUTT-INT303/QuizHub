@@ -21,6 +21,13 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <body>
+        <%
+            session = request.getSession(false);
+            if (session.getAttribute("user") != null) {
+                response.sendRedirect("Home");
+            }
+
+        %> 
         <div class="login-section">
             <div class="login-section-width">
                 <div id="container" class="container">
