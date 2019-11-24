@@ -25,7 +25,7 @@
                     <div class="card mb-4">
                         <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
 
-                        <c:if test="${(status == 'Teacher')|| status == 'admin'}">
+                        <c:if test="${(status == 'Teacher')|| status == 'Admin'}">
                             <div class="card-body text-secondary">
                                 <div class="card">
                                     <div class="card-body">
@@ -96,7 +96,7 @@
                             <input name="student_id" value="${user.id}" hidden />
                             <input type="hidden" name="count" value="${countc}">
                             <c:if test="${question.size() > 0}">
-                                <c:if test="${takequiz.page != page}">
+                                <c:if test="${takequiz.page != page && status == 'Student'}">
                                     <div id="nready">
                                         <div class="card-body text-secondary">
                                             <div class="card">
@@ -107,8 +107,33 @@
                                         </div>
                                     </div>
                                 </c:if>
-                                <div id="ready">
-                                </div>
+                                <c:choose>
+                                    <c:when test="${status == 'Teacher' || status == 'Admin'}">
+                                        <c:forEach items="${question}" var="q" varStatus="qround">
+                                            <div class="card-body text-secondary">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${qround.count}. ${q.questionName}</h5>
+                                                        <c:forEach items="${choice}" var="c" varStatus="cround">
+                                                            <c:if test="${q.questionId == c.questionId}">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="result${qround.count}" value="${c.choiceId}">
+                                                                    <label class="form-check-label" for="${q.questionId}">
+                                                                        ${c.choiceName}
+                                                                    </label>
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div id="ready">
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:if>
                             <c:if test="${question.size() <= 0}">
                                 <div class="card-body text-secondary">
@@ -131,26 +156,27 @@
 
                 <div class="col-sm-4">
 
-
-                    <div class="card mb-4">
-                        <h6 class="card-header"><center><i class="fas fa-hourglass-half"></i> Time</center></h6>
-                        <div class="card-body text-secondary">
-                            <center>   
-                                <c:if test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
-                                    <p>Pratice</p>
-                                </c:if>
-                                <div class="m-3">
-                                    <div id="time">
-                                        <div class="timer"></div>
+                    <c:if test="${status == 'Student'}">
+                        <div class="card mb-4">
+                            <h6 class="card-header"><center><i class="fas fa-hourglass-half"></i> Time</center></h6>
+                            <div class="card-body text-secondary">
+                                <center>   
+                                    <c:if test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
+                                        <p>Pratice</p>
+                                    </c:if>
+                                    <div class="m-3">
+                                        <div id="time">
+                                            <div class="timer"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <button id="load" class="btn btn-warning" ><i class="fas fa-play"></i> Ready</button>
-                                <div id="start_btn"></div>
-                                <%--${countc} : ${countq} --%>
+                                    <button id="load" class="btn btn-warning" ><i class="fas fa-play"></i> Ready</button>
+                                    <div id="start_btn"></div>
+                                    <%--${countc} : ${countq} --%>
 
-                            </center>
+                                </center>
+                            </div>
                         </div>
-                    </div>
+                    </c:if>
 
                     <div id="done_button">
 
