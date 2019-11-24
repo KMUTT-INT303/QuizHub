@@ -163,7 +163,8 @@ public class StatSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
+       processRequest(request, response); 
+       //request.getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
     }
 
     /**

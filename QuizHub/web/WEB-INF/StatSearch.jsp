@@ -27,7 +27,7 @@
         ${msg}
     
     <c:forEach items="${classList}" var="c" varStatus="cs">
-    <a href="StatSearch?classSelect=${c.id}">${c.name}</a> ${c.id}<br>
+    <a href="StatSearch?classSelect=${c.id}" >${c.name}</a> ${c.id}<br>
     </c:forEach>    
     
         
