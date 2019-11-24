@@ -60,6 +60,9 @@
                                 <div class="row mb-2">
                                     <div class="col-sm-12">
                                         <div class="row m-3">
+                                            
+                                            <c:if test="${quizzes.isEmpty()}"><p>You don't have any quiz now.</p></c:if>
+                                            
                                             <div class="card-deck col-12">
                                             
                                             <c:forEach items="${quizzes}" var="q" varStatus="round">

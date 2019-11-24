@@ -62,7 +62,7 @@ public class Quizdao {
                 quizzez.add(
                         new Quizzes(
                                 rs.getInt("quiz_id"),
-                                rs.getString("quizname"),
+                                rs.getString("quiz_name"),
                                 rs.getString("quiz_comments"),
                                 rs.getString("quiz_status"),
                                 rs.getLong("teacher_id"),
@@ -230,7 +230,7 @@ public class Quizdao {
 
     public static void main(String[] args) {
         Quizdao qdao = new Quizdao();
-        ArrayList<Quizzes> qs = qdao.ListAllQuizByFaculty(2);
+        ArrayList<Quizzes> qs = qdao.ListAllQuiz();
         System.out.println(qs);
     }
 
