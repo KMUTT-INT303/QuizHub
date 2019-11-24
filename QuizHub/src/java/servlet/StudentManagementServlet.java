@@ -38,11 +38,11 @@ public class StudentManagementServlet extends HttpServlet {
             throws ServletException, IOException {
         String msg = null;
         
-        /*if(!(request.getSession().getAttribute("user") instanceof Admin)){
+        if(!(request.getSession().getAttribute("user") instanceof Admin)){
             response.sendRedirect("Home");
             return;
             //getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
-        }*/
+        }
         
             String[] id = request.getParameterValues("delete_id");
             if(id != null){

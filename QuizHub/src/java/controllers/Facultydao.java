@@ -25,7 +25,7 @@ public class Facultydao {
     public boolean setFacultyName(Faculty f){
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE faculty SET name = ? WHERE id = ?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE faculty SET faculty_name = ? WHERE faculty_id = ?");
             ps.setString(1, f.getName());
             ps.setInt(2, f.getId());
             ps.executeUpdate();
@@ -71,5 +71,11 @@ public class Facultydao {
         faculties = fdao.getAllFaculty();
         //System.out.println(faculties);
         System.out.println(fdao.getFacultyById(3));
+        
+        Faculty f = fdao.getFacultyById(2);
+        System.out.println(f);
+        f.setName("SITTTTTTTTTTTTTTTTTTT");
+        fdao.setFacultyName(f);
+        System.out.println(fdao.getFacultyById(2));
     }
 }

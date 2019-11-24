@@ -29,7 +29,8 @@
             </tr>
             </c:forEach>
         </table><br>
-        <form action="FacultyMangement" method="post">
+        <form action="FacultyManagement" method="get">
+            <input type="hidden" name="id" value="${faculty.id}">
             Faculty Name : <input type="text" name="edit_faculty_name" value="${faculty == null ? 'SELECT SOME FACULTY':faculty.name}">
             <input type="submit" value="EDIT"><br>
         </form>
@@ -48,7 +49,9 @@
             </tr>
             </c:forEach>
         </table><br>
-        <form action="FacultyMangement" method="post">
+        <form action="FacultyManagement" method="get">
+            <input type="hidden" name="id" value="${faculty.id}">
+            <input type="hidden" name="bid" value="${branch.id}">
             Branch Name : <input type="text" name="edit_branch_name" value="${branch == null?'SELECT SOME BRANCH':branch.name}">
             <input type="submit" value="EDIT"><br>
         </form>

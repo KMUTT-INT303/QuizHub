@@ -102,6 +102,7 @@ public class LoginServlet extends HttpServlet {
                     //request.setAttribute("msg", msg);
                     //getServletContext().getRequestDispatcher(path).forward(request, response);
                     out.print(msg);
+                    return;
                 }
             } else {
                 Admindao adao = new Admindao();
@@ -118,6 +119,7 @@ public class LoginServlet extends HttpServlet {
                         //request.setAttribute("msg", msg);
                         //getServletContext().getRequestDispatcher(path).forward(request, response);
                         out.print(msg);
+                        return;
                     }
                 } else {
                     msg = "Your username or password are incorrect.";
@@ -129,10 +131,10 @@ public class LoginServlet extends HttpServlet {
             }
             
         }
-        msg = "Your username or password are incorrect.";
+ /*       msg = "Your username or password are incorrect.";
         //request.setAttribute("msg", msg);
         //getServletContext().getRequestDispatcher(path).forward(request, response);
-        out.print(msg);
+        out.print(msg);*/
         
     }
 

@@ -24,8 +24,8 @@ public class Studentdao {
     private final String GET_ALL_STUDENT = "SELECT * FROM students ORDER BY student_id";
     private final String GET_ALL_STUDENT_LIKE = "SELECT * FROM students WHERE CHAR(student_id) like ? OR LOWER(first_name) like ? " + "OR LOWER(last_name) like ?";
     private final String REMOVE_STUDENT_BY_STUDENT_ID = "DELETE FROM students WHERE student_id = ?";
-    private final String ADD_STUDENT = "INSERT INTO students(student_id, first_name, last_name, password, faculty_id, branch_id, account_status, email) VALUES(?,?,?,?,?,?,?,?)";
-    private final String EDIT_STUDENT_INFO = "UPDATE students SET first_name = ?, last_name = ?, password = ?, faculty_id = ?, branch_id = ?, account_status = ?, email = ? WHERE student_id = ?";
+    private final String ADD_STUDENT = "INSERT INTO students(student_id, first_name, last_name, password, faculty_id, branch_id, email, account_status) VALUES(?,?,?,?,?,?,?,?)";
+    private final String EDIT_STUDENT_INFO = "UPDATE students SET first_name = ?, last_name = ?, password = ?, faculty_id = ?, branch_id = ?, email = ?,account_status = ? WHERE student_id = ?";
     private final String GET_STUDENT_BY_STUDENT_ID = "SELECT * FROM students WHERE student_id = ?";
     private final String GET_ALL_STUDENT_BY_FACULTY_ID = "SELECT * FROM students s JOIN faculty f ON s.faculty_id = f.faculty_id WHERE f.faculty_id = ?";
     private final String GET_ALL_STUDENT_BY_BRANCH_ID = "SELECT * FROM students s JOIN branch b ON b.branch_id = s.branch_id WHERE b.branch_id = ?";

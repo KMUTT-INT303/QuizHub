@@ -21,6 +21,11 @@ public class Admin {
         this.lastName = lastName;
         this.password = password;
     }
+    
+    public String getFullname(){
+        String fullname = getFirstName() + " " + getLastName();
+        return fullname;
+    }
 
     public long getId() {
         return id;

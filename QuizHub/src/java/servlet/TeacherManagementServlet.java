@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Admin;
 import model.Teacher;
 
 /**
@@ -34,11 +35,11 @@ public class TeacherManagementServlet extends HttpServlet {
             throws ServletException, IOException {
         String msg = null;
         
-        /*if(!(request.getSession().getAttribute("user") instanceof Admin)){
+        if(!(request.getSession().getAttribute("user") instanceof Admin)){
             response.sendRedirect("Home");
             return;
             //getServletContext().getRequestDispatcher("/WEB-INF/StudentManagement.jsp").forward(request, response);
-        }*/
+        }
         
             String[] id = request.getParameterValues("delete_id");
             if(id != null){

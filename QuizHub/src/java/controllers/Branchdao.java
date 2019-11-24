@@ -27,7 +27,7 @@ public class Branchdao {
     public boolean setBranchName(Branch b){
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE branch SET name = ? WHERE id = ?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE branch SET branch_name = ? WHERE branch_id = ?");
             ps.setString(1, b.getName());
             ps.setInt(2, b.getId());
             ps.executeUpdate();

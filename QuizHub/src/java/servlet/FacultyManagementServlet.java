@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Admin;
 import model.Branch;
 import model.Faculty;
 
@@ -36,6 +37,12 @@ public class FacultyManagementServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String path = "/WEB-INF/FacultyManagement.jsp";
+        
+        if(!(request.getSession().getAttribute("user") instanceof Admin)){
+            response.sendRedirect("Home");
+            return;
+            //getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+        }
         
         String fid = request.getParameter("id");
         String bid = request.getParameter("bid");
@@ -67,20 +74,20 @@ public class FacultyManagementServlet extends HttpServlet {
                 request.setAttribute("branch", null);
             }else{
                 Branch b = bdao.getBranchById(Integer.valueOf(bid));
+                
+                if(edit_branch != null){
+                    b.setName(edit_branch);
+                    bdao.setBranchName(b);
+                    request.setAttribute("msg", "change branch name successful!");
+                    bs = bdao.getAllBranchInFacultyByFacultyId(f.getId());
+                }
+                
                 request.setAttribute("branch", b);
             }
             request.setAttribute("branchesInfaculty", bs);
             request.setAttribute("faculty", f);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
-        
-        /*if(bid == null || bid.isEmpty()){
-            request.setAttribute("branch", "SELECT SOME BRANCH");
-            getServletContext().getRequestDispatcher("/ListFaculty").include(request, response);
-            getServletContext().getRequestDispatcher(path).forward(request, response);
-        }*/
-        
-        
         
         
         
