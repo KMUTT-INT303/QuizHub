@@ -74,6 +74,7 @@
             <button class="tablinks" onclick="openCity(event, 'Student')">Student</button>
             <button class="tablinks" onclick="openCity(event, 'Teacher')">Teacher</button>
             <button class="tablinks" onclick="openCity(event, 'ActiveTeacher')">Active Teacher</button>
+            <button class="tablinks" onclick="openCity(event, 'FacultyAndBranch')">Faculty & Branch</button>
         </div>
 
         <div id="Student" class="tabcontent">
@@ -89,6 +90,11 @@
         <div id="ActiveTeacher" class="tabcontent">
             <h3>Active Teacher</h3>
             <iframe allowfullscreen frameborder="0" width="100%" height="540" src="ActiveUserSystem"></iframe>
+        </div>
+        
+        <div id="FacultyAndBranch" class="tabcontent">
+            <h3>Faculty & Branch</h3>
+            <iframe allowfullscreen frameborder="0" width="100%" height="540" src="FacultyManagement"></iframe>
         </div>
 
 
