@@ -101,7 +101,7 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">First Name: <span class="username">${user.firstName}</span></li>
                                     <li class="list-group-item">Last Name: <span class="username">${user.lastName}</span></li>
-                                    <li class="list-group-item">Student ID: <span class="id">${user.id}</span></li>
+                                    <li class="list-group-item">${status} ID: <span class="id">${user.id}</span></li>
                             </div>
                         </div>
                     </div>

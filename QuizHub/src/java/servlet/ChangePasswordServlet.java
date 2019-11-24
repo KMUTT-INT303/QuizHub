@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import controllers.Admindao;
 import controllers.Studentdao;
 import controllers.Teacherdao;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Admin;
 import model.Student;
 import model.Teacher;
 
@@ -117,6 +119,42 @@ public class ChangePasswordServlet extends HttpServlet {
                 request.setAttribute("msg", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }
+            
+        } else if (request.getSession().getAttribute("user") instanceof Admin) {
+            Admin a = (Admin) request.getSession().getAttribute("user");
+            if (a.getPassword().equals(opass)) {
+                if (npass.equals(opass)) {
+                    msg = "New Password Shouldn't same as Old Password!";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                } else {
+                    if (!npass.equals(cpass)) {
+                        msg = "Wrong Confirm password!";
+                        request.setAttribute("msg", msg);
+                        getServletContext().getRequestDispatcher(path).forward(request, response);
+                    } else {
+                        Admindao adao = new Admindao();
+                        Admin ainDB = adao.getAdminById(a.getId());
+                        if (ainDB.getId() == a.getId()) {
+                            a.setPassword(npass);
+                            adao.editPassword(a);
+                            msg = "change password successful.";
+                            request.setAttribute("msg", msg);
+                            //response.sendRedirect("/QuizHub/ChangePassword");
+                            getServletContext().getRequestDispatcher(path).forward(request, response);
+                            return;
+                        } else {
+                            msg = "Cannot change";
+                            request.setAttribute("msg", msg);
+                            getServletContext().getRequestDispatcher(path).forward(request, response);
+                        }
+                    }
+                }
+            } else {
+                msg = "Wrong Old Password!";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }
         } else {
             msg = "Have a BUG!";
             request.setAttribute("msg", msg);
@@ -138,8 +176,8 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        //getServletContext().getRequestDispatcher("/WEB-INF/ManageAccount.jsp").forward(request, response);
+        //processRequest(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/Profile.jsp").forward(request, response);
     }
 
     /**

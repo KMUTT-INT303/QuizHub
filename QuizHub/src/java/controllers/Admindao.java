@@ -35,6 +35,39 @@ public class Admindao {
         
         return null;
     }
+    
+    public boolean editPassword(Admin a){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE admins set password = ? WHERE admin_id = ?");
+            ps.setString(1, a.getPassword());
+            ps.setLong(2, a.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Admindao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public boolean editAdmin(Admin a){
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE admins set first_name = ?, last_name = ?, password = ? WHERE admin_id = ?");
+            ps.setString(1, a.getFirstName());
+            ps.setString(2, a.getLastName());
+            ps.setString(3, a.getPassword());
+            ps.setLong(4, a.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Admindao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
     public static void main(String[] args) {
         Admindao adao = new Admindao();
         Admin a = adao.getAdminById(000);

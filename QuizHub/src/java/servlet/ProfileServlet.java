@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import controllers.Admindao;
 import controllers.Studentdao;
 import controllers.Teacherdao;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Admin;
 import model.Student;
 import model.Teacher;
 
@@ -69,7 +71,8 @@ public class ProfileServlet extends HttpServlet {
                 request.setAttribute("ProfileException", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }
-        }else if(request.getSession().getAttribute("user") instanceof Teacher){
+        }
+        else if(request.getSession().getAttribute("user") instanceof Teacher){
             Teacher t =(Teacher) request.getSession().getAttribute("user");
             Teacherdao tdao = new Teacherdao();
             Teacher tinDB = tdao.getTeacherById(t.getId());
@@ -94,7 +97,34 @@ public class ProfileServlet extends HttpServlet {
                 request.setAttribute("ProfileException", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);
             }
-        }else{
+        }
+        else if(request.getSession().getAttribute("user") instanceof Admin){
+            Admin a =(Admin) request.getSession().getAttribute("user");
+            Admindao adao = new Admindao();
+            Admin ainDB = adao.getAdminById(a.getId());
+
+            if(a.getId() == ainDB.getId()){
+                if(fname.length() >= 3 && lname.length() >= 3){
+                    a.setFirstName(fname.trim());
+                    a.setLastName(lname.trim());
+                    adao.editAdmin(a);
+                    msg = "successful.";
+                    request.setAttribute("ProfileException", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                    //response.sendRedirect("/QuizHub/ManageAccountForStudent");
+                    return;
+                }else{
+                    msg = "First Name & Last Name must more than 3 character";
+                    request.setAttribute("msg", msg);
+                    getServletContext().getRequestDispatcher(path).forward(request, response);
+                }
+            }else{
+                msg = "cannot change";
+                request.setAttribute("ProfileException", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }
+        }
+        else{
             msg = "cannot change";
             request.setAttribute("ProfileException", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
