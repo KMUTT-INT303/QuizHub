@@ -27,7 +27,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/QuizHub/StatSearch.jsp"><i class="fas fa-chart-bar"></i> View Statistics</a>
+                    <a class="nav-link" href="StatSearch"><i class="fas fa-chart-bar"></i> View Statistics</a>
                 </li>
 
                 <li class="nav-item">

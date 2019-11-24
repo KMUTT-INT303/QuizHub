@@ -10,12 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@ include file="../Layouts/Headers.jsp" %> 
+        <%@ include file="../Layouts/Menu.jsp" %> 
         <title>Student Statistic</title>
     </head>
     <body>
         <h1>Statistic Site</h1>
-        <form action="StatSearch">
+        <form action="StatSearch" method="post">
         <input type="text" name="searchText">
         <select name="searchType">
             <option value="quizName">Quiz Name</option>

@@ -37,8 +37,18 @@ public class ManageQuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         int id = -1;
+        
+        if(request.getParameter("currentQuiz")!=null){
         String quizId = request.getParameter("currentQuiz");
-
+        request.setAttribute("currentQuizId", quizId);
+        id=Integer.valueOf(quizId);}
+        
+        if(request.getParameter("currentQuizId")!=null){
+        String quizId = request.getParameter("currentQuizId");
+        request.setAttribute("currentQuizId", quizId);
+        id=Integer.valueOf(quizId);}
+        
         String newName = request.getParameter("newName");
         String newCode = request.getParameter("newCode");
         String newFaculty = request.getParameter("newFaculty");
@@ -50,20 +60,21 @@ public class ManageQuizServlet extends HttpServlet {
         String newMinutes = request.getParameter("newMinutes");
         String newCourse = request.getParameter("newCourse");
 
-        request.setAttribute("currentQuizId", quizId);
+        
         QuizManagerdao qm = new QuizManagerdao();
-        int id = -1;
-
-        if (request.getParameter("currentQuiz") != null) {
-            id = Integer.valueOf(request.getParameter("currentQuiz"));
-        }
-
+       
+        
+        
+        
+        
         if ((newName == null || newName.equals("")) && (newCode == null || newCode.equals("")) && (newFaculty == null || newFaculty.equals("")) && (newBranch == null || newBranch.equals(""))
                 && (newSkill == null || newSkill.equals("")) && (newStartDate == null || newStartDate.equals("")) && (newEndDate == null || newEndDate.equals("")) && (newHours == null || newHours.equals("")) && (newMinutes == null || newMinutes.equals(""))) {
 
             request.getServletContext().getRequestDispatcher("/WEB-INF/ManageQuiz.jsp").forward(request, response);
 
         } else {
+            request.setAttribute("id",id);
+            
             String hours = null;
             String minutes = null;
 
@@ -92,7 +103,7 @@ public class ManageQuizServlet extends HttpServlet {
 
             Quizzes q = new Quizzes();
 
-            if (newName != null && !(newCode.equals(""))) {
+            if (newName != null && !(newName.equals(""))) {
                 qm.setQuizAttributeValue("quiz_name",newName, id);
             }
 
@@ -105,17 +116,17 @@ public class ManageQuizServlet extends HttpServlet {
             }
 
             if (newBranch != null && !(newBranch.equals(""))) {
-
-                String[] branch_list = newBranch.split("-");
-                String branch_id = branch_list[1];
-                qm.setQuizAttributeValue("branch_id", branch_id, id);
+//
+//                String[] branch_list = newBranch.split("-");
+//                String branch_id = branch_list[1];
+//                qm.setQuizAttributeValue("branch_id", branch_id, id);
             }
             if (newCourse != null && !(newCourse.equals(""))) {
-                String[] list = newCourse.split("-");
-                String courseId = list[0];
-                String courseName = list[1];
-                qm.setQuizAttributeValue("course_name", courseName, id);
-                qm.setQuizAttributeValue("course_id", courseId, id);
+//                String[] list = newCourse.split("-");
+//                String courseId = list[0];
+//                String courseName = list[1];
+//                qm.setQuizAttributeValue("course_name", courseName, id);
+//                qm.setQuizAttributeValue("course_id", courseId, id);
             }
             if (newSkill != null && !(newSkill.equals(""))) {
 
@@ -150,7 +161,7 @@ public class ManageQuizServlet extends HttpServlet {
     public static void main(String[] args) {
         QuizManagerdao qd = new QuizManagerdao();
         //qd.deleteQuiz(9);
-        qd.setQuizAttributeValue("quiz_name", "java basic 1", 8);
+        qd.setQuizAttributeValue("quiz_name", "good game",5);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
