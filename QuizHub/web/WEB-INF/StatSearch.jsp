@@ -10,12 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@ include file="../Layouts/Headers.jsp" %> 
+        <%@ include file="../Layouts/Menu.jsp" %> 
         <title>Student Statistic</title>
     </head>
     <body>
         <h1>Statistic Site</h1>
-        <form action="StatSearch">
+        <form action="StatSearch" method="post">
         <input type="text" name="searchText">
         <select name="searchType">
             <option value="quizName">Quiz Name</option>
@@ -27,7 +27,7 @@
         ${msg}
     
     <c:forEach items="${classList}" var="c" varStatus="cs">
-    <a href="StatSearch?classSelect=${c.id}">${c.name}</a> ${c.id}<br>
+    <a href="StatSearch?classSelect=${c.id}" >${c.name}</a> ${c.id}<br>
     </c:forEach>    
     
         

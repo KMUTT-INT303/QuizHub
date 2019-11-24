@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@ include file="../Layouts/Headers.jsp" %> 
+        <%@ include file="../Layouts/Menu.jsp" %>
         <title>Class Quiz</title>
     </head>
     <body>

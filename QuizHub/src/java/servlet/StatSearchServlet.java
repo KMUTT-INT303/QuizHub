@@ -57,7 +57,7 @@ public class StatSearchServlet extends HttpServlet {
 
                         request.setAttribute("quizList", ql);
                         request.setAttribute("quizTestScore", quizTestScore);
-                        request.getServletContext().getRequestDispatcher("/StatSearch.jsp").forward(request, response);
+                        request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
 
                     } else {
                         if (searchType.equals("className")) {
@@ -68,7 +68,7 @@ public class StatSearchServlet extends HttpServlet {
                             ArrayList<Course> c = sd.getAllCourseByName(searchText);
 
                             request.setAttribute("classList", c);
-                            request.getServletContext().getRequestDispatcher("/StatSearch.jsp").forward(request, response);
+                            request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
                         }
                     }
 
@@ -77,12 +77,12 @@ public class StatSearchServlet extends HttpServlet {
                     request.setAttribute("msg", "please input more than 3 character");
                 }
             }
-            if (quizSelect != null) {
-
-                request.getServletContext().getRequestDispatcher("QuizPage.jsp").forward(request, response);
-                //bring user to quiz page
-
-            }
+//            if (quizSelect != null) {
+//
+//                request.getServletContext().getRequestDispatcher("QuizPage.jsp").forward(request, response);
+//                //bring user to quiz page
+//
+//            }
 
             if (classSelect != null) {
                 Statdao sd = new Statdao();
@@ -101,7 +101,7 @@ public class StatSearchServlet extends HttpServlet {
 
                 if (ql.isEmpty() || quizTestScore.isEmpty()) {
 
-                    request.getServletContext().getRequestDispatcher("/StatSearch.jsp").forward(request, response);
+                    request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
                 } else {
 
                     //Set Skill Part
@@ -135,21 +135,21 @@ public class StatSearchServlet extends HttpServlet {
                     request.setAttribute("averagePercentOfClass", averagePercentOfClass);
                     request.setAttribute("quizList", ql);
                     request.setAttribute("quizTestScore", quizTestScore);
-                    request.getServletContext().getRequestDispatcher("/ClassStat.jsp").forward(request, response);
+                    request.getServletContext().getRequestDispatcher("/WEB-INF/ClassStat.jsp").forward(request, response);
                 }
                 //bring user to quiz page
 
             }
         }
 
-        request.getServletContext().getRequestDispatcher("/StatSearch.jsp").forward(request, response);
+        request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
     }
-    public static void main(String[] args) {
-        Statdao sd = new Statdao();
-        System.out.println(sd.getTestScoreForQuizByName("net",61130500001l));
-        
-        //System.out.println(sd.getSkillStatByCourseId("INT105",61130500001l));
-    }
+//    public static void main(String[] args) {
+//        Statdao sd = new Statdao();
+//        System.out.println(sd.getTestScoreForQuizByName("net",61130500001l));
+//        
+//        //System.out.println(sd.getSkillStatByCourseId("INT105",61130500001l));
+//    }
    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -163,7 +163,8 @@ public class StatSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       processRequest(request, response); 
+       //request.getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
     }
 
     /**
