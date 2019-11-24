@@ -37,8 +37,8 @@ public class ManageQuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String quizId = request.getParameter("quizId");
-        
+        String quizId = request.getParameter("currentQuiz");
+
         String newName = request.getParameter("newName");
         String newCode = request.getParameter("newCode");
         String newFaculty = request.getParameter("newFaculty");
@@ -49,108 +49,110 @@ public class ManageQuizServlet extends HttpServlet {
         String newHours = request.getParameter("newHours");
         String newMinutes = request.getParameter("newMinutes");
         String newCourse = request.getParameter("newCourse");
-        
-        request.setAttribute("currentQuizId",quizId);
+
+        request.setAttribute("currentQuizId", quizId);
         QuizManagerdao qm = new QuizManagerdao();
         int id = -1;
-        
-        if(request.getParameter("currentQuiz")!=null){
-        id = Integer.valueOf(request.getParameter("currentQuiz"));
+
+        if (request.getParameter("currentQuiz") != null) {
+            id = Integer.valueOf(request.getParameter("currentQuiz"));
         }
 
         if ((newName == null || newName.equals("")) && (newCode == null || newCode.equals("")) && (newFaculty == null || newFaculty.equals("")) && (newBranch == null || newBranch.equals(""))
                 && (newSkill == null || newSkill.equals("")) && (newStartDate == null || newStartDate.equals("")) && (newEndDate == null || newEndDate.equals("")) && (newHours == null || newHours.equals("")) && (newMinutes == null || newMinutes.equals(""))) {
 
-        request.getServletContext().getRequestDispatcher("/WEB-INF/ManageQuiz.jsp").forward(request, response);
-        
+            request.getServletContext().getRequestDispatcher("/WEB-INF/ManageQuiz.jsp").forward(request, response);
+
         } else {
-                    String hours = null;
-        String minutes = null;
+            String hours = null;
+            String minutes = null;
 
-        if (newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00") {
-            hours = "00";
-            minutes = newMinutes;
-            newHours = "00";
-        }
+            if (newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00") {
+                hours = "00";
+                minutes = newMinutes;
+                newHours = "00";
+            }
 
-        if (newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00") {
-            hours = newHours;
-            minutes = "00";
-            newMinutes = "00";
-        }
+            if (newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00") {
+                hours = newHours;
+                minutes = "00";
+                newMinutes = "00";
+            }
 
-        if (newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00" && newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00") {
-            hours = "unlimited";
-            minutes = "unlimited";
-        }
-            
-        String[] list = newCourse.split("-");
-        String courseId = list[0];
-        String courseName = list[1];
+            if (newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00" && newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00") {
+                hours = "unlimited";
+                minutes = "unlimited";
+            }
 
-        String[] branch_list = newBranch.split("-");
-        String branch_id = branch_list[1];  
-        
-        String removeSD = newStartDate.replace("T", " ");
-        String removeED = newEndDate.replace("T", " ");
-        
-        HttpSession session = request.getSession();
-        Teacher t = (Teacher) session.getAttribute("user");
-        
-        Quizzes q = new Quizzes();
-            
-            
-            
-            
-            
-            if (newName != null && !(newName.equals(""))) {
-               qm.setQuizAttributeValue("quiz_name",newName, id);
+            String removeSD;
+            String removeED;
+
+            HttpSession session = request.getSession();
+            Teacher t = (Teacher) session.getAttribute("user");
+
+            Quizzes q = new Quizzes();
+
+            if (newName != null && !(newCode.equals(""))) {
+                qm.setQuizAttributeValue("quiz_name",newName, id);
             }
 
             if (newCode != null && !(newCode.equals(""))) {
-               qm.setQuizAttributeValue("join_code",newCode, id);
+                qm.setQuizAttributeValue("join_code",newCode, id);
             }
 
             if (newFaculty != null && !(newFaculty.equals(""))) {
-               qm.setQuizAttributeValue("faculty",newFaculty, id);
+                qm.setQuizAttributeValue("faculty_id",newFaculty, id);
             }
 
             if (newBranch != null && !(newBranch.equals(""))) {
-                qm.setQuizAttributeValue("branch_id",branch_id,id);
+
+                String[] branch_list = newBranch.split("-");
+                String branch_id = branch_list[1];
+                qm.setQuizAttributeValue("branch_id", branch_id, id);
             }
-             if (newCourse != null && !(newCourse.equals(""))) {
-                qm.setQuizAttributeValue("course_name",courseName,id);
-                qm.setQuizAttributeValue("course_id",courseId,id);
-            }
-             
             if (newCourse != null && !(newCourse.equals(""))) {
-                qm.setQuizAttributeValue("skill_text",newSkill,id);
-               
-            } 
-            
+                String[] list = newCourse.split("-");
+                String courseId = list[0];
+                String courseName = list[1];
+                qm.setQuizAttributeValue("course_name", courseName, id);
+                qm.setQuizAttributeValue("course_id", courseId, id);
+            }
+            if (newSkill != null && !(newSkill.equals(""))) {
+
+                qm.setQuizAttributeValue("skill_text", newSkill, id);
+
+            }
+
             if (newStartDate != null && !(newStartDate.equals(""))) {
-                qm.setQuizAttributeValue("start_date",Timestamp.valueOf(removeSD + ":00"),id);
+                removeSD = newStartDate.replace("T", " ");
+                qm.setQuizAttributeValue("start_date", Timestamp.valueOf(removeSD + ":00"), id);
             }
             if (newEndDate != null && !(newEndDate.equals(""))) {
-                qm.setQuizAttributeValue("end_date",Timestamp.valueOf(removeED + ":00"),id);
+                removeED = newEndDate.replace("T", " ");
+                qm.setQuizAttributeValue("end_date", Timestamp.valueOf(removeED + ":00"), id);
             }
             if (newHours != null && !(newHours.equals(""))) {
-                qm.setQuizAttributeValue("HOURS",newHours,id);
+                qm.setQuizAttributeValue("HOURS", newHours, id);
             }
             if (newMinutes != null && !(newMinutes.equals(""))) {
-                qm.setQuizAttributeValue("MINUTES",newMinutes,id);
+                qm.setQuizAttributeValue("MINUTES", newMinutes, id);
             }
-            
-            
+//            if(request.getPart("file")!=null){
+//            request.getRequestDispatcher("Upload").forward(request, response);
+//            }
 
         }
         request.getServletContext().getRequestDispatcher("/WEB-INF/ManageQuiz.jsp").forward(request, response);
 
-    }
+        }
+    
+
     public static void main(String[] args) {
         QuizManagerdao qd = new QuizManagerdao();
-        qd.deleteQuiz(9);
+        //qd.deleteQuiz(9);
+        qd.setQuizAttributeValue("quiz_name", "java basic 1", 8);
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -189,5 +191,6 @@ public class ManageQuizServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

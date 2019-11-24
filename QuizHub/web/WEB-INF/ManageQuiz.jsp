@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@ include file="../Layouts/Headers.jsp" %> 
         <jsp:include page="/ListFaculty"/>
         <jsp:include page="/ListCourse"/>
     </head>

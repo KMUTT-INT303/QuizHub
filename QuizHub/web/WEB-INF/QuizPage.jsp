@@ -161,6 +161,7 @@
                             <div class="card-body text-secondary">
                                 <center>   
                                     <form action="ManageQuiz" method="post">
+                                        <input type="text" hidden name="currentQuiz" value="${takequiz.quizId}">
                                         <button type="submit" class="btn btn-success"><i class="fas fa-cogs"></i> Mange Quizzes</button>
                                     </form>
                                 </center>
