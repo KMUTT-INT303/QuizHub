@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import controllers.Studentdao;
 import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Student;
 import model.Teacher;
 
 /**
@@ -55,6 +57,13 @@ public class TeacherRegisterServlet extends HttpServlet {
             return;
         }
         
+        if(id.length() < 8){
+            msg = "Wrong format of Teacher ID.";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher(path).forward(request, response);
+            return;
+        }
+        
         if(!submail.equals("@kmutt.ac.th")){
             msg = "Plz , select mail address.";
             request.setAttribute("msg", msg);
@@ -79,12 +88,21 @@ public class TeacherRegisterServlet extends HttpServlet {
             request.setAttribute("msg", msg);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }else{
+            
+            Studentdao sdao = new Studentdao();
+            Student s = sdao.getStudentById(tid);
+            if(s!=null){
+                msg = "You must to use your Teacher ID.";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher(path).forward(request, response);
+            }
+            
             Teacher tmail = tdao.getTeacherByMail(email);
             if(tmail != null){
                 msg = "This email has registed!";
                 request.setAttribute("msg", msg);
                 getServletContext().getRequestDispatcher(path).forward(request, response);
-            }else{
+            }else{ 
                 tdao.addTeacher(registerTeacher);
                 msg = "Register successful.";
                 request.setAttribute("msg", msg);

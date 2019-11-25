@@ -16,6 +16,13 @@
 
         <jsp:include page="/ListFaculty"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <script>
+            function setNone() {
+              document.getElementById("back").style.display = "none";
+            }
+        </script>
+        
         <title>QuizHub - Register</title>
     </head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -39,10 +46,13 @@
 
                                 <div class="container">
                                     <ul class="nav nav-tabs justify-content-center align-items-center" style="border-bottom: 0px;">
-                                        <li><a data-toggle="tab" href="#s" class="btn btn-primary m-2"><i class="fas fa-user-graduate"></i> Student Register</a></li>
-                                        <li><a data-toggle="tab" href="#t" class="btn btn-primary m-2"><i class="fas fa-chalkboard-teacher"></i> Teacher Register</a></li>
+                                        <li><a data-toggle="tab" href="#s" class="btn btn-primary m-2" onclick="setNone()"><i class="fas fa-user-graduate"></i> Student Register</a></li>
+                                        <li><a data-toggle="tab" href="#t" class="btn btn-primary m-2" onclick="setNone()"><i class="fas fa-chalkboard-teacher"></i> Teacher Register</a></li>
                                     </ul>
-
+                                    
+                                    <ul class="nav nav-tabs justify-content-center align-items-center" style="border-bottom: 0px;">
+                                        <a href="Login" class="btn btn-success" id="back" ><i class="fas fa-undo"></i> Back</a>
+                                    </ul>
                                     <div class="tab-content">
                                         <div id="s" class="tab-pane fade in active">
                                             <form id="register-form" action="Register" method="post" class="form-inlin justify-content-center"<%--enctype="multipart/form-data" --%> autocomplete="off">
@@ -203,6 +213,7 @@
 
 
                             </div>
+                                                
                         </div>
                     </div>
                 </div>

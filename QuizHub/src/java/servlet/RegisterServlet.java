@@ -8,6 +8,7 @@ package servlet;
 import controllers.Branchdao;
 import controllers.Facultydao;
 import controllers.Studentdao;
+import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Branch;
 import model.Faculty;
 import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -121,6 +123,15 @@ public class RegisterServlet extends HttpServlet {
             return;
 
         } else {
+            Teacherdao tdao = new Teacherdao();
+            Teacher t = tdao.getTeacherById(sid);
+            if(t != null){
+                msg = "You must to use your Student ID.";
+                request.setAttribute("msg", msg);
+                request.getRequestDispatcher(path).forward(request, response);
+                return;
+            }
+            
             Student smail = sdao.getStudentByMail(email);
             if(smail!= null){
                 msg = "this email has Registered.";

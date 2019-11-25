@@ -66,6 +66,14 @@ public class CreateQuizServlet extends HttpServlet {
             }
         }
          
+        
+        if(quizName.trim().isEmpty() || quizComment.trim().isEmpty() || quizStatus.trim().isEmpty() || course.trim().isEmpty()
+                || quizFacultyId.trim().isEmpty() || quizBranchId.trim().isEmpty() || quizSkillText.trim().isEmpty() || quizStartDate.trim().isEmpty() || quizEndDate.trim().isEmpty()){
+                String msg = "add all information!";
+                request.setAttribute("msg", msg);
+                getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
+        }
+        
         String hours = null;
         String minutes = null;
 
@@ -174,7 +182,8 @@ public class CreateQuizServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
     }
 
     /**

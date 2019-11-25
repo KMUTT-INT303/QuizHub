@@ -41,13 +41,13 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Quizzes Name</div>
                                     </div>
-                                    <input type="text" class="form-control" name="quiz_name" placeholder="">
+                                    <input type="text" class="form-control" name="quiz_name" placeholder="Quiz Name" value="${param.quiz_name}">
                                 </div>
                             </div>
 
                             <div class="form-group row">  
                                 <label for="description">Quizzes Description</label>
-                                <textarea class="form-control" name="quiz_advice" style="width: 100%;"></textarea>
+                                <textarea class="form-control" name="quiz_advice" placeholder="Description for this quiz" style="width: 100%;">${param.quiz_advice}</textarea>
                             </div>
 
                             <div class="form-group row">
@@ -106,7 +106,7 @@
                                         <div class="input-group-text">Quizzes Branch</div>
                                     </div>
                                     <select class="form-control" id="branch" name="branch_id">
-                                        <c:forEach items="${branch}" var="b">
+                                        <c:forEach items="${branches}" var="b">
                                             <option value="${b.faculty_id}-${b.id}">${b.name}</option>
                                         </c:forEach>
                                     </select>
@@ -125,7 +125,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Quizzes Skill</div>
                                     </div>
-                                    <input type="text" class="form-control" name="skill" placeholder="">
+                                    <input type="text" class="form-control" name="skill" placeholder="" value="${param.skill}">
                                 </div>
                             </div>
 
@@ -134,7 +134,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Start Date</div>
                                     </div>
-                                    <input class="form-control" type="datetime-local" id="start_date" name="start_date">
+                                    <input class="form-control" type="datetime-local" id="start_date" name="start_date" value="${param.start_date}">
                                 </div>
                             </div>
 
@@ -143,7 +143,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">End Date</div>
                                     </div>
-                                    <input class="form-control" type="datetime-local" name="end_date">
+                                    <input class="form-control" type="datetime-local" name="end_date" value="${param.end_date}">
                                 </div>
                             </div>
 
