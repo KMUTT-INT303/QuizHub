@@ -112,6 +112,10 @@
         <servlet-name>FacultyManagementServlet</servlet-name>
         <servlet-class>servlet.FacultyManagementServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteQuestionServlet</servlet-name>
+        <servlet-class>servlet.DeleteQuestionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>FacultyManagementServlet</servlet-name>
         <url-pattern>/FacultyManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteQuestionServlet</servlet-name>
+        <url-pattern>/DeleteQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

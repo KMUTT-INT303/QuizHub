@@ -112,8 +112,8 @@
                                         <c:forEach items="${question}" var="q" varStatus="qround">
                                             <div class="card-body text-secondary">
                                                 <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">${qround.count}. ${q.questionName}</h5>
+                                                    <div class="card-body sc-remove">
+                                                        <h5 class="card-title">${qround.count}. ${q.questionName} <div class="float-right" id="remove-question"><div class="hc-remove"><button type="button" class="btn btn-danger btn-sm" value="${q.questionId}"><i class="fas fa-times-circle"></i></button></div></div></h5>
                                                         <c:forEach items="${choice}" var="c" varStatus="cround">
                                                             <c:if test="${q.questionId == c.questionId}">
                                                                 <div class="form-check">
@@ -204,6 +204,28 @@
 
 
         </main>
+
+
+        <div class="modal fade" id="remove-success" tabindex="-1" role="dialog" aria-labelledby="remove-q" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="remove-qmodal">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 
     <%@ include file="../Layouts/Footers.jsp" %> 
@@ -235,7 +257,7 @@
                 }
             });
 
-        })
+        });
 
         $(document).on('click', '#start', function (e)
         {
@@ -243,10 +265,7 @@
             if (!timer.isRunning()) {
 
                 $('#ready').load("LoadQuiz");
-                $('#done_button').load("LoadDoneButton",
-                        {
-                            user_agent: 'ajax',
-                        })
+                $('#done_button').load("LoadDoneButton");
 
                 timer.start({
                     countdown: true,
@@ -258,7 +277,28 @@
                 });
             }
 
-        })
+        });
+
+        $(document).on('click', '.sc-remove button', function (e)
+        {
+            e.preventDefault();
+
+            var q_value = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: "DeleteQuestion",
+                data: {
+                    q_id: q_value,
+                    t_id: '${user.id}',
+                    q_page: '${takequiz.page}'
+                },
+                success: function (e) {
+                    location.reload();
+                }
+            });
+
+        });
 
         $('#time .timer').html('${takequiz.hours}:${takequiz.minutes}:00');
 

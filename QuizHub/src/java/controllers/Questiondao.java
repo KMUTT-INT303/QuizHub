@@ -38,6 +38,26 @@ public class Questiondao {
         return false;
     }
 
+    public Question getQuestionById(int quiz_id) {
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM questions where question_id = ?");
+            ps.setInt(1, quiz_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Question(
+                        rs.getInt("question_id"),
+                        rs.getString("question_name"),
+                        rs.getInt("quiz_id")
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
     public Question getQuestionByQuizId(int quiz_id) {
         conn = BuildConnection.getConnection();
         try {
