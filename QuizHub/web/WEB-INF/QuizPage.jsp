@@ -20,7 +20,7 @@
 
             <div class="row justify-content-center">
 
-                <div class="col-sm-8">
+                <div id="block-content-q" class="col-sm-8" ${status == 'Student' ? 'hidden="true"' : ''}>
 
                     <div class="card mb-4">
                         <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
@@ -91,6 +91,51 @@
                                 </div>
                             </div>
                         </c:if>
+
+
+
+
+
+
+                        <c:if test="${status == 'Student'}">
+                            <div class="card" id="quiz-info">
+                                <div class="card-body">
+                                    <h5 class="card-title">${takequiz.quizName}</h5>
+                                    <h6 class="card-subtitle mb-4 text-muted">Teacher. Lenadian Pual | Created at 20/10/2019 20:21</h6>
+
+
+                                    <b><p class="card-text">Description</p></b>
+                                    <small><p class="card-text mb-4 ml-2">${takequiz.quizComment}</p></small>
+
+
+                                    <b><p class="card-text">Details</p></b>
+                                    <small>
+                                        <p class="card-text mb-4 ml-2">
+                                            Course ID: <span class="badge badge-primary">${takequiz.quizCourseId}</span>
+                                            Faculty: <span class="badge badge-primary">${takequiz.quizFacultyId}</span>
+                                            Branch: <span class="badge badge-primary">${takequiz.quizBranchId}</span>
+                                            Skill: <span class="badge badge-info">${takequiz.quizSkillText}</span>
+                                            Teacher: <span class="badge badge-dark">${takequiz.quizTeacherId}</span>
+                                        </p>
+                                    </small>
+
+                                    <div class="row justify-content-center">
+                                        <div class="alert alert-info text-center col-6" role="alert">
+                                            <b> If you are ready. Press start button! </b>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </c:if>
+
+
+
+
+
+
+
+
                         <form method="post" action="Done" id="send">
                             <input name="quiz_id" value="${takequiz.quizId}" hidden />
                             <input name="student_id" value="${user.id}" hidden />
@@ -114,8 +159,8 @@
                                                 <div class="card">
                                                     <div class="card-body sc-remove">
                                                         <h5 class="card-title">${qround.count}. ${q.questionName} <div class="float-right" id="remove-question"><div class="hc-remove"><button type="button" class="btn btn-danger btn-sm" value="${q.questionId}"><i class="fas fa-times-circle"></i></button></div></div></h5>
-                                                        <c:forEach items="${choice}" var="c" varStatus="cround">
-                                                            <c:if test="${q.questionId == c.questionId}">
+                                                                        <c:forEach items="${choice}" var="c" varStatus="cround">
+                                                                            <c:if test="${q.questionId == c.questionId}">
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="result${qround.count}" value="${c.choiceId}">
                                                                     <label class="form-check-label" for="${q.questionId}">
@@ -135,15 +180,6 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:if>
-                            <c:if test="${question.size() <= 0}">
-                                <div class="card-body text-secondary">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            This quiz doesn't have any question yet.
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:if>
                         </form>
 
                         <%--<div class="card-footer">
@@ -154,24 +190,61 @@
                 </div>
 
 
-                <div class="col-sm-4">
+                <div class="col" id="info">
 
                     <c:if test="${status == 'Student'}">
                         <div class="card mb-4">
-                            <h6 class="card-header"><center><i class="fas fa-hourglass-half"></i> Time</center></h6>
+                            <h6 class="card-header"><div id="block-content-t"><center><i class="fas fa-info-circle"></i> Quiz Alert</center></div></h6>
                             <div class="card-body text-secondary">
-                                <center>   
-                                    <c:if test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
-                                        <p>Pratice</p>
-                                    </c:if>
-                                    <div class="m-3">
-                                        <div id="time">
-                                            <div class="timer"></div>
-                                        </div>
-                                    </div>
-                                    <button id="load" class="btn btn-warning" ><i class="fas fa-play"></i> Ready</button>
-                                    <div id="start_btn"></div>
-                                    <%--${countc} : ${countq} --%>
+                                <center>
+                                    <c:choose>
+                                        <c:when test="${question.size() <= 0}">
+
+                                            <div class="alert alert-warning col-6" role="alert">
+                                                This quiz doesn't have any question yet.
+                                            </div>
+
+                                        </c:when>
+
+                                        <c:otherwise>
+
+
+                                            <c:choose>
+                                                <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
+                                                    <p>Pratice</p>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="m-3" id="time" hidden="true">
+                                                        <div class="timer"></div>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+
+
+                                            <c:choose>
+                                                <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
+                                                    <div class="alert alert-succes col-8" id="announce" role="alert">
+                                                        <p><b>Please attention!</b></p>
+                                                        <p><small>This is pratice. You can take with unlimited times!</small></p>
+                                                        <p><span class="badge badge-success">*Note: Your score will be not recognize.</span></p>
+                                                    </div>
+                                                    <button id="load" class="btn btn-success" ><i class="fas fa-check-square"></i> Accept </button>
+                                                    <div id="start_btn"></div>
+                                                    <%--${countc} : ${countq} --%>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="alert alert-warning col-8" id="announce" role="alert">
+                                                        <p><b>Please attention!</b></p>
+                                                        <p><small>You cannot leaving or close page until you finish. You will lose score if you leave or close!</small></p>
+                                                        <p><span class="badge badge-danger">*Note: You can do once time after press accept your score will be recognize.</span></p>
+                                                    </div>
+                                                    <button id="load" class="btn btn-success" ><i class="fas fa-check-square"></i> Accept </button>
+                                                    <div id="start_btn"></div>
+                                                    <%--${countc} : ${countq} --%>
+                                                </c:otherwise>
+                                            </c:choose> 
+                                        </c:otherwise>
+                                    </c:choose>
 
                                 </center>
                             </div>
@@ -204,25 +277,15 @@
 
 
         </main>
-
-
-        <div class="modal fade" id="remove-success" tabindex="-1" role="dialog" aria-labelledby="remove-q" aria-hidden="true">
+                    
+        <div class="modal" tabindex="-1" role="dialog" id="block-q">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="remove-qmodal">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+              <div class="modal-content">
+                <div class="modal-body">
+                  <p>You are already taken this quiz.</p>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
+              </div>
             </div>
         </div>
 
@@ -234,26 +297,38 @@
 
     <script>
 
-        <c:if test="${takequiz.hours != 'unlimited' && takequiz.minutes != 'unlimited'}">
         var timer = new Timer();
 
         $(document).on('click', '#load', function (e)
         {
             e.preventDefault();
-
-            $('#nready').hide();
-            $('#load').hide();
-            $('#start_btn').html('<button id="start" class="btn btn-warning" ><i class="fas fa-play"></i> Start</button>');
-
+            
             $.ajax({
                 type: "POST",
                 url: "StartQuiz",
                 data: {
                     quiz_id: ${takequiz.quizId},
-                    page: '${takequiz.page}'
+                    page: '${takequiz.page}',
+                    ispratice: '<c:choose><c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">true</c:when><c:otherwise>false</c:otherwise></c:choose>'
                 },
                 success: function (e) {
-                    console.log(e);
+                    if(e == 1) {
+                        $('#block-q').modal('show');
+                    } else {
+                        
+                        $('#nready').hide();
+                        $('#load').hide();
+                        $('#announce').remove();
+
+                        $('#block-content-t').html('<div class="animated heartBeat"><center><i class="fas fa-hourglass-half"></i> Time</center></div>');
+                        $('#info').addClass("animated fadeInLeft");
+                        $('#block-content-q').attr("hidden", false).addClass("animated fadeInLeft");
+
+                        $('#time').attr("hidden", false);
+
+                        $('#start_btn').html('<button id="start" class="btn btn-warning" ><i class="fas fa-play"></i> Start</button>');
+                        
+                    }
                 }
             });
 
@@ -264,17 +339,34 @@
             e.preventDefault();
             if (!timer.isRunning()) {
 
+                $('#quiz-info').remove();
+                $('#start').remove();
+
                 $('#ready').load("LoadQuiz");
                 $('#done_button').load("LoadDoneButton");
-
-                timer.start({
-                    countdown: true,
-                    startValues: {
-                        hours: ${takequiz.hours},
-                        minutes: ${takequiz.minutes},
-                        seconds: 0
-                    }
-                });
+                
+                <c:choose>
+                    <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
+                        timer.start({
+                            countdown: true,
+                            startValues: {
+                                hours: 99,
+                                minutes: 0,
+                                seconds: 0
+                            }
+                        });
+                    </c:when>
+                    <c:otherwise>
+                        timer.start({
+                            countdown: true,
+                            startValues: {
+                                hours: ${takequiz.hours},
+                                minutes: ${takequiz.minutes},
+                                seconds: 0
+                            }
+                        });
+                    </c:otherwise>
+                </c:choose>
             }
 
         });
@@ -300,7 +392,7 @@
 
         });
 
-        $('#time .timer').html('${takequiz.hours}:${takequiz.minutes}:00');
+        $('#time .timer').html('99:00:00');
 
         timer.addEventListener('secondsUpdated', function (e)
         {
@@ -309,9 +401,8 @@
 
         timer.addEventListener('targetAchieved', function (e)
         {
-            $('#time .timer').html('Time over');
+            $('#time .timer').html('Time over'); 
         });
-        </c:if>
 
     </script>
 

@@ -38,26 +38,58 @@ public class StartQuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String id = request.getParameter("quiz_id");
         String page = request.getParameter("page");
-        /*try (PrintWriter out = response.getWriter()) {
-            out.println(id);
-        }*/
+        String ispratice = request.getParameter("ispratice");
+        PrintWriter out = response.getWriter();
+
         HttpSession session = request.getSession();
         session.setAttribute("doquiz", "true");
         session.setAttribute("page", page);
-        Student s = (Student)session.getAttribute("user");
+        Student s = (Student) session.getAttribute("user");
 
-        Resultdao rdao = new Resultdao();
-        Result r = new Result();
+        //out.print(ispratice);
+        if (ispratice.equals("false")) {
 
-        r.setTotal_time("0");
-        r.setTotalCorrect(0);
-        r.setTotalIncorrect(0);
-        r.setQuizId(Integer.valueOf(id));
-        r.setStudentId(s.getId());
+            //out.print("true.");
+            Resultdao rdao = new Resultdao();
+            Result r = new Result();
 
-        rdao.createResult(r);
+            Result student = rdao.findResultByStudentId(s.getId());
+
+            //out.print(r);
+            if (student == null) {
+
+                r.setTotal_time("0");
+                r.setTotalCorrect(0);
+                r.setTotalIncorrect(0);
+                r.setQuizId(Integer.valueOf(id));
+                r.setStudentId(s.getId());
+
+                rdao.createResult(r);
+
+            }
+
+            if (student != null) {
+                if (student.getQuizId() == Integer.valueOf(id)) {
+
+                    out.print("1");
+
+                } else {
+
+                    r.setTotal_time("0");
+                    r.setTotalCorrect(0);
+                    r.setTotalIncorrect(0);
+                    r.setQuizId(Integer.valueOf(id));
+                    r.setStudentId(s.getId());
+
+                    rdao.createResult(r);
+                }
+            }
+        }
+
+        //out.print("pratice");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +104,14 @@ public class StartQuizServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("Quizzes");
+
+        String headerName = request.getHeader("x-requested-with");
+
+        if (null == headerName) {
+            response.sendRedirect("Quizzes");
+        } else {
+            processRequest(request, response);
+        }
     }
 
     /**
@@ -86,7 +125,15 @@ public class StartQuizServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String headerName = request.getHeader("x-requested-with");
+
+        if (null == headerName) {
+            response.sendRedirect("Quizzes");
+        } else {
+            processRequest(request, response);
+        }
+
     }
 
     /**

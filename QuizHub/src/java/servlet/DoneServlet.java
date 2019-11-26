@@ -40,67 +40,70 @@ public class DoneServlet extends HttpServlet {
         long student_id = Long.valueOf(request.getParameter("student_id"));
         int totalChoice = Integer.valueOf(request.getParameter("count"));
         int quiz_id = Integer.valueOf(request.getParameter("quiz_id"));
-        
+
+        PrintWriter out = response.getWriter();
+
+        //out.print(student_id + " ");
+        //out.print(totalChoice + " " );
+        //out.print(quiz_id + " " );
         ArrayList<String> results = new ArrayList();
-        for(int i = 0; i < totalChoice; i++){
-            String result =  request.getParameter("result" + i);
-            if(result != null){
+        for (int i = 0; i < totalChoice; i++) {
+            String result = request.getParameter("result" + i);
+            if (result != null) {
                 results.add(result);
             }
         }
-        
+
         //String[] result = request.getParameterValues("result");
-        
         int score = 0;
         int totalCorrect = 0;
         int totalIncorrect = 0;
-        
+
         Choicedao cdao = new Choicedao();
         Choice c = new Choice();
-        
+
         ChoiceResultDao crdao = new ChoiceResultDao();
         ChoiceResult cr = new ChoiceResult();
-        
-        
-        for(int i = 0; i < results.size(); i++) {
-            
+
+        for (int i = 0; i < results.size(); i++) {
+
             c = cdao.findChoiceById(Integer.valueOf(results.get(i)));
-            if(c.isChoiceCorrect().equals("true")) {
-                score ++;
+            if (c.isChoiceCorrect().equals("true")) {
+                score++;
                 totalCorrect++;
-            }
-            else
-            {
+            } else {
                 totalIncorrect++;
             }
-            
+
             cr.setQuiz_id(quiz_id);
             cr.setQuestion_id(c.getQuestionId());
             cr.setChoice_id(c.getChoiceId());
             cr.setStudent_id(student_id);
-            
+
             crdao.createChoiceResult(cr);
-            
+
         }
-        
+
         Resultdao rdao = new Resultdao();
         Result r = new Result();
-        
+
         r = rdao.findResultByQuizId(quiz_id);
-        
-        r.setTotal_time("");
-        r.setTotalCorrect(totalCorrect);
-        r.setTotalIncorrect(totalIncorrect);
-        r.setQuizId(quiz_id);
-        r.setStudentId(student_id);
-        r.setResult_id(r.getResult_id());
-        
-        rdao.updateResult(r);
-        
+
+        if (r != null) {
+            r.setTotal_time("");
+            r.setTotalCorrect(totalCorrect);
+            r.setTotalIncorrect(totalIncorrect);
+            r.setQuizId(quiz_id);
+            r.setStudentId(student_id);
+            r.setResult_id(r.getResult_id());
+
+            rdao.updateResult(r);
+        }
+
         request.setAttribute("score", score);
         request.setAttribute("totalcorrect", totalCorrect);
         request.setAttribute("totalincorrect", totalIncorrect);
-        
+
         request.getRequestDispatcher("/WEB-INF/Score.jsp").forward(request, response);
     }
 
