@@ -116,6 +116,10 @@
         <servlet-name>DeleteQuestionServlet</servlet-name>
         <servlet-class>servlet.DeleteQuestionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AuthenticationByEmailServlet</servlet-name>
+        <servlet-class>servlet.AuthenticationByEmailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>DeleteQuestionServlet</servlet-name>
         <url-pattern>/DeleteQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthenticationByEmailServlet</servlet-name>
+        <url-pattern>/AuthenticationByEmail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

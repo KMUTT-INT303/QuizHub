@@ -12,7 +12,7 @@ VALUES
 	
 INSERT INTO TEACHERS
 	(TEACHER_ID, FIRST_NAME, LAST_NAME, PASSWORD, FACULTY_ID, EMAIL, LAST_TIME)
-VALUES 
+VALUES
 	(1000000001, 'Teacher', 'A', '1234', 2, 'int303.quizhub@gmail.com', CURRENT_TIMESTAMP),
         (1000000002, 'Teacher', 'B', '1234', 2, 'tb@gmail.com', CURRENT_TIMESTAMP),
         (1000000003, 'Teacher', 'C', '1234', 2, 'tc@gmail.com', CURRENT_TIMESTAMP),

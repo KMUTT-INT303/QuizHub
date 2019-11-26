@@ -87,10 +87,11 @@ public class LoginServlet extends HttpServlet {
             if (t != null) {
                 if (t.getPassword().equals(password)) {
                     if (!t.getAccount_status().equals("active")) {
-                        msg = "Please wait, Your account on pending";
+                        msg = "Please wait, Your account on pending or you can <a href='AuthenticationByEmail'>active link</a>";
                         //request.setAttribute("msg", msg);
                         //getServletContext().getRequestDispatcher(path).forward(request, response);
                         out.print(msg);
+                        return;
                     }
                     request.getSession().setAttribute("user", t);
                     request.getSession().setAttribute("status", "Teacher");
@@ -150,6 +151,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getSession().removeAttribute("authenmsg");
         request.getSession().removeAttribute("codemsg");
         request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
     }
