@@ -63,7 +63,7 @@ public class Resultdao {
     public Result findResultByStudentId(long student_id) {
         conn = BuildConnection.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM results WHERE student_id = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM results WHERE student_id = ? ORDER BY RESULT_ID DESC FETCH FIRST 1 ROWS ONLY");
             ps.setLong(1, student_id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
