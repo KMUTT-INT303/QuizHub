@@ -14,30 +14,30 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item active">
+                <li class="nav-item ${current_page == 'home' ? 'active' : ''}">
                     <a class="nav-link" href="/QuizHub/Home"><i class="fas fa-home"></i> Home</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item ${current_page == 'profile' ? 'active' : ''}">
                     <a class="nav-link" href="Profile"><i class="fas fa-user"></i> Profile</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item ${current_page == 'quizzes' ? 'active' : ''}">
                     <a class="nav-link" href="Quizzes"><i class="fas fa-stream"></i> Quizzes</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item ${current_page == 'statistics' ? 'active' : ''}">
                     <a class="nav-link" href="StatSearch"><i class="fas fa-chart-bar"></i> View Statistics</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item ${current_page == 'question' ? 'active' : ''}">
                     <a class="nav-link" href="Question"><i class="fas fa-comment-dots"></i> Question?</a>
                 </li>
 
                 <c:if test="${status == 'Admin'}">
-                <li class="nav-item">
-                    <a class="nav-link" href="ManageSystem"><i class="fas fa-cogs"></i> Manage System</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ManageSystem"><i class="fas fa-cogs"></i> Manage System</a>
+                    </li>
                 </c:if>
 
             </ul>

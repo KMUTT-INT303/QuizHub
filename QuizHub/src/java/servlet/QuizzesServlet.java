@@ -45,6 +45,8 @@ public class QuizzesServlet extends HttpServlet {
 
         String page = request.getParameter("p");
         String path = "/WEB-INF/Quizzes.jsp";
+        
+        request.setAttribute("current_page", "quizzes");
 
         if (!request.getParameterMap().containsKey("p")) {
             this.ListQuizByBranch(request);

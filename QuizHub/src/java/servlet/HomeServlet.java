@@ -29,6 +29,7 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                request.setAttribute("current_page", "home");
                 getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
     }
 

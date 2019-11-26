@@ -144,6 +144,7 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
+       request.setAttribute("current_page", "profile");
        getServletContext().getRequestDispatcher("/WEB-INF/Profile.jsp").forward(request, response);
     }
 
