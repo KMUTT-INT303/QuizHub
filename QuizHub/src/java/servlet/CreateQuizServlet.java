@@ -150,7 +150,7 @@ public class CreateQuizServlet extends HttpServlet {
 
         qdao.createQuiz(q);
 
-        request.setAttribute("msg", "You have created a quiz.");
+        request.setAttribute("msg", "You have successful added a quiz.");
         getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
     }
 

@@ -27,7 +27,7 @@
                 </li>
 
                 <li class="nav-item ${current_page == 'statistics' ? 'active' : ''}">
-                    <a class="nav-link" href="StatSearch"><i class="fas fa-chart-bar"></i> View Statistics</a>
+                    <a class="nav-link" href="ViewStatistics"><i class="fas fa-chart-bar"></i> View Statistics</a>
                 </li>
 
                 <li class="nav-item ${current_page == 'question' ? 'active' : ''}">

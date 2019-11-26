@@ -85,8 +85,8 @@
         <servlet-class>servlet.DoneServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StatSearchServlet</servlet-name>
-        <servlet-class>servlet.StatSearchServlet</servlet-class>
+        <servlet-name>ViewStatisticsServlet</servlet-name>
+        <servlet-class>servlet.ViewStatisticsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageQuizServlet</servlet-name>
@@ -201,10 +201,6 @@
         <url-pattern>/Done</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StatSearchServlet</servlet-name>
-        <url-pattern>/StatSearch</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ManageQuizServlet</servlet-name>
         <url-pattern>/ManageQuiz</url-pattern>
     </servlet-mapping>
@@ -239,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>DeleteQuizzesServlet</servlet-name>
         <url-pattern>/DeleteQuizzes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewStatisticsServlet</servlet-name>
+        <url-pattern>/ViewStatistics</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
