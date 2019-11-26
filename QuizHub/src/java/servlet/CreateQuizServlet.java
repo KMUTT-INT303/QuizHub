@@ -89,7 +89,7 @@ public class CreateQuizServlet extends HttpServlet {
             t_m = "00";
         }
 
-        if (t_h == null || t_h.trim().isEmpty() || t_h == "0" || t_h == "00" && t_m == null || t_m.trim().isEmpty() || t_m == "0" || t_m == "00") {
+        if ((t_h == null || t_h.trim().isEmpty() || t_h == "0" || t_h == "00") && (t_m == null || t_m.trim().isEmpty() || t_m == "0" || t_m == "00")) {
             hours = "unlimited";
             minutes = "unlimited";
         }
@@ -150,7 +150,7 @@ public class CreateQuizServlet extends HttpServlet {
 
         qdao.createQuiz(q);
 
-        request.setAttribute("msg", "You have created a quiz.");
+        request.setAttribute("msg", "You have successful added a quiz.");
         getServletContext().getRequestDispatcher("/WEB-INF/CreateQuiz.jsp").forward(request, response);
     }
 

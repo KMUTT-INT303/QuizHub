@@ -90,7 +90,7 @@ public class ManageQuizServlet extends HttpServlet {
                 newMinutes = "00";
             }
 
-            if (newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00" && newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00") {
+            if ((newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00") && (newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00")) {
                 hours = "unlimited";
                 minutes = "unlimited";
             }

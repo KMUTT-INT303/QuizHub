@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Choice;
 import model.ChoiceResult;
 import model.Result;
@@ -99,12 +100,15 @@ public class DoneServlet extends HttpServlet {
 
             rdao.updateResult(r);
         }
+        
+        HttpSession session = request.getSession();
 
-        request.setAttribute("score", score);
-        request.setAttribute("totalcorrect", totalCorrect);
-        request.setAttribute("totalincorrect", totalIncorrect);
+        session.setAttribute("score", score);
+        session.setAttribute("totalcorrect", totalCorrect);
+        session.setAttribute("totalincorrect", totalIncorrect);
 
-        request.getRequestDispatcher("/WEB-INF/Score.jsp").forward(request, response);
+        //request.getRequestDispatcher("/WEB-INF/Score.jsp").forward(request, response);
+        response.sendRedirect("Score");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

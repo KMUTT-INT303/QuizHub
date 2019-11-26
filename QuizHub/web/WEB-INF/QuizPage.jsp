@@ -211,7 +211,7 @@
 
                                             <c:choose>
                                                 <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
-                                                    <p>Pratice</p>
+                                                    <p>Practice</p>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="m-3" id="time" hidden="true">
@@ -225,7 +225,7 @@
                                                 <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
                                                     <div class="alert alert-succes col-8" id="announce" role="alert">
                                                         <p><b>Please attention!</b></p>
-                                                        <p><small>This is pratice. You can take with unlimited times!</small></p>
+                                                        <p><small>This is practice. You can take with unlimited times!</small></p>
                                                         <p><span class="badge badge-success">*Note: Your score will be not recognize.</span></p>
                                                     </div>
                                                     <button id="load" class="btn btn-success" ><i class="fas fa-check-square"></i> Accept </button>
@@ -266,6 +266,16 @@
                                 </center>
                             </div>
                         </div>
+
+                        <div class="card mb-4">
+                            <div class="card-body text-secondary">
+                                <center>   
+                                    <button id="delete-quiz" type="submit" class="btn btn-danger" value="${takequiz.quizId}"><i class="fas fa-minus-circle"></i> Remove Quiz</button>
+                                </center>
+                            </div>
+                        </div>
+
+
                     </c:if>
 
 
@@ -277,17 +287,31 @@
 
 
         </main>
-                    
+
         <div class="modal" tabindex="-1" role="dialog" id="block-q">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <p>You are already taken this quiz.</p>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>You are already taken this quiz.</p>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="d-quiz">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>You are sure? Delete Quiz.</p>
+                        <p><small>Quiz data and choice include score, statics will be remove for permanent</small></p>
+                        <button type="button" class="btn btn-danger" id="confirm">Confirm</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </body>
 
@@ -302,7 +326,7 @@
         $(document).on('click', '#load', function (e)
         {
             e.preventDefault();
-            
+
             $.ajax({
                 type: "POST",
                 url: "StartQuiz",
@@ -310,99 +334,140 @@
                     quiz_id: ${takequiz.quizId},
                     page: '${takequiz.page}',
                     ispratice: '<c:choose><c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">true</c:when><c:otherwise>false</c:otherwise></c:choose>'
-                },
-                success: function (e) {
-                    if(e == 1) {
-                        $('#block-q').modal('show');
-                    } else {
-                        
-                        $('#nready').hide();
-                        $('#load').hide();
-                        $('#announce').remove();
+                                },
+                                success: function (e) {
+                                    if (e == 1) {
+                                        $('#block-q').modal('show');
+                                    } else {
 
-                        $('#block-content-t').html('<div class="animated heartBeat"><center><i class="fas fa-hourglass-half"></i> Time</center></div>');
-                        $('#info').addClass("animated fadeInLeft");
-                        $('#block-content-q').attr("hidden", false).addClass("animated fadeInLeft");
+                                        $('#nready').hide();
+                                        $('#load').hide();
+                                        $('#announce').remove();
 
-                        $('#time').attr("hidden", false);
+                                        $('#block-content-t').html('<div class="animated heartBeat"><center><i class="fas fa-hourglass-half"></i> Time</center></div>');
+                                        $('#info').addClass("animated fadeInLeft");
+                                        $('#block-content-q').attr("hidden", false).addClass("animated fadeInLeft");
 
-                        $('#start_btn').html('<button id="start" class="btn btn-warning" ><i class="fas fa-play"></i> Start</button>');
-                        
-                    }
-                }
-            });
+                                        $('#time').attr("hidden", false);
 
-        });
+                                        $('#start_btn').html('<button id="start" class="btn btn-warning" ><i class="fas fa-play"></i> Start</button>');
 
-        $(document).on('click', '#start', function (e)
-        {
-            e.preventDefault();
-            if (!timer.isRunning()) {
+                                    }
+                                }
+                            });
 
-                $('#quiz-info').remove();
-                $('#start').remove();
-
-                $('#ready').load("LoadQuiz");
-                $('#done_button').load("LoadDoneButton");
-                
-                <c:choose>
-                    <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
-                        timer.start({
-                            countdown: true,
-                            startValues: {
-                                hours: 99,
-                                minutes: 0,
-                                seconds: 0
-                            }
                         });
-                    </c:when>
-                    <c:otherwise>
-                        timer.start({
-                            countdown: true,
-                            startValues: {
-                                hours: ${takequiz.hours},
-                                minutes: ${takequiz.minutes},
-                                seconds: 0
+
+                        $(document).on('click', '#start', function (e)
+                        {
+                            e.preventDefault();
+                            if (!timer.isRunning()) {
+
+                                $('#quiz-info').remove();
+                                $('#start').remove();
+
+                                $('#ready').load("LoadQuiz");
+                                $('#done_button').load("LoadDoneButton");
+
+        <c:choose>
+            <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
+                                timer.start({
+                                    countdown: true,
+                                    startValues: {
+                                        hours: 99,
+                                        minutes: 0,
+                                        seconds: 0
+                                    }
+                                });
+            </c:when>
+            <c:otherwise>
+                                timer.start({
+                                    countdown: true,
+                                    startValues: {
+                                        hours: ${takequiz.hours},
+                                        minutes: ${takequiz.minutes},
+                                        seconds: 0
+                                    }
+                                });
+            </c:otherwise>
+        </c:choose>
                             }
+
                         });
-                    </c:otherwise>
-                </c:choose>
-            }
 
-        });
+                        $(document).on('click', '.sc-remove button', function (e)
+                        {
+                            e.preventDefault();
 
-        $(document).on('click', '.sc-remove button', function (e)
-        {
-            e.preventDefault();
+                            var q_value = $(this).val();
 
-            var q_value = $(this).val();
+                            $.ajax({
+                                type: "POST",
+                                url: "DeleteQuestion",
+                                data: {
+                                    q_id: q_value,
+                                    t_id: '${user.id}',
+                                    q_page: '${takequiz.page}'
+                                },
+                                success: function (e) {
+                                    location.reload();
+                                }
+                            });
 
-            $.ajax({
-                type: "POST",
-                url: "DeleteQuestion",
-                data: {
-                    q_id: q_value,
-                    t_id: '${user.id}',
-                    q_page: '${takequiz.page}'
-                },
-                success: function (e) {
-                    location.reload();
-                }
-            });
+                        });
+                        
+                        
+                        $(document).on('click', '#confirm', function (e)
+                        {
+                            e.preventDefault();
 
-        });
+                            var quiz_id = $('#delete-quiz').val();
 
-        $('#time .timer').html('99:00:00');
+                            $.ajax({
+                                type: "POST",
+                                url: "DeleteQuizzes",
+                                data: {
+                                    q_id: quiz_id
+                                },
+                                success: function (e) {
+                                    if(e == 1) {
+                                            alert("Your quiz was successful removed.");
+                                            location.href = "Quizzes";
+                                        } else {
+                                            alert("You cannot remove this quiz.");
+                                    }
+                                }
+                            });
 
-        timer.addEventListener('secondsUpdated', function (e)
-        {
-            $('#time .timer').html(timer.getTimeValues().toString());
-        });
+                        });
 
-        timer.addEventListener('targetAchieved', function (e)
-        {
-            $('#time .timer').html('Time over'); 
-        });
+                        $(document).on('click', '#delete-quiz', function (e)
+                        {
+                            e.preventDefault();
+
+                            $('#d-quiz').modal('show');
+
+                        });
+
+        <c:choose>
+            <c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">
+                        $('#time .timer').html('00:00:00');
+            </c:when>
+            <c:otherwise>
+                        $('#time .timer').html('${takequiz.hours}:${takequiz.minutes}:00');
+            </c:otherwise>
+        </c:choose>
+
+                        timer.addEventListener('secondsUpdated', function (e)
+                        {
+                            $('#time .timer').html(timer.getTimeValues().toString());
+                        });
+
+                        timer.addEventListener('targetAchieved', function (e)
+                        {
+                            $('#time .timer').html('Time over');
+                            location.href = "Quizzes";
+                        });
 
     </script>
 
