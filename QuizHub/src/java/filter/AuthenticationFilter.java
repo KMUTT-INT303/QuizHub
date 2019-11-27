@@ -35,7 +35,7 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpSession session = ((HttpServletRequest)request).getSession();
         if(session == null || session.getAttribute("user") == null){
-            config.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            config.getServletContext().getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
         }
         chain.doFilter(request, response);
     }
