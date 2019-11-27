@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h1>ACTIVE ACCOUNT BY EMAIL</h1><hr>
         ${authenmsg}
         <form action="AuthenticationByEmail" method="post">
             <input type="hidden" name="page" value="SENDCODE">
@@ -21,7 +22,7 @@
         </form>
         <hr>
         <br>
-        <a href="Login">BACK</a>
+        <a href="Login" >BACK</a>
         
     </body>
 </html>

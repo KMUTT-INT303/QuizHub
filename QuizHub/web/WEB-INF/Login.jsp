@@ -43,11 +43,11 @@
                                 <%--<form id="login-form" class="form-inlin justify-content-center" autocomplete="off">--%>
                                 <div class="form-group">
                                     <label class="sr-only">Username</label>
-                                    <input type="number" id="username" name="username" class="form-control animated bounceInUp fast" placeholder="Username">
+                                    <input type="number" id="username" name="username" class="form-control animated bounceInUp fast" placeholder="STUDENT ID | TEACHER ID">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only">Passoword</label>
-                                    <input type="password" id="password" name="password" class="form-control animated bounceInUp" placeholder="Password">        
+                                    <input type="password" id="password" name="password" class="form-control animated bounceInUp" placeholder="PASSWORD">        
                                 </div>
                                 <div class="row mt-1 justify-content-center animated bounceInUp">
                                     <div class="form-group form-check">

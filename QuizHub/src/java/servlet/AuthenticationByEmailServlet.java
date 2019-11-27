@@ -43,7 +43,7 @@ public class AuthenticationByEmailServlet extends HttpServlet {
         String msg = null;
         String page = request.getParameter("page");
         String AuthenCode = null;
-        
+    
         
         
         if (page.equals("ACTIVE")) {
