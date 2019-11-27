@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Student {
     private int branch_id;
     private String account_status;
     private String email;
+    private Timestamp last_time;
     
     public Student() {
     }
@@ -46,6 +48,18 @@ public class Student {
         this.account_status = account_status;
     }
 
+    public Student(long id, String firstName, String lastName, String password, int faculty_id, int branch_id, String account_status, String email, Timestamp last_time) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.faculty_id = faculty_id;
+        this.branch_id = branch_id;
+        this.account_status = account_status;
+        this.email = email;
+        this.last_time = last_time;
+    }
+    
     @Override
     public String toString() {
         return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", faculty_id=" + faculty_id + ", branch_id=" + branch_id + ", account_status=" + account_status + ", email=" + email + '}';
@@ -118,6 +132,14 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Timestamp getLast_time() {
+        return last_time;
+    }
+
+    public void setLast_time(Timestamp last_time) {
+        this.last_time = last_time;
     }
 
     

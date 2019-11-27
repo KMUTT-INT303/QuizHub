@@ -32,6 +32,21 @@ import model.Student;
 public class Test {
 
     public static void main(String[] args) throws ParseException {
+
+        Studentdao sdao = new Studentdao();
+        long sid = Long.valueOf("61130500001");
+        Student s = sdao.getStudentById(sid);
+        
+        System.out.println(s.getLast_time());
+        
+        System.out.println(getDate(s.getLast_time()));
+        
+        String pattern = "dd/MM/yyyy HH:mm:ss";
+        
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(getDate(s.getLast_time()));
+        System.out.println(date);
+        
         /*Facultydao fdao = new Facultydao();
         ArrayList<Faculty> faculties = new ArrayList();
         faculties = fdao.getAllFaculty();
@@ -121,6 +136,10 @@ public class Test {
             }
         }
         return ra.toString();
+    }
+    
+    public static Date getDate(Timestamp timestamp){
+        return new Date(timestamp.getTime());
     }
 
 }

@@ -117,7 +117,7 @@ public class Studentdao {
             ps.setLong(1, sid);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                return new Student(rs.getLong("student_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("email"), rs.getString("account_status"));
+                return new Student(rs.getLong("student_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"), rs.getInt("faculty_id"), rs.getInt("branch_id"), rs.getString("email"), rs.getString("account_status"), rs.getTimestamp("LAST_TIME"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);

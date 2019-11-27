@@ -45,50 +45,63 @@ public class CreateQuestionServlet extends HttpServlet {
         Questiondao qdao = new Questiondao();
         Question q = new Question();
 
-        if (question != null || !question.trim().isEmpty()) {
+        if (c.length > 1) {
+            if (question != null || !question.isEmpty()) {
 
-            q.setQuestionName(question);
-            q.setQuizId(Integer.valueOf(quiz_id));
+                q.setQuestionName(question);
+                q.setQuizId(Integer.valueOf(quiz_id));
 
-            qdao.createQuestion(q);
+                Choicedao cdao = new Choicedao();
+                //Choice choice = new Choice();
 
-            ArrayList<Question> qindb = qdao.getAllQuestionByQuizId(Integer.valueOf(quiz_id));
+                int countCorrect = 0;
+                int countIncorrect = 0;
 
-            Choicedao cdao = new Choicedao();
-            Choice choice = new Choice();
+                ArrayList<Choice> arrayChoice = new ArrayList();
 
-            int countCorrect = 0;
-            int countIncorrect = 0;
+                for (int i = 0; i < c.length; i++) {
 
-            for (int i = 0; i < c.length; i++) {
-                choice.setQuizId(Integer.valueOf(quiz_id));
-                choice.setChoiceName(c[i]);
-                choice.setChoiceCorrect(correct[i].toString());
-                if (correct[i].toString().equals("true")) {
-                    countCorrect++;
-                    if (countCorrect > 1) {
-                        request.setAttribute("msg", "You cannot add correct choice more than one.");
-                        getServletContext().getRequestDispatcher("Quizzes?p=" + page).forward(request, response);
+                    if (correct[i].toString().contains("true")) {
+                        countCorrect++;
+                    }
+
+                    if (correct[i].toString().contains("false")) {
+                        countIncorrect++;
                     }
                 }
 
-                if (correct[i].toString().equals("false")) {
-                    countIncorrect++;
-                    if (countIncorrect < 1) {
-                        request.setAttribute("msg", "You cannot add false at least one choice.");
-                        getServletContext().getRequestDispatcher("Quizzes?p=" + page).forward(request, response);
+                if (countCorrect == 1 && countIncorrect >= 1) {
+                    qdao.createQuestion(q);
+                    Question qindb = qdao.getQuestionByQuizIdAtFirstRow(Integer.valueOf(quiz_id));
+                    for (int i = 0; i < c.length; i++) {
+
+                        /*choice.setQuizId(Integer.valueOf(quiz_id));
+                    choice.setChoiceName(c[i]);
+                    choice.setChoiceCorrect(correct[i]);*/
+                        Choice addc = new Choice((c[i]), correct[i], qindb.getQuestionId(), Integer.valueOf(quiz_id));
+                        arrayChoice.add(addc);
+
                     }
+
+                    for (int i = 0; i < arrayChoice.size(); i++) {
+                        cdao.createChoice(arrayChoice.get(i));
+                    }
+
+                } else {
+                    request.setAttribute("msg", "You must add correct choice only one or incorrect choice at least one.");
+                    getServletContext().getRequestDispatcher("/Quizzes?p=" + page).forward(request, response);
                 }
 
-                for (Question num : qindb) {
-                    choice.setQuestionId(Integer.valueOf(num.getQuestionId()));
-                }
-                cdao.createChoice(choice);
-            }
+                /*if (countCorrect == 1 && countIncorrect >= 1) {
+                    System.out.println(arrayChoice);
+                    for (int i = 0; i < arrayChoice.size(); i++) {
+                        cdao.createChoice(arrayChoice.get(i));
+                    }
+                    qdao.createQuestion(q);
+                }*/
+                response.sendRedirect("Quizzes?p=" + page);
 
-            response.sendRedirect("Quizzes?p=" + page);
-
-            /*response.setContentType("text/html;charset=UTF-8");
+                /*response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
             for (int i = 0; i < c.length; i++) {
@@ -101,9 +114,13 @@ public class CreateQuestionServlet extends HttpServlet {
             out.print(question);
             out.print(quiz_id);
         }*/
+            } else {
+                request.setAttribute("msg", "Please insert your question or choices.");
+                getServletContext().getRequestDispatcher("/Quizzes?p=" + page).forward(request, response);
+            }
         } else {
             request.setAttribute("msg", "Please insert your question or choices.");
-            getServletContext().getRequestDispatcher("Quizzes?p=" + page).forward(request, response);
+            getServletContext().getRequestDispatcher("/Quizzes?p=" + page).forward(request, response);
         }
     }
 

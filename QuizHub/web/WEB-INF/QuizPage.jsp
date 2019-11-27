@@ -24,6 +24,7 @@
 
                     <div class="card mb-4">
                         <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
+                        ${msg}
 
                         <c:if test="${(status == 'Teacher')|| status == 'Admin'}">
                             <div class="card-body text-secondary">
