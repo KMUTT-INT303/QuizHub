@@ -18,6 +18,7 @@ import controllers.CommentReplydao;
 import model.Quizzes;
 import model.Reply;
 import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -29,13 +30,29 @@ public class CommentReplyServlet extends HttpServlet {
             throws ServletException, IOException {
 //        Student ex = new Student(61130500068l, "max", "pong", "1234", 1313, 7777);
 //        request.getSession().setAttribute("user",ex);
+        Long id = -1l;
+        int quizId = -1;
         
+//        String mode = request.getParameter("mode");
+//        if (mode.equals("getComment")){
+//            
+//            return;
+//        }
+        
+        if(request.getSession().getAttribute("user") instanceof Student){
         Student s = ((Student) (request.getSession().getAttribute("user")));
-        int currentQuizId = Integer.valueOf((String)request.getSession().getAttribute("currentQuizId"));
+        id = s.getId();
+        
+        }else if(request.getSession().getAttribute("user") instanceof Teacher){
+        Teacher t = ((Teacher) (request.getSession().getAttribute("user")));
+        id= t.getId();
+        }
+        //int currentQuizId  = (int)(request.getSession().getAttribute("currentQuizId"));
+        int currentQuizId  = Integer.valueOf((String)(request.getParameter("currentQuizId")));
         
 //int currentQuizId=-1;
-        if (((Quizzes) (request.getSession().getAttribute("takequiz"))) != null) {
-            currentQuizId = ((Quizzes) (request.getSession().getAttribute("takequiz"))).getQuizId();
+        if ((request.getSession().getAttribute("currentQuizId")) != null) {
+            currentQuizId = ((int) (request.getSession().getAttribute("currentQuizId")));
         }
         
         String deleteComment = request.getParameter("deleteComment");
@@ -44,17 +61,17 @@ public class CommentReplyServlet extends HttpServlet {
         String replyText = request.getParameter("reply");
 
         //Insert comment or reply part
-        if (commentText != null) {
+        if (commentText != null&&!commentText.equals("")) {
             CommentReplydao crd = new CommentReplydao();
-            Comment c = new Comment(commentText,s.getId(), currentQuizId);
+            Comment c = new Comment(commentText,id, currentQuizId);
             
 
             crd.addComment(c);
         }
 
-        if (replyText != null) {
+        if (replyText != null&&!replyText.equals("")) {
             CommentReplydao crd = new CommentReplydao();
-            Reply r = new Reply(replyText, s.getId(), Integer.valueOf(request.getParameter("commentTarget")));
+            Reply r = new Reply(replyText,id, Integer.valueOf(request.getParameter("commentTarget")));
             //Reply r = new Reply(replyText, ((Student) (request.getSession().getAttribute("user"))).getStudent_id(),1);
             
             crd.addReply(r);
@@ -78,11 +95,14 @@ public class CommentReplyServlet extends HttpServlet {
         if (comments.getAllCommentByQuizId(currentQuizId) != null) {
             request.setAttribute("CommentList", comments.getAllCommentByQuizId(currentQuizId));
         }
-
-        request.getServletContext().getRequestDispatcher("/Comment.jsp").forward(request, response);
-
+        request.setAttribute("currentQuizId",currentQuizId);
+      //  response.sendRedirect(mode); //it will use get method
+        request.getServletContext().getRequestDispatcher("/ShowAnswer").forward(request, response); //it will use post get method
+        //response.sendRedirect("ShowAnswer");
     }
-
+    
+   
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -53,7 +53,7 @@ public class QuizzesServlet extends HttpServlet {
             getServletContext().getRequestDispatcher(path).forward(request, response);
         }
 
-        if (page.trim().isEmpty() || page == null) {
+        if (page == null || page.isEmpty()) {
             this.ListQuizByBranch(request);
             getServletContext().getRequestDispatcher(path).forward(request, response);
         } else {

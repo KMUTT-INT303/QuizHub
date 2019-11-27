@@ -78,6 +78,26 @@ public class Questiondao {
         return null;
     }
 
+    public Question getQuestionByQuizIdAtFirstRow(int quiz_id) {
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM questions where quiz_id = ? ORDER BY question_id DESC FETCH FIRST 1 ROWS ONLY");
+            ps.setInt(1, quiz_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Question(
+                        rs.getInt("question_id"),
+                        rs.getString("question_name"),
+                        rs.getInt("quiz_id")
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
     public ArrayList<Question> getAllQuestionByQuizId(int quiz_id) {
         conn = BuildConnection.getConnection();
         ArrayList<Question> q = new ArrayList();
