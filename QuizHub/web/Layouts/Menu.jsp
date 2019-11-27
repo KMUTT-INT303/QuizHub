@@ -30,10 +30,6 @@
                     <a class="nav-link" href="ViewStatistics"><i class="fas fa-chart-bar"></i> View Statistics</a>
                 </li>
 
-                <li class="nav-item ${current_page == 'question' ? 'active' : ''}">
-                    <a class="nav-link" href="Question"><i class="fas fa-comment-dots"></i> Question?</a>
-                </li>
-
                 <c:if test="${status == 'Admin'}">
                     <li class="nav-item">
                         <a class="nav-link" href="ManageSystem"><i class="fas fa-cogs"></i> Manage System</a>

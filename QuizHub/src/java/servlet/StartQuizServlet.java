@@ -8,6 +8,7 @@ package servlet;
 import controllers.Choicedao;
 import controllers.Questiondao;
 import controllers.Resultdao;
+import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import model.Choice;
 import model.Question;
 import model.Result;
 import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -42,11 +44,16 @@ public class StartQuizServlet extends HttpServlet {
         String id = request.getParameter("quiz_id");
         String page = request.getParameter("page");
         String ispratice = request.getParameter("ispratice");
+        String t_id = request.getParameter("t_id");
         PrintWriter out = response.getWriter();
+        
+        Teacherdao tdao = new Teacherdao();
+        Teacher t = tdao.getTeacherById(Long.valueOf(t_id));
 
         HttpSession session = request.getSession();
         session.setAttribute("doquiz", "true");
         session.setAttribute("page", page);
+        session.setAttribute("teacher", t);
         Student s = (Student) session.getAttribute("user");
 
         //out.print(ispratice);

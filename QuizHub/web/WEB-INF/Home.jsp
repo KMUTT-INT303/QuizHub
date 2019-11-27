@@ -20,7 +20,7 @@
             <div class="jumbotron mb-2">
                 <h1>Welcome to QuizHub</h1>
                 <p class="lead">Make learning awesome! Quizhub! brings engagement and fun to more than 1 billion players every year at school, at work, and at home</p>
-                <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Try an example <i class="fas fa-hand-point-left"></i></a>
+                <a class="btn btn-lg btn-primary" href="Quizzes?p=8E4QKLU4JA" role="button">Try an example <i class="fas fa-hand-point-left"></i></a>
             </div>
             <div class="row">
                 <div class="col-sm-4">
@@ -37,7 +37,7 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Status: ${status}</li>
                                     <li class="list-group-item">ID: ${user.id}</li>
-                                    <li class="list-group-item">Last time: 20/10/2562 - 06:39:59</li>
+                                    <%--<li class="list-group-item">Last time: 20/10/2562 - 06:39:59</li>--%>
                                 </ul>
                                 <ul class="list-group list-group-flush">
                                     <c:if test="${status!='Admin'}">
@@ -52,13 +52,21 @@
                             <div class="card text-center mb-2"><a href="Logout" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i> Sign out</a></div>
                         </div>
                     </div>
-
-                    <div class="card mb-2">
-                        <h6 class="card-header"><i class="fas fa-list"></i> Last Activities</h6>
-                        <div class="card-body">
-                            <p>Nothing</p>
+                    <c:if test='${status != "Admin"}'>
+                        <div class="card mb-2">
+                            <h6 class="card-header"><i class="fas fa-list"></i> Last Activities</h6>
+                            <div class="card-body">
+                                <c:if test="${a != null}">
+                                    <c:forEach items="${a}" var="activities">
+                                        <li class="list-group-item">Id: ${activities.activities_id} at ${activities.activities_date}</li>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${a == null}">
+                                    <p>Nothing in your activities.</p>
+                                </c:if>
+                            </div>
                         </div>
-                    </div>
+                    </c:if>
                     <c:if test='${status == "Admin"}'>
                         <div class="card mb-2">
                             <h6 class="card-header"><i class="fas fa-user-shield"></i> Admin Panel</h6>
@@ -71,7 +79,7 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="card mb-2">
-                        <h6 class="card-header"><i class="fas fa-star"></i> Featured Quizzes</h6>
+                        <h6 class="card-header"><i class="fas fa-star"></i> Newest Quizzes</h6>
                         <div class="card-body pb-1">
                             <div class="row mb-2">
                                 <div class="col-sm-3"></div>
@@ -102,26 +110,26 @@
                             </div>
                             <div class="row">
                                 <div class="card-deck p-2">
-                                    <div class="card mb-1">
-                                        <img src="images/template.svg" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="card mb-1">
-                                        <img src="images/template.svg" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                        </div>
-                                    </div>
+                                    <c:if test="${quizzes != null}">
+                                        <c:forEach items="${quizzes}" var="q">
+                                            <div class="card mb-1">
+                                                    <a href="Quizzes?p=${q.page}"><div id="child-link"></div></a>
+                                                    <img class="card-img-top" src="images/template.svg" alt="Card image cap">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${q.quizName}</h5>
+                                                        <p class="card-text" style="color: gray;">${q.quizComment}</p>
+                                                        <p><b>Course: </b><span class="badge badge-primary">${q.quizCourseName}</span></p>
+                                                        <p><b>Skill: </b><span class="badge badge-info">${q.quizSkillText}</span></p>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <small class="text-muted">Due date: ${q.quizEndDate}</small>
+                                                    </div>
+                                                </div>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${quizzes == null}">
+                                        Quizzes soon.
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

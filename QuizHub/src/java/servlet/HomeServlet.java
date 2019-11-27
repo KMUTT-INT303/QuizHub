@@ -5,12 +5,25 @@
  */
 package servlet;
 
+import controllers.Activitiesdao;
+import controllers.Branchdao;
+import controllers.Facultydao;
+import controllers.Quizdao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Activities;
+import model.Admin;
+import model.Branch;
+import model.Faculty;
+import model.Quizzes;
+import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -29,8 +42,75 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                request.setAttribute("current_page", "home");
-                getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+        request.setAttribute("current_page", "home");
+        getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+    }
+
+    private void LastAtivitiesInfo(HttpServletRequest request) {
+        Object user = request.getSession().getAttribute("user");
+
+        Activitiesdao adao = new Activitiesdao();
+
+        if (user instanceof Student) {
+            Student s = (Student) user;
+            ArrayList<Activities> a = adao.findLastAtivitiesByStudentId(s.getId());
+            request.setAttribute("a", a);
+        }
+
+        if (user instanceof Teacher) {
+            Teacher t = (Teacher) user;
+            ArrayList<Activities> a = adao.findLastAtivitiesByTeacherId(t.getId());
+            request.setAttribute("a", a);
+        }
+
+    }
+
+    private void FacultyInfo(HttpServletRequest request) {
+        Object user = request.getSession().getAttribute("user");
+
+        Facultydao fdao = new Facultydao();
+        Branchdao bdao = new Branchdao();
+
+        if (user instanceof Student) {
+            Student s = (Student) user;
+            Faculty f = fdao.getFacultyById(s.getFaculty_id());
+            Branch b = bdao.getBranchById(s.getBranch_id());
+            request.setAttribute("faculty_profile", f);
+            request.setAttribute("branch_profile", b);
+        }
+        if (user instanceof Teacher) {
+            Teacher t = (Teacher) user;
+            Faculty f = fdao.getFacultyById(t.getFaculty_id());
+            request.setAttribute("faculty_profile", f);
+        }
+
+    }
+
+    private void LatestQuizzes(HttpServletRequest request) {
+        Quizdao qdao = new Quizdao();
+        HttpSession session = request.getSession();
+        Object user = session.getAttribute("user");
+
+        if (user instanceof Student) {
+            Student s = (Student) user;
+            ArrayList<Quizzes> quizzes = qdao.ListLatestQuizByBranch(s.getBranch_id());
+            request.setAttribute("quizzes", quizzes);
+        }
+        if (user instanceof Teacher) {
+            Teacher t = (Teacher) user;
+            ArrayList<Quizzes> quizzes = qdao.ListLatestQuizByFaculty(t.getFaculty_id());
+            request.setAttribute("quizzes", quizzes);
+        }
+        if (user instanceof Admin) {
+            ArrayList<Quizzes> quizzes = qdao.ListLatestQuiz();
+            request.setAttribute("quizzes", quizzes);
+        }
+
+        if (user == null) {
+            ArrayList<Quizzes> quizzes = qdao.ListLatestQuiz();
+            request.setAttribute("quizzes", quizzes);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,6 +125,9 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        this.FacultyInfo(request);
+        this.LastAtivitiesInfo(request);
+        this.LatestQuizzes(request);
         processRequest(request, response);
     }
 

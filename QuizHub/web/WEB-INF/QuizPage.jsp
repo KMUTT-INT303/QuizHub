@@ -102,7 +102,7 @@
                             <div class="card" id="quiz-info">
                                 <div class="card-body">
                                     <h5 class="card-title">${takequiz.quizName}</h5>
-                                    <h6 class="card-subtitle mb-4 text-muted">Teacher. Lenadian Pual | Created at 20/10/2019 20:21</h6>
+                                    <h6 class="card-subtitle mb-4 text-muted">Teacher. ${teacher.firstName} ${teacher.lastName} | Created at ${takequiz.quizStartDate}</h6>
 
 
                                     <b><p class="card-text">Description</p></b>
@@ -336,6 +336,7 @@
                 data: {
                     quiz_id: ${takequiz.quizId},
                     page: '${takequiz.page}',
+                    t_id: '${takequiz.quizTeacherId}',
                     ispratice: '<c:choose><c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">true</c:when><c:otherwise>false</c:otherwise></c:choose>'
                                 },
                                 success: function (e) {

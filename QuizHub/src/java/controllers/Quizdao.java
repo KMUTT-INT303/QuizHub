@@ -89,6 +89,79 @@ public class Quizdao {
         return null;
     }
 
+    public ArrayList<Quizzes> ListLatestQuiz() {
+        conn = BuildConnection.getConnection();
+        ArrayList<Quizzes> quizzez = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz ORDER BY quiz_id DESC FETCH FIRST 2 ROWS ONLY");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                quizzez.add(
+                        new Quizzes(
+                                rs.getInt("quiz_id"),
+                                rs.getString("quiz_name"),
+                                rs.getString("quiz_comments"),
+                                rs.getString("quiz_status"),
+                                rs.getLong("teacher_id"),
+                                rs.getString("course_name"),
+                                rs.getString("course_id"),
+                                rs.getInt("faculty_id"),
+                                rs.getInt("branch_id"),
+                                rs.getString("join_code"),
+                                rs.getString("cover_images"),
+                                rs.getString("skill_text"),
+                                rs.getTimestamp("start_date"),
+                                rs.getTimestamp("end_date"),
+                                rs.getString("page"),
+                                rs.getString("hours"),
+                                rs.getString("minutes")
+                        )
+                );
+            }
+            return quizzez;
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    public ArrayList<Quizzes> ListLatestQuizByBranch(int bid) {
+        conn = BuildConnection.getConnection();
+        ArrayList<Quizzes> quizzez = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz WHERE branch_id = ? ORDER BY quiz_id DESC FETCH FIRST 2 ROWS ONLY");
+            ps.setInt(1, bid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                quizzez.add(new Quizzes(
+                        rs.getInt("quiz_id"),
+                        rs.getString("quiz_name"),
+                        rs.getString("quiz_comments"),
+                        rs.getString("quiz_status"),
+                        rs.getLong("teacher_id"),
+                        rs.getString("course_name"),
+                        rs.getString("course_id"),
+                        rs.getInt("faculty_id"),
+                        rs.getInt("branch_id"),
+                        rs.getString("join_code"),
+                        rs.getString("cover_images"),
+                        rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"),
+                        rs.getTimestamp("end_date"),
+                        rs.getString("page"),
+                        rs.getString("hours"),
+                        rs.getString("minutes"))
+                );
+            }
+            return quizzez;
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
     public ArrayList<Quizzes> ListAllQuizByBranch(int bid) {
         conn = BuildConnection.getConnection();
         ArrayList<Quizzes> quizzez = new ArrayList();
@@ -153,6 +226,42 @@ public class Quizdao {
                                 rs.getString("hours"),
                                 rs.getString("minutes")
                         )
+                );
+            }
+            return quizzez;
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    public ArrayList<Quizzes> ListLatestQuizByFaculty(int bid) {
+        conn = BuildConnection.getConnection();
+        ArrayList<Quizzes> quizzez = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM quiz WHERE faculty_id = ? ORDER BY quiz_id DESC FETCH FIRST 2 ROWS ONLY");
+            ps.setInt(1, bid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                quizzez.add(new Quizzes(
+                        rs.getInt("quiz_id"),
+                        rs.getString("quiz_name"),
+                        rs.getString("quiz_comments"),
+                        rs.getString("quiz_status"),
+                        rs.getLong("teacher_id"),
+                        rs.getString("course_name"),
+                        rs.getString("course_id"),
+                        rs.getInt("faculty_id"),
+                        rs.getInt("branch_id"),
+                        rs.getString("join_code"),
+                        rs.getString("cover_images"),
+                        rs.getString("skill_text"),
+                        rs.getTimestamp("start_date"),
+                        rs.getTimestamp("end_date"),
+                        rs.getString("page"),
+                        rs.getString("hours"),
+                        rs.getString("minutes"))
                 );
             }
             return quizzez;
