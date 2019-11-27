@@ -6,15 +6,21 @@
 package servlet;
 
 import controllers.Admindao;
+import controllers.Branchdao;
+import controllers.Facultydao;
 import controllers.Studentdao;
 import controllers.Teacherdao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Admin;
+import model.Branch;
+import model.Faculty;
 import model.Student;
 import model.Teacher;
 
@@ -131,6 +137,26 @@ public class ProfileServlet extends HttpServlet {
         }
     }
 
+    private void FacultyInfo(HttpServletRequest request){
+        Object user = request.getSession().getAttribute("user");
+        
+        Facultydao fdao = new Facultydao();
+        Branchdao bdao = new Branchdao();
+        
+        if(user instanceof Student){
+            Student s = (Student) user;
+            Faculty f = fdao.getFacultyById(s.getFaculty_id());
+            Branch b = bdao.getBranchById(s.getBranch_id());
+            request.setAttribute("faculty_profile", f);
+            request.setAttribute("branch_profile", b);
+        }
+        if(user instanceof Teacher){
+            Teacher t = (Teacher) user;
+            Faculty f = fdao.getFacultyById(t.getFaculty_id());
+            request.setAttribute("faculty_profile", f);
+        }
+        
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -144,6 +170,7 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
+        this.FacultyInfo(request);
        request.setAttribute("current_page", "profile");
        getServletContext().getRequestDispatcher("/WEB-INF/Profile.jsp").forward(request, response);
     }

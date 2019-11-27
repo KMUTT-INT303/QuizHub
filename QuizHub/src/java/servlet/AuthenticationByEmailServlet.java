@@ -112,7 +112,7 @@ public class AuthenticationByEmailServlet extends HttpServlet {
             }
             
             if(t.getAccount_status().equals("active")){
-                msg="Your account is actived.";
+                msg = "Your account is actived.";
                 //request.getSession().removeAttribute("authenmsg");
                 request.getSession().setAttribute("authenmsg", msg);
                 response.sendRedirect("AuthenticationByEmail");
@@ -202,6 +202,11 @@ public class AuthenticationByEmailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        if(request.getSession().getAttribute("user") != null){
+            response.sendRedirect("Home");
+            return;
+        }
         //processRequest(request, response);
         this.deleteOlderCode();
         request.getSession().removeAttribute("gencode");

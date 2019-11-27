@@ -125,7 +125,7 @@ public class TeacherManagementServlet extends HttpServlet {
         Teacherdao tdao = new Teacherdao();
         ArrayList<Teacher> teachers = tdao.getAllTeacher();
         request.setAttribute("teachers", teachers);
-    
+        
     
     }
 

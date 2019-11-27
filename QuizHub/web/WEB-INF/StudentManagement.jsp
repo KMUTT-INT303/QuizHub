@@ -15,7 +15,7 @@
     <body>
         <h1>Hello ${user.firstName} ${user.lastName}!</h1>
         <h2>Student Management</h2><hr><br>
-        ${msg}
+        ${msg}<br>Student IN Server: ${students.size()}<br>
         <form action="StudentManagement" method="post">
             Find Student : <input type="text" name="findbydescription" value="${param.findbydescription}"> <input  type="submit">
             <c:if test="${studentsbydes!=null}">

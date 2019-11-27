@@ -102,6 +102,12 @@
                                     <li class="list-group-item">First Name: <span class="username">${user.firstName}</span></li>
                                     <li class="list-group-item">Last Name: <span class="username">${user.lastName}</span></li>
                                     <li class="list-group-item">${status} ID: <span class="id">${user.id}</span></li>
+                                    <c:if test="${status!='Admin'}">
+                                        <c:if test="${status == 'Student'}">
+                                            <li class="list-group-item">Branch: <span class="id">${branch_profile.name}</span></li>
+                                        </c:if>
+                                        <li class="list-group-item">Faculty: <span class="id">${faculty_profile.name}</span></li>
+                                    </c:if>
                             </div>
                         </div>
                     </div>

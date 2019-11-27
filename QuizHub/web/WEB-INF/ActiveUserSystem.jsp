@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello ${user}!</h1>
+        <h1>Hello ${user.fullname}!</h1>
         ${msg}${errormsg}
         <form action="ActiveUserSystem" method="post">
             FIND PENDING USER:<input type="text" name="descriptionPendingUser" value="${param.descriptionPendingUser}"><input type="submit">
@@ -56,6 +56,7 @@
         </c:if>
         </form>
             <p>User wait to active</p>
+                        TEACHER IS PENDING : ${teachers_pending.size()}
         <table border="3">
             <tr>
                 <th>ID</th>
@@ -85,6 +86,7 @@
             </c:forEach>
         </table>
         <p>Users have actived</p>
+        TEACHER HAVE ACTIVED : ${teachers_active.size()}
         <table border="3">
             <tr>
                 <th>ID</th>

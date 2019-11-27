@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Admin;
 import model.Teacher;
 
 /**
@@ -32,6 +33,12 @@ public class ActiveUserSystemServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        if(!(request.getSession().getAttribute("user") instanceof Admin)){
+            response.sendRedirect("Home");
+            return;
+        }
+        
         String msg = null;
         ArrayList<String> errormsg = null;
         String path = "/WEB-INF/ActiveUserSystem.jsp";

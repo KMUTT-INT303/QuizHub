@@ -13,9 +13,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello ${user.firstName} ${user.lastName}!</h1>
+        <h1>Hello ${user.fullname}!</h1>
         <h2>Teacher Management</h2><hr><br>
-        ${msg}
+        ${msg}<br>TEACHER IN SYSTEM : ${teachers.size()}<br>
         <form action="TeacherManagement" method="post">
             Find Student : <input type="text" name="findbydescription" value="${param.findbydescription}"> <input  type="submit">
             <c:if test="${teachersbydes!=null}">
