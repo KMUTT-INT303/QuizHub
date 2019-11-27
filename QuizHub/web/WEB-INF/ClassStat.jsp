@@ -42,7 +42,7 @@
     Course : ${q.quizCourseName}
     Test Score :${quizTestScore[qs.index].score} / ${quizTestScore[qs.index].fullScore} Practice Score :
     Percent :${quizTestScore[qs.index].percent}% Skill:${quizTestScore[qs.index].skill}<br>
-    <a href="ShowAnswer?quizId=${q.quizId}">Show Solution</a>
+    <a href="ShowAnswer?currentQuizId=${q.quizId}">Show Solution</a><br>
     </c:forEach>   
     
     </body>

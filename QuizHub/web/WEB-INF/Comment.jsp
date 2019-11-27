@@ -14,9 +14,11 @@
     </head>
     <body>
         <h1>Comment</h1> 
-       
+        
+    
         
     <c:forEach items="${CommentList}" var="c" varStatus="cs">
+        comment ${cs.count}<br>
         Owner:${c.userId}
         Text:${c.comment}
         Time:${c.date}
@@ -31,6 +33,7 @@
         
         <c:forEach items="${c.replys}" var="r" varStatus="rs">
         <br>    
+        reply ${rs.count}<br>
         Owner:${r. userId}
         Text:${r.replyComment}
         Time:${r.date}

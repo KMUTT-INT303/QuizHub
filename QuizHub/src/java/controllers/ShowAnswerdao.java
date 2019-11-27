@@ -104,7 +104,34 @@ public class ShowAnswerdao {
         return null;
 
     }
+    
+ public ArrayList<Choice> getChoiceByQuizIdTeacher(int quizId) {
 
+        conn = BuildConnection.getConnection();
+        ArrayList<Choice> choices = new ArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM choices WHERE quiz_id = ?");
+            ps.setInt(1, quizId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Choice c = new Choice(
+                        rs.getInt("choice_id"),
+                        rs.getString("choice_name"),
+                        rs.getString("choice_correct"),
+                        rs.getInt("question_id"),
+                        rs.getInt("quiz_id")
+                );
+      
+                choices.add(c);
+            }
+            return choices;
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
     public ArrayList<ChoiceResult> getChoiceResultByQuizId(int quizId, Long studentId) {
         conn = BuildConnection.getConnection();
         ArrayList<ChoiceResult> choices = new ArrayList();

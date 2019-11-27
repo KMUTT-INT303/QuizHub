@@ -21,6 +21,10 @@
 
         ${quiz.quizName}
         ${quiz.quizCourseName}
+        
+        ${quizT.quizName}
+        ${quizT.quizCourseName}
+      
         <c:forEach items="${questions}" var="q" varStatus="qround">
             <div class="card-body text-secondary">
                 <div class="card">
@@ -65,6 +69,40 @@
                                             </c:choose>
                                         </c:if>
                                     </c:forEach>
+
+                                    </label>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+        
+        
+                <c:forEach items="${questionsT}" var="q" varStatus="qround">
+            <div class="card-body text-secondary">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${qround.count}. ${q.questionName}</h5>
+                        <c:forEach items="${choicesT}" var="c" varStatus="cround">
+                            <c:if test="${q.questionId == c.questionId}">
+                                <div class="form-check">
+                                   
+                                    <input class="form-check-input" type="radio" name="result${qround.count}" value="${c.choiceId}" >
+                              
+                                    
+                                    <c:choose>
+                                        <c:when test="${c.choiceCorrect=='true'}">
+                                            <span style="color:yellow">${c.choiceName}</span>   
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${c.choiceName}
+                                        </c:otherwise>
+
+                                    </c:choose>
+
+                                  
 
                                     </label>
                                 </div>

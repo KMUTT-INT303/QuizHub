@@ -40,6 +40,27 @@ public class Statdao {
 
         return null;
     }
+    //getListOfQuizByTeacherId
+        public ArrayList<Quizzes> getAllQuizByTeacherId(long teacherId) {
+        conn = BuildConnection.getConnection();
+        ArrayList<Quizzes> q = new ArrayList();
+        try {
+            //PreparedStatement ps = conn.prepareStatement("SELECT * FROM QUIZ WHERE upper(QUIZ_NAME) like upper(?)");
+            PreparedStatement ps = conn.prepareStatement("select q.quiz_id as quiz_id,q.quiz_name as quiz_name,Q.COURSE_NAME as course_name,q.page as page FROM QUIZ Q where q.teacher_id = ?");
+            ps.setLong(1, teacherId);
+           
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                q.add(new Quizzes(rs.getString("quiz_Name"), rs.getString("Course_Name"), rs.getInt("quiz_id"), rs.getString("page")));
+            }
+            return q;
+        } catch (SQLException ex) {
+            Logger.getLogger(Statdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
 
     //getListOfQuizByQuizName
     public ArrayList<Quizzes> getAllQuizByName(String searchText, long studentId) {
