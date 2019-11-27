@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ClassStat
-    Created on : Oct 26, 2019, 12:13:26 AM
+    Document   : StatSearch
+    Created on : Oct 26, 2019, 12:13:11 AM
     Author     : MaxPong
 --%>
 
@@ -10,12 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@ include file="../Layouts/Menu.jsp" %>
-        <title>Class Quiz</title>
+        <%@ include file="../Layouts/Menu.jsp" %> 
+        
     </head>
     <body>
         <h1>Statistic Site</h1>
-        <form action="StatSearch">
+        <form action="StatSearch" method="post">
         <input type="text" name="searchText">
         <select name="searchType">
             <option value="quizName">Quiz Name</option>
@@ -25,25 +25,21 @@
         <button type="submit">search</button>
         </form>
         ${msg}
-        <h1>Class quiz statistic</h1>
-        ${averagePercentOfClass} %
-        <h1>Overall class skill statistic</h1>
-        
-        <c:forEach items="${skillList}" var="s" varStatus="ss">
-        Skill Name : ${s.name}
-        Skill Average Percent : ${s.averagePercent} % <br>
-        </c:forEach>  
-        
     
+    <c:forEach items="${classList}" var="c" varStatus="cs">
+    <a href="StatSearch?classSelect=${c.id}" >${c.name}</a> ${c.id}<br>
+    </c:forEach>    
+    
+        
     <c:forEach items="${quizList}" var="q" varStatus="qs"> Quiz Name : 
     ${q.quizName}
     
     
     Course : ${q.quizCourseName}
-    Test Score :${quizTestScore[qs.index].score} / ${quizTestScore[qs.index].fullScore} Practice Score :
+    Test Score :${quizTestScore[qs.index].score} / ${quizTestScore[qs.index].fullScore}
     Percent :${quizTestScore[qs.index].percent}% Skill:${quizTestScore[qs.index].skill}<br>
-    <a href="ShowAnswer?quizId=${q.quizId}">Show Solution</a>
-    </c:forEach>   
+    <a href="ShowAnswer?currentQuizId=${q.quizId}">Show Solution</a>
     
+    </c:forEach>   
     </body>
 </html>
