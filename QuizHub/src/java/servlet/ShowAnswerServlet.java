@@ -19,6 +19,7 @@ import model.ChoiceResult;
 import model.Question;
 import model.Quizzes;
 import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -28,7 +29,7 @@ public class ShowAnswerServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          
+        if(request.getSession().getAttribute("user") instanceof Student){ 
         Student s = (Student)request.getSession().getAttribute("user");
         
         int quizId = Integer.valueOf(request.getParameter("currentQuizId"));
@@ -64,6 +65,52 @@ public class ShowAnswerServlet extends HttpServlet {
         
         request.getServletContext().getRequestDispatcher("/WEB-INF/ShowAnswer.jsp").forward(request, response);
         
+        }
+        }else{
+        if(request.getSession().getAttribute("user") instanceof Teacher){
+                Teacher t = (Teacher)request.getSession().getAttribute("user");
+        
+        int quizId = Integer.valueOf(request.getParameter("currentQuizId"));
+          
+//        Student s = new Student(61130500001l,"kao","sodsong","1234",1,2,"kao@mail");
+//        int quizId = 1;
+        
+        
+        request.setAttribute("currentQuizId",quizId);
+        request.getSession().setAttribute("user",t);
+        
+        ShowAnswerdao sad = new ShowAnswerdao();
+        ArrayList<Choice>choices = sad.getChoiceByQuizIdTeacher(quizId);
+        ArrayList<Question>questions =sad.getQuestionByQuizId(quizId);
+        Quizzes quiz =sad.getQuizByQuizId(quizId);
+        
+       {
+        
+        request.setAttribute("choicesT",choices);
+        request.setAttribute("questionsT",questions);
+        request.setAttribute("quizT",quiz);
+        
+         CommentReplydao comments = new CommentReplydao();
+
+        if (comments.getAllCommentByQuizId(quizId) != null) {
+            request.setAttribute("CommentList", comments.getAllCommentByQuizId(quizId));
+        }
+        
+        request.getServletContext().getRequestDispatcher("/WEB-INF/ShowAnswer.jsp").forward(request, response);
+        
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        }
         }
     }
 //    public static void main(String[] args) {

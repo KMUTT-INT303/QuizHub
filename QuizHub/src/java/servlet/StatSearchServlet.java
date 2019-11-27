@@ -30,69 +30,69 @@ public class StatSearchServlet extends HttpServlet {
         String searchType = request.getParameter("searchType");
         String quizSelect = request.getParameter("quizSelect");
         String classSelect = request.getParameter("classSelect");
+        String ownQuiz = request.getParameter("ownQuiz");
         Student s;
-        
-        
-     if(request.getSession().getAttribute("user") instanceof Student){
-        //Search Part 
-        s = (Student) request.getSession().getAttribute("user");
-        if (s != null) {
-            if (searchText != null && searchText != "") {
-                if (searchText.length() >= 3) {
-                    if (searchType.equals("quizName")) {
+        Teacher t;
 
-                        //getCollection Of Quiz from searchtext
-                        Statdao sd = new Statdao();
-                        ArrayList<Quizzes> ql = sd.getAllQuizByName(searchText, s.getId());
+        if (request.getSession().getAttribute("user") instanceof Student) {
+            //Search Part 
+            s = (Student) request.getSession().getAttribute("user");
+            if (s != null) {
+                if (searchText != null && searchText != "") {
+                    if (searchText.length() >= 3) {
+                        if (searchType.equals("quizName")) {
 
-                        ArrayList<QuizScore> quizTestScore = null;
-                        quizTestScore = sd.getTestScoreForQuizByName(searchText, s.getId());
-
-                        request.setAttribute("quizList", ql);
-                        request.setAttribute("quizTestScore", quizTestScore);
-                        request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
-
-                    } else {
-                        if (searchType.equals("className")) {
-
-                            //show stat of class from searchtext
-                            //getCollection Of Class from searchtext 
+                            //getCollection Of Quiz from searchtext
                             Statdao sd = new Statdao();
-                            ArrayList<Course> c = sd.getAllCourseByName(searchText);
+                            ArrayList<Quizzes> ql = sd.getAllQuizByName(searchText, s.getId());
 
-                            request.setAttribute("classList", c);
+                            ArrayList<QuizScore> quizTestScore = null;
+                            quizTestScore = sd.getTestScoreForQuizByName(searchText, s.getId());
+
+                            request.setAttribute("quizList", ql);
+                            request.setAttribute("quizTestScore", quizTestScore);
                             request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
+
+                        } else {
+                            if (searchType.equals("className")) {
+
+                                //show stat of class from searchtext
+                                //getCollection Of Class from searchtext 
+                                Statdao sd = new Statdao();
+                                ArrayList<Course> c = sd.getAllCourseByName(searchText);
+
+                                request.setAttribute("classList", c);
+                                request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
+                            }
                         }
+
+                        //select quiz from class part
+                    } else {
+                        request.setAttribute("msg", "please input more than 3 character");
                     }
-
-                    //select quiz from class part
-                } else {
-                    request.setAttribute("msg", "please input more than 3 character");
                 }
-            }
 
+                if (classSelect != null) {
+                    Statdao sd = new Statdao();
+                    ArrayList<Quizzes> ql = sd.getQuizByCourseId(classSelect, s.getId());
 
-            if (classSelect != null) {
-                Statdao sd = new Statdao();
-                ArrayList<Quizzes> ql = sd.getQuizByCourseId(classSelect, s.getId());
+                    ArrayList<QuizScore> quizTestScore = quizTestScore = sd.getTestScoreForQuizByCourseId(classSelect, s.getId());
 
-                ArrayList<QuizScore> quizTestScore = quizTestScore = sd.getTestScoreForQuizByCourseId(classSelect, s.getId());
+                    double averagePercentOfClass;
+                    double sum = 0;
 
-                double averagePercentOfClass;
-                double sum = 0;
+                    for (int i = 0; i < quizTestScore.size(); i++) {
 
-                for (int i = 0; i < quizTestScore.size(); i++) {
+                        sum += quizTestScore.get(i).getPercent();
+                    }
+                    averagePercentOfClass = sum / quizTestScore.size();
 
-                    sum += quizTestScore.get(i).getPercent();
-                }
-                averagePercentOfClass = sum / quizTestScore.size();
+                    if (ql.isEmpty() || quizTestScore.isEmpty()) {
 
-                if (ql.isEmpty() || quizTestScore.isEmpty()) {
+                        request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
+                    } else {
 
-                    request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
-                } else {
-
-                    //Set Skill Part
+                        //Set Skill Part
 //                    ArrayList<SkillStat> sl = new ArrayList();
 //
 //                    for (int i = 0; i < quizTestScore.size(); i++) {
@@ -117,21 +117,37 @@ public class StatSearchServlet extends HttpServlet {
 //                            sl.add(new SkillStat(skillName, percent, 1));
 //                        }
 //                    }
+                        request.setAttribute("skillList", sd.getSkillStatByCourseId(classSelect, s.getId()));
 
-                    request.setAttribute("skillList",sd.getSkillStatByCourseId(classSelect,s.getId()));
+                        request.setAttribute("averagePercentOfClass", averagePercentOfClass);
+                        request.setAttribute("quizList", ql);
+                        request.setAttribute("quizTestScore", quizTestScore);
+                        request.getServletContext().getRequestDispatcher("/WEB-INF/ClassStat.jsp").forward(request, response);
+                    }
+                    //bring user to quiz page
 
-                    request.setAttribute("averagePercentOfClass", averagePercentOfClass);
-                    request.setAttribute("quizList", ql);
-                    request.setAttribute("quizTestScore", quizTestScore);
-                    request.getServletContext().getRequestDispatcher("/WEB-INF/ClassStat.jsp").forward(request, response);
                 }
-                //bring user to quiz page
-
             }
+        } else {
+            t = (Teacher) request.getSession().getAttribute("user");
+            if(t!=null){
+            if (request.getSession().getAttribute("user") instanceof Teacher) {
+                
+                if (searchText != null && searchText != "") {
+                    request.setAttribute("msg", "you are teacher,you can't have score");
+                }
+                if (ownQuiz!=null) {
+                    Statdao sd2 = new Statdao();
+                    ArrayList<Quizzes> tq = sd2.getAllQuizByTeacherId(t.getId());
+                    request.setAttribute("teacherQuizList", tq);
+                    request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
+
+                }
+                request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
+            }
+            }
+            request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
         }
-     }else{
-     request.setAttribute("msg","you are teacher,you can't have score");
-     }
         request.getServletContext().getRequestDispatcher("/WEB-INF/StatSearch.jsp").forward(request, response);
     }
 
@@ -142,7 +158,7 @@ public class StatSearchServlet extends HttpServlet {
 //        System.out.println(sl);
 //        
 //    }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -161,4 +177,3 @@ public class StatSearchServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
