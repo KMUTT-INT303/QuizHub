@@ -18,7 +18,7 @@
         <h1>Statistic Site</h1> 
         <form action="StatSearch" method="post">
             <input hidden type="text" name ="ownQuiz" value="true">
-            <button type="submit">show your own quiz</button>
+            <button type="submit">show your own quiz (only for teacher)</button>
         </form>
         
         <form action="StatSearch" method="post">

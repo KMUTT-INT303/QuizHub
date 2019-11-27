@@ -122,3 +122,23 @@ VALUES ('Network Programming', 'Please attention', 'public', 1000000001, 'Networ
         ('Program Programming', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', 'EMWO7GGBSM', '10', '00'),
         ('Eng Programming', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', '6TA8MMBDDG', '30', '00'),
         ('GG Programming', 'Please attention', 'public', 1000000001, 'Network I', 'INT201', 2, 18, '', '', 'Network', '2019-11-13 20:29:46.435', '2019-11-13 20:29:47.654', '8E4QKLU4JA', 'unlimited', 'unlimited');
+
+--- INSERT QUESTION ---
+INSERT INTO QUIZHUB.QUESTIONS (QUESTION_NAME, QUIZ_ID) 
+	VALUES ('What is QuizHub?', 1);
+INSERT INTO QUIZHUB.QUESTIONS (QUESTION_NAME, QUIZ_ID) 
+	VALUES ('Is INT303 easy?', 1);
+
+--- INSERT CHOICE ---
+INSERT INTO QUIZHUB.CHOICES (CHOICE_NAME, CHOICE_CORRECT, QUESTION_ID, QUIZ_ID) 
+	VALUES ('QuizHub is the best web quiz.', 'true', 1, 1);
+INSERT INTO QUIZHUB.CHOICES (CHOICE_NAME, CHOICE_CORRECT, QUESTION_ID, QUIZ_ID) 
+	VALUES ('QuizHub is cat name.', 'false', 1, 1);
+INSERT INTO QUIZHUB.CHOICES (CHOICE_NAME, CHOICE_CORRECT, QUESTION_ID, QUIZ_ID) 
+	VALUES ('Quiz', 'false', 1, 1);
+INSERT INTO QUIZHUB.CHOICES (CHOICE_NAME, CHOICE_CORRECT, QUESTION_ID, QUIZ_ID) 
+	VALUES ('Yes', 'false', 2, 1);
+INSERT INTO QUIZHUB.CHOICES (CHOICE_NAME, CHOICE_CORRECT, QUESTION_ID, QUIZ_ID) 
+	VALUES ('No', 'true', 2, 1);
+
+
