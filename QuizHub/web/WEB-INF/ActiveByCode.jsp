@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h1>Active Page</h1><hr>
         ${msg}
         <form action="AuthenticationByEmail" method="post">
             <input type="hidden" name="page" value="ACTIVE">

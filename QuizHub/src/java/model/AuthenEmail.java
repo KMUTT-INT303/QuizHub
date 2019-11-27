@@ -82,7 +82,7 @@ public class AuthenEmail {
     }
     
     public Timestamp getRemove_Time() {     
-        long t = getCreated_Time().getTime() + 60000;
+        long t = getCreated_Time().getTime() + 1800000; // 60000 is 1 minutes
         DateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
         Date result = new Date(t);
         //System.out.println(simple.format(result));
