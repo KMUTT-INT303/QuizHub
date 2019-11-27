@@ -401,4 +401,7 @@
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>/Home</welcome-file>
+    </welcome-file-list>
 </web-app>
