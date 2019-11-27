@@ -97,8 +97,9 @@ public class CommentReplyServlet extends HttpServlet {
         }
         request.setAttribute("currentQuizId",currentQuizId);
       //  response.sendRedirect(mode); //it will use get method
-        request.getServletContext().getRequestDispatcher("/ShowAnswer").forward(request, response); //it will use post get method
-        //response.sendRedirect("ShowAnswer");
+        //request.getServletContext().getRequestDispatcher("/ShowAnswer").forward(request, response); //it will use post get method
+        
+        response.sendRedirect("ShowAnswer?currentQuizId=" + currentQuizId);
     }
     
    

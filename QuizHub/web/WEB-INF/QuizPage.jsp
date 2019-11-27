@@ -24,7 +24,7 @@
 
                     <div class="card mb-4">
                         <h6 class="card-header"><center>${takequiz.quizName}</center></h6>
-                        ${msg}
+                                ${msg}
 
                         <c:if test="${(status == 'Teacher')|| status == 'Admin'}">
                             <div class="card-body text-secondary">
@@ -141,6 +141,8 @@
                             <input name="quiz_id" value="${takequiz.quizId}" hidden />
                             <input name="student_id" value="${user.id}" hidden />
                             <input type="hidden" name="count" value="${countc}">
+                            <input type="hidden" name="countq" value="${countq}">
+                            <input type="hidden" name="ispractice" value="<c:choose><c:when test="${takequiz.hours == 'unlimited' && takequiz.minutes == 'unlimited'}">true</c:when><c:otherwise>false</c:otherwise></c:choose>">
                             <c:if test="${question.size() > 0}">
                                 <c:if test="${takequiz.page != page && status == 'Student'}">
                                     <div id="nready">
@@ -416,8 +418,8 @@
                             });
 
                         });
-                        
-                        
+
+
                         $(document).on('click', '#confirm', function (e)
                         {
                             e.preventDefault();
@@ -431,11 +433,11 @@
                                     q_id: quiz_id
                                 },
                                 success: function (e) {
-                                    if(e == 1) {
-                                            alert("Your quiz was successful removed.");
-                                            location.href = "Quizzes";
-                                        } else {
-                                            alert("You cannot remove this quiz.");
+                                    if (e == 1) {
+                                        alert("Your quiz was successful removed.");
+                                        location.href = "Quizzes";
+                                    } else {
+                                        alert("You cannot remove this quiz.");
                                     }
                                 }
                             });
@@ -466,8 +468,10 @@
 
                         timer.addEventListener('targetAchieved', function (e)
                         {
-                            $('#time .timer').html('Time over');
-                            location.href = "Quizzes";
+                            $('#time .timer').html('Time over').delay(10000, function (e) {
+                                $('#send').submit();
+                                location.href = "Score";
+                            });
                         });
 
     </script>

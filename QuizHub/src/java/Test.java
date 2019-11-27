@@ -36,17 +36,17 @@ public class Test {
         Studentdao sdao = new Studentdao();
         long sid = Long.valueOf("61130500001");
         Student s = sdao.getStudentById(sid);
-        
+
         System.out.println(s.getLast_time());
-        
+
         System.out.println(getDate(s.getLast_time()));
-        
+
         String pattern = "dd/MM/yyyy HH:mm:ss";
-        
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(getDate(s.getLast_time()));
         System.out.println(date);
-        
+
         /*Facultydao fdao = new Facultydao();
         ArrayList<Faculty> faculties = new ArrayList();
         faculties = fdao.getAllFaculty();
@@ -97,14 +97,7 @@ public class Test {
 
         System.out.println(time);
 
-        Questiondao qdao = new Questiondao();
         Question q = new Question();
-
-        ArrayList<Question> qindb = qdao.getAllQuestionByQuizId(Integer.valueOf(6));
-
-        for (Question num : qindb) {
-            System.out.println(num.getQuestionId());
-        }
 
         /*Choice c = new Choice();
         Choicedao cdao = new Choicedao();
@@ -114,11 +107,6 @@ public class Test {
         } else {
             System.out.println("False");
         }*/
-        Choicedao cdao = new Choicedao();
-        ArrayList<Choice> cresult = cdao.getAllChoiceByQuizId(10);
-        System.out.println(cresult);
-        ArrayList<Choice> cresult1 = cdao.getAllChoiceByQuizId(1);
-        System.out.println(cresult1);
 
     }
 
@@ -137,8 +125,8 @@ public class Test {
         }
         return ra.toString();
     }
-    
-    public static Date getDate(Timestamp timestamp){
+
+    public static Date getDate(Timestamp timestamp) {
         return new Date(timestamp.getTime());
     }
 

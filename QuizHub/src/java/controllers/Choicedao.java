@@ -83,6 +83,27 @@ public class Choicedao {
         return null;
     }
 
+    public Choice findIncorrectChoiceByQuestion(int quiz) {
+        conn = BuildConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM choices WHERE question_id = ? AND choice_correct = 'false' FETCH FIRST 1 ROWS ONLY");
+            ps.setInt(1, quiz);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Choice(
+                        rs.getInt("choice_id"),
+                        rs.getString("choice_name"),
+                        rs.getString("choice_correct"),
+                        rs.getInt("question_id"),
+                        rs.getInt("quiz_id")
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Studentdao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public Choice findChoiceById(int choice) {
         conn = BuildConnection.getConnection();
         try {

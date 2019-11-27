@@ -7,6 +7,7 @@ package servlet;
 
 import controllers.ChoiceResultDao;
 import controllers.Choicedao;
+import controllers.Questiondao;
 import controllers.Resultdao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Choice;
 import model.ChoiceResult;
+import model.Question;
 import model.Result;
 
 /**
@@ -40,7 +42,9 @@ public class DoneServlet extends HttpServlet {
 
         long student_id = Long.valueOf(request.getParameter("student_id"));
         int totalChoice = Integer.valueOf(request.getParameter("count"));
+        int totalQuestion = Integer.valueOf(request.getParameter("countq"));
         int quiz_id = Integer.valueOf(request.getParameter("quiz_id"));
+        String isPractice = request.getParameter("ispractice");
 
         PrintWriter out = response.getWriter();
 
@@ -59,6 +63,8 @@ public class DoneServlet extends HttpServlet {
         int score = 0;
         int totalCorrect = 0;
         int totalIncorrect = 0;
+        int missingChoice = 0;
+        missingChoice = totalQuestion - results.size();
 
         Choicedao cdao = new Choicedao();
         Choice c = new Choice();
@@ -66,9 +72,25 @@ public class DoneServlet extends HttpServlet {
         ChoiceResultDao crdao = new ChoiceResultDao();
         ChoiceResult cr = new ChoiceResult();
 
+        ArrayList<Choice> cs = cdao.getAllChoiceByQuizId(Integer.valueOf(quiz_id));
+        ArrayList<Integer> choiceNotChoose = new ArrayList();
+        ArrayList<Choice> choiceChoose = new ArrayList();
+        for (int i = 0; i < results.size(); i++) {
+            Choice cadd = cdao.findChoiceById(Integer.valueOf(results.get(i)));
+            choiceChoose.add(cadd);
+        }
+        for (int i = 0; i < cs.size(); i++) {
+            for (int j = 0; j < choiceChoose.size(); j++) {
+                if (!(cs.get(i).getChoiceId() == choiceChoose.get(j).getChoiceId())) {
+                    choiceNotChoose.add(cs.get(i).getChoiceId());
+                }
+            }
+        }
+
         for (int i = 0; i < results.size(); i++) {
 
             c = cdao.findChoiceById(Integer.valueOf(results.get(i)));
+
             if (c.isChoiceCorrect().equals("true")) {
                 score++;
                 totalCorrect++;
@@ -76,12 +98,42 @@ public class DoneServlet extends HttpServlet {
                 totalIncorrect++;
             }
 
-            cr.setQuiz_id(quiz_id);
-            cr.setQuestion_id(c.getQuestionId());
-            cr.setChoice_id(c.getChoiceId());
-            cr.setStudent_id(student_id);
+            if (!isPractice.equals("true")) {
 
-            crdao.createChoiceResult(cr);
+                cr.setQuiz_id(quiz_id);
+                cr.setQuestion_id(c.getQuestionId());
+                cr.setChoice_id(c.getChoiceId());
+                cr.setStudent_id(student_id);
+
+                crdao.createChoiceResult(cr);
+            }
+        }
+
+        Questiondao qdao = new Questiondao();
+        ArrayList<Question> qm = qdao.getAllQuestionByQuizId(quiz_id);
+        int count = qm.size();
+        for (int i = 0; i < missingChoice; i++) {
+
+            System.out.println(missingChoice);
+
+            // Questiondao qdao = new Questiondao();
+            // ArrayList<Question> qm = qdao.getAllQuestionByQuizId(quiz_id);
+            for (int x = 0; x < count; x++) {
+                if (qm.get(x).getQuestionId() != c.getQuestionId()) {
+
+                    Choice ic = cdao.findIncorrectChoiceByQuestion(qm.get(x).getQuestionId());
+
+                    cr.setQuiz_id(quiz_id);
+                    cr.setQuestion_id(ic.getQuestionId());
+                    cr.setChoice_id(ic.getChoiceId());
+                    cr.setStudent_id(student_id);
+
+                    crdao.createChoiceResult(cr);
+
+                }
+            }
+
+            count = 0;
 
         }
 
@@ -90,7 +142,9 @@ public class DoneServlet extends HttpServlet {
 
         r = rdao.findResultByQuizId(quiz_id);
 
-        if (r != null) {
+        if (r
+                != null) {
+
             r.setTotal_time("");
             r.setTotalCorrect(totalCorrect);
             r.setTotalIncorrect(totalIncorrect);
@@ -100,7 +154,7 @@ public class DoneServlet extends HttpServlet {
 
             rdao.updateResult(r);
         }
-        
+
         HttpSession session = request.getSession();
 
         session.setAttribute("score", score);

@@ -39,6 +39,14 @@
                                     <li class="list-group-item">ID: ${user.id}</li>
                                     <li class="list-group-item">Last time: 20/10/2562 - 06:39:59</li>
                                 </ul>
+                                <ul class="list-group list-group-flush">
+                                    <c:if test="${status!='Admin'}">
+                                        <c:if test="${status == 'Student'}">
+                                            <li class="list-group-item">Branch: <span class="id">${branch_profile.name}</span></li>
+                                            </c:if>
+                                        <li class="list-group-item">Faculty: <span class="id">${faculty_profile.name}</span></li>
+                                        </c:if>
+                                </ul>
                             </div>
                             <div class="card text-center mb-2"><a href="Profile" class="btn btn-outline-dark"><i class="fas fa-cogs"></i> Manage</a></div>
                             <div class="card text-center mb-2"><a href="Logout" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i> Sign out</a></div>

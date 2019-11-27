@@ -21,7 +21,6 @@
 
         ${quiz.quizName}
         ${quiz.quizCourseName}
-        ${currentQuizId}
         <c:forEach items="${questions}" var="q" varStatus="qround">
             <div class="card-body text-secondary">
                 <div class="card">
