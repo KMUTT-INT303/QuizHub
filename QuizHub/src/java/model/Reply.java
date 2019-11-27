@@ -15,33 +15,34 @@ public class Reply {
     int replyCommentId;
     String replyComment;
     Timestamp date;
-    long studentId;
+    long userId;
     int commentId;
 
-    public Reply(String replyComment, long studentId, int commentId) {
+    public Reply(String replyComment, long userId, int commentId) {
         this.replyComment = replyComment;
-        this.studentId = studentId;
+        this.userId = userId;
         this.commentId = commentId;
     }
         
     
     
-    public Reply(int replyCommentId, String replyComment, Timestamp date, long studentId, int commentId) {
+    public Reply(int replyCommentId, String replyComment, Timestamp date, long userId, int commentId) {
         this.replyCommentId = replyCommentId;
         this.replyComment = replyComment;
         this.date = date;
-        this.studentId = studentId;
+        this.userId = userId;
         this.commentId = commentId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
         
 
-    public long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
 
     public int getCommentId() {
         return commentId;
@@ -81,7 +82,7 @@ public class Reply {
 
     @Override
     public String toString() {
-        return "Reply{" + "replyCommentId=" + replyCommentId + ", replyComment=" + replyComment + ", date=" + date + ", studentId=" + studentId + ", commentId=" + commentId + '}';
+        return "Reply{" + "replyCommentId=" + replyCommentId + ", replyComment=" + replyComment + ", date=" + date + ", studentId=" + userId + ", commentId=" + commentId + '}';
     }
 
  

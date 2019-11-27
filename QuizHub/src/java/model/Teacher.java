@@ -19,7 +19,7 @@ public class Teacher {
     private int faculty_id;
     private String email;
     private String account_status;
-
+    
     public Teacher() {
     }
 

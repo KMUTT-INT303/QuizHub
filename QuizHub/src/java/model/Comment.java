@@ -19,23 +19,23 @@ public class Comment {
     int commentId;
     String comment;
     Timestamp date;
-    long studentId;
+    long userId;
     int quizId;
     ArrayList<Reply> replys;
 
-    public Comment(String comment, long studentId, int quizId) {
+    public Comment(String comment, long id, int quizId) {
         
         this.comment = comment;
-        this.studentId = studentId;
+        this.userId = id;
         this.quizId = quizId;
         
     }
     
-     public Comment(int commentId,String comment,Timestamp date, long studentId, int quizId ,ArrayList<Reply> replys ) {
+     public Comment(int commentId,String comment,Timestamp date, long userId, int quizId ,ArrayList<Reply> replys ) {
         this.commentId=commentId;
         this.comment = comment;
         this.date = date;
-        this.studentId = studentId;
+        this.userId = userId;
         this.quizId = quizId;
         this.replys = replys;
     }
@@ -69,13 +69,24 @@ public class Comment {
         this.date = date;
     }
 
-    public long getStudentId() {
-        return studentId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" + "commentId=" + commentId + ", comment=" + comment + ", date=" + date + ", userId=" + userId + ", quizId=" + quizId + ", replys=" + replys + '}';
+    }
+
+
+
+
+
+
 
     public int getQuizId() {
         return quizId;
@@ -93,11 +104,7 @@ public class Comment {
         this.replys = replys;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" + "commentId=" + commentId + ", comment=" + comment + ", date=" + date + ", studentId=" + studentId + ", quizId=" + quizId + ", replys=" + replys + '}';
-    }
-    
+
     
     
     

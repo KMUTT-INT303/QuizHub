@@ -14,10 +14,11 @@
         <jsp:include page="/ListCourse"/>
     </head>
     <body>
-       
-        <form action="ManageQuiz">  
+
+
+        <form action="ManageQuiz" method="post" enctype="multipart/form-data" id="upText">  
             Quizzes Name :  <input type="text" name="newName">
-            
+
             Quizzes Access : <select class="form-control" name="newQuizStatus">
                 <option selected></option>
                 <option value="public">Public</option>
@@ -53,16 +54,36 @@
             <input type="text" name="newHours" >
             Quizzes Minutes
             <input type="text" name="newMinutes" >
+            <input type="text" name="currentQuizId" value="${currentQuizId}" hidden>
+
+
+
+
+        </form>
+
+
+
+
+        <input type="button" value="Apply" onclick="submitForm()" />
+        <form  method="post" action="Upload" enctype="multipart/form-data" id="upPic">
+
+            <input type="text" name="currentQuizId" value="${currentQuizId}" hidden>
             Quizzes Cover Image
             <input type="file" name="newCoverImage">
-            <label for="customFile">Choose Images</label>
-            
-            <input type="text" name="currentQuizId" value="${currentQuizId}" hidden>
-            <button type="submit" class="btn btn-primary mb-2">Apply</button>
-
-
-        </form>  
-
+            Choose Images
+            <button type="submit">Apply Image</button>
+        </form>
 
     </body>
+
+    <script>
+        function submitForm() {
+            document.getElementById("upPic").submit();
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1085264464.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </html>

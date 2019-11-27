@@ -21,7 +21,7 @@ public class Student {
     private int branch_id;
     private String account_status;
     private String email;
-    
+
     public Student() {
     }
 

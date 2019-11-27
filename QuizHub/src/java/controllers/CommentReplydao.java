@@ -22,8 +22,8 @@ import model.Reply;
  */
 public class CommentReplydao {
 
-    private final String ADD_COMMENT = "INSERT INTO COMMENTS(COMMENT,STUDENT_ID,QUIZ_ID) VALUES(?,?,?)";
-    private final String ADD_REPLY = "INSERT INTO REPLY_COMMENTS(REPLY_COMMENT,STUDENT_ID,COMMENT_ID) VALUES(?,?,?)";
+    private final String ADD_COMMENT = "INSERT INTO COMMENTS(COMMENT,user_ID,QUIZ_ID) VALUES(?,?,?)";
+    private final String ADD_REPLY = "INSERT INTO REPLY_COMMENTS(REPLY_COMMENT,user_ID,COMMENT_ID) VALUES(?,?,?)";
     private final String DELETE_COMMENT = "DELETE FROM COMMENTS WHERE COMMENT_ID = ?";
     private final String DELETE_REPLY = "DELETE FROM REPLY_COMMENTS WHERE REPLY_COMMENT_ID = ?";
 
@@ -79,10 +79,10 @@ public class CommentReplydao {
                     ArrayList<Reply> replys = new ArrayList();
 
                     while (rs2.next()) {
-                      replys.add(new Reply(rs2.getInt("reply_comment_id"), rs2.getString("reply_comment"),rs2.getTimestamp("reply_comment_date"), rs2.getLong("student_id"), rs2.getInt("comment_id")));
+                      replys.add(new Reply(rs2.getInt("reply_comment_id"), rs2.getString("reply_comment"),rs2.getTimestamp("reply_comment_date"), rs2.getLong("user_id"), rs2.getInt("comment_id")));
                     }
 
-                    comments.add(new Comment(rs.getInt("comment_id"), rs.getString("comment"), rs.getTimestamp("comment_date"), rs.getLong("student_id"), rs.getInt("quiz_id"), replys));
+                    comments.add(new Comment(rs.getInt("comment_id"), rs.getString("comment"), rs.getTimestamp("comment_date"), rs.getLong("user_id"), rs.getInt("quiz_id"), replys));
 
                 }
 
@@ -118,7 +118,7 @@ public class CommentReplydao {
             PreparedStatement ps = conn.prepareStatement(ADD_COMMENT);
 
             ps.setString(1,c.getComment());
-            ps.setLong(2,c.getStudentId());
+            ps.setLong(2,c.getUserId());
             ps.setInt(3,c.getQuizId());
 
             ps.executeUpdate();
@@ -136,7 +136,7 @@ public class CommentReplydao {
             PreparedStatement ps = conn.prepareStatement(ADD_REPLY);
 
             ps.setString(1, r.getReplyComment());
-            ps.setLong(2, r.getStudentId());
+            ps.setLong(2, r.getUserId());
             ps.setInt(3, r.getCommentId());
 
             ps.executeUpdate();

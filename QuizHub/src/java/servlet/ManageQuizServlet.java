@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import model.Teacher;
  *
  * @author MaxPong
  */
+@MultipartConfig
 public class ManageQuizServlet extends HttpServlet {
 
     /**
@@ -37,18 +39,21 @@ public class ManageQuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         int id = -1;
-        
-        if(request.getParameter("currentQuiz")!=null){
-        String quizId = request.getParameter("currentQuiz");
-        request.setAttribute("currentQuizId", quizId);
-        id=Integer.valueOf(quizId);}
-        
-        if(request.getParameter("currentQuizId")!=null){
-        String quizId = request.getParameter("currentQuizId");
-        request.setAttribute("currentQuizId", quizId);
-        id=Integer.valueOf(quizId);}
-        
+      
+        int id = -1;
+        PrintWriter out = response.getWriter();
+        if (request.getParameter("currentQuiz") != null) {
+            String quizId = request.getParameter("currentQuiz");
+            request.setAttribute("currentQuizId", quizId);
+            id = Integer.valueOf(quizId);
+        }
+
+        if (request.getParameter("currentQuizId") != null) {
+            String quizId = request.getParameter("currentQuizId");
+            request.setAttribute("currentQuizId", quizId);
+            id = Integer.valueOf(quizId);
+        }
+
         String newName = request.getParameter("newName");
         String newCode = request.getParameter("newCode");
         String newFaculty = request.getParameter("newFaculty");
@@ -60,21 +65,16 @@ public class ManageQuizServlet extends HttpServlet {
         String newMinutes = request.getParameter("newMinutes");
         String newCourse = request.getParameter("newCourse");
 
-        
         QuizManagerdao qm = new QuizManagerdao();
-       
-        
-        
-        
-        
+
         if ((newName == null || newName.equals("")) && (newCode == null || newCode.equals("")) && (newFaculty == null || newFaculty.equals("")) && (newBranch == null || newBranch.equals(""))
                 && (newSkill == null || newSkill.equals("")) && (newStartDate == null || newStartDate.equals("")) && (newEndDate == null || newEndDate.equals("")) && (newHours == null || newHours.equals("")) && (newMinutes == null || newMinutes.equals(""))) {
 
             request.getServletContext().getRequestDispatcher("/WEB-INF/ManageQuiz.jsp").forward(request, response);
 
         } else {
-            request.setAttribute("id",id);
-            
+            request.setAttribute("id", id);
+
             String hours = null;
             String minutes = null;
 
@@ -90,7 +90,7 @@ public class ManageQuizServlet extends HttpServlet {
                 newMinutes = "00";
             }
 
-            if ((newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00") && (newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00")) {
+            if ((newHours == null || newHours.trim().isEmpty() || newHours == "0" || newHours == "00" )&& (newMinutes == null || newMinutes.trim().isEmpty() || newMinutes == "0" || newMinutes == "00")) {
                 hours = "unlimited";
                 minutes = "unlimited";
             }
@@ -104,29 +104,28 @@ public class ManageQuizServlet extends HttpServlet {
             Quizzes q = new Quizzes();
 
             if (newName != null && !(newName.equals(""))) {
-                qm.setQuizAttributeValue("quiz_name",newName, id);
+                qm.setQuizAttributeValue("quiz_name", newName, id);
             }
 
             if (newCode != null && !(newCode.equals(""))) {
-                qm.setQuizAttributeValue("join_code",newCode, id);
+                qm.setQuizAttributeValue("join_code", newCode, id);
             }
 
             if (newFaculty != null && !(newFaculty.equals(""))) {
-                qm.setQuizAttributeValue("faculty_id",newFaculty, id);
+                qm.setQuizAttributeValue("faculty_id", newFaculty, id);
             }
 
             if (newBranch != null && !(newBranch.equals(""))) {
-//
-//                String[] branch_list = newBranch.split("-");
-//                String branch_id = branch_list[1];
-//                qm.setQuizAttributeValue("branch_id", branch_id, id);
+                String[] branch_list = newBranch.split("-");
+                String branch_id = branch_list[1];
+                qm.setQuizAttributeValue("branch_id", branch_id, id);
             }
             if (newCourse != null && !(newCourse.equals(""))) {
-//                String[] list = newCourse.split("-");
-//                String courseId = list[0];
-//                String courseName = list[1];
-//                qm.setQuizAttributeValue("course_name", courseName, id);
-//                qm.setQuizAttributeValue("course_id", courseId, id);
+                String[] list = newCourse.split("-");
+                String courseId = list[0];
+                String courseName = list[1];
+                qm.setQuizAttributeValue("course_name", courseName, id);
+                qm.setQuizAttributeValue("course_id", courseId, id);
             }
             if (newSkill != null && !(newSkill.equals(""))) {
 
@@ -148,20 +147,17 @@ public class ManageQuizServlet extends HttpServlet {
             if (newMinutes != null && !(newMinutes.equals(""))) {
                 qm.setQuizAttributeValue("MINUTES", newMinutes, id);
             }
-//            if(request.getPart("file")!=null){
-//            request.getRequestDispatcher("Upload").forward(request, response);
-//            }
+
 
         }
         request.getServletContext().getRequestDispatcher("/WEB-INF/ManageQuiz.jsp").forward(request, response);
 
-        }
-    
+    }
 
     public static void main(String[] args) {
         QuizManagerdao qd = new QuizManagerdao();
         //qd.deleteQuiz(9);
-        qd.setQuizAttributeValue("quiz_name", "good game",5);
+        qd.setQuizAttributeValue("quiz_name", "good game", 5);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -202,6 +198,5 @@ public class ManageQuizServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 
 }

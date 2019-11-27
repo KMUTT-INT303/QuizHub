@@ -15,6 +15,7 @@ public class Choice {
     private String choiceCorrect;
     private int questionId;
     private int quizId;
+    private String choose="false";
 
     public Choice() {
     }
@@ -36,6 +37,23 @@ public class Choice {
         this.choiceCorrect = choiceCorrect;
         this.questionId = questionId;
         this.quizId = quizId;
+    }
+    
+     public Choice(int choiceId, String choiceName, String choiceCorrect, int questionId, int quizId,String choose) {
+        this.choiceId = choiceId;
+        this.choiceName = choiceName;
+        this.choiceCorrect = choiceCorrect;
+        this.questionId = questionId;
+        this.quizId = quizId;
+        this.choose = choose;
+    }
+
+    public String getChoose() {
+        return choose;
+    }
+
+    public void setChoose(String choose) {
+        this.choose = choose;
     }
 
     public int getChoiceId() {
@@ -72,6 +90,10 @@ public class Choice {
 
     public int getQuizId() {
         return quizId;
+    }
+
+    public String getChoiceCorrect() {
+        return choiceCorrect;
     }
 
     public void setQuizId(int quizId) {

@@ -128,6 +128,22 @@
         <servlet-name>AuthenticationByEmailServlet</servlet-name>
         <servlet-class>servlet.AuthenticationByEmailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StatSearchServlet</servlet-name>
+        <servlet-class>servlet.StatSearchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>servlet.UploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowAnswerServlet</servlet-name>
+        <servlet-class>servlet.ShowAnswerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentReplyServlet</servlet-name>
+        <servlet-class>servlet.CommentReplyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -247,6 +263,22 @@
     <servlet-mapping>
         <servlet-name>ViewStatisticsServlet</servlet-name>
         <url-pattern>/ViewStatistics</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatSearchServlet</servlet-name>
+        <url-pattern>/StatSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAnswerServlet</servlet-name>
+        <url-pattern>/ShowAnswer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentReplyServlet</servlet-name>
+        <url-pattern>/CommentReply</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
